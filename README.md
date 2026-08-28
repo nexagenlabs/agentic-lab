@@ -7,7 +7,7 @@ Each folder under `builds/` corresponds to one build in the book. Clone once
 and you have everything.
 
 ```bash
-git clone https://github.com/suryaprakashtripathy8-tech/agentic-lab.git
+git clone https://github.com/nexagenlabs/agentic-lab.git
 cd agentic-lab
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
@@ -37,7 +37,8 @@ current list, with a dated changelog.
 
 ## Errata
 
-Found an error in the book or the code? Open an issue.
+Found an error in the book or the code? Open an issue, or email
+biotech.suryaprakash@gmail.com if you would rather not use GitHub.
 
 ## Licence
 

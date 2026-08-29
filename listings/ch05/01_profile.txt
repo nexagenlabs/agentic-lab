@@ -1,0 +1,8 @@
+def profile(path: Path) -> dict:
+    raw = path.read_text(errors="replace").splitlines()[:15]
+    return {
+        "filename": path.name,
+        "head": raw,
+        "n_lines": sum(1 for _ in path.open()),
+        "delimiter_guess": _sniff(raw),   # returns None rather than raising
+    }

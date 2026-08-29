@@ -1,0 +1,15 @@
+class ParameterChange(BaseModel):
+    parameter: str
+    source_value: str            # what the paper said
+    adapted_value: str           # what we will do
+    rationale: str
+    confidence: Literal["high", "low"]
+
+class Adaptation(BaseModel):
+    source_doi: str
+    source_cell_line: str
+    target_cell_line: str
+    changed: list[ParameterChange]
+    carried_over_unchanged: list[str]     # the dangerous list
+    not_stated_in_source: list[str]       # the more dangerous list
+    requires_human_decision: list[str]

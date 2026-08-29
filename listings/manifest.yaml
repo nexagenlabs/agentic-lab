@@ -83,3 +83,51 @@ listings:
     mode: exact
     chapter: 4
     heading: "One record per call, driven by your list"
+
+  # ---- Chapter 5 ----
+
+  - file: listings/ch05/01_profile.txt
+    target: builds/05-wrangler/profile.py
+    mode: exact
+    chapter: 5
+    heading: "Stage one: profile before parsing"
+
+  - file: listings/ch05/02_mapping_models.txt
+    target: builds/05-wrangler/models.py
+    mode: exact
+    chapter: 5
+    heading: "Stage two: the mapping is a proposal, and it is data"
+
+  - file: listings/ch05/03_apply_mapping.txt
+    target: builds/05-wrangler/transform.py
+    mode: exact
+    chapter: 5
+    heading: "Stage three: the transformation, with no model in sight"
+
+  - file: listings/ch05/04_pandera_schema.txt
+    target: builds/05-wrangler/schema.py
+    mode: exact
+    chapter: 5
+    heading: "Stage four: a schema that knows about units"
+
+  # ---- Chapter 6 ----
+
+  - file: listings/ch06/01_design_file.txt
+    target: builds/06-plate-mapper/designs/tmz_na_u87mg.yaml
+    mode: exact
+    chapter: 6
+    heading: "The design is a declaration, and it comes first"
+
+  - file: listings/ch06/02_dilution_check.txt
+    target: builds/06-plate-mapper/checks.py
+    mode: exact
+    chapter: 6
+    heading: "Arithmetic in Python, before the pipette"
+
+  - file: listings/ch06/03_adaptation_models.txt
+    target: builds/07-protocol-adapter/models.py
+    mode: skip
+    chapter: 6
+    heading: "Build 07: The Protocol Adapter"
+    note: >
+      Build 07 is not implemented yet. Change mode to exact when it is.

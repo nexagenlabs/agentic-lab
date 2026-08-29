@@ -1,0 +1,23 @@
+def check_dilution_series(drug: str, top_uM: float, factor: float,
+                          n: int, stock_mM: float, transfer_uL: float,
+                          max_solvent_pct: float) -> list[str]:
+    problems = []
+    series = [top_uM / (factor ** i) for i in range(n)]
+
+    # 1. Does the top concentration require more solvent than cells tolerate?
+    solvent_pct = (top_uM / (stock_mM * 1000)) * 100
+    if solvent_pct > max_solvent_pct:
+        problems.append(
+            f"Top dose needs {solvent_pct:.2f}% solvent, "
+            f"limit is {max_solvent_pct}%")
+
+    # 2. Is the lowest dose still above the reported IC50 floor?
+    if series[-1] > EXPECTED_IC50[drug]:
+        problems.append("Series never drops below the expected IC50; "
+                        "the curve will have no lower plateau")
+
+    # 3. Is the serial transfer volume below what the pipette can deliver?
+    if transfer_uL < MIN_RELIABLE_UL:
+        problems.append("Serial transfer below reliable pipetting volume")
+
+    return problems

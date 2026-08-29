@@ -1,0 +1,14 @@
+class ColumnMapping(BaseModel):
+    source_column: str
+    target_column: str
+    detected_unit: str | None      # what the agent believes it found
+    unit_evidence: str             # where in the file it saw that
+    confidence: Literal["high", "low"]
+
+class FileMapping(BaseModel):
+    instrument: str
+    layout: Literal["wide", "long"]
+    header_row: int
+    columns: list[ColumnMapping]
+    approved_by: str | None = None       # blank until a human signs it
+    approved_at: datetime | None = None

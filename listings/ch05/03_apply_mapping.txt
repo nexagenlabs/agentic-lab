@@ -1,0 +1,10 @@
+def apply_mapping(path: Path, mapping: FileMapping) -> pd.DataFrame:
+    if mapping.approved_at is None:
+        raise RuntimeError("Unapproved mapping; refusing to transform.")
+
+    df = pd.read_csv(path, header=mapping.header_row, dtype=str)
+    df = df.rename(columns={c.source_column: c.target_column
+                            for c in mapping.columns})
+    if mapping.layout == "wide":
+        df = df.melt(id_vars=ID_COLS, var_name="well", value_name="value")
+    return df

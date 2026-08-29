@@ -1,0 +1,14 @@
+import pandera.pandas as pa
+from pandera.typing import Series
+
+class TidyReadings(pa.DataFrameModel):
+    plate_id:    Series[str]   = pa.Field(str_matches=r"^P\d{3}$")
+    well:        Series[str]   = pa.Field(str_matches=r"^[A-H](0[1-9]|1[0-2])$")
+    compound:    Series[str]   = pa.Field(nullable=False)
+    conc_nM:     Series[float] = pa.Field(ge=0, le=1e7)
+    viability:   Series[float] = pa.Field(ge=-0.2, le=1.5)
+    replicate:   Series[int]   = pa.Field(ge=1, le=6)
+
+    class Config:
+        strict = True          # an unexpected column is an error
+        coerce = True

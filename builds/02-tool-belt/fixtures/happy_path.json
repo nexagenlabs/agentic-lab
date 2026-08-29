@@ -1,0 +1,15 @@
+{
+  "model": "stub-model-0000-00-00",
+  "turns": [
+    {
+      "kind": "tool_use",
+      "name": "search_pubmed",
+      "input": {"query": "olaparib ovarian carcinoma"}
+    },
+    {
+      "kind": "text",
+      "text": "One record matches: PMID 31562799.",
+      "stop_reason": "end_turn"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "note": "Fabricated. See fixtures/README.md. No line, RRID, doubling time or tolerance here describes a real cell line.",
+  "lines": [
+    {
+      "name": "GBM-4471",
+      "rrid": "CVCL_9901",
+      "doubling_time_h": 22.0,
+      "serum_pct": 10.0,
+      "max_dmso_pct": 0.5,
+      "max_passage": 20,
+      "assay_interference": []
+    },
+    {
+      "name": "GBM-2209",
+      "rrid": "CVCL_9902",
+      "doubling_time_h": 34.0,
+      "serum_pct": 10.0,
+      "max_dmso_pct": 0.5,
+      "max_passage": 20,
+      "assay_interference": []
+    },
+    {
+      "name": "NSC-8810",
+      "rrid": "CVCL_9903",
+      "doubling_time_h": 55.0,
+      "serum_pct": 5.0,
+      "max_dmso_pct": 0.2,
+      "max_passage": 15,
+      "assay_interference": []
+    },
+    {
+      "name": "HEP-3355",
+      "rrid": "CVCL_9904",
+      "doubling_time_h": 48.0,
+      "serum_pct": 10.0,
+      "max_dmso_pct": 0.5,
+      "max_passage": 20,
+      "assay_interference": ["resazurin"]
+    }
+  ]
+}

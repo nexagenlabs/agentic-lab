@@ -1,0 +1,19 @@
+{
+  "source_protocol": "omits_density_and_endpoint.md",
+  "source_doi": "10.5555/agenticlab.2026.00712",
+  "source_cell_line": "GBM-4471",
+  "target_cell_line": "GBM-2209",
+  "note": "States neither the seeding density nor the time to readout. Both are absences, and the adapter must report them as absences rather than supply a usual value.",
+  "changed": [],
+  "carried_over_unchanged": [
+    "passage_number_range",
+    "readout_chemistry",
+    "serum_concentration",
+    "solvent_tolerance"
+  ],
+  "not_stated_in_source": [
+    "incubation_to_endpoint",
+    "seeding_density"
+  ],
+  "requires_human_decision": []
+}

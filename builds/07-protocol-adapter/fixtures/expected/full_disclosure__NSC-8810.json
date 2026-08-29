@@ -1,0 +1,19 @@
+{
+  "source_protocol": "full_disclosure.md",
+  "source_doi": "10.5555/agenticlab.2026.00711",
+  "source_cell_line": "GBM-4471",
+  "target_cell_line": "NSC-8810",
+  "note": "States all six parameters with a quotable value for each.",
+  "changed": [
+    "passage_number_range",
+    "seeding_density",
+    "serum_concentration",
+    "solvent_tolerance"
+  ],
+  "carried_over_unchanged": [
+    "incubation_to_endpoint",
+    "readout_chemistry"
+  ],
+  "not_stated_in_source": [],
+  "requires_human_decision": []
+}

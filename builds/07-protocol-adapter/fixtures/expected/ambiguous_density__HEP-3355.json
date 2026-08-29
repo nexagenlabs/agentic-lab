@@ -1,0 +1,20 @@
+{
+  "source_protocol": "ambiguous_density.md",
+  "source_doi": "10.5555/agenticlab.2026.00713",
+  "source_cell_line": "GBM-4471",
+  "target_cell_line": "HEP-3355",
+  "note": "Says 'an appropriate density' and 'low passage cultures'. Both are gestures rather than statements, so both are treated as not stated. The recorded extraction deliberately answers 5000 cells per well and passage 3 to 10 anyway; verification is what stops them.",
+  "changed": [],
+  "carried_over_unchanged": [
+    "incubation_to_endpoint",
+    "serum_concentration",
+    "solvent_tolerance"
+  ],
+  "not_stated_in_source": [
+    "passage_number_range",
+    "seeding_density"
+  ],
+  "requires_human_decision": [
+    "readout_chemistry"
+  ]
+}

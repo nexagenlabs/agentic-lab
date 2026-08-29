@@ -81,11 +81,28 @@ leaves 60 usable interior wells, and 40 combinations plus 12 control wells is
 each recorded as `unused` rather than left blank: an unassigned well nobody
 wrote down is a well somebody later assumes held something.
 
+### One replicate per plate, and why it is not a layout preference
+
 A replicate is never split across plates while another replicate sits on one
-of its own. If it were, a plate effect and a replicate effect would be the
-same number, and repeating the controls on every plate would have bought
-nothing. When a matrix is too large for one plate the layout gives each
+of its own. When a matrix is too large for one plate, the layout gives each
 replicate its own run of plates instead.
+
+This is a correction to a real experimental design error, not a tidier
+arrangement. The earlier layout packed treatment wells end to end across
+plates, so with three replicates of a matrix that did not fit, plate one
+carried all of replicate one and part of replicate two. **A plate effect and a
+replicate effect are then the same number.** Edge evaporation, a warm corner of
+the incubator, an uneven dispense: anything that shifts one plate relative to
+another now shifts one replicate relative to another, and the variance between
+replicates, which is the number the whole experiment rests on, absorbs it
+silently. Nothing in the data says it happened.
+
+It is worth noticing what this cost. Repeating the controls on every plate,
+which this build does and which the spec requires, exists precisely to let
+each plate be normalised on its own. Splitting replicates across plates throws
+that away again at the next step: the controls correct the plate, and then the
+replicate boundary sits in the middle of a plate anyway. The two decisions have
+to agree, and only one of them was written down.
 
 An earlier printing of this design asked for a 6 by 10 matrix at 800 uM, which
 needed 72 interior wells it did not have and 0.8 per cent DMSO against the 0.5

@@ -14,6 +14,7 @@ rejected here rather than discussed later.
 
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Literal
@@ -149,8 +150,6 @@ def validate_design(design: Design) -> None:
             "service found 4.7 per cent of submitted lines misidentified in "
             "2024. Add the Cellosaurus identifier, for example CVCL_0022.",
         )
-
-    import re
 
     if not re.match(RRID_PATTERN, design.rrid):
         raise DesignError(

@@ -268,8 +268,12 @@ def test_an_undated_reading_is_refused(tmp_path):
 
 
 def test_this_build_imported_its_own_modules():
-    import layout
-    import review
+    # Imported inside the function on purpose, and the only place in the
+    # repository that is allowed to be. A function-body import is the
+    # shape that resolved to another build's module three times, so the
+    # guard reproduces it rather than avoiding it.
+    import layout  # noqa: PLC0415
+    import review  # noqa: PLC0415
 
     build_dir = Path(__file__).resolve().parents[1]
     for module in (layout, review):

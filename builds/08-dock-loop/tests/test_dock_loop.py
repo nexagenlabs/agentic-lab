@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 
 import pytest
+import tracing
 from affinity import AFFINITY_METHODS, AffinityClaimRefused
 from campaign import (
     SCORE_TOLERANCE,
@@ -23,7 +24,7 @@ from campaign import (
 from comparison import ComparisonSetRefused, build_comparison_set
 from controls import decoy_enrichment, redocking_control
 from engine import EngineError, RecordedEngine, VinaEngine
-from geometry import cluster_occupancy, rmsd, spread
+from geometry import GeometryError, cluster_occupancy, rmsd, spread
 from models import (
     DockingBox,
     DockingResult,
@@ -31,7 +32,7 @@ from models import (
     PreparationDecisions,
     StructureRecord,
 )
-from parse import parse_poses
+from parse import ParseError, parse_poses
 from pydantic import ValidationError
 from rank import RankingRefused, consensus_rank, enrichment_factor, rank_results
 
@@ -385,8 +386,6 @@ def test_the_seed_and_exhaustiveness_reach_the_engine(engine, records,
 
 def test_rmsd_refuses_two_different_molecules():
     """An RMSD between unequal atom counts is a number with no meaning."""
-    from geometry import GeometryError
-
     with pytest.raises(GeometryError) as caught:
         rmsd([(0.0, 0.0, 0.0)], [(0.0, 0.0, 0.0), (1.0, 0.0, 0.0)])
     assert caught.value.code == "atom_count_mismatch"
@@ -396,8 +395,6 @@ def test_rmsd_refuses_two_different_molecules():
 
 def test_a_pose_without_a_score_is_refused():
     """A geometry with no score is not a pose the ranking can use."""
-    from parse import ParseError
-
     text = "MODEL 1\nATOM      1 C1   LIG A   1       0.000   0.000   0.000\nENDMDL\n"
     with pytest.raises(ParseError) as caught:
         parse_poses(text)
@@ -406,8 +403,6 @@ def test_a_pose_without_a_score_is_refused():
 
 def test_the_trace_is_jsonl(engine, records, preparation, tmp_path):
     """One event per line, from the first version."""
-    import tracing
-
     trace = tracing.Trace(run_dir=tmp_path / "runs")
     pairs = [("KIN-ALPHA", "LIG-PROBE"), ("KIN-BETA", "LIG-PROBE")]
     comparison = build_comparison_set(
@@ -438,8 +433,12 @@ def test_a_score_is_never_presented_as_an_affinity(engine, records):
 
 
 def test_this_build_imported_its_own_modules():
-    import campaign
-    import geometry
+    # Imported inside the function on purpose, and the only place in the
+    # repository that is allowed to be. A function-body import is the
+    # shape that resolved to another build's module three times, so the
+    # guard reproduces it rather than avoiding it.
+    import campaign  # noqa: PLC0415
+    import geometry  # noqa: PLC0415
 
     build_dir = Path(__file__).resolve().parents[1]
     for module in (campaign, geometry):

@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 
 import pytest
+import tracing
 from adapt import (
     classify,
     load_lines,
@@ -285,8 +286,6 @@ def test_the_model_is_never_asked_to_adapt_anything(client):
 
 def test_the_trace_is_jsonl(client, tmp_path):
     """One event per line, from the first version."""
-    import tracing
-
     trace = tracing.Trace(run_dir=tmp_path / "runs")
     run_adaptation(PROTOCOLS / "ambiguous_density.md", "NSC-8810", client,
                    MODEL, lines_path=LINES, trace=trace)
@@ -308,8 +307,12 @@ def test_a_change_records_a_rationale_and_a_confidence(client):
 
 
 def test_this_build_imported_its_own_modules():
-    import adapt as adapt_module
-    import report
+    # Imported inside the function on purpose, and the only place in the
+    # repository that is allowed to be. A function-body import is the
+    # shape that resolved to another build's module three times, so the
+    # guard reproduces it rather than avoiding it.
+    import adapt as adapt_module  # noqa: PLC0415
+    import report  # noqa: PLC0415
 
     build_dir = Path(__file__).resolve().parents[1]
     for module in (adapt_module, report):

@@ -60,6 +60,48 @@ These come from the book's arguments and every build must follow them.
   those exactly. You may add more; you may not omit or rename any.
 - Prefer a fixture over a mock. Broken-input fixtures live in
   `builds/<name>/fixtures/` and are committed.
+- **A build that generates its fixtures programmatically ships the generator.**
+  Commit both the generator and its output, so nothing has to be run to use the
+  build. A fixture whose provenance nobody can inspect is the thing Chapter 9
+  argues against, and it is worse than an unchecked one: where a test computes
+  its number from fixture data rather than reading it from a file alongside,
+  a fixture that quietly made the check easy turns the check into decoration.
+  Build 08's `fixtures/make_fixtures.py` is the pattern.
+
+## Cross-build imports: settled, do not redesign
+
+Builds deliberately share module names. Four carry `config.py`, five carry
+`models.py`, four carry `tracing.py`, and they import each other's modules by
+bare name because the book prints `from config import MODEL` and a reader must
+be able to open one folder and run `python profile.py` in it.
+
+Two obvious fixes are both wrong and have been ruled out:
+
+- **Renaming modules per build** breaks the printed listings, which is the one
+  defect this project treats as unshippable.
+- **Making each build a package** breaks the reader: inside a package,
+  `from transform import apply_mapping` is not a valid absolute import, so
+  every intra-build import in every build would have to change and the file a
+  reader typed from the page would stop running on its own.
+
+So the repository root `conftest.py` keeps **exactly one build importable at a
+time**: one build folder on `sys.path`, one build's modules in `sys.modules`.
+
+The part that is easy to undo by accident: modules of the other builds are
+**parked in a per-build cache, not deleted**. Eviction was the earlier
+approach. It means a function-body `import models` re-executes the module and
+produces a second copy of every class in it, so `isinstance` starts returning
+False for objects that are obviously the right type. That failure is quieter
+than the one being fixed. Park, do not evict.
+
+`tests/test_build_isolation.py` asserts the invariant rather than the
+mechanism, and `PLC0415` in `pyproject.toml` bans function-body imports so the
+shape that causes the collision cannot be written in the first place. The
+guard tests are the one exception and carry an explicit `# noqa: PLC0415` and
+a comment saying why.
+
+Every build ships `test_this_build_imported_its_own_modules`, and the
+isolation test fails until a new build has one.
 
 ## Things you must not do
 

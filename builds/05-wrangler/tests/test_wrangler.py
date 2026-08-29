@@ -5,7 +5,7 @@ The proposal step is driven by a stub, and every export is a committed fixture.
 
 import json
 from pathlib import Path
-from profile import profile
+from profile import _sniff, profile
 
 import pandas as pd
 import pytest
@@ -266,8 +266,6 @@ def test_strict_schema_rejects_an_unexpected_column(long_mapping):
 
 def test_sniff_gives_up_quietly():
     """csv.Sniffer throws readily on real exports. That is not an error."""
-    from profile import _sniff
-
     assert _sniff(["a,b,c", "1,2,3"]) == ","
     assert _sniff([]) is None
     assert _sniff([""]) is None
@@ -275,8 +273,12 @@ def test_sniff_gives_up_quietly():
 
 
 def test_this_build_imported_its_own_modules():
-    import pipeline
-    import transform
+    # Imported inside the function on purpose, and the only place in the
+    # repository that is allowed to be. A function-body import is the
+    # shape that resolved to another build's module three times, so the
+    # guard reproduces it rather than avoiding it.
+    import pipeline  # noqa: PLC0415
+    import transform  # noqa: PLC0415
 
     build_dir = Path(__file__).resolve().parents[1]
     for module in (pipeline, transform):

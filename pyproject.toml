@@ -11,3 +11,17 @@
 # a module of the same name without one shadowing the other.
 addopts = "--import-mode=importlib"
 testpaths = ["tests", "builds"]
+
+[tool.ruff.lint]
+# Ban imports inside function bodies. This is not a style preference. Builds
+# deliberately share module names, so a bare `import models` resolves to
+# whichever build is importable at the moment it runs, and a function-body
+# import runs long after collection, when that is no longer the build the test
+# belongs to. That resolved to the wrong build three times before the root
+# conftest.py fixed it, and each time the fix was the same and the next
+# occurrence was already being written. This catches the shape rather than the
+# aftermath.
+#
+# extend-select rather than select, so the rest of the default rule set stays
+# whatever the installed ruff considers default.
+extend-select = ["PLC0415"]

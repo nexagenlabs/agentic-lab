@@ -1,0 +1,7 @@
+{
+  "fixture": "excel_mangled.csv",
+  "breaks": "Excel converted sample codes and concentrations to dates. The concentrations coerce to null, which assertion 2 counts. The mangled compound codes alone would not be caught: the printed schema puts no pattern on compound. See HANDOFF.md.",
+  "expected_assertion": 2,
+  "expected_wells": 6,
+  "fires_on": "run"
+}

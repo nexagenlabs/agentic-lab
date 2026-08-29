@@ -1,0 +1,24 @@
+# Approved mapping for the Ascent Reader wide export.
+# Written once by a human signing off an agent proposal, replayed thereafter
+# with no model call at all.
+instrument: plate_wide
+layout: wide
+header_row: 2
+approved_by: s.tripathy
+approved_at: 2026-01-05T09:14:00+00:00
+columns:
+  - source_column: conc_nM
+    target_column: conc_nM
+    detected_unit: nM
+    unit_evidence: >
+      Read from the file, not inferred: line 5 of the export begins with the
+      literal row label conc_nM in the measure column.
+    confidence: high
+  - source_column: viability
+    target_column: viability
+    detected_unit: null
+    unit_evidence: >
+      Read from the file: line 7 begins with the row label viability. The
+      quantity is dimensionless and the values lie between 0 and 1, so it is
+      a fraction rather than a percentage.
+    confidence: high

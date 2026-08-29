@@ -1,0 +1,7 @@
+Plate P001 - viability read,,,,,,
+Instrument: Ascent Reader 3; exported 2026-01-04,,,,,,
+measure,A01,A02,A03,B01,B02,B03
+compound,TMZ,TMZ,TMZ,nicotinamide,nicotinamide,nicotinamide
+conc_nM,100,1000,10000,100,1000,10000
+replicate,1,1,1,2,2,2
+viability,0.92,0.71,0.31,0.90,0.69,0.29

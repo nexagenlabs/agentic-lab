@@ -1,0 +1,7 @@
+{
+  "fixture": "extra_column.csv",
+  "breaks": "A field added by a software update. Numeric with no unit in its name, so assertion 3 catches it before the strict schema does. Both refuse it.",
+  "expected_assertion": 3,
+  "expected_wells": 6,
+  "fires_on": "run"
+}

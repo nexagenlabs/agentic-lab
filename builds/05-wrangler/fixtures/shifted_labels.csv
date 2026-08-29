@@ -1,0 +1,7 @@
+Plate,Well,Compound,Conc (uM),Rep,Signal
+P001,A2,TMZ,0.1,1,0.92
+P001,A3,TMZ,1,1,0.71
+P001,A4,TMZ,10,1,0.31
+P001,B2,nicotinamide,0.1,2,0.90
+P001,B3,nicotinamide,1,2,0.69
+P001,B4,nicotinamide,10,2,0.29

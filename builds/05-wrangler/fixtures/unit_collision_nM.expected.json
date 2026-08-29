@@ -1,0 +1,8 @@
+{
+  "fixture": "unit_collision_nM.csv",
+  "breaks": "Concentrations in nM. Nothing about this file is wrong on its own, and it passes every assertion alone. Merged with its partner the two frames carry the same quantity under different names, which must collide rather than concatenate into a silent thousandfold error. Assertion 3, units, is what the collision is an instance of.",
+  "expected_assertion": 3,
+  "expected_wells": 6,
+  "fires_on": "merge",
+  "merge_with": "unit_collision_uM.csv"
+}

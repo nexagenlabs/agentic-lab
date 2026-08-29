@@ -1,0 +1,7 @@
+{
+  "fixture": "percentage_as_fraction.csv",
+  "breaks": "Viability recorded as a percentage where the printed schema declares a fraction bounded at 1.5. Every value is a hundred times too large and assertion 4 catches all six.",
+  "expected_assertion": 4,
+  "expected_wells": 6,
+  "fires_on": "run"
+}

@@ -1,0 +1,42 @@
+# Approved mapping for the long instrument export.
+instrument: qpcr_long
+layout: long
+header_row: 0
+approved_by: s.tripathy
+approved_at: 2026-01-05T09:20:00+00:00
+columns:
+  - source_column: Plate
+    target_column: plate_id
+    detected_unit: null
+    unit_evidence: "Read from the file: header cell Plate, line 1."
+    confidence: high
+  - source_column: Well
+    target_column: well
+    detected_unit: null
+    unit_evidence: "Read from the file: header cell Well, line 1."
+    confidence: high
+  - source_column: Compound
+    target_column: compound
+    detected_unit: null
+    unit_evidence: "Read from the file: header cell Compound, line 1."
+    confidence: high
+  - source_column: Conc (uM)
+    target_column: conc
+    detected_unit: uM
+    unit_evidence: >
+      Read from the file, not inferred: the unit is written in the header
+      cell itself, Conc (uM), on line 1.
+    confidence: high
+  - source_column: Rep
+    target_column: replicate
+    detected_unit: null
+    unit_evidence: "Read from the file: header cell Rep, line 1."
+    confidence: high
+  - source_column: Signal
+    target_column: viability
+    detected_unit: null
+    unit_evidence: >
+      INFERRED, not read. The header says Signal and gives no unit. The
+      values all lie between 0 and 1, which is consistent with a viability
+      fraction, but the file does not say so and a human should confirm it.
+    confidence: low

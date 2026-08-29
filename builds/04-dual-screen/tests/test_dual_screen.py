@@ -4,11 +4,15 @@ Nothing here reaches the network. The two screens are committed fixtures, and
 the one test that runs a screen drives it with a stub.
 """
 
+import inspect
 import json
 from pathlib import Path
 from typing import Any
 
+import goldset
+import metrics
 import pytest
+import screens
 from adjudicate import find_disagreements, write_adjudication
 from config import GOLD_NEGATIVES, GOLD_SEED, SCREEN_A_MODEL, SCREEN_B_MODEL
 from criteria import load_criteria
@@ -213,11 +217,11 @@ def test_the_two_screens_cannot_see_each_other():
 
     run_screen takes no parameter that could carry the other screen's
     verdicts. If one is ever added, this fails and somebody has to justify it.
+
+    The modules are imported at module scope, not here. A later build's
+    conftest evicts this build's modules during collection, so an import
+    evaluated at run time resolves to whichever build ran last.
     """
-    import inspect
-
-    import screens
-
     parameters = set(inspect.signature(screens.run_screen).parameters)
     forbidden = {"other", "other_screen", "verdicts", "screen_a", "screen_b",
                  "previous", "peer"}
@@ -305,10 +309,6 @@ def test_render_report_does_not_touch_disk(run):
 
 def test_this_build_imported_its_own_modules():
     """Guards against one build being handed another build's modules."""
-    import goldset
-    import metrics
-    import screens
-
     build_dir = Path(__file__).resolve().parents[1]
     for module in (screens, metrics, goldset):
         assert Path(module.__file__).resolve().parent == build_dir

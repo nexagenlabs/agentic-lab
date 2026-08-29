@@ -1,0 +1,7 @@
+{
+  "fixture": "shifted_labels.csv",
+  "breaks": "Every well label moved by one position. The file parses, the schema passes, and A04 and B04 are not on the plate map while A01 and B01 have vanished.",
+  "expected_assertion": 5,
+  "expected_wells": 6,
+  "fires_on": "run"
+}

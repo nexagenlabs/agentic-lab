@@ -1,0 +1,7 @@
+{
+  "fixture": "transposed_plate.csv",
+  "breaks": "Rows where the other instrument wrote columns. Passes the schema completely: every value is in range and every type is right. Fails identifier integrity, in about one second.",
+  "expected_assertion": 5,
+  "expected_wells": 6,
+  "fires_on": "run"
+}

@@ -1,0 +1,11 @@
+{
+  "target": "KIN-ALPHA",
+  "source": "EXPERIMENTAL",
+  "identifier": "9XX1",
+  "method": "X-ray",
+  "resolution_angstrom": 1.85,
+  "ligand_state": "holo",
+  "cocrystal_ligand": "LIG-CRYSTAL",
+  "prediction_confidence": null,
+  "retrieved_at": "2026-02-11T09:00:00+00:00"
+}

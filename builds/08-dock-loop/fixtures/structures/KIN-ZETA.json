@@ -1,0 +1,11 @@
+{
+  "target": "KIN-ZETA",
+  "source": "PREDICTED",
+  "identifier": "MOD-9XX6",
+  "method": "HelixFold3",
+  "resolution_angstrom": null,
+  "ligand_state": "predicted_holo",
+  "cocrystal_ligand": "LIG-ZETA-1",
+  "prediction_confidence": 84.2,
+  "retrieved_at": "2026-02-11T09:20:00+00:00"
+}

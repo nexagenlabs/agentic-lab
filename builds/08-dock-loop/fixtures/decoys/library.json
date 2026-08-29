@@ -1,0 +1,294 @@
+{
+  "note": "Fabricated. Decoys are property matched on molecular weight and logP only, which is weaker than a real decoy set and is stated rather than implied.",
+  "target": "KIN-BETA",
+  "compounds": [
+    {
+      "ligand_id": "ACT-001",
+      "active": true,
+      "molecular_weight": 382.4,
+      "logp": 2.52
+    },
+    {
+      "ligand_id": "ACT-002",
+      "active": true,
+      "molecular_weight": 422.7,
+      "logp": 3.17
+    },
+    {
+      "ligand_id": "ACT-003",
+      "active": true,
+      "molecular_weight": 318.4,
+      "logp": 3.81
+    },
+    {
+      "ligand_id": "ACT-004",
+      "active": true,
+      "molecular_weight": 327.3,
+      "logp": 3.36
+    },
+    {
+      "ligand_id": "ACT-005",
+      "active": true,
+      "molecular_weight": 314.1,
+      "logp": 3.83
+    },
+    {
+      "ligand_id": "ACT-006",
+      "active": true,
+      "molecular_weight": 381.7,
+      "logp": 2.14
+    },
+    {
+      "ligand_id": "ACT-007",
+      "active": true,
+      "molecular_weight": 362.7,
+      "logp": 2.97
+    },
+    {
+      "ligand_id": "ACT-008",
+      "active": true,
+      "molecular_weight": 429.0,
+      "logp": 2.15
+    },
+    {
+      "ligand_id": "DEC-001",
+      "active": false,
+      "molecular_weight": 378.0,
+      "logp": 3.64
+    },
+    {
+      "ligand_id": "DEC-002",
+      "active": false,
+      "molecular_weight": 419.7,
+      "logp": 3.29
+    },
+    {
+      "ligand_id": "DEC-003",
+      "active": false,
+      "molecular_weight": 399.9,
+      "logp": 1.84
+    },
+    {
+      "ligand_id": "DEC-004",
+      "active": false,
+      "molecular_weight": 400.0,
+      "logp": 2.36
+    },
+    {
+      "ligand_id": "DEC-005",
+      "active": false,
+      "molecular_weight": 348.5,
+      "logp": 2.69
+    },
+    {
+      "ligand_id": "DEC-006",
+      "active": false,
+      "molecular_weight": 422.8,
+      "logp": 2.73
+    },
+    {
+      "ligand_id": "DEC-007",
+      "active": false,
+      "molecular_weight": 414.5,
+      "logp": 2.55
+    },
+    {
+      "ligand_id": "DEC-008",
+      "active": false,
+      "molecular_weight": 382.6,
+      "logp": 2.87
+    },
+    {
+      "ligand_id": "DEC-009",
+      "active": false,
+      "molecular_weight": 347.8,
+      "logp": 3.41
+    },
+    {
+      "ligand_id": "DEC-010",
+      "active": false,
+      "molecular_weight": 386.5,
+      "logp": 3.68
+    },
+    {
+      "ligand_id": "DEC-011",
+      "active": false,
+      "molecular_weight": 311.4,
+      "logp": 1.94
+    },
+    {
+      "ligand_id": "DEC-012",
+      "active": false,
+      "molecular_weight": 423.6,
+      "logp": 1.99
+    },
+    {
+      "ligand_id": "DEC-013",
+      "active": false,
+      "molecular_weight": 356.7,
+      "logp": 1.97
+    },
+    {
+      "ligand_id": "DEC-014",
+      "active": false,
+      "molecular_weight": 367.8,
+      "logp": 1.91
+    },
+    {
+      "ligand_id": "DEC-015",
+      "active": false,
+      "molecular_weight": 376.4,
+      "logp": 2.8
+    },
+    {
+      "ligand_id": "DEC-016",
+      "active": false,
+      "molecular_weight": 379.9,
+      "logp": 2.93
+    },
+    {
+      "ligand_id": "DEC-017",
+      "active": false,
+      "molecular_weight": 312.9,
+      "logp": 1.91
+    },
+    {
+      "ligand_id": "DEC-018",
+      "active": false,
+      "molecular_weight": 369.3,
+      "logp": 1.93
+    },
+    {
+      "ligand_id": "DEC-019",
+      "active": false,
+      "molecular_weight": 402.9,
+      "logp": 3.29
+    },
+    {
+      "ligand_id": "DEC-020",
+      "active": false,
+      "molecular_weight": 347.1,
+      "logp": 2.75
+    },
+    {
+      "ligand_id": "DEC-021",
+      "active": false,
+      "molecular_weight": 344.4,
+      "logp": 3.22
+    },
+    {
+      "ligand_id": "DEC-022",
+      "active": false,
+      "molecular_weight": 374.5,
+      "logp": 1.88
+    },
+    {
+      "ligand_id": "DEC-023",
+      "active": false,
+      "molecular_weight": 415.7,
+      "logp": 2.68
+    },
+    {
+      "ligand_id": "DEC-024",
+      "active": false,
+      "molecular_weight": 419.0,
+      "logp": 3.6
+    },
+    {
+      "ligand_id": "DEC-025",
+      "active": false,
+      "molecular_weight": 337.2,
+      "logp": 2.29
+    },
+    {
+      "ligand_id": "DEC-026",
+      "active": false,
+      "molecular_weight": 343.0,
+      "logp": 3.03
+    },
+    {
+      "ligand_id": "DEC-027",
+      "active": false,
+      "molecular_weight": 313.1,
+      "logp": 3.1
+    },
+    {
+      "ligand_id": "DEC-028",
+      "active": false,
+      "molecular_weight": 328.3,
+      "logp": 2.46
+    },
+    {
+      "ligand_id": "DEC-029",
+      "active": false,
+      "molecular_weight": 341.5,
+      "logp": 1.92
+    },
+    {
+      "ligand_id": "DEC-030",
+      "active": false,
+      "molecular_weight": 373.8,
+      "logp": 3.79
+    },
+    {
+      "ligand_id": "DEC-031",
+      "active": false,
+      "molecular_weight": 414.8,
+      "logp": 2.36
+    },
+    {
+      "ligand_id": "DEC-032",
+      "active": false,
+      "molecular_weight": 418.2,
+      "logp": 2.74
+    },
+    {
+      "ligand_id": "DEC-033",
+      "active": false,
+      "molecular_weight": 334.4,
+      "logp": 2.16
+    },
+    {
+      "ligand_id": "DEC-034",
+      "active": false,
+      "molecular_weight": 362.4,
+      "logp": 2.66
+    },
+    {
+      "ligand_id": "DEC-035",
+      "active": false,
+      "molecular_weight": 349.8,
+      "logp": 2.82
+    },
+    {
+      "ligand_id": "DEC-036",
+      "active": false,
+      "molecular_weight": 397.1,
+      "logp": 3.63
+    },
+    {
+      "ligand_id": "DEC-037",
+      "active": false,
+      "molecular_weight": 312.6,
+      "logp": 3.67
+    },
+    {
+      "ligand_id": "DEC-038",
+      "active": false,
+      "molecular_weight": 402.7,
+      "logp": 2.19
+    },
+    {
+      "ligand_id": "DEC-039",
+      "active": false,
+      "molecular_weight": 353.1,
+      "logp": 2.52
+    },
+    {
+      "ligand_id": "DEC-040",
+      "active": false,
+      "molecular_weight": 400.1,
+      "logp": 2.43
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "target": "KIN-BETA",
+  "source": "EXPERIMENTAL",
+  "identifier": "9XX2",
+  "method": "X-ray",
+  "resolution_angstrom": 2.1,
+  "ligand_state": "holo",
+  "cocrystal_ligand": "LIG-BETA-1",
+  "prediction_confidence": null,
+  "retrieved_at": "2026-02-11T09:04:00+00:00"
+}

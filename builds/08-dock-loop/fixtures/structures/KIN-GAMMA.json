@@ -1,0 +1,11 @@
+{
+  "target": "KIN-GAMMA",
+  "source": "EXPERIMENTAL",
+  "identifier": "9XX3",
+  "method": "cryo-EM",
+  "resolution_angstrom": 3.4,
+  "ligand_state": "apo",
+  "cocrystal_ligand": null,
+  "prediction_confidence": null,
+  "retrieved_at": "2026-02-11T09:08:00+00:00"
+}

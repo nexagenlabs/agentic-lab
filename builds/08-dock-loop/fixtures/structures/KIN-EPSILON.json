@@ -1,0 +1,11 @@
+{
+  "target": "KIN-EPSILON",
+  "source": "PREDICTED",
+  "identifier": "MOD-9XX5",
+  "method": "AF3",
+  "resolution_angstrom": null,
+  "ligand_state": "unknown",
+  "cocrystal_ligand": null,
+  "prediction_confidence": 62.8,
+  "retrieved_at": "2026-02-11T09:16:00+00:00"
+}

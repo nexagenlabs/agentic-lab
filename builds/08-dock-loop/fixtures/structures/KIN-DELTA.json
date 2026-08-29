@@ -1,0 +1,11 @@
+{
+  "target": "KIN-DELTA",
+  "source": "PREDICTED",
+  "identifier": "MOD-9XX4",
+  "method": "AF3",
+  "resolution_angstrom": null,
+  "ligand_state": "unknown",
+  "cocrystal_ligand": null,
+  "prediction_confidence": 91.4,
+  "retrieved_at": "2026-02-11T09:12:00+00:00"
+}

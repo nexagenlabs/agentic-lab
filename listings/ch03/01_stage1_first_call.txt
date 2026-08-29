@@ -1,0 +1,13 @@
+# builds/01-first-agent/stage1.py
+import os
+from anthropic import Anthropic
+
+client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+MODEL = os.environ.get("AGENT_MODEL", "claude-sonnet-5")
+
+response = client.messages.create(
+    model=MODEL,
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "What is ivermectin used for?"}],
+)
+print(response.content[0].text)

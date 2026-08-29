@@ -1,0 +1,32 @@
+import json
+
+MAX_STEPS = 20
+
+def run_agent(task: str, max_steps: int = MAX_STEPS) -> dict:
+    messages = [{"role": "user", "content": task}]
+    steps = 0
+
+    while steps < max_steps:
+        steps += 1
+        response = client.messages.create(
+            model=MODEL, max_tokens=2048, tools=TOOLS, messages=messages,
+        )
+        messages.append({"role": "assistant", "content": response.content})
+
+        if response.stop_reason != "tool_use":
+            text = "".join(b.text for b in response.content
+                           if b.type == "text")
+            return {"status": "COMPLETE", "steps": steps,
+                    "answer": text}
+
+        results = []
+        for block in response.content:
+            if block.type != "tool_use":
+                continue
+            output = dispatch(block.name, block.input)
+            results.append({"type": "tool_result",
+                            "tool_use_id": block.id,
+                            "content": json.dumps(output)})
+        messages.append({"role": "user", "content": results})
+
+    return {"status": "INCOMPLETE", "steps": steps, "answer": None}

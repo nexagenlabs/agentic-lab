@@ -1,0 +1,62 @@
+# Listing conformance manifest.
+#
+# Each entry maps a code listing printed in the book to the repository file
+# that must contain it verbatim. The test in tests/test_listings.py asserts
+# that containment, so a drift between the printed page and the repository
+# fails loudly instead of being discovered by a reader.
+#
+# mode: exact     the listing must appear verbatim inside the target file
+# mode: fragment  the listing is an excerpt; every non-blank line must appear
+#                 in the target file, in order, but other lines may sit
+#                 between them
+# mode: skip      not checked, with a stated reason
+#
+# Whitespace at end of line is ignored. Blank lines are ignored. Comment
+# lines beginning with # are ignored, because the book adds explanatory
+# comments that the repository does not need.
+
+listings:
+
+  - file: listings/ch03/01_stage1_first_call.txt
+    target: builds/01-first-agent/stage1.py
+    mode: exact
+    chapter: 3
+    heading: "Stage one: a model call that is not yet an agent"
+
+  - file: listings/ch03/02_stage2_tool_definition.txt
+    target: builds/01-first-agent/stage2.py
+    mode: fragment
+    chapter: 3
+    heading: "Stage two: give it something it may ask for"
+    note: >
+      The printed listing's own docstring says the real implementation lives
+      in the repository, so an exact match is unsatisfiable by construction.
+      The tool declaration and the return shape must still match.
+
+  - file: listings/ch03/03_stage3_the_loop.txt
+    target: builds/01-first-agent/stage3.py
+    mode: exact
+    chapter: 3
+    heading: "Stage three: the loop itself"
+
+  - file: listings/ch03/04_stage4_trace.txt
+    target: builds/01-first-agent/stage4.py
+    mode: exact
+    chapter: 3
+    heading: "Stage four: the trace, which is the point"
+
+  - file: listings/ch03/05_stage5_limits.txt
+    target: builds/01-first-agent/stage5.py
+    mode: fragment
+    chapter: 3
+    heading: "Stage five: the remaining limits"
+    note: >
+      The book prints three separate snippets in one block, joined by
+      comments. They appear in stage5.py in the same order but are
+      interleaved with surrounding code, so this is a fragment check.
+
+  - file: listings/ch03/06_build02_pydantic_dispatch.txt
+    target: builds/02-tool-belt/dispatch.py
+    mode: exact
+    chapter: 3
+    heading: "Build 02: The Tool Belt"

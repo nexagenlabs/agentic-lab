@@ -1,0 +1,27 @@
+# Inside run_agent, immediately before each model call.
+# The indentation is the real one: this sits in the loop.
+
+        if tokens_used + estimated_next > TOKEN_BUDGET:
+            trace.write("halt", reason="budget")
+            return {"status": "INCOMPLETE", "reason": "budget",
+                    "steps": steps}
+
+
+# The error policy and the write gate both live in dispatch,
+# because both are decisions about whether a call happens at all.
+
+def dispatch(name, args):
+    fn = REGISTRY.get(name)
+    if fn is None:
+        return {"status": "error", "code": "unknown_tool", "tool": name}
+
+    if name in WRITE_TOOLS and not approved(name, args):
+        return {"status": "blocked", "code": "awaiting_human_approval"}
+
+    for attempt in (1, 2):
+        try:
+            return fn(**args)
+        except TransientError:
+            if attempt == 2:
+                return {"status": "error", "code": "tool_unavailable"}
+            time.sleep(2 ** attempt)

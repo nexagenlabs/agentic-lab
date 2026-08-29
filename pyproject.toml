@@ -1,0 +1,13 @@
+# Repository-wide tool configuration.
+#
+# The builds are not a package. Each one is a folder a reader can open on its
+# own, and several of them deliberately carry files of the same name, such as
+# agent.py and config.py. That is good for a reader and awkward for pytest,
+# which is what the import mode below is here to settle.
+
+[tool.pytest.ini_options]
+# Import test modules by their full path rather than by prepending their
+# directory to sys.path, so two builds may both hold a tests/conftest.py and
+# a module of the same name without one shadowing the other.
+addopts = "--import-mode=importlib"
+testpaths = ["tests", "builds"]

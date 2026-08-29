@@ -1,0 +1,19 @@
+from pydantic import BaseModel, Field, ValidationError
+
+class SearchPubMed(BaseModel):
+    query: str = Field(min_length=3)
+    max_results: int = Field(default=20, ge=1, le=200)
+
+SCHEMAS = {"search_pubmed": SearchPubMed}
+
+def dispatch(name, args, trace):
+    schema = SCHEMAS.get(name)
+    if schema is None:
+        return {"status": "error", "code": "unknown_tool", "tool": name}
+    try:
+        validated = schema(**args)
+    except ValidationError as exc:
+        trace.write("tool_rejected", tool=name, errors=exc.error_count())
+        return {"status": "error", "code": "invalid_arguments",
+                "detail": exc.errors()[0]["msg"]}
+    return REGISTRY[name](**validated.model_dump())

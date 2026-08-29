@@ -29,7 +29,9 @@ These come from the book's arguments and every build must follow them.
 
 1. **Model name from configuration, never from source.** Read it from the
    environment with a default, as `os.environ.get("AGENT_MODEL", ...)`. It must
-   appear in at most one place per build.
+   appear in at most one place **per runnable artefact**. The assembled build
+   reads it from `config.py`. Teaching stage files each name it once, because
+   each must run on a machine holding only that one file.
 2. **A run that exhausts its step cap returns `INCOMPLETE` with `answer: None`.**
    It never summarises partial work. This is the book's central failure mode.
 3. **Arithmetic belongs in Python, never in a model prompt.** Counts, totals,
@@ -40,9 +42,12 @@ These come from the book's arguments and every build must follow them.
 5. **Validate tool arguments with Pydantic at the dispatch boundary**, before
    the function body runs. Log rejections to the trace.
 6. **Units live in column names**, e.g. `conc_nM`, never `conc`.
-7. **Provenance fields are required, not optional.** Where a spec names a field
-   such as `source`, `criteria_version`, or `approved_by`, it is required and
-   the code refuses to proceed without it.
+7. **Provenance fields are required where a spec or a listing names one.**
+   Fields such as `source`, `criteria_version` and `approved_by` are required
+   when specified, and the code refuses to proceed without them. This rule does
+   not license adding provenance fields a listing does not print. Where the
+   two conflict, the listing wins: a reader typing the printed return shape
+   must get the printed return shape.
 8. **Write the trace as JSONL** from the first version, one event per line.
 
 ## Testing
@@ -65,6 +70,9 @@ These come from the book's arguments and every build must follow them.
   activated.
 - **Do not add dependencies** not already in `requirements.txt` without asking
   first and explaining why.
+- **Do not edit anything in `listings/`.** Those files are the printed book.
+  If a conformance test fails, the repository is wrong. Report the mismatch
+  and stop.
 - **Do not upgrade or reformat code in other build folders.** Stay in your build.
 - **Do not delete or rewrite `MODELS.md`, `README.md`, or another build's files.**
 

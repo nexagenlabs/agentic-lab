@@ -1,0 +1,25 @@
+def search_pubmed(query: str, max_results: int = 20) -> dict:
+    """Stubbed until Build 03 replaces the body."""
+    pmids = _pubmed_esearch(query, retmax=max_results)
+    return {"status": "ok", "count": len(pmids), "pmids": pmids}
+
+
+TOOLS = [
+    {
+        "name": "search_pubmed",
+        "description": (
+            "Searches PubMed and returns matching PMIDs. Use this to find "
+            "literature when you do not already have identifiers. "
+            "Do NOT use this to retrieve the text of a known PMID; "
+            "use fetch_abstract for that."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string"},
+                "max_results": {"type": "integer", "default": 20},
+            },
+            "required": ["query"],
+        },
+    }
+]

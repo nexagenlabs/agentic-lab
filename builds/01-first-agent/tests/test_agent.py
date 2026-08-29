@@ -50,8 +50,8 @@ def test_step_cap_marks_incomplete(tmp_path: Path) -> None:
 def test_invalid_arguments_are_rejected(tmp_path: Path, monkeypatch) -> None:
     entered: list[tuple[str, int]] = []
 
-    def spy(query: str, max_results: int) -> list[dict[str, Any]]:
-        entered.append((query, max_results))
+    def spy(query: str, retmax: int) -> list[str]:
+        entered.append((query, retmax))
         return []
 
     monkeypatch.setattr(agent, "_pubmed_esearch", spy)

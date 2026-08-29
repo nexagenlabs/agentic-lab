@@ -91,7 +91,6 @@ def fetch_abstract(pmid: str) -> dict:
         "pmid": pmid,
         "title": record["title"],
         "abstract": record["abstract"],
-        "source": "pubmed-stub",
     }
 
 

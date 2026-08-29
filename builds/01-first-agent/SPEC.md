@@ -40,8 +40,14 @@ Returns a dict with at least: `status`, `steps`, `answer`, `run_id`.
 **On `INCOMPLETE`, `answer` must be `None`.** No partial summary, ever.
 
 ```python
-dispatch(name: str, args: dict, trace: Trace) -> dict
+dispatch(name, args) -> dict
 ```
+
+`dispatch` takes no trace in this build, which is why the loop, not `dispatch`,
+writes the `tool_rejected` and `tool_blocked` events. The trace parameter
+arrives in Build 02, where listing 06 prints `dispatch(name, args, trace)`:
+the schema there can say precisely what was wrong with an argument, and that is
+worth recording from inside the boundary. The progression is deliberate.
 
 Returns the tool result, or a structured error with `status: "error"` and a
 `code`. Never raises to the caller for an expected failure.

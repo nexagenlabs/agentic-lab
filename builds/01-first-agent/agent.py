@@ -4,19 +4,24 @@ This is stage1 through stage5 in one file, with nothing in it that did not
 appear in one of them. The stage files are for reading in order; this one is
 for importing. The five orchestration decisions are all here as ordinary
 lines of code: a step cap, a trace, a budget, an error policy, a write gate.
+
+One thing here is not on the printed page: ``run_agent`` takes ``client``,
+``token_budget``, ``run_dir`` and ``backoff_s``, so a test can drive the loop
+with a stubbed client and a temporary directory. Everything those parameters
+default to is what stage5 does. Nothing else differs.
 """
 
 import json
 import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from uuid import uuid4
 
 from anthropic import Anthropic, APIConnectionError, APIError
 from config import MODEL
 
-MAX_TOKENS = 1024
+MAX_TOKENS = 2048
 
 # Status codes that mean "the same request may work in a moment". Everything
 # else, a 400 above all, means the request itself is wrong and always will be.
@@ -29,23 +34,16 @@ FAILURE_LIMIT = 3
 SEARCH_PUBMED = {
     "name": "search_pubmed",
     "description": (
-        "Search PubMed for papers matching a query and return their PMIDs, "
-        "titles and years. Use this when you need to find papers you do not "
-        "already know about, for example to see what has been published on a "
-        "target. Do NOT use this to retrieve the text of a known PMID: it "
-        "returns metadata only, and a PMID you already hold needs no search."
+        "Searches PubMed and returns matching PMIDs. Use this to find "
+        "literature when you do not already have identifiers. "
+        "Do NOT use this to retrieve the text of a known PMID; "
+        "use fetch_abstract for that."
     ),
     "input_schema": {
         "type": "object",
         "properties": {
-            "query": {
-                "type": "string",
-                "description": "Free text query, at least three characters.",
-            },
-            "max_results": {
-                "type": "integer",
-                "description": "How many records to return, 1 to 200. Defaults to 20.",
-            },
+            "query": {"type": "string"},
+            "max_results": {"type": "integer", "default": 20},
         },
         "required": ["query"],
     },
@@ -54,18 +52,15 @@ SEARCH_PUBMED = {
 SAVE_NOTE = {
     "name": "save_note",
     "description": (
-        "Append a note to the laboratory notebook. Use this when the user has "
-        "asked for a finding to be recorded. Do NOT use this to keep working "
-        "notes for yourself: the notebook is a record other people read."
+        "Append a note to the laboratory notebook. Use this when the user "
+        "has asked for a finding to be recorded. Do NOT use this to keep "
+        "working notes: the notebook is a record other people read."
     ),
     "input_schema": {
         "type": "object",
         "properties": {
-            "text": {"type": "string", "description": "The note, one paragraph."},
-            "approved_by": {
-                "type": "string",
-                "description": "The person who approved this write.",
-            },
+            "text": {"type": "string"},
+            "approved_by": {"type": "string"},
         },
         "required": ["text", "approved_by"],
     },
@@ -91,41 +86,33 @@ class Trace:
     """
 
     def __init__(self, run_dir: str = "runs") -> None:
-        self.run_id = uuid4().hex[:12]
+        self.run_id = uuid.uuid4().hex[:12]
+        Path(run_dir).mkdir(parents=True, exist_ok=True)
         self.path = Path(run_dir) / f"{self.run_id}.jsonl"
-        self.path.parent.mkdir(parents=True, exist_ok=True)
 
     def write(self, event: str, **fields: Any) -> None:
-        record: dict[str, Any] = {
-            "run_id": self.run_id,
-            "ts": datetime.now(timezone.utc).isoformat(),
-            "event": event,
-        }
-        record.update(fields)
-        with self.path.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(record, default=str) + "\n")
+        record = {"run_id": self.run_id,
+                  "ts": datetime.now(timezone.utc).isoformat(),
+                  "event": event, **fields}
+        with self.path.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(record, default=str) + "\n")
 
 
-def _pubmed_esearch(query: str, max_results: int) -> list[dict[str, Any]]:
-    """Stubbed PubMed search. Build 03 replaces the body, not the signature."""
+def _pubmed_esearch(query: str, retmax: int) -> list[str]:
+    """Return the matching PMIDs. Build 03 replaces the body, not the name."""
     terms = query.lower().split()
     hits = [r for r in CORPUS if any(t in r["title"].lower() for t in terms)]
-    return hits[:max_results]
+    return [r["pmid"] for r in hits[:retmax]]
 
 
-def search_pubmed(query: str, max_results: int = 5) -> dict[str, Any]:
-    """Return records matching ``query``.
+def search_pubmed(query: str, max_results: int = 20) -> dict[str, Any]:
+    """Stubbed until Build 03 replaces the body.
 
     ``count`` is computed here rather than asked of the model, because a model
     asked to count will sometimes be wrong and will never say so.
     """
-    hits = _pubmed_esearch(query, max_results)
-    return {
-        "status": "ok",
-        "count": len(hits),
-        "results": hits,
-        "source": "pubmed-stub",
-    }
+    pmids = _pubmed_esearch(query, retmax=max_results)
+    return {"status": "ok", "count": len(pmids), "pmids": pmids}
 
 
 def save_note(text: str, approved_by: str, path: str = "notes.jsonl") -> dict[str, Any]:
@@ -138,8 +125,8 @@ def save_note(text: str, approved_by: str, path: str = "notes.jsonl") -> dict[st
         "approved_by": approved_by,
         "ts": datetime.now(timezone.utc).isoformat(),
     }
-    with Path(path).open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(record) + "\n")
+    with Path(path).open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(record) + "\n")
     return {"status": "ok", "written": path, "approved_by": approved_by}
 
 

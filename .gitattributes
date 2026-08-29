@@ -1,0 +1,9 @@
+# Normalise text files to LF in the repository. Working copies still get the
+# platform ending on checkout, which is why git warned on every commit made
+# from Windows before this file existed.
+* text=auto eol=lf
+
+# Anything that is not text, listed so a future addition does not get mangled.
+*.png binary
+*.jpg binary
+*.pdf binary

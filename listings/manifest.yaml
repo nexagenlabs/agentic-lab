@@ -14,6 +14,24 @@
 # Whitespace at end of line is ignored. Blank lines are ignored. Comment
 # lines beginning with # are ignored, because the book adds explanatory
 # comments that the repository does not need.
+#
+# Two properties of fragment mode are easy to discover the hard way.
+#
+# It is indentation-sensitive. Lines are compared with their leading
+# whitespace intact, so a snippet printed at column 0 only matches code at
+# column 0. A snippet lifted out of a function and dedented for the page can
+# be unsatisfiable: a return statement at four spaces under a column 0 if is
+# a SyntaxError, so no valid Python file can ever contain it. Print snippets
+# at the indentation they really have.
+#
+# It is also order-sensitive. _missing_in_order advances a cursor through the
+# target file, so each printed line is only looked for after the previous one
+# was found. The order snippets appear on the printed page therefore
+# constrains the order of code in the repository file. Listing 05 prints the
+# budget check, which lives inside run_agent, before dispatch, so dispatch
+# has to be defined below run_agent in stage5.py. That is a real constraint
+# on the code, not on the prose: reordering snippets on the page will move
+# code in the repository.
 
 listings:
 

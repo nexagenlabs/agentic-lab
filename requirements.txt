@@ -8,7 +8,7 @@
 # the result of the dtype=str instrument reads in Chapter 5.
 
 anthropic>=0.40,<2.0
-openai>=1.50,<4.0
+openai>=2.0,<4.0
 pydantic>=2.7,<3.0
 python-dotenv>=1.0
 httpx>=0.27

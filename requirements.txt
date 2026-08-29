@@ -15,6 +15,10 @@ httpx>=0.27
 
 pandas>=2.2,<3.0
 numpy>=1.26,<3.0
+# pandera.pandas is the modern namespace and Chapter 5 prints it. The
+# floor is the version that exposes it; it must never pull pandas past
+# the cap above.
+pandera>=0.20,<1.0
 biopython>=1.83
 
 pytest>=8.0,<10.0

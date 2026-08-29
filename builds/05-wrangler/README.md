@@ -53,6 +53,7 @@ assertion that must fire.
 | `unit_collision_nM.csv` | 3 | The partner. |
 | `extra_column.csv` | 3 | A numeric field with no unit, added by a software update. |
 | `percentage_as_fraction.csv` | 4 | Viability on the wrong scale by a factor of a hundred. |
+| `mangled_compound.csv` | schema | Sample codes eaten by Excel with every number left intact. None of the six assertions sees it; the schema does. |
 
 `transposed_plate.csv` is the one to look at. Every value is in range, every
 type is right, the file is beautiful, and it passes the schema completely. A
@@ -116,19 +117,23 @@ For an export with no mapping yet, call `propose_mapping`, read what came
 back, satisfy yourself about the `unit_evidence`, then set `approved_by` and
 `approved_at` and save it under `mappings/`. Nothing transforms until you do.
 
-## Known gaps, recorded rather than hidden
+## Two gaps that were in the printed material and are now closed
 
-Two properties of the printed material are worth knowing before you rely on
-this build. Both are in `HANDOFF.md` with the evidence.
+Both were reported from this build and both were fixed in the chapter rather
+than worked around here. They are worth knowing because the tests that cover
+them are the ones that would notice a regression.
 
-The printed schema puts no pattern on `compound`, so a mangled compound code
-on its own is not caught by anything here. `excel_mangled.csv` is detected
-because Excel also ate the concentration in the same rows.
+The schema now carries a `str_matches` guard on `compound` rejecting anything
+of the form `1-Mar`, so the Excel corruption the chapter opens with is caught
+by the schema rather than by a knock-on numeric failure.
+`mangled_compound.csv` is the fixture: every number in it is correct and only
+the guard sees anything wrong.
 
-The printed `apply_mapping` reads with `dtype=str` but does not pass
-`keep_default_na=False`, so a compound literally named `NA` becomes null
-despite the chapter's instruction to read everything as text. No fixture uses
-that name, which is itself a workaround rather than a fix.
+`apply_mapping` now reads with `keep_default_na=False` as well as `dtype=str`.
+`dtype=str` stops type inference; it does not stop pandas mapping the string
+`NA` onto a null before the dtype applies, and a compound named `NA` is not
+hypothetical. Both the transformation and the raw baseline it is compared
+against read the file the same way.
 
 ## What is not here
 

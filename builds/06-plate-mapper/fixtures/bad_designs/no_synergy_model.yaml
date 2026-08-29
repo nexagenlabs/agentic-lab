@@ -6,14 +6,14 @@ plate_format: 96
 axes:
   drug_a:
     name: temozolomide
-    top_conc_uM: 800
+    top_conc_uM: 400
     dilution_factor: 2
-    n_steps: 6
+    n_steps: 5
   drug_b:
     name: nanaomycin_A
     top_conc_uM: 10
     dilution_factor: 2
-    n_steps: 10
+    n_steps: 8
 controls:
   vehicle:
     wells: 4
@@ -25,4 +25,5 @@ controls:
     wells: 4
 edge_policy: exclude_perimeter
 replicates: 3
+transfer_uL: 50
 randomise_within_plate: true

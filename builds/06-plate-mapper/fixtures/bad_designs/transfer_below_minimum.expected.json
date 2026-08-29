@@ -1,9 +1,7 @@
 {
   "design": "transfer_below_minimum.yaml",
   "expected_failure": "transfer_below_minimum",
-  "breaks": "The serial transfer is 0.5 uL, below the 2 uL floor where precision collapses, so the error compounds at every step.",
-  "stock_mM": 1000.0,
-  "transfer_uL": 0.5,
-  "max_solvent_pct": 0.5,
-  "review_note": "Reviewed against a 1 M stock so the solvent check, which the printed design trips at 100 mM, does not fire first and mask the failure this design is testing."
+  "breaks": "The design declares a serial transfer of 0.5 uL, below the 2 uL floor where pipetting precision collapses, so the error compounds at every step of the series.",
+  "stock_mM": 100.0,
+  "max_solvent_pct": 0.5
 }

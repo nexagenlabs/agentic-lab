@@ -1,0 +1,10 @@
+class DockingBox(BaseModel):
+    strategy: Literal["cocrystal_ligand", "residue_list", "explicit"]
+    centre_xyz: tuple[float, float, float]
+    size_xyz: tuple[float, float, float]
+    defining_residues: list[str] | None
+    justification: str
+
+    # Enforced at construction: within a comparison set, every target
+    # must use the same strategy. Mixed strategies are not comparable.
+    comparison_set_id: str

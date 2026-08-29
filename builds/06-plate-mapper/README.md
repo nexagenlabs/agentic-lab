@@ -72,21 +72,24 @@ the design, so Build 05's wrangler can regenerate this exact map and verify
 returning data against it. A layout you cannot reproduce is a layout nothing
 can check.
 
-## The printed design needs four plates
+## The printed design fits its plate, and one replicate is one plate
 
-Worth knowing before you run it. The design asks for a 6 by 10 dose matrix,
-which is 60 combinations, plus 12 control wells. Excluding the perimeter of a
-96-well plate leaves 60 usable wells. Sixty combinations plus twelve controls
-is 72, so **one replicate does not fit on one plate**, and the design asks for
-three.
+The arithmetic, since it is the first thing to check about any design. A 5 by
+8 dose matrix is 40 combinations. Excluding the perimeter of a 96-well plate
+leaves 60 usable interior wells, and 40 combinations plus 12 control wells is
+52 of them. Three replicates are therefore three plates, with 8 wells spare on
+each recorded as `unused` rather than left blank: an unassigned well nobody
+wrote down is a well somebody later assumes held something.
 
-The layout therefore spans four plates: 48 treatment wells on each of the
-first three, 36 on the fourth, with 12 wells left over and recorded as
-`unused` rather than left blank. An unassigned well nobody wrote down is a
-well somebody later assumes held something.
+A replicate is never split across plates while another replicate sits on one
+of its own. If it were, a plate effect and a replicate effect would be the
+same number, and repeating the controls on every plate would have bought
+nothing. When a matrix is too large for one plate the layout gives each
+replicate its own run of plates instead.
 
-This is recorded in `HANDOFF.md` as a finding about the printed design rather
-than worked around silently.
+An earlier printing of this design asked for a 6 by 10 matrix at 800 uM, which
+needed 72 interior wells it did not have and 0.8 per cent DMSO against the 0.5
+per cent it declared. Both were corrected in the chapter.
 
 ## The seven bad designs
 

@@ -49,13 +49,16 @@ def review_design(
         if max_solvent_pct is not None
         else design.controls.vehicle.final_pct
     )
+    # A declared transfer volume beats the caller's, because the design is
+    # the record of what was decided and the caller is a convenience.
+    transfer = design.transfer_uL if design.transfer_uL is not None else transfer_uL
 
     problems: list[str] = []
     for axis in design.axes.values():
         problems.extend(
             check_dilution_series(
                 axis.name, axis.top_conc_uM, axis.dilution_factor,
-                axis.n_steps, stock_mM, transfer_uL, limit,
+                axis.n_steps, stock_mM, transfer, limit,
             )
         )
 

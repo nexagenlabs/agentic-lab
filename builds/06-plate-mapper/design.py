@@ -111,6 +111,10 @@ class Design(BaseModel):
     controls: Controls
     edge_policy: Literal["exclude_perimeter", "use_all"]
     replicates: int = Field(ge=1, le=12)
+    # The serial transfer volume, where the design states one. None means the
+    # design is silent and the bench parameter comes from the caller: a
+    # default invented here would be a pipetting decision nobody wrote down.
+    transfer_uL: float | None = Field(default=None, gt=0)
     randomise_within_plate: bool
     randomisation_seed: int = 20260314
     analysis: Analysis | None = None

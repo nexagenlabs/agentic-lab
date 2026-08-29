@@ -117,7 +117,10 @@ def run(
     path = Path(path)
     plate_map = PLATE_MAP if plate_map is None else plate_map
 
-    raw = pd.read_csv(path, header=mapping.header_row, dtype=str)
+    # Read the baseline exactly as apply_mapping does, or the null count
+    # this compares against is a count of a file nobody transformed.
+    raw = pd.read_csv(path, header=mapping.header_row, dtype=str,
+                      keep_default_na=False)
     frame = tidy(path, mapping)
 
     assert_row_conservation(frame, expected)

@@ -2,8 +2,6 @@
   "design": "wells_do_not_balance.yaml",
   "expected_failure": "wells_do_not_balance",
   "breaks": "Seventy control wells against sixty usable interior wells once the perimeter is excluded. There is no room for a single treatment.",
-  "stock_mM": 1000.0,
-  "transfer_uL": 100.0,
-  "max_solvent_pct": 0.5,
-  "review_note": "Reviewed against a 1 M stock so the solvent check, which the printed design trips at 100 mM, does not fire first and mask the failure this design is testing."
+  "stock_mM": 100.0,
+  "max_solvent_pct": 0.5
 }

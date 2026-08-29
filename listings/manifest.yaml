@@ -126,8 +126,23 @@ listings:
 
   - file: listings/ch06/03_adaptation_models.txt
     target: builds/07-protocol-adapter/models.py
-    mode: skip
+    mode: exact
     chapter: 6
     heading: "Build 07: The Protocol Adapter"
+
+  # ---- Chapter 7 ----
+
+  - file: listings/ch07/01_structure_record.txt
+    target: builds/08-dock-loop/models.py
+    mode: exact
+    chapter: 7
+    heading: "Stage one: acquisition carries provenance"
+
+  - file: listings/ch07/02_docking_box.txt
+    target: builds/08-dock-loop/models.py
+    mode: exact
+    chapter: 7
+    heading: "Stage two: the grid box is a declared parameter"
     note: >
-      Build 07 is not implemented yet. Change mode to exact when it is.
+      Both Chapter 7 listings target the same file and must appear as two
+      separate verbatim blocks.

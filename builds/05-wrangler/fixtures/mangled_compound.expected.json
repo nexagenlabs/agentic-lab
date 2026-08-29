@@ -1,0 +1,7 @@
+{
+  "fixture": "mangled_compound.csv",
+  "breaks": "Excel converted the sample codes SEPT1 and SEPT9 to dates, in the 1-Mar and 9-Sep form, and left every concentration intact. Nothing numeric is wrong, no null appears, and all six wells are on the plate map, so none of the six assertions has anything to say. The str_matches guard on compound is the only thing standing between this file and a tidy table.",
+  "expected_assertion": "schema",
+  "expected_wells": 6,
+  "fires_on": "schema"
+}

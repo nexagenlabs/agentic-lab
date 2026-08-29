@@ -44,21 +44,23 @@ def test_dilution_series_is_physical(design):
     """Volumes, solvent and span, all computed before anything is pipetted."""
     limit = design.controls.vehicle.final_pct
 
-    # The printed design does trip the solvent check: 800 uM from a 100 mM
-    # stock needs 0.8 per cent DMSO against a 0.5 per cent limit.
-    tmz = design.axes["drug_a"]
-    problems = check_dilution_series(tmz.name, tmz.top_conc_uM,
-                                     tmz.dilution_factor, tmz.n_steps,
-                                     stock_mM=100.0, transfer_uL=100.0,
-                                     max_solvent_pct=limit)
-    assert any("solvent" in problem for problem in problems)
+    # The printed design clears its own solvent limit on a 100 mM stock:
+    # 400 uM needs 0.40 per cent DMSO against the 0.5 per cent it declares.
+    for axis in design.axes.values():
+        assert check_dilution_series(
+            axis.name, axis.top_conc_uM, axis.dilution_factor, axis.n_steps,
+            stock_mM=100.0, transfer_uL=design.transfer_uL,
+            max_solvent_pct=limit,
+        ) == []
 
-    # A stock ten times stronger clears it, and then the series is physical.
-    clean = check_dilution_series(tmz.name, tmz.top_conc_uM,
-                                  tmz.dilution_factor, tmz.n_steps,
-                                  stock_mM=1000.0, transfer_uL=100.0,
-                                  max_solvent_pct=limit)
-    assert clean == []
+    tmz = design.axes["drug_a"]
+    # A weaker stock does not, and the arithmetic is the whole check: the same
+    # top dose out of a 10 mM stock needs 4 per cent.
+    weak = check_dilution_series(tmz.name, tmz.top_conc_uM,
+                                 tmz.dilution_factor, tmz.n_steps,
+                                 stock_mM=10.0, transfer_uL=design.transfer_uL,
+                                 max_solvent_pct=limit)
+    assert any("solvent" in problem for problem in weak)
 
     # Both axes span their expected IC50 with a point each side.
     for axis in design.axes.values():
@@ -71,7 +73,7 @@ def test_dilution_series_is_physical(design):
 
     # And a transfer below the pipetting floor is refused.
     thin = check_dilution_series(tmz.name, tmz.top_conc_uM, tmz.dilution_factor,
-                                 tmz.n_steps, stock_mM=1000.0,
+                                 tmz.n_steps, stock_mM=100.0,
                                  transfer_uL=MIN_RELIABLE_UL / 2,
                                  max_solvent_pct=limit)
     assert any("pipetting" in problem for problem in thin)
@@ -103,6 +105,13 @@ def test_well_count_balances(design):
     # Every treatment well the design asks for is somewhere.
     treatments = [a for a in layout.assignments if a.role == "treatment"]
     assert len(treatments) == design.treatment_wells
+
+    # And no plate carries two replicates, or a replicate effect and a plate
+    # effect would be the same number.
+    for plate in range(1, layout.plates + 1):
+        on_plate = {a.replicate for a in layout.for_plate(plate)
+                    if a.role == "treatment"}
+        assert len(on_plate) == 1, f"plate {plate} mixes replicates {on_plate}"
 
 
 def test_synergy_model_committed_before_data(design):
@@ -211,21 +220,32 @@ def test_bad_designs_are_rejected():
 # Added tests, for behaviour the spec requires but does not name a test for.
 
 
-def test_the_printed_design_passes_review_on_a_stronger_stock():
-    """The printed design is sound apart from the stock it assumes."""
-    result = review_design(DESIGN, results_dir=RESULTS, stock_mM=1000.0)
+def test_the_printed_design_passes_review_on_its_own_stock():
+    """The printed design is sound on the 100 mM stock it is written for."""
+    result = review_design(DESIGN, results_dir=RESULTS, stock_mM=100.0)
     assert result["dilution_problems"] == []
     assert result["commitment"]["margin_hours"] > 0
-    # It needs four plates, which is the finding recorded in HANDOFF.md.
-    assert result["plates"] == 4
+    # Three replicates, one plate each.
+    assert result["plates"] == 3
 
 
-def test_the_printed_design_needs_more_than_one_plate(design):
-    """60 combinations plus 12 controls against 60 usable interior wells."""
+def test_the_printed_design_fits_its_own_plate(design):
+    """40 combinations plus 12 controls against 60 usable interior wells."""
     usable = design.plate_format - len(perimeter_wells(design.rows, design.columns))
     needed_for_one_replicate = design.combinations + design.controls.total
-    assert needed_for_one_replicate > usable
-    assert build_layout(design).plates == 4
+    assert design.combinations == 40
+    assert needed_for_one_replicate == 52 <= usable == 60
+    assert build_layout(design).plates == design.replicates
+
+
+def test_a_declared_transfer_volume_beats_the_callers(design):
+    """The design is the record of what was decided; the caller is not."""
+    assert design.transfer_uL == 50
+    # transfer_below_minimum.yaml declares 0.5 uL and is refused even though
+    # the caller's default is a comfortable 100 uL.
+    with pytest.raises(ReviewFailed) as caught:
+        review_design(BAD / "transfer_below_minimum.yaml", stock_mM=100.0)
+    assert caught.value.failure == "transfer_below_minimum"
 
 
 def test_timezones_are_compared_as_instants():

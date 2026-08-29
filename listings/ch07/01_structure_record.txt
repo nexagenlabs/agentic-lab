@@ -1,0 +1,10 @@
+class StructureRecord(BaseModel):
+    target: str
+    source: Literal["EXPERIMENTAL", "PREDICTED"]
+    identifier: str                  # PDB ID, or model accession
+    method: str | None               # X-ray, cryo-EM, AF3, HelixFold3
+    resolution_angstrom: float | None
+    ligand_state: Literal["holo", "apo", "predicted_holo", "unknown"]
+    cocrystal_ligand: str | None
+    prediction_confidence: float | None      # mean pLDDT over the pocket
+    retrieved_at: datetime

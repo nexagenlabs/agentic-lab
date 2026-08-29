@@ -11,8 +11,13 @@ cannot reproduce is a layout nothing can check: the wrangler from Build 05 has
 to be able to regenerate this exact map to verify returning data against it,
 and it cannot do that from a shuffle nobody recorded.
 
-A note on capacity. The printed design asks for more wells than its own plate
-has, so the layout spans plates. See HANDOFF.md for the arithmetic.
+A note on capacity. A replicate is never split across plates while another
+replicate sits on one of its own, because that confounds replicate with plate
+and plate effects are the reason the controls are repeated in the first place.
+Each replicate gets its own plate, or its own run of plates if one plate
+cannot hold it. The printed design puts 40 combinations and 12 controls into
+the 60 interior wells a 96-well plate leaves, so three replicates are three
+plates with eight wells spare on each.
 """
 
 from __future__ import annotations
@@ -105,50 +110,59 @@ def build_layout(design: Design) -> Layout:
             "wells; there is no room for treatment"
         )
 
-    treatments = []
     axis_a, axis_b = (design.axes[key] for key in sorted(design.axes))
-    for replicate in range(1, design.replicates + 1):
-        for a, b in product(axis_a.series_uM(), axis_b.series_uM()):
-            treatments.append((a, b, replicate))
+    combinations = list(product(axis_a.series_uM(), axis_b.series_uM()))
 
-    plates = math.ceil(len(treatments) / per_plate)
+    # One replicate per plate, or one run of plates per replicate when a
+    # single plate cannot hold the matrix. Packing replicates end to end
+    # would put part of replicate two on plate one, and then a plate effect
+    # and a replicate effect are the same number.
+    plates_per_replicate = math.ceil(len(combinations) / per_plate)
+    plates = plates_per_replicate * design.replicates
+
     assignments: list[Assignment] = []
-    cursor = 0
+    plate = 0
 
-    for plate in range(1, plates + 1):
-        # Controls first and always, on this plate, not a reference plate.
-        slots = list(usable)
-        if design.randomise_within_plate:
-            # A fresh Random per plate, derived from the recorded seed, so the
-            # layout is reproducible plate by plate rather than dependent on
-            # how many plates happened to come before it.
-            random.Random(design.randomisation_seed + plate).shuffle(slots)
+    for replicate in range(1, design.replicates + 1):
+        cursor = 0
+        for _ in range(plates_per_replicate):
+            plate += 1
+            # Controls first and always, on this plate, not a reference plate.
+            slots = list(usable)
+            if design.randomise_within_plate:
+                # A fresh Random per plate, derived from the recorded seed, so
+                # the layout is reproducible plate by plate rather than
+                # dependent on how many plates happened to come before it.
+                random.Random(design.randomisation_seed + plate).shuffle(slots)
 
-        control_roles = (
-            ["vehicle"] * design.controls.vehicle.wells
-            + ["untreated"] * design.controls.untreated.wells
-            + ["blank"] * design.controls.blank.wells
-        )
-        for role, well in zip(control_roles, slots[:controls_needed], strict=True):
-            assignments.append(Assignment(plate, well, role))
+            control_roles = (
+                ["vehicle"] * design.controls.vehicle.wells
+                + ["untreated"] * design.controls.untreated.wells
+                + ["blank"] * design.controls.blank.wells
+            )
+            for role, well in zip(control_roles, slots[:controls_needed],
+                                  strict=True):
+                assignments.append(Assignment(plate, well, role))
 
-        for well in slots[controls_needed:]:
-            if cursor < len(treatments):
-                a, b, replicate = treatments[cursor]
-                cursor += 1
-                assignments.append(
-                    Assignment(plate, well, "treatment", a, b, replicate)
-                )
-            else:
-                # The design ran out before the plate did. The well is filled
-                # with buffer and recorded, because an unassigned well that
-                # nobody wrote down is a well somebody will later assume held
-                # something.
-                assignments.append(Assignment(plate, well, "unused"))
+            for well in slots[controls_needed:]:
+                if cursor < len(combinations):
+                    a, b = combinations[cursor]
+                    cursor += 1
+                    assignments.append(
+                        Assignment(plate, well, "treatment", a, b, replicate)
+                    )
+                else:
+                    # The replicate ran out before the plate did. The well is
+                    # filled with buffer and recorded, because an unassigned
+                    # well that nobody wrote down is a well somebody will
+                    # later assume held something.
+                    assignments.append(Assignment(plate, well, "unused"))
 
-        if design.edge_policy == "exclude_perimeter":
-            for well in sorted(perimeter):
-                assignments.append(Assignment(plate, well, "excluded_perimeter"))
+            if design.edge_policy == "exclude_perimeter":
+                for well in sorted(perimeter):
+                    assignments.append(
+                        Assignment(plate, well, "excluded_perimeter")
+                    )
 
     ordered = tuple(sorted(assignments, key=lambda a: (a.plate, a.well)))
     return Layout(ordered, design.randomisation_seed, design.plate_format, plates)

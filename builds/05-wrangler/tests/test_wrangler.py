@@ -120,6 +120,43 @@ def test_schema_rejects_known_corruptions():
         assert declared["expected_assertion"] in (1, 2, 3, 4, 5, 6)
 
 
+def test_a_date_mangled_compound_is_caught_by_the_schema():
+    """The corruption the chapter opens with, caught by the chapter's schema.
+
+    Every number in this fixture is correct. Nothing is null, every well is on
+    the plate map, and the six assertions all pass. Only the str_matches guard
+    on ``compound`` sees that SEPT1 has become a date.
+    """
+    path = FIX / "mangled_compound.csv"
+    result = check_expected(path, mapping_for(path))
+    assert result["fired"] == "schema"
+    assert "compound" in result["detail"]
+
+    # And it is the compound column that is complained about, not a knock-on
+    # failure somewhere numeric.
+    frame = tidy(path, mapping_for(path))
+    assert frame["conc_nM"].notna().all()
+    assert frame["viability"].notna().all()
+
+
+def test_a_compound_named_NA_is_not_read_as_a_null(tmp_path, long_mapping):
+    """keep_default_na=False, and why the printed listing carries it.
+
+    dtype=str stops type inference. It does not stop pandas mapping the string
+    NA onto a null before the dtype applies, and a compound named NA is not
+    hypothetical: nicotinamide is abbreviated that way in the very design
+    Build 06 lays out.
+    """
+    export = tmp_path / "na_compound.csv"
+    export.write_text(
+        "Plate,Well,Compound,Conc (uM),Rep,Signal\n"
+        "P001,A1,NA,0.1,1,0.92\n",
+        encoding="utf-8",
+    )
+    frame = apply_mapping(export, long_mapping)
+    assert frame["compound"].tolist() == ["NA"]
+
+
 def test_transform_is_deterministic(long_mapping, wide_mapping):
     """The same input twice, byte for byte, column order included."""
     for path, mapping in ((FIX / "qpcr_long.csv", long_mapping),

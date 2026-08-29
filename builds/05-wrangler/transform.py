@@ -49,7 +49,8 @@ def apply_mapping(path: Path, mapping: FileMapping) -> pd.DataFrame:
     if mapping.approved_at is None:
         raise RuntimeError("Unapproved mapping; refusing to transform.")
 
-    df = pd.read_csv(path, header=mapping.header_row, dtype=str)
+    df = pd.read_csv(path, header=mapping.header_row, dtype=str,
+                     keep_default_na=False)
     df = df.rename(columns={c.source_column: c.target_column
                             for c in mapping.columns})
     if mapping.layout == "wide":

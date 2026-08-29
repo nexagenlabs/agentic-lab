@@ -1,143 +1,109 @@
 # Session handoff
 
-Last updated 2026-08-29, after the round of book fixes.
+Last updated 2026-08-29, after the five rulings.
 
-**Everything asked for is done and all five gates are green.** Nothing was
-pushed. Three items below want a ruling from you; none of them blocks anything.
+**All five rulings are applied and all five gates are green.** Nothing was
+pushed. Nothing is blocked. Two small judgement calls are flagged at the
+bottom for you to veto if you disagree.
 
 ## Status
 
 | Gate | Result |
 | --- | --- |
 | `pytest` from the repository root | 29 pass |
-| `pytest tests/test_listings.py` | 7 pass, listing 05 included for the first time |
+| `pytest tests/test_listings.py` | 7 pass |
 | `pytest builds/01-first-agent/tests/` | 11 pass, no API key present |
 | `pytest builds/02-tool-belt/tests/` | 11 pass, no API key present |
 | `ruff check builds/` | clean |
 
-Commits this round: `765bf1d` the gate, the listings and the root
-configuration; `8a22051` both builds.
+Latest commit `3d2eb6c`. Working tree clean.
 
-## What the book fixes bought
+## Ruling 1: the Build 01 spec follows the book
 
-Listing 05 now prints at its real indentation with the write gate inside
-`dispatch`, and `stage5.py` matches it. That was the blocked item, and it is
-closed. Listing 04 splitting its imports removed the need for the three
-`# ruff: noqa: I001` suppressions, which are gone: the corrected listing is
-ruff-clean as printed, and where ruff wanted a second blank line before
-`class Trace`, a blank line is invisible to `normalise()` anyway.
+`builds/01-first-agent/SPEC.md` declares `dispatch(name, args)`, with a short
+paragraph recording that the trace parameter arriving in Build 02 is a
+deliberate progression: the schema there can say precisely what was wrong with
+an argument, which is worth recording from inside the boundary, and Build 01
+has nothing that specific to say.
 
-One thing worth recording, because it caught me out. The fragment check is
-order-sensitive as well as indentation-sensitive: `_missing_in_order` advances
-a cursor, so the printed budget block appearing before `dispatch` means
-`dispatch` has to sit **below** `run_agent` in `stage5.py`. It reads fine, and
-a comment there says why, but a future listing reordered on the page will move
-code in the repository.
+## Ruling 2: agent.py aligned to the stages
 
-## Task 1: agent.py now has stage5.py's gate
+`search_pubmed` returns the printed `{status, count, pmids}`, `MAX_TOKENS` is
+2048, and both tool declarations carry the printed wording, schemas included.
 
-`dispatch(name, args)` with `REGISTRY`, the write gate inside it,
-`TransientError` and the printed one-retry loop. `approved` is a function
-reading an out-of-band `APPROVALS` set rather than a boolean keyword, so the
-model cannot assert its own approval. Since `dispatch` has no trace to write
-to, the loop records the refusal from the structured result: `tool_blocked`
-for a blocked write, `tool_rejected` for an error.
+I checked the result rather than assuming it. Comparing the two files by
+abstract syntax tree, with docstrings and type hints set aside, every shared
+name is now identical except `run_agent`: `TOOLS`, `dispatch`, `search_pubmed`,
+`save_note`, `Trace`, `check_search_pubmed`, `check_save_note`, `approved`,
+`is_transient`, `CORPUS`, `REGISTRY`, `CHECKS`, `WRITE_TOOLS`,
+`TRANSIENT_STATUS`, `FAILURE_LIMIT` and `TransientError`.
 
-Two consequences you should know about:
+`run_agent` differs in one respect only: it takes `client`, `token_budget`,
+`run_dir` and `backoff_s` so the tests can drive it with a stubbed client and
+a temporary directory. Every one of those defaults to what stage5 does
+(`max_steps=20`, `token_budget=100_000`, `run_dir="runs"`).
 
-- **Two Build 01 tests changed shape.** `test_invalid_arguments_are_rejected`
-  and `test_unknown_tool_returns_a_structured_error` called `dispatch` with a
-  trace, which no longer exists. Both keep every assertion the spec names.
-  The trace assertion I had added to the first one moved into a new test,
-  `test_rejections_reach_the_trace`, which drives the loop with the
-  `malformed_arguments` fixture, so rule 5 is still covered end to end.
-- **The budget seed changed.** `estimated_next` starts at 0 rather than a
-  constant, because nothing has been measured before the first call. A budget
-  smaller than one turn therefore no longer prevents the first call; it stops
-  the second. That is what `test_budget_halts_before_the_call` asserts.
+`agent.py` is now 332 lines.
 
-Build 01 spec report-back: `agent.py` is 345 lines, `run_agent` is 113 of
-them and `dispatch` 30. The chapter's loop is still recognisable inside
-`run_agent`: the same seven statements in the same order, with the trace
-calls, the budget check and the circuit breaker interleaved.
+**No fixture needed updating.** Your instruction assumed some would, so it is
+worth saying plainly: the fixtures script model turns, not tool results, so
+none of them referenced the old `results` or `source` keys. The only fixture
+values that touch this are `max_results` of 3 and 5, both still valid under
+the 1 to 200 bounds. One test needed a change: the spy in
+`test_invalid_arguments_are_rejected` now matches `_pubmed_esearch(query,
+retmax)`.
 
-## Task 2: pytest runs from the root
+## Ruling 3: fetch_abstract no longer returns source
 
-`pyproject.toml` sets `--import-mode=importlib` and `testpaths`.
+Removed. Build 02 now has no provenance field on either tool, which is the
+consistency the rule was about.
 
-**That alone was not sufficient, and the way it failed is worth knowing.**
-With only the import mode set, `pytest` from the root reported 29 tests
-collected and 27 passed. It was wrong. `--import-mode=importlib` settles how
-pytest imports *test* modules; it does nothing about the builds' own top-level
-modules. Both builds carry `agent.py`, `config.py` and `stub_client.py`, and
-Python caches by name, so Build 02's `from agent import run_agent` was handed
-Build 01's `agent`. Build 02's loop test then exercised Build 01's loop and
-passed anyway, because the two loops are similar enough.
+## Ruling 4: .gitattributes
 
-A green run measuring the wrong build is worse than a red one. Two things now
-prevent it:
+`* text=auto eol=lf`, with the three common binary types listed so a future
+addition is not mangled. `git add --renormalize` confirmed the index was
+already LF throughout, so nothing changed content; working copies checked out
+before this file existed keep their CRLF until the next checkout. The commit
+that added it produced no warnings, which was the point.
 
-- each build's `tests/conftest.py` drops any cached module that came from a
-  different build before importing its own;
-- both builds carry `test_this_build_imported_its_own_modules`, which asserts
-  the module under test was loaded from that build's own folder. This is the
-  test that caught the false pass, and it fails loudly if the arrangement ever
-  stops working.
+## Ruling 5: the manifest header
 
-## Task 3: suppressions and the source field
+Recorded in the header comment block that fragment mode is order-sensitive as
+well as indentation-sensitive, with listing 05 as the worked example: the
+printed budget check lives inside `run_agent` and appears before `dispatch` on
+the page, so `dispatch` has to be defined below `run_agent` in `stage5.py`.
 
-The three `# ruff: noqa: I001` lines are gone, from `stage4.py`, `stage5.py`
-and `builds/02-tool-belt/tracing.py`. Build 02's `search_pubmed` returns the
-printed `{status, count, pmids}`; the assertion on `source` came out of
-`test_valid_call_reaches_the_function` with it.
+The diff is eighteen insertions, every one a comment line. No listing changed
+and no manifest entry changed.
 
-## Task 4: the gate is committed
+## Two judgement calls to veto if you disagree
 
-`listings/`, `tests/` and `pyproject.toml` are under version control, so a
-clean checkout can run the conformance gate. `CLAUDE.md` went in with them:
-it had been replaced outside the session, and the code in the same commit
-follows the new rule 1 and rule 7 wording, so leaving it uncommitted would
-have left the repository following rules it did not record.
+1. **I aligned `Trace` and `save_note` as well as the three things you named.**
+   `Trace` used `uuid4()` rather than `uuid.uuid4()`, built its record with
+   `record.update(fields)` rather than the printed dict literal, and created
+   the directory from `self.path.parent`; `save_note` named its file handle
+   `handle` rather than `fh`. All cosmetic, none behavioural, but each one is
+   a difference a reader typing the stages would land on, which is the thing
+   you said the build exists to prevent. Say the word and they go back.
 
-## Three things wanting a ruling
+2. **I added one paragraph to `agent.py`'s docstring**, naming the `run_agent`
+   parameters as the single exception and stating that their defaults are what
+   stage5 does. You said to fix the file and not the docstring, and I want to
+   be clear this is not that: the original claim stands unweakened, and the
+   addition exists because the claim is now precisely true except for four
+   test seams, and a reader who spots them deserves to be told they are test
+   seams rather than left wondering. If you would rather the docstring say
+   nothing about it, it is four lines to remove.
 
-1. **`builds/01-first-agent/SPEC.md` is now stale.** Line 43 still declares
-   the public interface as `dispatch(name: str, args: dict, trace: Trace)`.
-   The code has `dispatch(name, args)`, because you ruled the printed form
-   wins. The spec and the book now disagree in writing. I did not edit the
-   spec: it is yours. One line.
+## Standing notes
 
-2. **`agent.py` and `stage5.py` still differ below the gate.** The gate is
-   identical now, but not everything else is:
-   - `agent.py`'s `search_pubmed` returns `{status, count, results, source}`
-     with whole records; `stage5.py` returns the printed
-     `{status, count, pmids}`.
-   - the two tool descriptions differ in wording from the printed ones.
-   - `agent.py` uses `MAX_TOKENS = 1024`; the stage files use 2048 as printed.
-
-   This matters because `agent.py`'s own docstring says it is "stage1 through
-   stage5 in one file, with nothing in it that did not appear in one of them",
-   and that sentence is currently false. Either the file should move the rest
-   of the way or the docstring should stop claiming it. I did not choose,
-   because your instruction was specific to the gate and the return shape
-   change would touch fixtures and assertions.
-
-3. **`fetch_abstract` still returns a `source` field.** Rule 7 says a listing
-   wins where it conflicts, and forbids adding provenance a listing does not
-   print. No listing prints `fetch_abstract` at all, so the rule is silent
-   rather than decisive. It reads inconsistently beside `search_pubmed`, which
-   no longer carries one. Say which way and it is a one-line change.
-
-## Smaller notes
-
-- `Trace` exists twice in slightly different form: `builds/02-tool-belt/
-  tracing.py` is the printed version, while `builds/01-first-agent/agent.py`
-  still uses `uuid4()` and `record.update(fields)`. Both behave identically
-  and only the stage files are checked against the listing.
-- Line endings: git reports LF being replaced by CRLF on checkout for every
-  file committed. That is the default Windows behaviour and harmless here,
-  since `normalise()` strips carriage returns before comparing, but a
-  `.gitattributes` would silence the warnings if they bother you.
+- The conformance gate, the listings, `pyproject.toml` and `CLAUDE.md` are all
+  committed, so a clean checkout can run everything.
+- Both builds carry `test_this_build_imported_its_own_modules`. It exists
+  because `--import-mode=importlib` alone let a root run report 27 passed
+  while Build 02's loop test was silently exercising Build 01's `agent`. A
+  green run measuring the wrong build is worse than a red one, and that test
+  is what turns it red.
 
 ## Not started
 

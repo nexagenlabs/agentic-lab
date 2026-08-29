@@ -1,13 +1,16 @@
 """Stage 2: one tool, and the declaration that tells the model about it.
 
 Still not an agent. The model can now ask for the tool, but nothing here
-answers the request.
+answers the request. This file stands alone: type it and run it.
 """
 
+import os
 from typing import Any
 
 from anthropic import Anthropic
-from config import MODEL
+
+MODEL = os.environ.get("AGENT_MODEL", "claude-opus-5")
+
 
 SEARCH_PUBMED = {
     "name": "search_pubmed",
@@ -33,6 +36,7 @@ SEARCH_PUBMED = {
         "required": ["query"],
     },
 }
+
 
 # Stands in for a real esearch call, which arrives in Build 03.
 CORPUS = [

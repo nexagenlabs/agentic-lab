@@ -1,16 +1,73 @@
 """Stage 3: the loop. This is the whole idea of an agent, and it is short.
 
-Each stage imports from the one before it, so a reader who has typed stage2
-does not type it again. The loop below is the core of the build; everything
-stage4 and stage5 add is a limit placed on it.
+Stage 2 is repeated here in full, because this file stands alone. The new
+code is ``check_search_pubmed``, ``dispatch`` and ``run_agent``.
 """
 
 import json
+import os
 from typing import Any
 
 from anthropic import Anthropic
-from config import MODEL
-from stage2 import SEARCH_PUBMED, search_pubmed
+
+MODEL = os.environ.get("AGENT_MODEL", "claude-opus-5")
+
+
+SEARCH_PUBMED = {
+    "name": "search_pubmed",
+    "description": (
+        "Search PubMed for papers matching a query and return their PMIDs, "
+        "titles and years. Use this when you need to find papers you do not "
+        "already know about, for example to see what has been published on a "
+        "target. Do NOT use this to retrieve the text of a known PMID: it "
+        "returns metadata only, and a PMID you already hold needs no search."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "query": {
+                "type": "string",
+                "description": "Free text query, at least three characters.",
+            },
+            "max_results": {
+                "type": "integer",
+                "description": "How many records to return, 1 to 50. Defaults to 5.",
+            },
+        },
+        "required": ["query"],
+    },
+}
+
+
+# Stands in for a real esearch call, which arrives in Build 03.
+CORPUS = [
+    {"pmid": "31562799", "title": "Olaparib maintenance in ovarian carcinoma", "year": 2019},
+    {"pmid": "30345884", "title": "Niraparib in recurrent ovarian carcinoma", "year": 2018},
+    {"pmid": "28578601", "title": "PARP inhibitor resistance mechanisms", "year": 2017},
+    {"pmid": "32268121", "title": "Rucaparib in prostate carcinoma", "year": 2020},
+]
+
+
+def _pubmed_esearch(query: str, max_results: int) -> list[dict[str, Any]]:
+    """Stubbed PubMed search. Build 03 replaces the body, not the signature."""
+    terms = query.lower().split()
+    hits = [r for r in CORPUS if any(t in r["title"].lower() for t in terms)]
+    return hits[:max_results]
+
+
+def search_pubmed(query: str, max_results: int = 5) -> dict[str, Any]:
+    """Return records matching ``query``.
+
+    ``count`` is computed here rather than asked of the model, because a model
+    asked to count will sometimes be wrong and will never say so.
+    """
+    hits = _pubmed_esearch(query, max_results)
+    return {
+        "status": "ok",
+        "count": len(hits),
+        "results": hits,
+        "source": "pubmed-stub",
+    }
 
 
 def check_search_pubmed(args: dict[str, Any]) -> str | None:

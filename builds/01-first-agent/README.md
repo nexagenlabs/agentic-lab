@@ -28,11 +28,16 @@ sometimes be wrong and will never say so.
 ## The files
 
 The chapter builds this in five stages, each of which runs on its own. Type
-them in order; each imports from the one before it, so nothing is typed twice.
+them in order.
+
+Each stage file stands alone. It imports nothing from another stage and
+nothing from `config.py`, and it repeats whatever earlier code it needs in
+full. If you have typed only `stage3.py`, `python stage3.py` runs. The
+duplication is the point: it is what lets you read one page and run it.
 
 | File | What it adds |
 |---|---|
-| `config.py` | The one place in the build that names a model. |
+| `config.py` | The one place the assembled build names a model. |
 | `stage1.py` | A single model call. Eleven lines, and not yet an agent. |
 | `stage2.py` | One tool: `search_pubmed`, and the declaration that describes it. |
 | `stage3.py` | The loop, and the `dispatch` boundary that validates arguments. |
@@ -62,8 +67,12 @@ The model name comes from the environment, never from the source:
 AGENT_MODEL=claude-sonnet-5 python agent.py
 ```
 
-See [MODELS.md](../../MODELS.md) for the current names. The default is in
-`config.py` and appears exactly once in this build.
+See [MODELS.md](../../MODELS.md) for the current names. In the assembled
+build the default lives in `config.py` and nowhere else: `agent.py`, and
+anything that imports it, reads it from there. The stage files are the one
+exception. Each reads `AGENT_MODEL` directly, because a stage that imported
+`config.py` would not run on its own, and standing alone is what a stage file
+is for.
 
 Traces land in `runs/<run_id>.jsonl`, one event per line. To see what a run
 actually did, read the file rather than the return value:

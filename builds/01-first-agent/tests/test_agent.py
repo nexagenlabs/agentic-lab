@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 import agent
-from agent import Trace, dispatch, run_agent
+from agent import dispatch, run_agent
 from stub_client import StubClient, load_script
 
 
@@ -55,10 +55,9 @@ def test_invalid_arguments_are_rejected(tmp_path: Path, monkeypatch) -> None:
         return []
 
     monkeypatch.setattr(agent, "_pubmed_esearch", spy)
-    trace = Trace(str(tmp_path))
 
-    negative = dispatch("search_pubmed", {"query": "olaparib", "max_results": -1}, trace)
-    short = dispatch("search_pubmed", {"query": "ov", "max_results": 5}, trace)
+    negative = dispatch("search_pubmed", {"query": "olaparib", "max_results": -1})
+    short = dispatch("search_pubmed", {"query": "ov", "max_results": 5})
 
     for result in (negative, short):
         assert result["status"] == "error"
@@ -68,10 +67,27 @@ def test_invalid_arguments_are_rejected(tmp_path: Path, monkeypatch) -> None:
     # have run at all.
     assert entered == []
 
-    records = read_trace(tmp_path, trace.run_id)
-    rejections = events(records, "tool_rejected")
-    assert len(rejections) == 2
-    assert {r["code"] for r in rejections} == {"invalid_arguments"}
+
+def test_rejections_reach_the_trace(tmp_path: Path) -> None:
+    """dispatch takes no trace, so the loop has to record the refusal.
+
+    A rejection nobody can count is a rejection nobody will fix, which is why
+    CLAUDE.md rule 5 asks for it in the trace whoever writes it there.
+    """
+    client = StubClient.from_fixture("malformed_arguments")
+
+    result = run_agent(
+        "Find everything on niraparib.",
+        client=client,
+        run_dir=str(tmp_path),
+        backoff_s=0.0,
+    )
+    assert result["status"] == "COMPLETE"
+
+    rejections = events(read_trace(tmp_path, result["run_id"]), "tool_rejected")
+    assert len(rejections) == 1
+    assert rejections[0]["tool"] == "search_pubmed"
+    assert rejections[0]["code"] == "invalid_arguments"
 
 
 def test_trace_replays_the_run(tmp_path: Path) -> None:
@@ -220,12 +236,23 @@ def test_write_tool_is_blocked_without_approval(tmp_path: Path) -> None:
     assert not Path("notes.jsonl").exists()
 
 
-def test_unknown_tool_returns_a_structured_error(tmp_path: Path) -> None:
-    trace = Trace(str(tmp_path))
-    result = dispatch("delete_everything", {}, trace)
+def test_unknown_tool_returns_a_structured_error() -> None:
+    result = dispatch("delete_everything", {})
 
     assert result == {
         "status": "error",
         "code": "unknown_tool",
         "tool": "delete_everything",
     }
+
+
+def test_this_build_imported_its_own_modules() -> None:
+    """Build 01 and Build 02 both carry an agent.py, a config.py and a
+    stub_client.py. If one pytest process hands this build the other one, the
+    tests above are quietly measuring the wrong code. This asserts the module
+    under test came from this folder.
+    """
+    build_dir = Path(__file__).resolve().parents[1]
+    assert Path(agent.__file__).resolve().parent == build_dir, (
+        f"agent was imported from {agent.__file__}, not from {build_dir}"
+    )

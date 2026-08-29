@@ -5,11 +5,8 @@ artefacts read in sequence, not a package, and a reader who opens this folder
 alone must find everything it needs inside it.
 """
 
-# The chapter prints the trace imports on one line, so isort is switched off
-# for this file rather than let the page and the repository disagree.
-# ruff: noqa: I001
-
-import json, uuid
+import json
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 

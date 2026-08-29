@@ -7,10 +7,6 @@ a run spends its whole budget on one broken thing.
 Stages 2 to 4 are repeated here in full, because this file stands alone.
 """
 
-# The chapter prints the trace imports on one line, so isort is switched off
-# for this file rather than let the page and the repository disagree.
-# ruff: noqa: I001
-
 import os
 import time
 
@@ -23,10 +19,6 @@ MAX_STEPS = 20
 
 # The ceiling a run may spend. Checked before a call, never after.
 TOKEN_BUDGET = 100_000
-
-# What the next call is assumed to cost when deciding whether to make it.
-# The first call has no measured turn behind it, so it starts from here.
-ESTIMATED_CALL_TOKENS = 1_500
 
 # Three consecutive failures from one tool is not bad luck, it is a broken
 # tool. Disable it rather than spend the rest of the run rediscovering that.
@@ -48,9 +40,11 @@ class TransientError(RuntimeError):
     """A tool failure that the same call might survive if tried again."""
 
 
-import json, uuid
+import json
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
+
 
 class Trace:
     def __init__(self, run_dir="runs"):
@@ -83,7 +77,7 @@ def _pubmed_esearch(query: str, retmax: int) -> list[str]:
 
 
 def search_pubmed(query: str, max_results: int = 20) -> dict:
-    """Real implementation lives in the repo. Stub shown here."""
+    """Stubbed until Build 03 replaces the body."""
     pmids = _pubmed_esearch(query, retmax=max_results)
     return {"status": "ok", "count": len(pmids), "pmids": pmids}
 
@@ -185,30 +179,14 @@ def is_transient(error: APIError) -> bool:
     return getattr(error, "status_code", None) in TRANSIENT_STATUS
 
 
-def dispatch(name, args):
-    fn = REGISTRY.get(name)
-    if fn is None:
-        return {"status": "error", "code": "unknown_tool", "tool": name}
-    if name in WRITE_TOOLS and not approved(name, args):
-        return {"status": "blocked", "code": "awaiting_human_approval"}
-    reason = CHECKS[name](args)
-    if reason is not None:
-        return {"status": "error", "code": "invalid_arguments", "detail": reason}
-    for attempt in (1, 2):
-        try:
-            return fn(**args)
-        except TransientError:
-            if attempt == 2:
-                return {"status": "error", "code": "tool_unavailable"}
-            time.sleep(2 ** attempt)
-
-
 def run_agent(task: str, max_steps: int = MAX_STEPS) -> dict:
     trace = Trace()
     messages = [{"role": "user", "content": task}]
     steps = 0
     tokens_used = 0
-    estimated_next = ESTIMATED_CALL_TOKENS
+    # Nothing has been measured yet, so nothing is assumed. The first call is
+    # the one that produces the estimate every later call is judged against.
+    estimated_next = 0
     retries = 0
     failures: dict[str, int] = {}
     disabled: set[str] = set()
@@ -218,10 +196,9 @@ def run_agent(task: str, max_steps: int = MAX_STEPS) -> dict:
     while steps < max_steps:
         # Budget ceiling, checked BEFORE the call rather than after.
         if tokens_used + estimated_next > TOKEN_BUDGET:
-            trace.write("halt", reason="budget", steps=steps,
-                        tokens_used=tokens_used)
-            return {"status": "INCOMPLETE", "reason": "budget", "steps": steps,
-                    "answer": None, "run_id": trace.run_id}
+            trace.write("halt", reason="budget")
+            return {"status": "INCOMPLETE", "reason": "budget",
+                    "steps": steps}
 
         steps += 1
         tools = [t for t in TOOLS if t["name"] not in disabled]
@@ -272,11 +249,15 @@ def run_agent(task: str, max_steps: int = MAX_STEPS) -> dict:
                 output = {"status": "error", "code": "tool_disabled", "tool": block.name}
             else:
                 output = dispatch(block.name, block.input)
-                # dispatch keeps the signature the chapter prints, so the
-                # rejection reaches the trace from here instead of from inside.
-                if output["status"] != "ok":
+                # dispatch keeps the two argument signature the chapter prints,
+                # so it has no trace to write to. The refusal is recorded here
+                # instead, from the structured result it returned.
+                if output["status"] == "blocked":
+                    trace.write("tool_blocked", tool=block.name,
+                                code=output["code"])
+                elif output["status"] == "error":
                     trace.write("tool_rejected", tool=block.name,
-                                code=output.get("code"), args=block.input)
+                                code=output["code"], args=block.input)
                 if output["status"] == "error":
                     failures[block.name] = failures.get(block.name, 0) + 1
                     if failures[block.name] >= FAILURE_LIMIT:
@@ -295,6 +276,30 @@ def run_agent(task: str, max_steps: int = MAX_STEPS) -> dict:
     trace.write("halt", reason="step_cap", steps=steps, max_steps=max_steps)
     return {"status": "INCOMPLETE", "steps": steps, "answer": None,
             "run_id": trace.run_id}
+
+
+# The error policy and the write gate both live in dispatch, because both are
+# decisions about whether a call happens at all. It sits below the loop that
+# calls it, in the order the chapter introduces the two.
+def dispatch(name, args):
+    fn = REGISTRY.get(name)
+    if fn is None:
+        return {"status": "error", "code": "unknown_tool", "tool": name}
+
+    if name in WRITE_TOOLS and not approved(name, args):
+        return {"status": "blocked", "code": "awaiting_human_approval"}
+
+    reason = CHECKS[name](args)
+    if reason is not None:
+        return {"status": "error", "code": "invalid_arguments", "detail": reason}
+
+    for attempt in (1, 2):
+        try:
+            return fn(**args)
+        except TransientError:
+            if attempt == 2:
+                return {"status": "error", "code": "tool_unavailable"}
+            time.sleep(2 ** attempt)
 
 
 if __name__ == "__main__":

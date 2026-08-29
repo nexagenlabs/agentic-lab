@@ -8,10 +8,6 @@ Stages 2 and 3 are repeated here in full, because this file stands alone. The
 new code is the ``Trace`` class and the trace calls inside the loop.
 """
 
-# The chapter prints the trace imports on one line, so isort is switched off
-# for this file rather than let the page and the repository disagree.
-# ruff: noqa: I001
-
 import os
 
 from anthropic import Anthropic
@@ -37,7 +33,7 @@ def _pubmed_esearch(query: str, retmax: int) -> list[str]:
 
 
 def search_pubmed(query: str, max_results: int = 20) -> dict:
-    """Real implementation lives in the repo. Stub shown here."""
+    """Stubbed until Build 03 replaces the body."""
     pmids = _pubmed_esearch(query, retmax=max_results)
     return {"status": "ok", "count": len(pmids), "pmids": pmids}
 
@@ -76,9 +72,11 @@ def check_search_pubmed(args: dict) -> str | None:
     return None
 
 
-import json, uuid
+import json
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
+
 
 class Trace:
     def __init__(self, run_dir="runs"):

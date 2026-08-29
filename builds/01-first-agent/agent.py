@@ -44,7 +44,7 @@ SEARCH_PUBMED = {
             },
             "max_results": {
                 "type": "integer",
-                "description": "How many records to return, 1 to 50. Defaults to 5.",
+                "description": "How many records to return, 1 to 200. Defaults to 20.",
             },
         },
         "required": ["query"],
@@ -152,11 +152,11 @@ def check_search_pubmed(args: dict[str, Any]) -> str | None:
     query = args.get("query")
     if not isinstance(query, str) or len(query.strip()) < 3:
         return "query must be a string of at least three characters"
-    max_results = args.get("max_results", 5)
+    max_results = args.get("max_results", 20)
     if isinstance(max_results, bool) or not isinstance(max_results, int):
         return "max_results must be an integer"
-    if not 1 <= max_results <= 50:
-        return "max_results must be between 1 and 50"
+    if not 1 <= max_results <= 200:
+        return "max_results must be between 1 and 200"
     return None
 
 
@@ -171,7 +171,26 @@ def check_save_note(args: dict[str, Any]) -> str | None:
 
 
 CHECKS = {"search_pubmed": check_search_pubmed, "save_note": check_save_note}
-FUNCTIONS = {"search_pubmed": search_pubmed, "save_note": save_note}
+REGISTRY = {"search_pubmed": search_pubmed, "save_note": save_note}
+
+# Approval arrives out of band, from a human. It is never read from the
+# arguments the model supplied: a model asked whether its own write was
+# approved will say yes.
+APPROVALS: set[str] = set()
+
+
+class TransientError(RuntimeError):
+    """A tool failure that the same call might survive if tried again."""
+
+
+def approved(name: str, args: dict[str, Any]) -> bool:
+    """Whether a human has approved this write.
+
+    The arguments the model supplied cannot answer this question, which is why
+    ``args`` is read for nothing here. Approval has to arrive from outside the
+    run, and ``APPROVALS`` stands in for wherever it arrives from.
+    """
+    return name in APPROVALS
 
 
 def is_transient(error: APIError) -> bool:
@@ -182,28 +201,33 @@ def is_transient(error: APIError) -> bool:
     return getattr(error, "status_code", None) in TRANSIENT_STATUS
 
 
-def dispatch(
-    name: str,
-    args: dict[str, Any],
-    trace: Trace,
-    *,
-    approved: bool = False,
-) -> dict[str, Any]:
+def dispatch(name, args):
     """The gate every tool call passes: known tool, then write policy, then
-    arguments. Nothing raises out of here, and no prose describing a failure
-    ever goes back to the model."""
-    if name not in FUNCTIONS:
-        trace.write("tool_rejected", tool=name, code="unknown_tool")
+    arguments, then the call itself with one retry.
+
+    This is the form Chapter 3 prints. It takes no trace, so it writes none:
+    the caller records the refusal from the structured result it gets back.
+    Nothing raises out of here, and no prose describing a failure ever goes
+    back to the model.
+    """
+    fn = REGISTRY.get(name)
+    if fn is None:
         return {"status": "error", "code": "unknown_tool", "tool": name}
-    if name in WRITE_TOOLS and not approved:
-        trace.write("tool_blocked", tool=name, code="awaiting_human_approval")
-        return {"status": "blocked", "code": "awaiting_human_approval", "tool": name}
+
+    if name in WRITE_TOOLS and not approved(name, args):
+        return {"status": "blocked", "code": "awaiting_human_approval"}
+
     reason = CHECKS[name](args)
     if reason is not None:
-        trace.write("tool_rejected", tool=name, code="invalid_arguments",
-                    detail=reason, args=args)
         return {"status": "error", "code": "invalid_arguments", "detail": reason}
-    return FUNCTIONS[name](**args)
+
+    for attempt in (1, 2):
+        try:
+            return fn(**args)
+        except TransientError:
+            if attempt == 2:
+                return {"status": "error", "code": "tool_unavailable"}
+            time.sleep(2 ** attempt)
 
 
 def run_agent(
@@ -222,6 +246,9 @@ def run_agent(
     messages: list[dict[str, Any]] = [{"role": "user", "content": task}]
     steps = 0
     tokens_used = 0
+    # Nothing has been measured yet, so nothing is assumed. The first call is
+    # the one that produces the estimate every later call is judged against.
+    estimated_next = 0
     retries = 0
     failures: dict[str, int] = {}
     disabled: set[str] = set()
@@ -230,7 +257,7 @@ def run_agent(
     while steps < max_steps:
         # Before the call, not after: a budget checked afterwards is one that
         # has already been spent.
-        if tokens_used >= token_budget:
+        if tokens_used + estimated_next > token_budget:
             trace.write("halt", reason="budget", steps=steps,
                         max_steps=max_steps, tokens_used=tokens_used)
             return {"status": "INCOMPLETE", "reason": "budget", "steps": steps,
@@ -262,7 +289,10 @@ def run_agent(
                     "status_code": status_code, "answer": None,
                     "run_id": trace.run_id}
         retries = 0
-        tokens_used += response.usage.input_tokens + response.usage.output_tokens
+        spent = response.usage.input_tokens + response.usage.output_tokens
+        tokens_used += spent
+        # The turn just measured is the best estimate of the next one.
+        estimated_next = spent
         trace.write("model_response", step=steps, model=response.model,
                     stop_reason=response.stop_reason, tokens_used=tokens_used)
         if response.stop_reason != "tool_use":
@@ -279,7 +309,15 @@ def run_agent(
             if block.name in disabled:
                 result = {"status": "error", "code": "tool_disabled", "tool": block.name}
             else:
-                result = dispatch(block.name, block.input, trace)
+                result = dispatch(block.name, block.input)
+                # dispatch takes no trace, so the refusal is recorded here
+                # from the structured result it returned.
+                if result["status"] == "blocked":
+                    trace.write("tool_blocked", tool=block.name,
+                                code=result["code"])
+                elif result["status"] == "error":
+                    trace.write("tool_rejected", tool=block.name,
+                                code=result["code"], args=block.input)
                 if result["status"] == "error":
                     failures[block.name] = failures.get(block.name, 0) + 1
                     if failures[block.name] >= FAILURE_LIMIT:

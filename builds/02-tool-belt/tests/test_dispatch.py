@@ -107,7 +107,6 @@ def test_valid_call_reaches_the_function(tmp_path: Path) -> None:
 
     assert result["status"] == "ok"
     assert result["count"] == len(result["pmids"])
-    assert result["source"] == "pubmed-stub"
 
 
 def test_pmid_pattern_is_enforced(tmp_path: Path) -> None:
@@ -159,3 +158,19 @@ def test_no_api_key_is_needed(monkeypatch) -> None:
             client.messages.create(model="stub", max_tokens=1, messages=[])
 
     assert "script ran out" in str(caught.value)
+
+
+def test_this_build_imported_its_own_modules() -> None:
+    """Build 01 and Build 02 both carry an agent.py, a config.py and a
+    stub_client.py. If one pytest process hands this build the other one, the
+    loop test above is quietly measuring the wrong code and still passing.
+    This asserts the modules under test came from this folder.
+    """
+    import agent as agent_module
+
+    build_dir = Path(__file__).resolve().parents[1]
+    for module in (agent_module, dispatch_module):
+        assert Path(module.__file__).resolve().parent == build_dir, (
+            f"{module.__name__} was imported from {module.__file__}, "
+            f"not from {build_dir}"
+        )

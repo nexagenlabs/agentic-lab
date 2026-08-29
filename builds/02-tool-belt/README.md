@@ -53,8 +53,17 @@ other rather than in a package.
 
 ## A note on running the whole repository at once
 
-Run each build's tests separately, as above. Build 01 and Build 02 both expose
-top-level modules called `agent`, `config` and `stub_client`, so a single
-pytest process that collects both directories will import one build and hand
-those modules to the other. Each gate passes on its own; the two together do
-not. See `HANDOFF.md`.
+`pytest` from the repository root runs everything, this build included.
+
+That takes a little arranging, because Build 01 and Build 02 both carry
+modules called `agent`, `config` and `stub_client`: each build has to stand
+alone for a reader who opens only that folder. Python caches modules by name,
+so without help the build collected first would hand its modules to the
+second. Two things prevent it. `pyproject.toml` sets
+`--import-mode=importlib`, which settles the test module names, and each
+build's `tests/conftest.py` drops any cached module belonging to a different
+build before importing its own.
+
+Both builds also carry `test_this_build_imported_its_own_modules`, which fails
+loudly if that ever stops working. Without it the symptom is not an error: the
+wrong build is measured and the tests still pass.

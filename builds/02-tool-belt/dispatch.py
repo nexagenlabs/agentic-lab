@@ -73,7 +73,7 @@ def search_pubmed(query: str, max_results: int = 20) -> dict:
         if any(term in record["title"].lower() for term in terms)
     ]
     pmids = pmids[:max_results]
-    return {"status": "ok", "count": len(pmids), "pmids": pmids, "source": "pubmed-stub"}
+    return {"status": "ok", "count": len(pmids), "pmids": pmids}
 
 
 def fetch_abstract(pmid: str) -> dict:

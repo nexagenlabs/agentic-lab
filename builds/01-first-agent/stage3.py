@@ -33,7 +33,7 @@ def _pubmed_esearch(query: str, retmax: int) -> list[str]:
 
 
 def search_pubmed(query: str, max_results: int = 20) -> dict:
-    """Real implementation lives in the repo. Stub shown here."""
+    """Stubbed until Build 03 replaces the body."""
     pmids = _pubmed_esearch(query, retmax=max_results)
     return {"status": "ok", "count": len(pmids), "pmids": pmids}
 

@@ -1,0 +1,14 @@
+{
+  "description": "A 429 on the first call, then a clean answer. Drives the retry.",
+  "model": "stub-model-2026-01-01",
+  "repeat_last": false,
+  "turns": [
+    {"kind": "error", "status_code": 429, "message": "rate limited"},
+    {
+      "kind": "text",
+      "text": "Answered on the retry.",
+      "stop_reason": "end_turn",
+      "usage": {"input_tokens": 300, "output_tokens": 25}
+    }
+  ]
+}

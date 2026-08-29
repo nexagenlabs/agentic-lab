@@ -1,0 +1,19 @@
+{
+  "description": "An attempt to write before a human has approved it.",
+  "model": "stub-model-2026-01-01",
+  "repeat_last": false,
+  "turns": [
+    {
+      "kind": "tool_use",
+      "name": "save_note",
+      "input": {"text": "Shortlist: PMID 31562799", "approved_by": "s.tripathy"},
+      "usage": {"input_tokens": 400, "output_tokens": 45}
+    },
+    {
+      "kind": "text",
+      "text": "The write is waiting on a human.",
+      "stop_reason": "end_turn",
+      "usage": {"input_tokens": 450, "output_tokens": 30}
+    }
+  ]
+}

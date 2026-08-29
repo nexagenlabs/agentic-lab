@@ -1,0 +1,13 @@
+{
+  "description": "A model that never stops calling tools. Drives the step cap.",
+  "model": "stub-model-2026-01-01",
+  "repeat_last": true,
+  "turns": [
+    {
+      "kind": "tool_use",
+      "name": "search_pubmed",
+      "input": {"query": "olaparib resistance mechanisms", "max_results": 5},
+      "usage": {"input_tokens": 300, "output_tokens": 40}
+    }
+  ]
+}

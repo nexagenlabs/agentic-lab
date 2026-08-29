@@ -1,0 +1,8 @@
+{
+  "description": "A 400. Retrying this would only spend the budget again.",
+  "model": "stub-model-2026-01-01",
+  "repeat_last": false,
+  "turns": [
+    {"kind": "error", "status_code": 400, "message": "max_tokens is too large"}
+  ]
+}

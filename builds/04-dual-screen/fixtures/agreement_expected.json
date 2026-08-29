@@ -1,0 +1,33 @@
+{
+  "_note": "JSON has no comments, so the constructed values live here. These are the statistics the contingency table was designed to produce, not values observed after the fact. A test asserts against them to three decimal places.",
+  "_contingency_table_rows_are_screen_a": {
+    "include": {
+      "include": 3,
+      "exclude": 3,
+      "flag": 1
+    },
+    "exclude": {
+      "include": 3,
+      "exclude": 46,
+      "flag": 1
+    },
+    "flag": {
+      "include": 1,
+      "exclude": 1,
+      "flag": 2
+    }
+  },
+  "n": 61,
+  "observed_agreement": 0.836066,
+  "kappa": 0.472318,
+  "kappa_band": "moderate",
+  "pabak": 0.754098,
+  "ac1": 0.805918,
+  "screen_a_against_gold": {
+    "gold_size": 22,
+    "sensitivity": 0.888889,
+    "specificity": 0.769231,
+    "negative_predictive_value": 0.909091,
+    "positive_predictive_value": 0.727273
+  }
+}

@@ -1,0 +1,557 @@
+{
+  "screen": "b",
+  "model": "claude-opus-5",
+  "criteria_version": 3,
+  "failed": [],
+  "verdicts": [
+    {
+      "pmid": "99000001",
+      "decision": "include",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Reports a numerical endpoint in a qualifying human liver model.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000002",
+      "decision": "include",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Reports a numerical endpoint in a qualifying human liver model.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000003",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000004",
+      "decision": "flag",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "The text does not settle every criterion, so a human must decide.",
+      "confidence": "low",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000005",
+      "decision": "flag",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "The text does not settle every criterion, so a human must decide.",
+      "confidence": "low",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000006",
+      "decision": "include",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Reports a numerical endpoint in a qualifying human liver model.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000007",
+      "decision": "include",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Reports a numerical endpoint in a qualifying human liver model.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000008",
+      "decision": "include",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Reports a numerical endpoint in a qualifying human liver model.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000009",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000010",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000011",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000012",
+      "decision": "include",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Reports a numerical endpoint in a qualifying human liver model.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000013",
+      "decision": "include",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Reports a numerical endpoint in a qualifying human liver model.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000014",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000015",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000016",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000017",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000018",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000019",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000020",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000021",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000022",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000023",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000024",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000025",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000026",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000027",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000028",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000029",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000030",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000031",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000032",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000033",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000034",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000035",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000036",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000037",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000038",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000039",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000040",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000041",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000042",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000043",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000044",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000045",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000046",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000047",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000048",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000049",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000050",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000051",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000052",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000053",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000054",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000055",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000056",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000057",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000058",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000059",
+      "decision": "exclude",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "Fails an inclusion criterion or trips an exclusion.",
+      "confidence": "high",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000060",
+      "decision": "flag",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "The text does not settle every criterion, so a human must decide.",
+      "confidence": "low",
+      "criteria_version": 3
+    },
+    {
+      "pmid": "99000061",
+      "decision": "flag",
+      "criteria_met": [],
+      "criteria_failed": [],
+      "reason": "The text does not settle every criterion, so a human must decide.",
+      "confidence": "low",
+      "criteria_version": 3
+    }
+  ]
+}

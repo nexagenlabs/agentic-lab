@@ -1,0 +1,36 @@
+design_id: TMZ-NA-U87-001
+cell_line: U87MG
+rrid: CVCL_0022
+seeding_density: 5000
+plate_format: 96
+axes:
+  drug_a:
+    name: temozolomide
+    top_conc_uM: 800
+    dilution_factor: 2
+    n_steps: 6
+  drug_b:
+    name: nanaomycin_A
+    top_conc_uM: 10
+    dilution_factor: 2
+    n_steps: 10
+controls:
+  vehicle:
+    wells: 30
+    solvent: DMSO
+    final_pct: 0.5
+  untreated:
+    wells: 20
+  blank:
+    wells: 20
+edge_policy: exclude_perimeter
+replicates: 3
+randomise_within_plate: true
+analysis:
+  synergy_model: bliss
+  justification: 'The two agents act through distinct mechanisms, so the multiplicative
+    survival assumption is defensible. Loewe is not appropriate here because it assumes
+    a shared dose-equivalence relationship.
+
+    '
+  committed_at: '2026-03-14 09:20:00+05:30'

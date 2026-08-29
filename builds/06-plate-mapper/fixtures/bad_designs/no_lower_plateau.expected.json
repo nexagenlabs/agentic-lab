@@ -1,0 +1,9 @@
+{
+  "design": "no_lower_plateau.yaml",
+  "expected_failure": "no_lower_plateau",
+  "breaks": "Two steps from 800 uM stop at 400 uM, well above the 100 uM expected IC50. The curve has no lower plateau and the fitted IC50 is an extrapolation nobody notices until the cells are gone.",
+  "stock_mM": 1000.0,
+  "transfer_uL": 100.0,
+  "max_solvent_pct": 0.5,
+  "review_note": "Reviewed against a 1 M stock so the solvent check, which the printed design trips at 100 mM, does not fire first and mask the failure this design is testing."
+}

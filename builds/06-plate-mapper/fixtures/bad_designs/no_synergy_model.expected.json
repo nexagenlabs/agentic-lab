@@ -1,0 +1,5 @@
+{
+  "design": "no_synergy_model.yaml",
+  "expected_failure": "no_synergy_model",
+  "breaks": "No analysis block, so no synergy model and no justification. This is the design that lets four candidate models become four chances at a positive number."
+}

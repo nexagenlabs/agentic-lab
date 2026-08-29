@@ -1,0 +1,5 @@
+{
+  "design": "no_rrid.yaml",
+  "expected_failure": "no_rrid",
+  "breaks": "Names the cell line U87MG with no RRID. A name is a label and labels have been wrong: 4.7 per cent of submitted lines were misidentified in 2024."
+}

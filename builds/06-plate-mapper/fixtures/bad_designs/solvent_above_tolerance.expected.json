@@ -1,0 +1,8 @@
+{
+  "design": "solvent_above_tolerance.yaml",
+  "expected_failure": "solvent_above_tolerance",
+  "breaks": "Top dose of 8000 uM from a 100 mM stock needs 8 per cent DMSO against a 0.5 per cent limit. The cells die of the vehicle.",
+  "stock_mM": 100.0,
+  "transfer_uL": 100.0,
+  "max_solvent_pct": 0.5
+}

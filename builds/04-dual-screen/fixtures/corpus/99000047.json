@@ -1,0 +1,16 @@
+{
+  "pmid": "99000047",
+  "sha256": "70ab4f63c5a34b752d950ce97c47861feb58ad5d23c63b36c549fc0afdd6cf8e",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000047",
+    "title": "Cardiomyocyte viability and beat rate under repurposed antiarrhythmic exposure",
+    "abstract": "Induced pluripotent stem cell derived cardiomyocytes are increasingly used for proarrhythmia screening. Cells were exposed to four approved antiarrhythmics for 24 hours, with viability by ATP content and beat rate by impedance recording. Flecainide reduced viability with an IC50 of 58 micromolar while altering beat rate at concentrations twenty-fold lower. Amiodarone gave an IC50 of 22 micromolar. The model is cardiac and derived from induced pluripotent stem cells; no hepatic differentiation was performed and no liver model was tested in this study.",
+    "journal": "Stem Cell Safety",
+    "year": 2023,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

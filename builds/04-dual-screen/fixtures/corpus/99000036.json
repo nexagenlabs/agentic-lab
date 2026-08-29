@@ -1,0 +1,16 @@
+{
+  "pmid": "99000036",
+  "sha256": "fc41c9f88d237c4547b762f3236c6963d8b5f8bdcb8524856eee077765699f15",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000036",
+    "title": "Passage number effects on HepG2 phenotype over sixty passages",
+    "abstract": "Cell line drift is an under-reported source of irreproducibility. We maintained HepG2 cells in continuous culture for sixty passages and profiled morphology, doubling time, karyotype and transcriptome at ten passage intervals, without any compound exposure. Doubling time shortened measurably by passage forty and a subpopulation with altered chromosome number emerged. Expression of several drug-metabolising enzymes declined steadily. We recommend that screening laboratories state passage number. No treatment was administered and no potency value is reported. Short tandem repeat profiling confirmed the identity of the line at every sampled passage, so the changes described here represent genuine drift within an authenticated stock rather than cross-contamination by another line.",
+    "journal": "Hepatic Transcriptomics",
+    "year": 2019,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

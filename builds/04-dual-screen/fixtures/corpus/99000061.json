@@ -1,0 +1,16 @@
+{
+  "pmid": "99000061",
+  "sha256": "bf52b7c57dbc20d92049b6b80cebd43e765adae5002eaf852f13ad3a48eac1a3",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000061",
+    "title": "Cytotoxicity of a silibinin-standardised Silybum marianum extract in HepG2 cells, dosed by quantified constituent",
+    "abstract": "Crude milk thistle preparations vary in composition, which makes their reported activities difficult to compare between laboratories. We tested a standardised extract of Silybum marianum characterised by high performance liquid chromatography against an authentic reference standard. Silibinin content was 78.4 per cent by weight with a relative standard deviation of 2.1 per cent across three manufactured batches, and dosing was expressed as silibinin equivalents rather than as total extract mass. HepG2 cells were exposed for 48 hours at silibinin-equivalent concentrations of 1, 3, 10, 30, 100 and 300 micromolar, with viability measured by ATP content and normalised to vehicle-treated wells. Viability fell in a concentration dependent manner with an IC50 of 96 micromolar. Purified silibinin tested in parallel gave an IC50 of 91 micromolar, indicating that the quantified constituent accounts for essentially all of the observed activity.",
+    "journal": "Ethnopharmacology and Cell Biology",
+    "year": 2023,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

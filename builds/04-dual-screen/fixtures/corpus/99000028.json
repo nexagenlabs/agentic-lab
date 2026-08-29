@@ -1,0 +1,16 @@
+{
+  "pmid": "99000028",
+  "sha256": "290b3af84467e0b5e510f63c810cefa7c0c25794ffba9076d28e30dd343d6947",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000028",
+    "title": "Free fatty acid loading induces steatosis in HepaRG without pharmacological treatment",
+    "abstract": "Models of non-alcoholic fatty liver disease require a reproducible steatotic phenotype. Differentiated HepaRG cells were loaded with a two to one mixture of oleate and palmitate for periods up to 96 hours. Lipid accumulation was quantified by Nile red fluorescence and triglyceride assay, rising roughly four-fold over the loading period. Viability was preserved throughout, confirming that the phenotype is steatosis rather than lipotoxic death. No drug or investigational compound was applied at any stage. The model is intended as a substrate for subsequent pharmacological studies rather than as a test of any agent.",
+    "journal": "Metabolic Disease Models",
+    "year": 2022,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

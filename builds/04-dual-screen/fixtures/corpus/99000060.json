@@ -1,0 +1,16 @@
+{
+  "pmid": "99000060",
+  "sha256": "d4a931766c3a5ca874aeba6b20227fba74fd339d539b5ec0c38b20f40ff6ccd9",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000060",
+    "title": "Comparative morphology of HepG2 spheroids under repurposed drug exposure",
+    "abstract": "Spheroid culture is proposed to improve the physiological relevance of hepatic screening. HepG2 spheroids were formed in ultra-low attachment plates and exposed to four approved drugs for seven days. Spheroid diameter and optical density were tracked by brightfield imaging. Amiodarone and chlorpromazine produced visible surface disaggregation and loss of the smooth boundary, while metformin and pravastatin spheroids appeared unchanged. Findings are presented as representative images and descriptive comparison. No viability assay was performed and no potency value was derived. Spheroid formation was consistent between plates, with starting diameters falling within a narrow band, so the divergence seen after treatment cannot readily be attributed to variation in the starting material.",
+    "journal": "Applied In Vitro Toxicology Letters",
+    "year": 2023,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

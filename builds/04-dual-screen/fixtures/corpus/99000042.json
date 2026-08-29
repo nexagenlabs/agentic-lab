@@ -1,0 +1,16 @@
+{
+  "pmid": "99000042",
+  "sha256": "5e593829e89f3fd9c95ccc021c3e961ec36200cf246aa057b02c7cbe327a38fa",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000042",
+    "title": "HL-60 differentiation and viability under repurposed retinoid exposure",
+    "abstract": "Retinoid repurposing in myeloid malignancy is well established and the HL-60 line remains the standard model. Cells were exposed to four retinoids for 96 hours and viability was measured by trypan blue exclusion alongside differentiation markers. All-trans retinoic acid gave an IC50 of 2.7 micromolar for viability while inducing CD11b expression at substantially lower concentrations. Isotretinoin was roughly five-fold less potent. The cells are promyelocytic leukaemia in origin and were maintained in suspension culture. No hepatic cell type was included in the experimental design.",
+    "journal": "Haematology Cell Reports",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

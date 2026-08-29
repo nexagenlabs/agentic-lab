@@ -1,0 +1,16 @@
+{
+  "pmid": "99000029",
+  "sha256": "873f8f600bb4a9dac2ee32f83f2a37c8713c0a589b250a78b414072d72c87b17",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000029",
+    "title": "Hepatitis C replicon establishment in Huh7 subclones",
+    "abstract": "Replicon-bearing Huh7 subclones differ in permissiveness, which complicates comparison of antiviral results between laboratories. We derived eighteen subclones and measured replicon RNA levels by quantitative PCR over ten passages without any antiviral treatment. Replication efficiency varied more than thirty-fold across subclones and was stable within a clone over the passages examined. Host factor expression correlated with permissiveness. We report the characterisation only; no compound was tested and no viability or cytotoxicity endpoint was determined in this study. We also report the passage window over which permissiveness remained stable, which we suggest laboratories state when publishing replicon work, since drift between subclones is a plausible source of the discrepant antiviral potencies reported across groups.",
+    "journal": "Antiviral Cell Biology",
+    "year": 2019,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

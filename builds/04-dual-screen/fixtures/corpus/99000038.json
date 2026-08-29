@@ -1,0 +1,16 @@
+{
+  "pmid": "99000038",
+  "sha256": "e2002aa09264450b6d2938c08a1372e4cb36112367e5cd8f454f16eb433f536b",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000038",
+    "title": "Repurposed antidepressants reduce MCF-7 viability at micromolar concentrations",
+    "abstract": "Several antidepressants have been reported to have antiproliferative activity, prompting repurposing interest in oncology. MCF-7 breast carcinoma cells were treated with sertraline, fluoxetine and paroxetine for 72 hours and viability was determined by sulforhodamine B staining. Sertraline gave an IC50 of 8.4 micromolar, fluoxetine 14.1 micromolar and paroxetine 22.6 micromolar. Apoptosis was confirmed by caspase 3 and 7 activation at the IC50 concentration for each compound. The cell model used throughout is mammary in origin, and no hepatic line or hepatocyte preparation was included in the study design.",
+    "journal": "Breast Cancer Cell Biology",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

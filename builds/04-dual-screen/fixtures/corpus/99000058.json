@@ -1,0 +1,16 @@
+{
+  "pmid": "99000058",
+  "sha256": "85c500176ad10a29a63d450794315d19949ddc090d72c2170e23a8aef9d903cb",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000058",
+    "title": "Simvastatin alters cytoskeletal organisation in primary human hepatocytes",
+    "abstract": "Statins affect protein prenylation, with downstream consequences for small GTPase function and the cytoskeleton. Primary human hepatocytes were exposed to simvastatin and the actin cytoskeleton was imaged by phalloidin staining. Stress fibres were visibly reduced and cell shape became more rounded over the exposure period. Geranylgeranyl pyrophosphate co-treatment restored the normal appearance. Observations are qualitative and drawn from representative fields across two donors. Viability was not quantified and no concentration response relationship was established. The rounding was reversible within twenty-four hours of drug washout, and parallel cultures maintained in statin-free medium retained their normal spread morphology throughout the observation period.",
+    "journal": "Molecular Liver Biology",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

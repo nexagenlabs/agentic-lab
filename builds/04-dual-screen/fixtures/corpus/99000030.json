@@ -1,0 +1,16 @@
+{
+  "pmid": "99000030",
+  "sha256": "b9a33367e588b801dba74d653b62245d02b7865b8a4c0a9454a7369136a5629d",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000030",
+    "title": "Hypoxic preconditioning changes the injury response of primary human hepatocytes",
+    "abstract": "Ischaemia reperfusion injury is a central problem in transplantation. Cryopreserved primary human hepatocytes were subjected to controlled oxygen deprivation followed by reoxygenation, with no pharmacological intervention. Preconditioned cultures released substantially less lactate dehydrogenase on reoxygenation than naive cultures, and mitochondrial membrane potential recovered more completely. The protective effect depended on the duration of the preconditioning stimulus. The study addresses a physical stress rather than a compound exposure, and no drug treatment of any kind was administered. Oxygen tension during the preconditioning window was monitored continuously with an optical probe, and the protective effect was lost entirely when the reoxygenation phase was shortened below thirty minutes.",
+    "journal": "Cell Stress Communications",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

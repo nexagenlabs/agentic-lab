@@ -1,0 +1,16 @@
+{
+  "pmid": "99000051",
+  "sha256": "e96749ac2740dee2e041cf430790f55303bca5f33aaae6c4f741ebba35f9470e",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000051",
+    "title": "Paracetamol depletes glutathione in HepaRG without measurable viability loss",
+    "abstract": "Glutathione depletion precedes overt injury in paracetamol toxicity. Differentiated HepaRG cells were exposed to paracetamol for up to 12 hours and total glutathione was measured enzymatically. Glutathione fell steeply over the first six hours and partially recovered thereafter. Cells appeared morphologically intact throughout and no substantial detachment was observed. Viability was described qualitatively as preserved. The study reports a biochemical time course rather than a concentration response, and no potency estimate or percentage viability figure is given anywhere in the results.",
+    "journal": "Hepatic Pharmacology Reports",
+    "year": 2019,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

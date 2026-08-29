@@ -1,0 +1,16 @@
+{
+  "pmid": "99000043",
+  "sha256": "6f5c2703af82d211c24fcfe73b186f6685f6b6fb8140b9f9d3b2f10edd490dc2",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000043",
+    "title": "SH-SY5Y viability following exposure to repurposed antipsychotics",
+    "abstract": "Neuronal tolerance of antipsychotics at high local concentration is relevant to their central adverse effect profile. Differentiated SH-SY5Y neuroblastoma cells were exposed to five approved antipsychotics for 48 hours, with viability determined by ATP content. Thioridazine was the most potent, with an IC50 of 14 micromolar, and aripiprazole the least at above 120 micromolar. Neurite retraction preceded loss of viability in every treatment group examined. The model throughout is neuronal, and no hepatic line or hepatocyte preparation formed part of this study.",
+    "journal": "Neurotoxicology Letters",
+    "year": 2023,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

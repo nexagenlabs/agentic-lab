@@ -1,0 +1,16 @@
+{
+  "pmid": "99000049",
+  "sha256": "c29c12e9539cc79efa2c96e6f2f0655b28284dadf3edaef51cd8c8f48cf75157",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000049",
+    "title": "Diclofenac induces endoplasmic reticulum stress in HepG2 cells",
+    "abstract": "Diclofenac is associated with idiosyncratic hepatic injury and the mechanism is incompletely defined. HepG2 cells were treated with diclofenac for periods up to 24 hours and the unfolded protein response was characterised by immunoblot. Phosphorylated eIF2 alpha and CHOP were markedly induced relative to vehicle, and splicing of XBP1 was detectable by 6 hours. Chemical chaperone co-treatment visibly attenuated the response. Viability declined appreciably at the highest concentration but was not formally quantified, and no concentration response curve or potency value was derived from these experiments.",
+    "journal": "Molecular Liver Biology",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

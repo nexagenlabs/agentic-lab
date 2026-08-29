@@ -1,0 +1,16 @@
+{
+  "pmid": "99000016",
+  "sha256": "d05da93d181b22d1f6fb045134576abd036065db41425bd9b47e51ff54ff5120",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000016",
+    "title": "Editorial: are we screening hepatotoxicity or screening HepG2?",
+    "abstract": "The dominance of a single immortalised line in published hepatotoxicity screening deserves scrutiny. HepG2 cells are convenient, cheap and reproducible, and they lack most of the cytochrome P450 activity that converts a parent compound into the species that injures the liver. The field continues to publish IC50 values from this line and to describe them as hepatotoxicity. This editorial argues that the practice inflates confidence in negative results and that metabolic competence should be stated in the abstract of any screening report. No experimental work accompanies this comment.",
+    "journal": "Hepatology Commentary",
+    "year": 2020,
+    "publication_types": [
+      "Editorial"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

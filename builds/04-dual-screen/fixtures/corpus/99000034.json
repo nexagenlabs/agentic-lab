@@ -1,0 +1,16 @@
+{
+  "pmid": "99000034",
+  "sha256": "52753147c5ad51a39b6b907ae4e22d0eabaf61212a2e2265d78e79d39b56dd9c",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000034",
+    "title": "Scaffold stiffness governs primary hepatocyte polarity in culture",
+    "abstract": "Hepatocytes lose polarity rapidly on stiff plastic. Primary human hepatocytes were cultured on hydrogels spanning a physiological stiffness range and bile canalicular network formation was quantified by immunofluorescence over seven days. Networks formed most extensively at intermediate stiffness and were largely absent at the highest modulus tested. Albumin secretion followed the same pattern. The variable under study is mechanical rather than pharmacological, and no drug or compound was applied at any point in the described experiments. Canalicular networks were scored blind by two observers working independently, and agreement between them was high across the stiffness range, which supports the reliability of the morphological endpoint used throughout.",
+    "journal": "Tissue Engineering Notes",
+    "year": 2022,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

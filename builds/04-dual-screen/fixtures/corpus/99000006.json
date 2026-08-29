@@ -1,0 +1,16 @@
+{
+  "pmid": "99000006",
+  "sha256": "f82c256d4491ace5e8f63cdaaad693e2edec0f83302ddcb24a3862a675e97cfd",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000006",
+    "title": "Huh7 viability following exposure to repurposed nucleoside analogues",
+    "abstract": "Huh7 cells are widely used to study hepatitis C replication, and the cytotoxicity of candidate antivirals in this line constrains the therapeutic window that can be claimed. We exposed Huh7 monolayers to six approved nucleoside analogues for 72 hours and measured viability by ATP content. Ribavirin reduced viability with an IC50 of 88 micromolar and sofosbuvir showed no measurable cytotoxicity below 250 micromolar. Gemcitabine was markedly more potent, with an IC50 of 0.4 micromolar, consistent with its antiproliferative mechanism. Cell counts confirmed that the ATP signal tracked cell number rather than per-cell metabolic change across the concentration range examined.",
+    "journal": "Antiviral Cell Biology",
+    "year": 2022,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

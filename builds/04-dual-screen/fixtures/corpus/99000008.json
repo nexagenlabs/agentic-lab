@@ -1,0 +1,16 @@
+{
+  "pmid": "99000008",
+  "sha256": "1540e1d36894a1b0b873925fd08fabf264b2eee2b5ecf8be9483deb2a87015cf",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000008",
+    "title": "Screening of approved antifungals for hepatocellular toxicity in HepG2 and Huh7",
+    "abstract": "Azole antifungals carry a recognised hepatic warning, but the relative contribution of direct cytotoxicity is not well characterised. Twelve approved antifungals were screened in parallel in HepG2 and Huh7 cells over 48 hours, with viability read by ATP content and normalised to vehicle-treated controls on the same plate. Ketoconazole was the most potent in both lines, with IC50 values of 41 and 37 micromolar respectively. Itraconazole and posaconazole showed IC50 values above 100 micromolar. Fluconazole was inactive to the limit of solubility. Rank order was preserved between the two lines, though absolute potency differed by up to two-fold for individual compounds.",
+    "journal": "Journal of Drug Repurposing",
+    "year": 2023,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "pmid": "99000059",
+  "sha256": "6417446e8bff4a50979098ce4a8e0735a02c8b9cc5b4d557b9f58e4ba9f1b904",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000059",
+    "title": "Ketoconazole inhibits testosterone hydroxylation in HepaRG microsomes",
+    "abstract": "Ketoconazole is a standard CYP3A4 inhibitor used to benchmark interaction assays. Microsomes prepared from differentiated HepaRG cells were incubated with testosterone in the presence of ketoconazole and hydroxylated metabolite formation was quantified by liquid chromatography mass spectrometry. Formation was strongly suppressed. The inhibition was competitive on preliminary analysis. The endpoint here is enzymatic turnover in a subcellular fraction rather than the viability of intact cells, and no viability percentage or cytotoxic potency value is reported. Substrate depletion was linear over the incubation period selected, and control incubations lacking the cofactor regenerating system confirmed that metabolite formation was enzyme dependent rather than chemical.",
+    "journal": "Hepatic Pharmacology Reports",
+    "year": 2019,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

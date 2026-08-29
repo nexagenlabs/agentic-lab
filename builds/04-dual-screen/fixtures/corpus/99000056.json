@@ -1,0 +1,16 @@
+{
+  "pmid": "99000056",
+  "sha256": "2d7e4a20973f8a030c6d5300ca316927552f9cfd9b942a7501aec334121d9fe8",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000056",
+    "title": "Bile acid accumulation following bosentan exposure in HepaRG",
+    "abstract": "Bosentan inhibits the bile salt export pump and causes dose-dependent transaminase elevation in patients. Differentiated HepaRG cells were exposed to bosentan in the presence of physiological bile acid concentrations and intracellular accumulation was measured by mass spectrometry. Accumulation was pronounced and taurocholate was the species most affected. Cultures showed no obvious detachment over the exposure period and viability was described as maintained. No percentage viability, IC50 or EC50 was calculated at any point in the study. Accumulation was reversed on washout over a twelve-hour period, and the authors argue that the transporter inhibition is competitive rather than reflecting any lasting injury to the cells under these conditions.",
+    "journal": "Applied In Vitro Toxicology Letters",
+    "year": 2018,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

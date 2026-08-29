@@ -1,0 +1,16 @@
+{
+  "pmid": "99000032",
+  "sha256": "b980ecc1449f34a466a34d557148fcdf0b3bf59997447c113ead6fc8206856bd",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000032",
+    "title": "Monoclonal antibody binding to hepatocyte surface antigens in primary culture",
+    "abstract": "Targeting hepatocytes with biologics requires knowing which surface epitopes are accessible in culture. Primary human hepatocytes were incubated with a panel of eleven monoclonal antibodies and binding was quantified by flow cytometry. Binding was strongest for asialoglycoprotein receptor and declined markedly over four days in culture as cells dedifferentiated. No small-molecule drug was administered, and viability was monitored only to confirm that the cultures remained healthy for the duration of the binding experiments rather than as a study endpoint. Epitope accessibility was compared between freshly thawed and plated cells, and the loss over time was partially reversed by culturing on an extracellular matrix overlay rather than on bare plastic.",
+    "journal": "Biologics in Hepatology",
+    "year": 2023,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

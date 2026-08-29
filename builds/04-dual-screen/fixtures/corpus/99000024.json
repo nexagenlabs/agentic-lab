@@ -1,0 +1,16 @@
+{
+  "pmid": "99000024",
+  "sha256": "ea343a07d24b0390b81e61622eabd3fe2002243b2590ba307ac7612a4ad2cb1c",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000024",
+    "title": "Abstract P-118: primary human hepatocyte donor variability in drug response",
+    "abstract": "Conference abstract. Primary human hepatocytes from twelve donors were exposed to four reference hepatotoxicants and viability was recorded at 24 hours. Preliminary analysis indicates that donor identity accounts for a substantial share of total variance, exceeding the contribution of plate and operator. Full concentration response modelling is ongoing and IC50 values with confidence intervals will be reported at the meeting. This abstract summarises work in progress and the complete methods will appear in the subsequent full publication. Attendees are directed to the poster for the interim curves and for the donor demographic table, neither of which is reproduced in this summary.",
+    "journal": "Federation Meeting Abstracts",
+    "year": 2019,
+    "publication_types": [
+      "Congress"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

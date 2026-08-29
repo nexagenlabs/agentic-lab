@@ -1,0 +1,16 @@
+{
+  "pmid": "99000014",
+  "sha256": "3b465cf78f0d7d32b63dd83c79632ec0996abab29e94168c91bd6baa92bf43c5",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000014",
+    "title": "In vitro models of drug-induced liver injury: a narrative review",
+    "abstract": "Drug-induced liver injury remains a leading cause of late-stage attrition and post-marketing withdrawal. This narrative review surveys the in vitro models used to predict it, including HepG2, Huh7, HepaRG, primary human hepatocytes and emerging three-dimensional spheroid systems. We summarise reported IC50 values for a set of reference hepatotoxicants across these models and discuss why potency estimates for the same compound differ by more than an order of magnitude between laboratories. Assay endpoint, exposure duration and serum content account for much of the spread. We argue for minimum reporting standards and provide a checklist. No new experimental data are presented here.",
+    "journal": "Reviews in Hepatic Safety",
+    "year": 2021,
+    "publication_types": [
+      "Review"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

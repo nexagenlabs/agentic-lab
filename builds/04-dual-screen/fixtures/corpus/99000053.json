@@ -1,0 +1,16 @@
+{
+  "pmid": "99000053",
+  "sha256": "dfc0ec2c67f0185aba838d441cf57ca167c70ef713919acc34365f45335326d0",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000053",
+    "title": "Valproate alters lipid droplet morphology in HepG2 cells",
+    "abstract": "Valproate is associated with microvesicular steatosis in susceptible patients. HepG2 cells were exposed to valproate for 48 hours and lipid droplets were visualised by Nile red staining and electron microscopy. Droplet number rose and mean droplet size fell, giving the microvesicular appearance described clinically. Changes were consistent across three independent experiments and are presented as representative micrographs. Cell viability appeared unaffected by inspection. No viability assay was run and no numerical potency or viability value is reported in this manuscript.",
+    "journal": "Applied In Vitro Toxicology Letters",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

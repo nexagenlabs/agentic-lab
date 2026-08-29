@@ -1,0 +1,16 @@
+{
+  "pmid": "99000041",
+  "sha256": "f9d32485eb55bd6aae7ed1ae5e70cf5616b89cb0151f87933b0f4c210b73aa22",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000041",
+    "title": "Caco-2 monolayer integrity under exposure to repurposed antibiotics",
+    "abstract": "Gastrointestinal tolerance limits the dose of several repurposed antibiotics. Caco-2 monolayers were grown on permeable supports to confluence and exposed apically to six approved antibiotics for 24 hours. Transepithelial electrical resistance and viability were recorded in parallel. Doxycycline reduced viability with an IC50 of 96 micromolar and produced a measurable fall in resistance at lower concentrations. Amoxicillin and cefalexin were without effect to 500 micromolar. The model is intestinal epithelium and the endpoints describe barrier function; no hepatic model was used at any point in this study.",
+    "journal": "Intestinal Barrier Research",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

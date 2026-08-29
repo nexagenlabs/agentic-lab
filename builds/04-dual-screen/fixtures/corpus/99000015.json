@@ -1,0 +1,16 @@
+{
+  "pmid": "99000015",
+  "sha256": "474e11469a6d856be8ea1d3fa2b4f6f5b0877645cc50de9c62c4137ec076b526",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000015",
+    "title": "Repurposing approved drugs for liver disease: a systematic review",
+    "abstract": "We systematically reviewed reports of approved drugs repurposed for chronic liver disease published over a fifteen-year window. Searches of three databases returned 2,412 records, of which 118 met inclusion criteria after duplicate screening by two reviewers. Extracted outcomes included in vitro potency where reported, animal model results and any clinical endpoint. Agreement between reviewers before adjudication was moderate, with a kappa of 0.61, and most disagreement concerned whether preclinical-only reports qualified. We conclude that the evidence base is dominated by small uncontrolled studies. This is a synthesis of published work and contains no primary experimental measurements.",
+    "journal": "Annual Perspectives in Toxicology",
+    "year": 2022,
+    "publication_types": [
+      "Review"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

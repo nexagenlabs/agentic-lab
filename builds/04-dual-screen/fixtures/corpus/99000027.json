@@ -1,0 +1,16 @@
+{
+  "pmid": "99000027",
+  "sha256": "fa81f14ab250c9bf60175939c726e47f260cd03104e341e40b524afd9d62ff22",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000027",
+    "title": "CRISPR knockout of CYP2E1 in HepG2 cells alters basal oxidative state",
+    "abstract": "We generated CYP2E1 knockout HepG2 clones using CRISPR-Cas9 and characterised them in the absence of any pharmacological treatment. Knockout was confirmed by sequencing and immunoblot in three independent clones. Basal reactive oxygen species were reduced by roughly forty per cent relative to parental cells, and glutathione content was correspondingly higher. Proliferation rate and morphology were unchanged. These lines are offered as a tool for future bioactivation studies. No drug, compound or extract was administered in the work described here, and no cytotoxicity assay was performed.",
+    "journal": "Molecular Liver Biology",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

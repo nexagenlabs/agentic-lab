@@ -1,0 +1,16 @@
+{
+  "pmid": "99000035",
+  "sha256": "9f806c4916188882b902f3e657f735028362a93357cbf17bf0b4db3973e22a94",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000035",
+    "title": "Ionising radiation response of HepG2 and Huh7 monolayers",
+    "abstract": "Hepatic tolerance limits the dose deliverable in abdominal radiotherapy. HepG2 and Huh7 monolayers were irradiated across a range of single doses and clonogenic survival was measured. Survival curves were fitted with the linear quadratic model and Huh7 proved the more radioresistant of the two lines. DNA damage foci resolved more rapidly in Huh7. The exposure under study is physical, and no drug, radiosensitiser or other compound was administered in any arm of this work. Dose rate was held constant across all experiments, and the surviving fraction at two gray is reported for both lines to allow comparison with the wider radiobiological literature on hepatic tolerance.",
+    "journal": "Radiation Biology Letters",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "pmid": "99000023",
+  "sha256": "eb9a0134addb0c77c9cd9aebf91675f206ee85a35355bbcf52a101424d43bcd1",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000023",
+    "title": "Regulatory acceptance of new approach methodologies: a review",
+    "abstract": "New approach methodologies promise to reduce animal use in safety assessment, but regulatory acceptance has lagged behind technical capability. We review the qualification pathways available in three major jurisdictions and the dossiers submitted to date. Case studies include hepatic spheroid systems and transporter inhibition panels, several of which report IC50 values in HepG2 and transfected cell systems. We identify the reproducibility evidence regulators have asked for and where sponsors have failed to supply it. This is a policy and evidence review; it generates no data.",
+    "journal": "Regulatory Science Reviews",
+    "year": 2023,
+    "publication_types": [
+      "Review"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

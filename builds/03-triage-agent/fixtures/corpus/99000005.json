@@ -1,0 +1,16 @@
+{
+  "pmid": "99000005",
+  "sha256": "504b95b514427ead523685c33f19fd821c31502e6b9eba1f273a09ae898c89a3",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000005",
+    "title": "Cytotoxicity of eight repurposed antipsychotics in HepG2 cells",
+    "abstract": "Antipsychotics are among the most frequently implicated drug classes in idiosyncratic liver injury, yet comparative potency data across the class are sparse. HepG2 cells were seeded at 10,000 cells per well and exposed to eight approved antipsychotics for 48 hours over a ten-point concentration range. Viability was determined by resazurin reduction and expressed relative to vehicle. Chlorpromazine was the most potent, with an IC50 of 24 micromolar, followed by thioridazine at 31 micromolar and clozapine at 58 micromolar. Aripiprazole, olanzapine and quetiapine exceeded 200 micromolar. Potency correlated poorly with reported daily dose but well with calculated lipophilicity across the eight compounds tested.",
+    "journal": "Hepatic Pharmacology Reports",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

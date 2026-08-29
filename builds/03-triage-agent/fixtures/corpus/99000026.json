@@ -1,0 +1,16 @@
+{
+  "pmid": "99000026",
+  "sha256": "b80c07ed2c5db9fc9da7bd836903d637896a9b2a7ed7495eb9ff74b437bd35fc",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000026",
+    "title": "Baseline transcriptomic characterisation of four hepatic cell models",
+    "abstract": "Interpreting a toxicological result requires knowing what the untreated model expresses. We profiled HepG2, Huh7, differentiated HepaRG and cryopreserved primary human hepatocytes by RNA sequencing at matched confluence, with no compound exposure of any kind. Primary hepatocytes expressed the major cytochrome P450 transcripts at levels one to three orders of magnitude above HepG2. HepaRG occupied an intermediate position that depended strongly on days post-differentiation. Transporter expression diverged similarly. We provide the full expression matrices as a resource for laboratories choosing between these models. No treatment was administered and no viability endpoint was measured.",
+    "journal": "Hepatic Transcriptomics",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

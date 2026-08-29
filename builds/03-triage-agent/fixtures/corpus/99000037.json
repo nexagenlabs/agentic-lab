@@ -1,0 +1,16 @@
+{
+  "pmid": "99000037",
+  "sha256": "c34792e025a690af1c217170019046817624af91923a215666ccc750594a0795",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000037",
+    "title": "Cytotoxicity of repurposed antimalarials in A549 lung epithelial cells",
+    "abstract": "Inhaled repurposing of antimalarial agents has been proposed for viral respiratory infection, which makes their toxicity toward airway epithelium directly relevant. A549 cells were exposed to chloroquine, hydroxychloroquine and mefloquine for 48 hours across a nine-point concentration range, with viability measured by ATP content. Mefloquine was the most potent, with an IC50 of 19 micromolar, followed by chloroquine at 46 micromolar and hydroxychloroquine at 71 micromolar. Lysosomal accumulation was evident by acridine orange staining at sub-cytotoxic concentrations. The findings quantify airway epithelial tolerance and do not speak to hepatic exposure, which was not examined in this work.",
+    "journal": "Respiratory Cell Pharmacology",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

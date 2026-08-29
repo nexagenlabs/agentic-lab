@@ -1,0 +1,16 @@
+{
+  "pmid": "99000019",
+  "sha256": "c586162981b1bb2f73d31da7b0ca6b8a2f319fc161107b29bc4aa84b2b44ad5c",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000019",
+    "title": "Mechanisms of mitochondrial injury by approved drugs: a review",
+    "abstract": "Mitochondrial dysfunction is a recurring mechanism in idiosyncratic liver injury. This review collates the evidence linking approved drug classes to impaired oxidative phosphorylation, beta-oxidation and mitochondrial DNA replication. We tabulate published potency values from hepatic and non-hepatic models and note that assay format strongly influences the apparent rank order. Particular attention is given to the galactose substitution assay and to seahorse respirometry. The review closes with a discussion of why in vitro mitochondrial signals translate poorly to clinical risk at the level of the individual patient. No primary data are reported.",
+    "journal": "Reviews in Hepatic Safety",
+    "year": 2021,
+    "publication_types": [
+      "Review"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

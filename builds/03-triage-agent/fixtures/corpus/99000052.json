@@ -1,0 +1,16 @@
+{
+  "pmid": "99000052",
+  "sha256": "9f17b376399d5979daf82630b9a35727672545d5bdce545f5e8a42483a46ca2d",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000052",
+    "title": "Metformin activates AMPK in Huh7 cells",
+    "abstract": "Metformin acts in part through AMP-activated protein kinase and the hepatocyte is its principal site of action. Huh7 cells were treated with metformin and AMPK activation was followed by immunoblot for the phosphorylated kinase and its downstream substrate. Activation was clear by two hours and sustained to twenty-four hours. Downstream lipogenic gene expression fell, as judged by quantitative PCR. The paper reports a signalling time course; viability was monitored only to confirm cultures remained healthy and is not reported as a percentage or as any potency value.",
+    "journal": "Molecular Liver Biology",
+    "year": 2022,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

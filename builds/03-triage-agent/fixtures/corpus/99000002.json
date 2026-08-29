@@ -1,0 +1,16 @@
+{
+  "pmid": "99000002",
+  "sha256": "1f88bebe8d1949e3ac3bea02e87526f0cf953118b47c45cd08b81187272c46a1",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000002",
+    "title": "Concentration-dependent cytotoxicity of three repurposed kinase inhibitors in primary human hepatocytes from six donors",
+    "abstract": "Predicting hepatotoxicity before a repurposing candidate reaches the clinic remains difficult, and immortalised lines can underestimate injury because they lack full metabolic competence. Cryopreserved primary human hepatocytes from six donors were plated in collagen-coated plates and allowed to recover for 24 hours before treatment. Cells were exposed to sunitinib, pazopanib or regorafenib for 48 hours across a nine-point concentration range. Viability was measured by cellular ATP content and normalised to vehicle control. Mean IC50 values were 11.2, 24.8 and 8.6 micromolar respectively, with a roughly four-fold spread across donors. Donor variation exceeded plate-to-plate variation for all three compounds. Primary hepatocytes retained albumin secretion throughout the exposure period.",
+    "journal": "Applied Hepatocyte Toxicology",
+    "year": 2022,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

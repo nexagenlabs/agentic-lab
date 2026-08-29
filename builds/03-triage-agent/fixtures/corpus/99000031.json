@@ -1,0 +1,16 @@
+{
+  "pmid": "99000031",
+  "sha256": "8b25138d1bf2b361003d4ff4ab0b9dec349367991365cb7ad9605fc7193f3930",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000031",
+    "title": "Cytokine exposure alters HepG2 acute phase protein secretion",
+    "abstract": "Inflammatory signalling modulates hepatic protein synthesis and may confound toxicological readouts. HepG2 cells were treated with interleukin-6 and tumour necrosis factor alpha at physiological concentrations for 24 hours. C-reactive protein secretion increased more than twenty-fold and albumin secretion fell by roughly half. Viability was unaffected across the range examined. The agents used here are recombinant proteins rather than small-molecule drugs, and the study reports a secretory phenotype rather than a pharmacological potency value for any compound. Transcriptomic profiling confirmed induction of the canonical acute phase programme, and the magnitude of the albumin decrease tracked the interleukin-6 concentration across the range examined.",
+    "journal": "Immunometabolism Reports",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

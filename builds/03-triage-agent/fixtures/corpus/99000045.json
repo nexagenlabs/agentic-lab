@@ -1,0 +1,16 @@
+{
+  "pmid": "99000045",
+  "sha256": "9c16fd66f260fe58af0f8a2702ee13ae71b29e8d819ef5db43395d2e9e2b8fbf",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000045",
+    "title": "HaCaT keratinocyte viability under topical repurposing candidates",
+    "abstract": "Topical repurposing requires keratinocyte tolerance at the concentrations achieved in skin. HaCaT keratinocytes were exposed to six approved compounds for 24 hours and percentage viability was determined by neutral red uptake relative to vehicle. Tacrolimus and clobetasol were well tolerated, retaining above ninety per cent viability at 100 micromolar. Ciclopirox reduced viability to 38 per cent at 25 micromolar. The experimental system is an immortalised keratinocyte line of epidermal origin, and no liver-derived cells were used anywhere in this work.",
+    "journal": "Dermatological Science Reports",
+    "year": 2022,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

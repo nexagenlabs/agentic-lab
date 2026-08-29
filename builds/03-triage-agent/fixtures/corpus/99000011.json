@@ -1,0 +1,16 @@
+{
+  "pmid": "99000011",
+  "sha256": "e7c35b8fe357cca7a5aa0f755570428bb6149a4684465316fcf8137433188514",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000011",
+    "title": "EC50 determination for statin-induced viability loss in Huh7 cells",
+    "abstract": "Statins are among the most widely prescribed drugs and their hepatic safety profile is generally favourable, but in vitro potency differences between family members are less often quantified. Huh7 cells were exposed to six approved statins for 72 hours and viability was measured by resazurin reduction. Concentration response curves were fitted with a four-parameter logistic model. Cerivastatin gave the lowest EC50 at 1.9 micromolar, followed by simvastatin at 12 micromolar and lovastatin at 18 micromolar. Pravastatin and rosuvastatin, both hydrophilic, showed no effect below 100 micromolar. Mevalonate co-treatment reversed the loss of viability, indicating an on-target mechanism.",
+    "journal": "Hepatic Pharmacology Reports",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "pmid": "99000044",
+  "sha256": "8f9b1b8cd8b1114d7ec207bda4d0d85e9c3266d613f5f190187a92a5ec0a62d7",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000044",
+    "title": "Endothelial toxicity of repurposed kinase inhibitors in HUVEC",
+    "abstract": "Vascular toxicity is a recognised class effect of angiogenesis inhibitors. Human umbilical vein endothelial cells were exposed to sunitinib, sorafenib and pazopanib for 48 hours and viability was measured by resazurin reduction. Sunitinib gave an IC50 of 6.2 micromolar, sorafenib 9.8 micromolar and pazopanib 31 micromolar. Tube formation was disrupted at concentrations well below those affecting viability. The cells are endothelial in origin and derived from umbilical vein; no hepatic model was examined and no hepatocyte endpoint is reported here.",
+    "journal": "Vascular Cell Biology",
+    "year": 2019,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

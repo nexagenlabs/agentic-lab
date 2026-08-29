@@ -1,0 +1,16 @@
+{
+  "pmid": "99000050",
+  "sha256": "add97394ec00f8d7bcbaf92b567174ca53767c93967efdc7ff93595388eaadf6",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000050",
+    "title": "Troglitazone triggers mitochondrial fragmentation in primary human hepatocytes",
+    "abstract": "Troglitazone was withdrawn following hepatic failure and mitochondrial injury is the leading candidate mechanism. Primary human hepatocytes were treated with troglitazone and mitochondrial morphology was assessed by confocal imaging after staining. Networks fragmented substantially within four hours and membrane potential fell as judged by dye redistribution. Rosiglitazone produced no comparable change under matched conditions. Effects are reported qualitatively from representative images across three donors. No viability percentage, IC50 or EC50 was determined in the course of this work. Donor to donor variation in the timing of fragmentation was noted, with one preparation showing the change appreciably earlier than the other two, which the authors attribute to differences in basal mitochondrial content.",
+    "journal": "Cell Stress Communications",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

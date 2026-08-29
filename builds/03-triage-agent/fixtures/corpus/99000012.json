@@ -1,0 +1,16 @@
+{
+  "pmid": "99000012",
+  "sha256": "90acec9dd945af8075d047cc3bbd8dcdb6df6d7bb735bc25c1bb878f9441ea1e",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000012",
+    "title": "Amiodarone significantly reduces HepG2 viability in a concentration-dependent manner",
+    "abstract": "Amiodarone accumulates in hepatic tissue and is associated with phospholipidosis and steatohepatitis on prolonged administration. HepG2 cells were treated with amiodarone for 24 and 48 hours and viability was assessed by resazurin reduction. Treatment significantly reduced viability relative to vehicle at both time points, with the effect being more pronounced at 48 hours. Differences reached statistical significance in all treated groups by two-way analysis of variance. Lipid droplet accumulation was evident by Nile red staining and increased in parallel with the loss of viability. Values are reported in the supplementary figures. We conclude that amiodarone is directly cytotoxic to this line under the conditions tested.",
+    "journal": "Cell Stress Communications",
+    "year": 2018,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

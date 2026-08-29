@@ -1,0 +1,16 @@
+{
+  "pmid": "99000017",
+  "sha256": "e93ebdab9d77948633b9b40812f6c752863d991cd10982cd61d5c5658d039fba",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000017",
+    "title": "Comment on: cytotoxicity of repurposed antivirals in hepatic lines",
+    "abstract": "The recent report of antiviral cytotoxicity in Huh7 cells raises a methodological question that we believe warrants comment. The authors normalised viability to a vehicle control containing 0.5 per cent dimethyl sulfoxide, but their highest compound concentrations required 1 per cent. Solvent alone reduces viability in this line by a measurable margin, so the reported IC50 values may be systematically low. We recalculated the curves using a solvent-matched control and obtained values roughly 1.4-fold higher. The authors are invited to respond. This letter presents no new experimental cohort of its own.",
+    "journal": "Toxicology Correspondence",
+    "year": 2019,
+    "publication_types": [
+      "Comment"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

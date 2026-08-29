@@ -1,0 +1,16 @@
+{
+  "pmid": "99000025",
+  "sha256": "074fd7edf6c2342a87a4e430b2acd21e044b12718c25cca629a6d34d760748be",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000025",
+    "title": "Editorial: reporting standards for percentage viability",
+    "abstract": "Percentage viability is reported in thousands of papers each year and defined consistently in very few. Some authors normalise to untreated wells, some to vehicle-matched wells, and some to a time-zero reading. The three conventions give different numbers from identical raw data. This editorial sets out the case for stating the normalisation explicitly in the abstract, and proposes wording. We illustrate the problem using published HepG2 datasets in which the same experiment supports viability figures differing by fifteen percentage points. No new experiments were performed for this editorial.",
+    "journal": "Toxicology Correspondence",
+    "year": 2021,
+    "publication_types": [
+      "Editorial"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "pmid": "99000033",
+  "sha256": "1c567acc391b2e07e3c5a5526ce1bf1765b815de0d4e64c25620b7c5f4258756",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000033",
+    "title": "siRNA knockdown of hepatic transporters in HepaRG cells",
+    "abstract": "Attribution of a transport phenotype to a specific carrier requires selective loss of function. We knocked down four hepatic transporters individually in differentiated HepaRG cells using small interfering RNA and confirmed silencing at transcript and protein level. Substrate accumulation changed as predicted for each target. Off-target effects were assessed by transcriptomic profiling and were modest. No pharmacological agent was administered; the perturbation throughout is genetic, and the study reports transport function rather than cytotoxicity. Silencing persisted for at least ninety-six hours after transfection, which defines the experimental window available to any subsequent study using these cells, and rescue with a resistant construct restored the original phenotype.",
+    "journal": "Molecular Liver Biology",
+    "year": 2018,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "pmid": "99000040",
+  "sha256": "68df2ac55102bf2c4432aa339b7d66976f2ed0752a5972c6270e7c5e0d59cf39",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000040",
+    "title": "AML12 murine hepatocyte viability following statin exposure",
+    "abstract": "The AML12 line is derived from mouse liver and is often used where human material is unavailable. AML12 cells were exposed to six statins for 48 hours and viability was measured by resazurin reduction, with curves fitted by four-parameter logistic regression. Cerivastatin was the most potent with an IC50 of 3.1 micromolar, and pravastatin showed no activity below 200 micromolar. Mevalonate rescue confirmed on-target activity. The model is murine throughout, and the authors caution that mouse and human hepatocytes differ substantially in transporter expression, which limits direct extrapolation of these potency values.",
+    "journal": "Comparative Toxicology",
+    "year": 2019,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

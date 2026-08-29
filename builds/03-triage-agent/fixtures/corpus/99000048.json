@@ -1,0 +1,16 @@
+{
+  "pmid": "99000048",
+  "sha256": "164cd253da71716e8ccee0e61395f74d96842f02874f597508b98bb648884cb9",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000048",
+    "title": "Dermal fibroblast tolerance of six repurposed antifibrotic candidates",
+    "abstract": "Antifibrotic repurposing requires that the candidate spare the fibroblast at therapeutic exposure while suppressing collagen deposition. Primary human dermal fibroblasts were exposed to six approved compounds for 72 hours. Viability was measured by ATP content and collagen production by hydroxyproline assay. Pirfenidone suppressed collagen with no viability loss below 300 micromolar. Nintedanib reduced viability with an IC50 of 12 micromolar. The primary cells used here are dermal in origin. No hepatic stellate cell or hepatocyte preparation was included, despite the hepatic relevance of the fibrotic indication.",
+    "journal": "Fibroblast Research Notes",
+    "year": 2018,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "pmid": "99000046",
+  "sha256": "574f468d20b917038887a766889f4319045d93d27a754173235579cc8e0b39b6",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000046",
+    "title": "HK-2 proximal tubule viability under aminoglycoside and antiviral exposure",
+    "abstract": "Nephrotoxicity limits the use of several repurposed agents. HK-2 human proximal tubule cells were exposed to gentamicin, tenofovir and cidofovir for 48 hours, with viability measured by ATP content and confirmed by lactate dehydrogenase release. Cidofovir was the most potent with an IC50 of 44 micromolar, followed by gentamicin at 810 micromolar. Tenofovir showed no measurable effect below 500 micromolar. The cells are of renal tubular origin. Although both organs handle these agents, no hepatic model was included in the present study.",
+    "journal": "Renal Cell Pharmacology",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

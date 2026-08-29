@@ -1,0 +1,16 @@
+{
+  "pmid": "99000010",
+  "sha256": "188fbe218a63c319daf498ee29c6a46f10858eebedf7a26d914ced13c6c09fc4",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000010",
+    "title": "Effect of approved antidiabetic agents on primary human hepatocyte viability",
+    "abstract": "Metformin and the thiazolidinediones are given long term to patients with existing hepatic steatosis, so their direct effect on hepatocyte viability is of practical interest. Cryopreserved primary human hepatocytes from four donors were treated for 24 hours across an eight-point concentration range. Viability was assessed by lactate dehydrogenase release and confirmed by ATP content. Troglitazone reduced viability with an IC50 of 62 micromolar, while pioglitazone and rosiglitazone exceeded 300 micromolar. Metformin produced no loss of viability up to 10 millimolar. The rank order matched the historical clinical record for this drug class.",
+    "journal": "Metabolic Disease Models",
+    "year": 2022,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

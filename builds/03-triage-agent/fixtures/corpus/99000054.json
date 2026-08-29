@@ -1,0 +1,16 @@
+{
+  "pmid": "99000054",
+  "sha256": "e1acfb345d468dbaaa45a07f880f4cbd4ee06db4952f4dc808ac1da3f63d89ec",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000054",
+    "title": "Transcriptomic signature of rifampicin exposure in primary human hepatocytes",
+    "abstract": "Rifampicin is a canonical pregnane X receptor agonist and a standard positive control for induction studies. Primary human hepatocytes from three donors were exposed for 48 hours and profiled by RNA sequencing. CYP3A4 and CYP2B6 transcripts were strongly induced, alongside a broader set of transporter and phase two genes. Fold-change values are given for the induction endpoints. Cultures remained healthy by visual inspection. The study measures gene expression, and no viability endpoint, percentage or concentration response potency value was determined.",
+    "journal": "Hepatic Transcriptomics",
+    "year": 2023,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

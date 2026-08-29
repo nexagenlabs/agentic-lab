@@ -1,0 +1,16 @@
+{
+  "pmid": "99000039",
+  "sha256": "fed3ca5172988fa89aeb7a2059402cb06ef210d675f18ff65bdc362e5d9b59cc",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000039",
+    "title": "Concentration response of primary rat hepatocytes to four reference hepatotoxicants",
+    "abstract": "Rodent primary hepatocytes remain a common first-tier screen despite known species differences in drug metabolism. Primary hepatocytes were isolated from adult male rats by two-step collagenase perfusion and plated in collagen-coated dishes. Cells were exposed to paracetamol, diclofenac, amiodarone and troglitazone for 24 hours and viability was measured by ATP content. IC50 values were 12 millimolar, 340 micromolar, 41 micromolar and 74 micromolar respectively. Species comparison with published human values showed differences of up to eight-fold. All cells used in this study were of rat origin; no human hepatocyte preparation was included.",
+    "journal": "Comparative Toxicology",
+    "year": 2022,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

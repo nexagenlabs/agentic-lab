@@ -1,0 +1,16 @@
+{
+  "pmid": "99000004",
+  "sha256": "7570249dca3c14dd35abeeee8a4abc812bf33fa42202184091f448edb14d6346",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000004",
+    "title": "Drug-induced liver injury screening: preliminary findings",
+    "abstract": "We screened a panel of approved drugs for hepatotoxicity and report preliminary findings.",
+    "journal": "Proceedings in Translational Safety",
+    "year": 2019,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

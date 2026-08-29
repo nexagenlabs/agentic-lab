@@ -1,0 +1,16 @@
+{
+  "pmid": "99000055",
+  "sha256": "56cb2be13f3959d615de2c3d109f5f315ec032273323e29227cf764beb13a063",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000055",
+    "title": "Tamoxifen provokes autophagic flux in HepG2 cells",
+    "abstract": "Autophagy modulates hepatocyte survival under drug stress. HepG2 cells were treated with tamoxifen and autophagic flux was assessed by LC3 conversion with and without lysosomal inhibition. Flux increased appreciably within eight hours. Electron microscopy showed accumulated autophagosomes. Inhibition of autophagy visibly worsened the morphological appearance of treated cultures. Results are reported as immunoblot densitometry ratios and representative images. Neither a viability percentage nor a concentration response curve was generated during this investigation. The effect was reproduced in a second HepG2 stock of independent provenance, and co-treatment with a lysosomal alkalinising agent produced the accumulation of undegraded autophagosomes expected if flux rather than synthesis was the process being modulated by the drug.",
+    "journal": "Cell Stress Communications",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "pmid": "99000057",
+  "sha256": "61906aa1b6004037ac8385d1d6ea265f49f49191f99b02406ace9a8696c37659",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000057",
+    "title": "Fenofibrate modifies peroxisomal marker expression in Huh7",
+    "abstract": "Fibrates act through peroxisome proliferator activated receptor alpha and the hepatocyte is the principal target tissue. Huh7 cells were treated with fenofibrate and peroxisomal markers were followed by immunofluorescence and immunoblot over 72 hours. Catalase and ACOX1 signals rose visibly and peroxisome number per cell appeared to increase on inspection of confocal stacks. Cells tolerated the treatment without evident detachment. The work characterises a receptor-mediated phenotype and reports no viability percentage and no potency value of any kind. A receptor antagonist abolished the response, confirming that the phenotype described is receptor mediated rather than a general stress reaction to the solvent or to the culture conditions used in these experiments.",
+    "journal": "Metabolic Disease Models",
+    "year": 2022,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

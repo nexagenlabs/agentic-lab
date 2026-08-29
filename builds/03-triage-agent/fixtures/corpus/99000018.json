@@ -1,0 +1,16 @@
+{
+  "pmid": "99000018",
+  "sha256": "2c8e810410521b54458dc36cff7fac63f1f398cf84c5e2b8e1f4891f1d72966c",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000018",
+    "title": "Abstract 4412: high-throughput viability screening of 800 approved drugs in HepaRG",
+    "abstract": "Conference abstract. We screened a library of 800 approved drugs in differentiated HepaRG cells at a single concentration of 20 micromolar, with viability read by ATP content at 48 hours. Sixty-one compounds reduced viability below 50 per cent of vehicle control. Hits were enriched for antineoplastic and antipsychotic classes. Full concentration response curves and IC50 determination for the confirmed hits are in progress and will be presented. Methods, replicate structure and statistical treatment are summarised only briefly here owing to the abstract length limit imposed by the meeting organisers.",
+    "journal": "Federation Meeting Abstracts",
+    "year": 2023,
+    "publication_types": [
+      "Congress"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "pmid": "99000003",
+  "sha256": "40f05e4f540a7fa9a93a69399c3b89dde48cee148f8380e20fa27d34ae86fcf7",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000003",
+    "title": "Cytotoxic potency of six repurposed compounds in an established hepatic screening cascade",
+    "abstract": "We report potency estimates for six approved compounds carried through the screening cascade described previously by this laboratory. Compounds were tested over a seven-point concentration range in quadruplicate, with viability read at 72 hours and normalised to vehicle-treated wells on the same plate. IC50 values were 2.1, 7.9, 14.3, 22.0, 48.5 and greater than 100 micromolar. Assay performance was acceptable throughout, with a mean Z prime of 0.71 and no plate excluded for edge effects. The ranking of the six compounds was reproducible across three independent runs performed on separate days. Full details of the cell model, culture conditions and passage range are given in our earlier methodological report and are not repeated here.",
+    "journal": "Screening Methods Quarterly",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

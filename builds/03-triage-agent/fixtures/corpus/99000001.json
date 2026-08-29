@@ -1,0 +1,16 @@
+{
+  "pmid": "99000001",
+  "sha256": "fb82e720def098d46c1124a2fde4691a4be5fcbd1b98a57b7e8965f47117533b",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000001",
+    "title": "Inhibition of OATP1B1-mediated substrate uptake by four repurposed antiparasitic agents in a stably transfected cell line",
+    "abstract": "Hepatic uptake transporters govern the exposure of many orally administered drugs, and inhibition of OATP1B1 is a recognised mechanism of clinical drug interaction. We established HEK293 cells stably transfected with human OATP1B1 and screened four approved antiparasitic agents for inhibition of pravastatin uptake. Concentration response curves were generated over eight half-log dilutions in triplicate. Ivermectin inhibited uptake with an IC50 of 3.4 micromolar, praziquantel with an IC50 of 18.7 micromolar, while albendazole and mebendazole showed less than 20 per cent inhibition at the highest concentration tested. Parental HEK293 cells lacking the transporter showed no measurable uptake. These data quantify transporter inhibition in a heterologous expression system and do not address cytotoxicity in hepatocellular models.",
+    "journal": "Journal of Membrane Transport Research",
+    "year": 2021,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

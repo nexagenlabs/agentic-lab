@@ -1,0 +1,16 @@
+{
+  "pmid": "99000021",
+  "sha256": "3db935608ade569b46d5c1da3f3c4404df2c1df1b1862958325d6d512edc87a2",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000021",
+    "title": "Three-dimensional liver models: a critical review of the evidence",
+    "abstract": "Spheroid and organoid liver cultures are widely promoted as more predictive than monolayers. We critically review the comparative evidence and find it thinner than commonly asserted. Of thirty-one head-to-head comparisons identified, only nine used matched donors and matched endpoints. Where matched comparisons exist, three-dimensional culture shifted potency estimates by less than three-fold for most compounds, with larger shifts confined to compounds requiring bioactivation. We conclude that the case for routine adoption is not yet made and outline the study design that would settle it. No new laboratory data are presented.",
+    "journal": "Trends in Screening Science",
+    "year": 2022,
+    "publication_types": [
+      "Review"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

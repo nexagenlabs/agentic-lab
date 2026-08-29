@@ -1,0 +1,16 @@
+{
+  "pmid": "99000020",
+  "sha256": "fc0bea54efb6125c89746d3b27f0df21ac393efbc6406552c16607090a313f56",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000020",
+    "title": "Genetic determinants of susceptibility to hepatotoxicity: a review",
+    "abstract": "Human leukocyte antigen associations now explain a meaningful fraction of idiosyncratic injury risk for several approved drugs. We review the genome-wide association literature, summarise effect sizes and consider what the associations imply for mechanism. Reported odds ratios range from 2.1 to 80.6 depending on drug and allele. We also discuss why in vitro models built on a single donor genotype cannot capture this variation, and what a genotype-stratified primary hepatocyte panel would need to look like. This article synthesises published association studies and reports no new experimental measurements.",
+    "journal": "Pharmacogenomics Reviews",
+    "year": 2018,
+    "publication_types": [
+      "Review"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

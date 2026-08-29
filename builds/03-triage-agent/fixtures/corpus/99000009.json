@@ -1,0 +1,16 @@
+{
+  "pmid": "99000009",
+  "sha256": "8a59ffaa5cf5fc617dec3b20e8c4bd06d7a4e88f60bb7d6db7c097520013b298",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000009",
+    "title": "Percentage viability of HepG2 cells after exposure to repurposed antihelminthics",
+    "abstract": "Benzimidazole antihelminthics have attracted repurposing interest for oncology, which raises the question of their toxicity toward non-transformed and hepatic tissue. HepG2 cells were exposed to mebendazole, albendazole and flubendazole for 48 hours at concentrations from 0.1 to 50 micromolar. Viability was measured by crystal violet staining and expressed as a percentage of untreated wells. Mebendazole reduced viability to 22 per cent at 10 micromolar, albendazole to 51 per cent, and flubendazole to 63 per cent at the same concentration. Cell cycle analysis showed G2 arrest preceding the loss of viability in all three treatment groups.",
+    "journal": "Cancer Therapeutics and Toxicity",
+    "year": 2019,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

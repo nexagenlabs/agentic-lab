@@ -1,0 +1,16 @@
+{
+  "pmid": "99000007",
+  "sha256": "8ab44eb357b93b62910adac618c464aac0f91a5c647eb84987672c6edf165f80",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000007",
+    "title": "HepaRG differentiation state alters apparent potency of three hepatotoxicants",
+    "abstract": "HepaRG cells acquire metabolic competence on differentiation, which may change the apparent potency of compounds requiring bioactivation. We compared proliferating and differentiated HepaRG cultures exposed to paracetamol, diclofenac and amiodarone for 24 hours. Percentage viability was measured by neutral red uptake. In differentiated cultures, paracetamol reduced viability to 46 per cent at 10 millimolar, whereas proliferating cultures retained 89 per cent viability at the same concentration. Diclofenac and amiodarone showed smaller shifts, with IC50 values of 210 and 34 micromolar respectively in the differentiated state. The results argue that differentiation state should be reported alongside any potency value obtained in this line.",
+    "journal": "Applied In Vitro Toxicology Letters",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

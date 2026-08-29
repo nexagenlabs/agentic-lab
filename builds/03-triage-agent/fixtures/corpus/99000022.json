@@ -1,0 +1,16 @@
+{
+  "pmid": "99000022",
+  "sha256": "b04e9c209fb720dbc9ec02cc3765f56cb6d2c5c845639e7e8da98563b7a37dfb",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000022",
+    "title": "Paracetamol overdose: a clinical review",
+    "abstract": "Paracetamol remains the commonest cause of acute liver failure in several countries. This clinical review covers presentation, the nomogram, the evidence base for acetylcysteine and the management of late presentation. We summarise the pharmacology of the toxic metabolite and the role of glutathione depletion, drawing on published in vitro work in primary human hepatocytes without repeating it. Recent changes to national guidance on infusion regimens are discussed. The review is aimed at the acute physician and contains no original experimental measurements.",
+    "journal": "Clinical Hepatology Digest",
+    "year": 2020,
+    "publication_types": [
+      "Review"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

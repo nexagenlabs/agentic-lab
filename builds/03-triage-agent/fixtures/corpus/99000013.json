@@ -1,0 +1,16 @@
+{
+  "pmid": "99000013",
+  "sha256": "9d3b941cff287b0c23506dd1554a63b6a17dd2a3f1e493bfa628b440844100ba",
+  "payload": {
+    "status": "ok",
+    "pmid": "99000013",
+    "title": "Cytotoxicity of a crude Silybum marianum seed extract in HepG2 cells",
+    "abstract": "Milk thistle preparations are taken widely for hepatic complaints, but crude preparations vary in composition and their direct cytotoxicity is seldom quantified. A crude ethanolic extract of Silybum marianum seed was prepared in house, dried and redissolved for testing. No fractionation was performed and no individual constituent was isolated or quantified. HepG2 cells were exposed for 48 hours across a seven-point range and viability was measured by ATP content. The extract reduced viability with an IC50 of 118 micrograms per millilitre. Heat treatment of the extract abolished the effect. The active component or components remain unidentified and no purified compound was administered in this study.",
+    "journal": "Ethnopharmacology and Cell Biology",
+    "year": 2020,
+    "publication_types": [
+      "Journal Article"
+    ],
+    "source": "pubmed-efetch"
+  }
+}

@@ -2,41 +2,18 @@
 
 Stage 2 is repeated here in full, because this file stands alone. The new
 code is ``check_search_pubmed``, ``dispatch`` and ``run_agent``.
+
+``run_agent`` sits at the foot of the file, below the tools it dispatches to,
+because a name used inside a function body need only exist by the time the
+function is called.
 """
 
-import json
 import os
-from typing import Any
 
 from anthropic import Anthropic
 
-MODEL = os.environ.get("AGENT_MODEL", "claude-opus-5")
-
-
-SEARCH_PUBMED = {
-    "name": "search_pubmed",
-    "description": (
-        "Search PubMed for papers matching a query and return their PMIDs, "
-        "titles and years. Use this when you need to find papers you do not "
-        "already know about, for example to see what has been published on a "
-        "target. Do NOT use this to retrieve the text of a known PMID: it "
-        "returns metadata only, and a PMID you already hold needs no search."
-    ),
-    "input_schema": {
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "Free text query, at least three characters.",
-            },
-            "max_results": {
-                "type": "integer",
-                "description": "How many records to return, 1 to 50. Defaults to 5.",
-            },
-        },
-        "required": ["query"],
-    },
-}
+MODEL = os.environ.get("AGENT_MODEL", "claude-sonnet-5")
+client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
 
 # Stands in for a real esearch call, which arrives in Build 03.
@@ -48,46 +25,59 @@ CORPUS = [
 ]
 
 
-def _pubmed_esearch(query: str, max_results: int) -> list[dict[str, Any]]:
-    """Stubbed PubMed search. Build 03 replaces the body, not the signature."""
+def _pubmed_esearch(query: str, retmax: int) -> list[str]:
+    """Return the matching PMIDs. Build 03 replaces the body, not the name."""
     terms = query.lower().split()
     hits = [r for r in CORPUS if any(t in r["title"].lower() for t in terms)]
-    return hits[:max_results]
+    return [r["pmid"] for r in hits[:retmax]]
 
 
-def search_pubmed(query: str, max_results: int = 5) -> dict[str, Any]:
-    """Return records matching ``query``.
+def search_pubmed(query: str, max_results: int = 20) -> dict:
+    """Real implementation lives in the repo. Stub shown here."""
+    pmids = _pubmed_esearch(query, retmax=max_results)
+    return {"status": "ok", "count": len(pmids), "pmids": pmids}
 
-    ``count`` is computed here rather than asked of the model, because a model
-    asked to count will sometimes be wrong and will never say so.
-    """
-    hits = _pubmed_esearch(query, max_results)
-    return {
-        "status": "ok",
-        "count": len(hits),
-        "results": hits,
-        "source": "pubmed-stub",
+
+TOOLS = [
+    {
+        "name": "search_pubmed",
+        "description": (
+            "Searches PubMed and returns matching PMIDs. Use this to find "
+            "literature when you do not already have identifiers. "
+            "Do NOT use this to retrieve the text of a known PMID; "
+            "use fetch_abstract for that."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string"},
+                "max_results": {"type": "integer", "default": 20},
+            },
+            "required": ["query"],
+        },
     }
+]
 
 
-def check_search_pubmed(args: dict[str, Any]) -> str | None:
+def check_search_pubmed(args: dict) -> str | None:
     """Return a reason to refuse the call, or None to allow it.
 
     Written out by hand so the reader can see what a schema would do for them.
-    Build 02 replaces this with Pydantic and the behaviour does not change.
+    Build 02 replaces this with Pydantic and the behaviour does not change,
+    which is why the bounds here are the bounds the Pydantic model declares.
     """
     query = args.get("query")
     if not isinstance(query, str) or len(query.strip()) < 3:
         return "query must be a string of at least three characters"
-    max_results = args.get("max_results", 5)
+    max_results = args.get("max_results", 20)
     if isinstance(max_results, bool) or not isinstance(max_results, int):
         return "max_results must be an integer"
-    if not 1 <= max_results <= 50:
-        return "max_results must be between 1 and 50"
+    if not 1 <= max_results <= 200:
+        return "max_results must be between 1 and 200"
     return None
 
 
-def dispatch(name: str, args: dict[str, Any]) -> dict[str, Any]:
+def dispatch(name: str, args: dict) -> dict:
     """Validate at the boundary, then call. The function body never sees a
     bad argument, and the caller never sees an exception."""
     if name != "search_pubmed":
@@ -98,33 +88,37 @@ def dispatch(name: str, args: dict[str, Any]) -> dict[str, Any]:
     return search_pubmed(**args)
 
 
-def run_agent(task: str, max_steps: int = 20) -> dict[str, Any]:
-    client = Anthropic()
-    messages: list[dict[str, Any]] = [{"role": "user", "content": task}]
+import json
+
+MAX_STEPS = 20
+
+def run_agent(task: str, max_steps: int = MAX_STEPS) -> dict:
+    messages = [{"role": "user", "content": task}]
     steps = 0
+
     while steps < max_steps:
         steps += 1
         response = client.messages.create(
-            model=MODEL,
-            max_tokens=1024,
-            tools=[SEARCH_PUBMED],
-            messages=messages,
+            model=MODEL, max_tokens=2048, tools=TOOLS, messages=messages,
         )
-        if response.stop_reason != "tool_use":
-            answer = "".join(b.text for b in response.content if b.type == "text")
-            return {"status": "COMPLETE", "steps": steps, "answer": answer}
         messages.append({"role": "assistant", "content": response.content})
+
+        if response.stop_reason != "tool_use":
+            text = "".join(b.text for b in response.content
+                           if b.type == "text")
+            return {"status": "COMPLETE", "steps": steps,
+                    "answer": text}
+
         results = []
         for block in response.content:
             if block.type != "tool_use":
                 continue
-            result = dispatch(block.name, block.input)
-            results.append({
-                "type": "tool_result",
-                "tool_use_id": block.id,
-                "content": json.dumps(result),
-            })
+            output = dispatch(block.name, block.input)
+            results.append({"type": "tool_result",
+                            "tool_use_id": block.id,
+                            "content": json.dumps(output)})
         messages.append({"role": "user", "content": results})
+
     return {"status": "INCOMPLETE", "steps": steps, "answer": None}
 
 

@@ -8,7 +8,7 @@ lines of code: a step cap, a trace, a budget, an error policy, a write gate.
 
 import json
 import time
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
@@ -98,7 +98,7 @@ class Trace:
     def write(self, event: str, **fields: Any) -> None:
         record: dict[str, Any] = {
             "run_id": self.run_id,
-            "ts": datetime.now(UTC).isoformat(),
+            "ts": datetime.now(timezone.utc).isoformat(),
             "event": event,
         }
         record.update(fields)
@@ -136,7 +136,7 @@ def save_note(text: str, approved_by: str, path: str = "notes.jsonl") -> dict[st
     record = {
         "text": text,
         "approved_by": approved_by,
-        "ts": datetime.now(UTC).isoformat(),
+        "ts": datetime.now(timezone.utc).isoformat(),
     }
     with Path(path).open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(record) + "\n")

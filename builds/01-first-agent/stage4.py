@@ -8,42 +8,16 @@ Stages 2 and 3 are repeated here in full, because this file stands alone. The
 new code is the ``Trace`` class and the trace calls inside the loop.
 """
 
-import json
+# The chapter prints the trace imports on one line, so isort is switched off
+# for this file rather than let the page and the repository disagree.
+# ruff: noqa: I001
+
 import os
-from datetime import UTC, datetime
-from pathlib import Path
-from typing import Any
-from uuid import uuid4
 
 from anthropic import Anthropic
 
-MODEL = os.environ.get("AGENT_MODEL", "claude-opus-5")
-
-
-SEARCH_PUBMED = {
-    "name": "search_pubmed",
-    "description": (
-        "Search PubMed for papers matching a query and return their PMIDs, "
-        "titles and years. Use this when you need to find papers you do not "
-        "already know about, for example to see what has been published on a "
-        "target. Do NOT use this to retrieve the text of a known PMID: it "
-        "returns metadata only, and a PMID you already hold needs no search."
-    ),
-    "input_schema": {
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "Free text query, at least three characters.",
-            },
-            "max_results": {
-                "type": "integer",
-                "description": "How many records to return, 1 to 50. Defaults to 5.",
-            },
-        },
-        "required": ["query"],
-    },
-}
+MODEL = os.environ.get("AGENT_MODEL", "claude-sonnet-5")
+client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
 
 # Stands in for a real esearch call, which arrives in Build 03.
@@ -55,69 +29,72 @@ CORPUS = [
 ]
 
 
-class Trace:
-    """Append-only JSONL for one run.
-
-    One JSON object per line, written as the run happens, because a run you
-    cannot replay is a run you cannot debug.
-    """
-
-    def __init__(self, run_dir: str = "runs") -> None:
-        self.run_id = uuid4().hex[:12]
-        self.path = Path(run_dir) / f"{self.run_id}.jsonl"
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-
-    def write(self, event: str, **fields: Any) -> None:
-        record: dict[str, Any] = {
-            "run_id": self.run_id,
-            "ts": datetime.now(UTC).isoformat(),
-            "event": event,
-        }
-        record.update(fields)
-        with self.path.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(record, default=str) + "\n")
-
-
-def _pubmed_esearch(query: str, max_results: int) -> list[dict[str, Any]]:
-    """Stubbed PubMed search. Build 03 replaces the body, not the signature."""
+def _pubmed_esearch(query: str, retmax: int) -> list[str]:
+    """Return the matching PMIDs. Build 03 replaces the body, not the name."""
     terms = query.lower().split()
     hits = [r for r in CORPUS if any(t in r["title"].lower() for t in terms)]
-    return hits[:max_results]
+    return [r["pmid"] for r in hits[:retmax]]
 
 
-def search_pubmed(query: str, max_results: int = 5) -> dict[str, Any]:
-    """Return records matching ``query``.
+def search_pubmed(query: str, max_results: int = 20) -> dict:
+    """Real implementation lives in the repo. Stub shown here."""
+    pmids = _pubmed_esearch(query, retmax=max_results)
+    return {"status": "ok", "count": len(pmids), "pmids": pmids}
 
-    ``count`` is computed here rather than asked of the model, because a model
-    asked to count will sometimes be wrong and will never say so.
-    """
-    hits = _pubmed_esearch(query, max_results)
-    return {
-        "status": "ok",
-        "count": len(hits),
-        "results": hits,
-        "source": "pubmed-stub",
+
+TOOLS = [
+    {
+        "name": "search_pubmed",
+        "description": (
+            "Searches PubMed and returns matching PMIDs. Use this to find "
+            "literature when you do not already have identifiers. "
+            "Do NOT use this to retrieve the text of a known PMID; "
+            "use fetch_abstract for that."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string"},
+                "max_results": {"type": "integer", "default": 20},
+            },
+            "required": ["query"],
+        },
     }
+]
 
 
-def check_search_pubmed(args: dict[str, Any]) -> str | None:
-    """Return a reason to refuse the call, or None to allow it.
-
-    Written out by hand so the reader can see what a schema would do for them.
-    Build 02 replaces this with Pydantic and the behaviour does not change.
-    """
+def check_search_pubmed(args: dict) -> str | None:
+    """Return a reason to refuse the call, or None to allow it."""
     query = args.get("query")
     if not isinstance(query, str) or len(query.strip()) < 3:
         return "query must be a string of at least three characters"
-    max_results = args.get("max_results", 5)
+    max_results = args.get("max_results", 20)
     if isinstance(max_results, bool) or not isinstance(max_results, int):
         return "max_results must be an integer"
-    if not 1 <= max_results <= 50:
-        return "max_results must be between 1 and 50"
+    if not 1 <= max_results <= 200:
+        return "max_results must be between 1 and 200"
     return None
 
 
-def dispatch(name: str, args: dict[str, Any], trace: Trace) -> dict[str, Any]:
+import json, uuid
+from datetime import datetime, timezone
+from pathlib import Path
+
+class Trace:
+    def __init__(self, run_dir="runs"):
+        self.run_id = uuid.uuid4().hex[:12]
+        Path(run_dir).mkdir(parents=True, exist_ok=True)
+        self.path = Path(run_dir) / f"{self.run_id}.jsonl"
+
+    def write(self, event: str, **fields):
+        record = {"run_id": self.run_id,
+                  "ts": datetime.now(timezone.utc).isoformat(),
+                  "event": event, **fields}
+        with self.path.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(record, default=str) + "\n")
+
+
+def dispatch(name: str, args: dict, trace: "Trace") -> dict:
     """Validate at the boundary, then call. A rejection goes to the trace, so
     an argument the model keeps getting wrong is visible after the run."""
     if name != "search_pubmed":
@@ -131,46 +108,48 @@ def dispatch(name: str, args: dict[str, Any], trace: Trace) -> dict[str, Any]:
     return search_pubmed(**args)
 
 
-def run_agent(task: str, max_steps: int = 20) -> dict[str, Any]:
-    client = Anthropic()
+MAX_STEPS = 20
+
+
+def run_agent(task: str, max_steps: int = MAX_STEPS) -> dict:
     trace = Trace()
-    messages: list[dict[str, Any]] = [{"role": "user", "content": task}]
+    messages = [{"role": "user", "content": task}]
     steps = 0
     trace.write("run_start", task=task, model=MODEL, max_steps=max_steps)
+
     while steps < max_steps:
         steps += 1
         trace.write("model_call", step=steps, model=MODEL)
         response = client.messages.create(
-            model=MODEL,
-            max_tokens=1024,
-            tools=[SEARCH_PUBMED],
-            messages=messages,
+            model=MODEL, max_tokens=2048, tools=TOOLS, messages=messages,
         )
         trace.write("model_response", step=steps, model=response.model,
                     stop_reason=response.stop_reason)
-        if response.stop_reason != "tool_use":
-            answer = "".join(b.text for b in response.content if b.type == "text")
-            trace.write("halt", reason="complete", steps=steps, max_steps=max_steps)
-            return {"status": "COMPLETE", "steps": steps, "answer": answer,
-                    "run_id": trace.run_id}
         messages.append({"role": "assistant", "content": response.content})
+
+        if response.stop_reason != "tool_use":
+            text = "".join(b.text for b in response.content
+                           if b.type == "text")
+            trace.write("halt", reason="complete", steps=steps, max_steps=max_steps)
+            return {"status": "COMPLETE", "steps": steps,
+                    "answer": text, "run_id": trace.run_id}
+
         results = []
         for block in response.content:
             if block.type != "tool_use":
                 continue
             trace.write("tool_request", step=steps, tool=block.name, args=block.input)
-            result = dispatch(block.name, block.input, trace)
+            output = dispatch(block.name, block.input, trace)
             trace.write("tool_result", step=steps, tool=block.name,
-                        status=result["status"], code=result.get("code"))
-            results.append({
-                "type": "tool_result",
-                "tool_use_id": block.id,
-                "content": json.dumps(result),
-            })
+                        status=output["status"], code=output.get("code"))
+            results.append({"type": "tool_result",
+                            "tool_use_id": block.id,
+                            "content": json.dumps(output)})
         messages.append({"role": "user", "content": results})
+
     trace.write("halt", reason="step_cap", steps=steps, max_steps=max_steps)
-    return {"status": "INCOMPLETE", "reason": "step_cap", "steps": steps,
-            "answer": None, "run_id": trace.run_id}
+    return {"status": "INCOMPLETE", "steps": steps, "answer": None,
+            "run_id": trace.run_id}
 
 
 if __name__ == "__main__":

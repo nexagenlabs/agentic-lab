@@ -8,10 +8,12 @@ import os
 
 from anthropic import Anthropic
 
-client = Anthropic()
+client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+MODEL = os.environ.get("AGENT_MODEL", "claude-sonnet-5")
+
 response = client.messages.create(
-    model=os.environ.get("AGENT_MODEL", "claude-opus-5"),
+    model=MODEL,
     max_tokens=1024,
-    messages=[{"role": "user", "content": "Name three PARP inhibitors."}],
+    messages=[{"role": "user", "content": "What is ivermectin used for?"}],
 )
 print(response.content[0].text)

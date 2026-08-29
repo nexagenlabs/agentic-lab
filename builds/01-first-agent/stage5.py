@@ -7,76 +7,63 @@ a run spends its whole budget on one broken thing.
 Stages 2 to 4 are repeated here in full, because this file stands alone.
 """
 
-import json
+# The chapter prints the trace imports on one line, so isort is switched off
+# for this file rather than let the page and the repository disagree.
+# ruff: noqa: I001
+
 import os
 import time
-from datetime import UTC, datetime
-from pathlib import Path
-from typing import Any
-from uuid import uuid4
 
 from anthropic import Anthropic, APIConnectionError, APIError
 
-MODEL = os.environ.get("AGENT_MODEL", "claude-opus-5")
+MODEL = os.environ.get("AGENT_MODEL", "claude-sonnet-5")
+client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
-# Status codes that mean "the same request may work in a moment". Everything
-# else, a 400 above all, means the request itself is wrong and always will be.
-TRANSIENT_STATUS = frozenset({408, 409, 429, 500, 502, 503, 504})
+MAX_STEPS = 20
+
+# The ceiling a run may spend. Checked before a call, never after.
+TOKEN_BUDGET = 100_000
+
+# What the next call is assumed to cost when deciding whether to make it.
+# The first call has no measured turn behind it, so it starts from here.
+ESTIMATED_CALL_TOKENS = 1_500
 
 # Three consecutive failures from one tool is not bad luck, it is a broken
 # tool. Disable it rather than spend the rest of the run rediscovering that.
 FAILURE_LIMIT = 3
 
+# Status codes that mean the same request may work in a moment. Everything
+# else, a 400 above all, means the request itself is wrong and always will be.
+TRANSIENT_STATUS = frozenset({408, 409, 429, 500, 502, 503, 504})
 
-SEARCH_PUBMED = {
-    "name": "search_pubmed",
-    "description": (
-        "Search PubMed for papers matching a query and return their PMIDs, "
-        "titles and years. Use this when you need to find papers you do not "
-        "already know about, for example to see what has been published on a "
-        "target. Do NOT use this to retrieve the text of a known PMID: it "
-        "returns metadata only, and a PMID you already hold needs no search."
-    ),
-    "input_schema": {
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "Free text query, at least three characters.",
-            },
-            "max_results": {
-                "type": "integer",
-                "description": "How many records to return, 1 to 50. Defaults to 5.",
-            },
-        },
-        "required": ["query"],
-    },
-}
-
-
-SAVE_NOTE = {
-    "name": "save_note",
-    "description": (
-        "Append a note to the laboratory notebook. Use this when the user has "
-        "asked for a finding to be recorded. Do NOT use this to keep working "
-        "notes for yourself: the notebook is a record other people read."
-    ),
-    "input_schema": {
-        "type": "object",
-        "properties": {
-            "text": {"type": "string", "description": "The note, one paragraph."},
-            "approved_by": {
-                "type": "string",
-                "description": "The person who approved this write.",
-            },
-        },
-        "required": ["text", "approved_by"],
-    },
-}
-
-
-TOOLS = [SEARCH_PUBMED, SAVE_NOTE]
 WRITE_TOOLS = {"save_note"}
+
+# Approval arrives out of band, from a human. It is never read from the
+# arguments the model supplied: a model asked whether its own write was
+# approved will say yes.
+APPROVALS: set[str] = set()
+
+
+class TransientError(RuntimeError):
+    """A tool failure that the same call might survive if tried again."""
+
+
+import json, uuid
+from datetime import datetime, timezone
+from pathlib import Path
+
+class Trace:
+    def __init__(self, run_dir="runs"):
+        self.run_id = uuid.uuid4().hex[:12]
+        Path(run_dir).mkdir(parents=True, exist_ok=True)
+        self.path = Path(run_dir) / f"{self.run_id}.jsonl"
+
+    def write(self, event: str, **fields):
+        record = {"run_id": self.run_id,
+                  "ts": datetime.now(timezone.utc).isoformat(),
+                  "event": event, **fields}
+        with self.path.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(record, default=str) + "\n")
 
 
 # Stands in for a real esearch call, which arrives in Build 03.
@@ -88,52 +75,20 @@ CORPUS = [
 ]
 
 
-class Trace:
-    """Append-only JSONL for one run.
-
-    One JSON object per line, written as the run happens, because a run you
-    cannot replay is a run you cannot debug.
-    """
-
-    def __init__(self, run_dir: str = "runs") -> None:
-        self.run_id = uuid4().hex[:12]
-        self.path = Path(run_dir) / f"{self.run_id}.jsonl"
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-
-    def write(self, event: str, **fields: Any) -> None:
-        record: dict[str, Any] = {
-            "run_id": self.run_id,
-            "ts": datetime.now(UTC).isoformat(),
-            "event": event,
-        }
-        record.update(fields)
-        with self.path.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(record, default=str) + "\n")
-
-
-def _pubmed_esearch(query: str, max_results: int) -> list[dict[str, Any]]:
-    """Stubbed PubMed search. Build 03 replaces the body, not the signature."""
+def _pubmed_esearch(query: str, retmax: int) -> list[str]:
+    """Return the matching PMIDs. Build 03 replaces the body, not the name."""
     terms = query.lower().split()
     hits = [r for r in CORPUS if any(t in r["title"].lower() for t in terms)]
-    return hits[:max_results]
+    return [r["pmid"] for r in hits[:retmax]]
 
 
-def search_pubmed(query: str, max_results: int = 5) -> dict[str, Any]:
-    """Return records matching ``query``.
-
-    ``count`` is computed here rather than asked of the model, because a model
-    asked to count will sometimes be wrong and will never say so.
-    """
-    hits = _pubmed_esearch(query, max_results)
-    return {
-        "status": "ok",
-        "count": len(hits),
-        "results": hits,
-        "source": "pubmed-stub",
-    }
+def search_pubmed(query: str, max_results: int = 20) -> dict:
+    """Real implementation lives in the repo. Stub shown here."""
+    pmids = _pubmed_esearch(query, retmax=max_results)
+    return {"status": "ok", "count": len(pmids), "pmids": pmids}
 
 
-def save_note(text: str, approved_by: str, path: str = "notes.jsonl") -> dict[str, Any]:
+def save_note(text: str, approved_by: str, path: str = "notes.jsonl") -> dict:
     """Append one note to the notebook.
 
     ``approved_by`` is required: an unattributed write is not a record.
@@ -141,31 +96,64 @@ def save_note(text: str, approved_by: str, path: str = "notes.jsonl") -> dict[st
     record = {
         "text": text,
         "approved_by": approved_by,
-        "ts": datetime.now(UTC).isoformat(),
+        "ts": datetime.now(timezone.utc).isoformat(),
     }
-    with Path(path).open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(record) + "\n")
+    with Path(path).open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(record) + "\n")
     return {"status": "ok", "written": path, "approved_by": approved_by}
 
 
-def check_search_pubmed(args: dict[str, Any]) -> str | None:
-    """Return a reason to refuse the call, or None to allow it.
+TOOLS = [
+    {
+        "name": "search_pubmed",
+        "description": (
+            "Searches PubMed and returns matching PMIDs. Use this to find "
+            "literature when you do not already have identifiers. "
+            "Do NOT use this to retrieve the text of a known PMID; "
+            "use fetch_abstract for that."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string"},
+                "max_results": {"type": "integer", "default": 20},
+            },
+            "required": ["query"],
+        },
+    },
+    {
+        "name": "save_note",
+        "description": (
+            "Append a note to the laboratory notebook. Use this when the user "
+            "has asked for a finding to be recorded. Do NOT use this to keep "
+            "working notes: the notebook is a record other people read."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "text": {"type": "string"},
+                "approved_by": {"type": "string"},
+            },
+            "required": ["text", "approved_by"],
+        },
+    },
+]
 
-    Written out by hand so the reader can see what a schema would do for them.
-    Build 02 replaces this with Pydantic and the behaviour does not change.
-    """
+
+def check_search_pubmed(args: dict) -> str | None:
+    """Return a reason to refuse the call, or None to allow it."""
     query = args.get("query")
     if not isinstance(query, str) or len(query.strip()) < 3:
         return "query must be a string of at least three characters"
-    max_results = args.get("max_results", 5)
+    max_results = args.get("max_results", 20)
     if isinstance(max_results, bool) or not isinstance(max_results, int):
         return "max_results must be an integer"
-    if not 1 <= max_results <= 50:
-        return "max_results must be between 1 and 50"
+    if not 1 <= max_results <= 200:
+        return "max_results must be between 1 and 200"
     return None
 
 
-def check_save_note(args: dict[str, Any]) -> str | None:
+def check_save_note(args: dict) -> str | None:
     text = args.get("text")
     if not isinstance(text, str) or not text.strip():
         return "text must be a non-empty string"
@@ -175,8 +163,18 @@ def check_save_note(args: dict[str, Any]) -> str | None:
     return None
 
 
+REGISTRY = {"search_pubmed": search_pubmed, "save_note": save_note}
 CHECKS = {"search_pubmed": check_search_pubmed, "save_note": check_save_note}
-FUNCTIONS = {"search_pubmed": search_pubmed, "save_note": save_note}
+
+
+def approved(name: str, args: dict) -> bool:
+    """Whether a human has approved this write.
+
+    The arguments the model supplied cannot answer this question, which is why
+    ``args`` is read for nothing here. Approval has to arrive from outside the
+    run, and ``APPROVALS`` stands in for wherever it arrives from.
+    """
+    return name in APPROVALS
 
 
 def is_transient(error: APIError) -> bool:
@@ -187,65 +185,50 @@ def is_transient(error: APIError) -> bool:
     return getattr(error, "status_code", None) in TRANSIENT_STATUS
 
 
-def dispatch(
-    name: str,
-    args: dict[str, Any],
-    trace: Trace,
-    *,
-    approved: bool = False,
-) -> dict[str, Any]:
-    """The gate every tool call passes: known tool, then write policy, then
-    arguments. Nothing raises out of here."""
-    if name not in FUNCTIONS:
-        trace.write("tool_rejected", tool=name, code="unknown_tool")
+def dispatch(name, args):
+    fn = REGISTRY.get(name)
+    if fn is None:
         return {"status": "error", "code": "unknown_tool", "tool": name}
-    if name in WRITE_TOOLS and not approved:
-        trace.write("tool_blocked", tool=name, code="awaiting_human_approval")
-        return {"status": "blocked", "code": "awaiting_human_approval", "tool": name}
+    if name in WRITE_TOOLS and not approved(name, args):
+        return {"status": "blocked", "code": "awaiting_human_approval"}
     reason = CHECKS[name](args)
     if reason is not None:
-        trace.write("tool_rejected", tool=name, code="invalid_arguments",
-                    detail=reason, args=args)
         return {"status": "error", "code": "invalid_arguments", "detail": reason}
-    return FUNCTIONS[name](**args)
+    for attempt in (1, 2):
+        try:
+            return fn(**args)
+        except TransientError:
+            if attempt == 2:
+                return {"status": "error", "code": "tool_unavailable"}
+            time.sleep(2 ** attempt)
 
 
-def run_agent(
-    task: str,
-    max_steps: int = 20,
-    *,
-    client: Any = None,
-    token_budget: int = 100_000,
-    run_dir: str = "runs",
-    backoff_s: float = 2.0,
-) -> dict[str, Any]:
-    client = client or Anthropic()
-    trace = Trace(run_dir)
-    messages: list[dict[str, Any]] = [{"role": "user", "content": task}]
+def run_agent(task: str, max_steps: int = MAX_STEPS) -> dict:
+    trace = Trace()
+    messages = [{"role": "user", "content": task}]
     steps = 0
     tokens_used = 0
+    estimated_next = ESTIMATED_CALL_TOKENS
     retries = 0
     failures: dict[str, int] = {}
     disabled: set[str] = set()
     trace.write("run_start", task=task, model=MODEL, max_steps=max_steps,
-                token_budget=token_budget)
+                token_budget=TOKEN_BUDGET)
+
     while steps < max_steps:
-        # Before the call, not after: a budget checked afterwards is one that
-        # has already been spent.
-        if tokens_used >= token_budget:
+        # Budget ceiling, checked BEFORE the call rather than after.
+        if tokens_used + estimated_next > TOKEN_BUDGET:
             trace.write("halt", reason="budget", steps=steps,
-                        max_steps=max_steps, tokens_used=tokens_used)
+                        tokens_used=tokens_used)
             return {"status": "INCOMPLETE", "reason": "budget", "steps": steps,
                     "answer": None, "run_id": trace.run_id}
+
         steps += 1
-        tools = [tool for tool in TOOLS if tool["name"] not in disabled]
+        tools = [t for t in TOOLS if t["name"] not in disabled]
         trace.write("model_call", step=steps, model=MODEL)
         try:
             response = client.messages.create(
-                model=MODEL,
-                max_tokens=1024,
-                tools=tools,
-                messages=messages,
+                model=MODEL, max_tokens=2048, tools=tools, messages=messages,
             )
         except APIError as error:
             status_code = getattr(error, "status_code", None)
@@ -255,34 +238,46 @@ def run_agent(
                 retries += 1
                 trace.write("model_error", step=steps,
                             status_code=status_code, retrying=True)
-                time.sleep(backoff_s)
+                time.sleep(2)
                 continue
             trace.write("model_error", step=steps,
                         status_code=status_code, retrying=False)
-            trace.write("halt", reason="api_error", steps=steps, max_steps=max_steps)
+            trace.write("halt", reason="api_error", steps=steps)
             return {"status": "FAILED", "code": "api_error", "steps": steps,
                     "status_code": status_code, "answer": None,
                     "run_id": trace.run_id}
+
         retries = 0
-        tokens_used += response.usage.input_tokens + response.usage.output_tokens
+        spent = response.usage.input_tokens + response.usage.output_tokens
+        tokens_used += spent
+        # The turn just measured is the best estimate of the next one.
+        estimated_next = spent
         trace.write("model_response", step=steps, model=response.model,
                     stop_reason=response.stop_reason, tokens_used=tokens_used)
-        if response.stop_reason != "tool_use":
-            answer = "".join(b.text for b in response.content if b.type == "text")
-            trace.write("halt", reason="complete", steps=steps, max_steps=max_steps)
-            return {"status": "COMPLETE", "steps": steps, "answer": answer,
-                    "run_id": trace.run_id}
         messages.append({"role": "assistant", "content": response.content})
+
+        if response.stop_reason != "tool_use":
+            text = "".join(b.text for b in response.content
+                           if b.type == "text")
+            trace.write("halt", reason="complete", steps=steps, max_steps=max_steps)
+            return {"status": "COMPLETE", "steps": steps,
+                    "answer": text, "run_id": trace.run_id}
+
         results = []
         for block in response.content:
             if block.type != "tool_use":
                 continue
             trace.write("tool_request", step=steps, tool=block.name, args=block.input)
             if block.name in disabled:
-                result = {"status": "error", "code": "tool_disabled", "tool": block.name}
+                output = {"status": "error", "code": "tool_disabled", "tool": block.name}
             else:
-                result = dispatch(block.name, block.input, trace)
-                if result["status"] == "error":
+                output = dispatch(block.name, block.input)
+                # dispatch keeps the signature the chapter prints, so the
+                # rejection reaches the trace from here instead of from inside.
+                if output["status"] != "ok":
+                    trace.write("tool_rejected", tool=block.name,
+                                code=output.get("code"), args=block.input)
+                if output["status"] == "error":
                     failures[block.name] = failures.get(block.name, 0) + 1
                     if failures[block.name] >= FAILURE_LIMIT:
                         disabled.add(block.name)
@@ -291,16 +286,15 @@ def run_agent(
                 else:
                     failures[block.name] = 0
             trace.write("tool_result", step=steps, tool=block.name,
-                        status=result["status"], code=result.get("code"))
-            results.append({
-                "type": "tool_result",
-                "tool_use_id": block.id,
-                "content": json.dumps(result),
-            })
+                        status=output["status"], code=output.get("code"))
+            results.append({"type": "tool_result",
+                            "tool_use_id": block.id,
+                            "content": json.dumps(output)})
         messages.append({"role": "user", "content": results})
+
     trace.write("halt", reason="step_cap", steps=steps, max_steps=max_steps)
-    return {"status": "INCOMPLETE", "reason": "step_cap", "steps": steps,
-            "answer": None, "run_id": trace.run_id}
+    return {"status": "INCOMPLETE", "steps": steps, "answer": None,
+            "run_id": trace.run_id}
 
 
 if __name__ == "__main__":

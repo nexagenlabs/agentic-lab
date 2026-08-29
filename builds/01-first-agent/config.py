@@ -6,4 +6,4 @@ this build runs against is an environment variable, not an edit.
 
 import os
 
-MODEL = os.environ.get("AGENT_MODEL", "claude-opus-5")
+MODEL = os.environ.get("AGENT_MODEL", "claude-sonnet-5")

@@ -5,37 +5,10 @@ answers the request. This file stands alone: type it and run it.
 """
 
 import os
-from typing import Any
 
 from anthropic import Anthropic
 
-MODEL = os.environ.get("AGENT_MODEL", "claude-opus-5")
-
-
-SEARCH_PUBMED = {
-    "name": "search_pubmed",
-    "description": (
-        "Search PubMed for papers matching a query and return their PMIDs, "
-        "titles and years. Use this when you need to find papers you do not "
-        "already know about, for example to see what has been published on a "
-        "target. Do NOT use this to retrieve the text of a known PMID: it "
-        "returns metadata only, and a PMID you already hold needs no search."
-    ),
-    "input_schema": {
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "Free text query, at least three characters.",
-            },
-            "max_results": {
-                "type": "integer",
-                "description": "How many records to return, 1 to 50. Defaults to 5.",
-            },
-        },
-        "required": ["query"],
-    },
-}
+MODEL = os.environ.get("AGENT_MODEL", "claude-sonnet-5")
 
 
 # Stands in for a real esearch call, which arrives in Build 03.
@@ -47,34 +20,46 @@ CORPUS = [
 ]
 
 
-def _pubmed_esearch(query: str, max_results: int) -> list[dict[str, Any]]:
-    """Stubbed PubMed search. Build 03 replaces the body, not the signature."""
+def _pubmed_esearch(query: str, retmax: int) -> list[str]:
+    """Return the matching PMIDs. Build 03 replaces the body, not the name."""
     terms = query.lower().split()
     hits = [r for r in CORPUS if any(t in r["title"].lower() for t in terms)]
-    return hits[:max_results]
+    return [r["pmid"] for r in hits[:retmax]]
 
 
-def search_pubmed(query: str, max_results: int = 5) -> dict[str, Any]:
-    """Return records matching ``query``.
+def search_pubmed(query: str, max_results: int = 20) -> dict:
+    """Real implementation lives in the repo. Stub shown here."""
+    pmids = _pubmed_esearch(query, retmax=max_results)
+    return {"status": "ok", "count": len(pmids), "pmids": pmids}
 
-    ``count`` is computed here rather than asked of the model, because a model
-    asked to count will sometimes be wrong and will never say so.
-    """
-    hits = _pubmed_esearch(query, max_results)
-    return {
-        "status": "ok",
-        "count": len(hits),
-        "results": hits,
-        "source": "pubmed-stub",
+
+TOOLS = [
+    {
+        "name": "search_pubmed",
+        "description": (
+            "Searches PubMed and returns matching PMIDs. Use this to find "
+            "literature when you do not already have identifiers. "
+            "Do NOT use this to retrieve the text of a known PMID; "
+            "use fetch_abstract for that."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string"},
+                "max_results": {"type": "integer", "default": 20},
+            },
+            "required": ["query"],
+        },
     }
+]
 
 
 if __name__ == "__main__":
-    client = Anthropic()
+    client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     response = client.messages.create(
         model=MODEL,
         max_tokens=1024,
-        tools=[SEARCH_PUBMED],
+        tools=TOOLS,
         messages=[{"role": "user", "content": "What is published on olaparib?"}],
     )
     print(response.stop_reason)

@@ -14,24 +14,6 @@
 # Whitespace at end of line is ignored. Blank lines are ignored. Comment
 # lines beginning with # are ignored, because the book adds explanatory
 # comments that the repository does not need.
-#
-# Two properties of fragment mode are easy to discover the hard way.
-#
-# It is indentation-sensitive. Lines are compared with their leading
-# whitespace intact, so a snippet printed at column 0 only matches code at
-# column 0. A snippet lifted out of a function and dedented for the page can
-# be unsatisfiable: a return statement at four spaces under a column 0 if is
-# a SyntaxError, so no valid Python file can ever contain it. Print snippets
-# at the indentation they really have.
-#
-# It is also order-sensitive. _missing_in_order advances a cursor through the
-# target file, so each printed line is only looked for after the previous one
-# was found. The order snippets appear on the printed page therefore
-# constrains the order of code in the repository file. Listing 05 prints the
-# budget check, which lives inside run_agent, before dispatch, so dispatch
-# has to be defined below run_agent in stage5.py. That is a real constraint
-# on the code, not on the prose: reordering snippets on the page will move
-# code in the repository.
 
 listings:
 
@@ -78,3 +60,26 @@ listings:
     mode: exact
     chapter: 3
     heading: "Build 02: The Tool Belt"
+
+  # ---- Chapter 4 ----
+
+  - file: listings/ch04/01_criteria_file.txt
+    target: builds/03-triage-agent/criteria/repurposing_v3.yaml
+    mode: exact
+    chapter: 4
+    heading: "Criteria as data, not prose"
+    note: >
+      The inline comment on on_ambiguity is not a full-line comment, so
+      normalise() keeps it. The repository file must carry it too.
+
+  - file: listings/ch04/02_verdict_model.txt
+    target: builds/03-triage-agent/models.py
+    mode: exact
+    chapter: 4
+    heading: "A structured verdict, not a sentence"
+
+  - file: listings/ch04/03_per_record_driver.txt
+    target: builds/03-triage-agent/screen.py
+    mode: exact
+    chapter: 4
+    heading: "One record per call, driven by your list"

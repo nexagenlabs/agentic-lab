@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+import agent as agent_module
 import dispatch as dispatch_module
 import pytest
 from agent import run_agent
@@ -165,9 +166,11 @@ def test_this_build_imported_its_own_modules() -> None:
     stub_client.py. If one pytest process hands this build the other one, the
     loop test above is quietly measuring the wrong code and still passing.
     This asserts the modules under test came from this folder.
-    """
-    import agent as agent_module
 
+    The imports are captured at module scope, not inside this function. A
+    later build's conftest evicts this build's modules during collection, so
+    an import evaluated here at run time resolves to whichever build ran last.
+    """
     build_dir = Path(__file__).resolve().parents[1]
     for module in (agent_module, dispatch_module):
         assert Path(module.__file__).resolve().parent == build_dir, (

@@ -1,0 +1,15 @@
+# The version field has been removed. A verdict stamped with no version
+# cannot be compared with anything, so this file must not load.
+question: >
+  Does this record report a measured cytotoxicity or viability endpoint
+  for an approved drug in a liver-derived human cell model?
+
+include_if_all:
+  - id: numeric_endpoint
+    text: Reports a numerical IC50, EC50 or percentage viability.
+
+exclude_if_any:
+  - id: review
+    text: Review, editorial, commentary or conference abstract.
+
+on_ambiguity: flag

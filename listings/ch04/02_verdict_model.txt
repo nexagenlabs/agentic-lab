@@ -1,0 +1,11 @@
+from typing import Literal
+from pydantic import BaseModel, Field
+
+class Verdict(BaseModel):
+    pmid: str
+    decision: Literal["include", "exclude", "flag"]
+    criteria_met: list[str] = Field(default_factory=list)
+    criteria_failed: list[str] = Field(default_factory=list)
+    reason: str = Field(max_length=300)
+    confidence: Literal["high", "low"]
+    criteria_version: int

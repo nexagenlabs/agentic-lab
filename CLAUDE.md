@@ -79,6 +79,26 @@ These come from the book's arguments and every build must follow them.
   then runs `verify_replay` through them to watch it die before trusting the
   offline replay that follows.
 
+- **When a ruling changes what a status or a field means, check what reads it
+  downstream.** A relaxed definition propagates silently. `OK` in
+  `verify_printed_urls.py` meant "returns 200" until `/ch01` was ruled to be
+  correctly returning 404, after which it meant "behaves as intended".
+  `generate_qr_codes.py` was reading `OK` as "safe to print" and duly produced
+  QR codes for the two addresses the book does not print. Nothing owned the
+  relationship between the two meanings, which is Chapter 12's failure account
+  in miniature, inside the tooling for the book that contains it. Grep for the
+  field before widening what it means.
+
+- **A figure quoted from a specification is not a measurement.** If a number
+  will guide a physical decision, measure it. "Level H tolerates thirty per
+  cent damage" is the specification talking about codewords, and it told a
+  typesetter nothing useful: measuring gave a twenty per cent contiguous blot
+  surviving, twenty-three per cent failing, ten per cent scattered speckle
+  already fatal, and any damage to a corner square fatal at any size, because
+  a scanner has to locate a symbol before error correction can do anything.
+  The last of those is the one that matters and no specification figure
+  contains it.
+
 - **Before creating a new top-level directory, check it is not already
   ignored.** `git check-ignore -v <path>` before you write the first file.
   `site/` was ignored by `/site` in `.gitignore`, a rule inherited from the

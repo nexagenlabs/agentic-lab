@@ -43,6 +43,26 @@ PRIOR_BUILDS = [
     "09-eln-bridge", "10-run-manifest", "11-red-team",
 ]
 
+# How many tests each gate contributes. Anchored rather than counted, because
+# "no failures" is silent about tests that stopped existing: a gate can lose
+# half its cases and still report zero failures. Adding a test means changing
+# the number here, which is the point. It is a deliberate act, recorded next
+# to the eleven gates it describes, rather than a total that drifts.
+EXPECTED_TESTS = {
+    "01-first-agent": 11,
+    "02-tool-belt": 11,
+    "03-triage-agent": 14,
+    "04-dual-screen": 26,
+    "05-wrangler": 15,
+    "06-plate-mapper": 14,
+    "07-protocol-adapter": 26,
+    "08-dock-loop": 19,
+    "09-eln-bridge": 17,
+    "10-run-manifest": 17,
+    "11-red-team": 21,
+    "tests": 72,
+}
+
 
 def a_manifest(tmp_path, client=None, approvals=None, run_id="desk-test"):
     return RunManifest(
@@ -95,6 +115,11 @@ def test_all_prior_gates_pass_in_sequence(recorded, tmp_path):
     result = subprocess.run(
         [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
          f"--junit-xml={report}",
+         # The mutation gate runs these same eleven gates once per mutated
+         # guard. Running it in here as well squares that work for no new
+         # information, so it is left to the outer suite, which is where it
+         # already runs.
+         "--ignore=tests/test_mutation_gate.py",
          *[f"builds/{name}/tests" for name in PRIOR_BUILDS], "tests"],
         cwd=REPO, capture_output=True, text=True, timeout=1800, check=False,
     )
@@ -121,9 +146,14 @@ def test_all_prior_gates_pass_in_sequence(recorded, tmp_path):
             per_build[owner]["failures"] += 1
 
     for name, counts in sorted(per_build.items()):
-        assert counts["tests"] > 0, f"{name} contributed no tests"
         assert counts["failures"] == 0, (
             f"{name} failed {counts['failures']} of {counts['tests']}"
+        )
+        assert counts["tests"] == EXPECTED_TESTS[name], (
+            f"{name} contributed {counts['tests']} tests and this gate expects "
+            f"{EXPECTED_TESTS[name]}. If you added or removed tests, change "
+            "EXPECTED_TESTS in this file to say so. A gate that accepts any "
+            "number cannot tell a deleted test from a test that never was."
         )
     assert result.returncode == 0, result.stdout[-3000:]
 
@@ -138,7 +168,7 @@ def test_all_prior_gates_pass_in_sequence(recorded, tmp_path):
 
     summary = {name: counts["tests"] for name, counts in per_build.items()}
     (tmp_path / "gate_summary.json").write_text(json.dumps(summary, indent=2))
-    assert sum(summary.values()) > 200
+    assert sum(summary.values()) == sum(EXPECTED_TESTS.values())
 
 
 def test_no_stage_proceeds_past_an_unapproved_checkpoint(tmp_path):

@@ -1,0 +1,10 @@
+{
+  "earliest_year": 2015,
+  "include_if_all": [
+    "numeric_endpoint",
+    "year_in_window"
+  ],
+  "on_ambiguity": "flag",
+  "question": "Does the record report a numerical endpoint in a qualifying model published in or after 2015?",
+  "version": 3
+}

@@ -1,0 +1,254 @@
+[
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-001",
+    "reason": "published before the criteria window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-002",
+    "reason": "published before the criteria window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-003",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-004",
+    "reason": "the upstream record is retracted"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-005",
+    "reason": "the upstream record is retracted"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-006",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-007",
+    "reason": "the upstream record is retracted"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-008",
+    "reason": "the upstream record is retracted"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-009",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-010",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "low",
+    "criteria_version": 3,
+    "decision": "flag",
+    "id": "REC-011",
+    "reason": "the endpoint could not be determined"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-012",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-013",
+    "reason": "the upstream record is retracted"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-014",
+    "reason": "published before the criteria window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-015",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-016",
+    "reason": "published before the criteria window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-017",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-018",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-019",
+    "reason": "the upstream record is retracted"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-020",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-021",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "low",
+    "criteria_version": 3,
+    "decision": "flag",
+    "id": "REC-022",
+    "reason": "the endpoint could not be determined"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-023",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-024",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-025",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-026",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-027",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-028",
+    "reason": "published before the criteria window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-029",
+    "reason": "published before the criteria window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-030",
+    "reason": "no numerical endpoint is reported"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-031",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-032",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "low",
+    "criteria_version": 3,
+    "decision": "flag",
+    "id": "REC-033",
+    "reason": "the endpoint could not be determined"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-034",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "include",
+    "id": "REC-035",
+    "reason": "reports a numerical endpoint in window"
+  },
+  {
+    "confidence": "high",
+    "criteria_version": 3,
+    "decision": "exclude",
+    "id": "REC-036",
+    "reason": "no numerical endpoint is reported"
+  }
+]

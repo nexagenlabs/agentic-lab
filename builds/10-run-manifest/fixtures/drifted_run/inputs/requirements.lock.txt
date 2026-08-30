@@ -1,0 +1,4 @@
+# Fabricated lock file, for a fabricated run.
+anthropic==0.42.0
+pydantic==2.9.2
+pyyaml==6.0.2

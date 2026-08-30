@@ -1,0 +1,102 @@
+{
+  "approvals": [
+    "PROP-9f3a21c40b by S. Bramall"
+  ],
+  "corpus_snapshot_id": "89a7f4449852b8870058b592c969467ef70da798c9e8937f4d0b82cd9bd4ba32",
+  "criteria_version": 3,
+  "design_ids": [
+    "TMZ-NA-U87-001"
+  ],
+  "external_calls": [
+    {
+      "called_at": "2026-02-17T09:00:00Z",
+      "endpoint": "https://enrichment.example/v1/records",
+      "query": "ids=REC-001,REC-002,REC-003,REC-004,REC-005,REC-006",
+      "response_sha256": "82b4ec9d9e44752694036c0373f13c1af0802dd0f05121b408f5f107a911f43f"
+    },
+    {
+      "called_at": "2026-02-17T09:00:00Z",
+      "endpoint": "https://enrichment.example/v1/records",
+      "query": "ids=REC-007,REC-008,REC-009,REC-010,REC-011,REC-012",
+      "response_sha256": "23bfe7b2532a3dab614434153d74404e100619535fcac6923d5f1f86ff343df9"
+    },
+    {
+      "called_at": "2026-02-17T09:00:00Z",
+      "endpoint": "https://enrichment.example/v1/records",
+      "query": "ids=REC-013,REC-014,REC-015,REC-016,REC-017,REC-018",
+      "response_sha256": "62dc4fc905dcdfba36ea06c2424992d44439e85a4a233913ad285f6d9afc920b"
+    },
+    {
+      "called_at": "2026-02-17T09:00:00Z",
+      "endpoint": "https://enrichment.example/v1/records",
+      "query": "ids=REC-019,REC-020,REC-021,REC-022,REC-023,REC-024",
+      "response_sha256": "eb837a04b29e16414914eb6e10c18fab2a1641a192877f175de55b4588f0efdd"
+    },
+    {
+      "called_at": "2026-02-17T09:00:00Z",
+      "endpoint": "https://enrichment.example/v1/records",
+      "query": "ids=REC-025,REC-026,REC-027,REC-028,REC-029,REC-030",
+      "response_sha256": "9a21f637204ea2e71ca1f3547cf0a38a161b85b84c087511f9fa4ea9ec577c86"
+    },
+    {
+      "called_at": "2026-02-17T09:00:00Z",
+      "endpoint": "https://enrichment.example/v1/records",
+      "query": "ids=REC-031,REC-032,REC-033,REC-034,REC-035,REC-036",
+      "response_sha256": "f1057fa6c461a59b7319375bc526933a95c13c72037d81c842f1fbe89b906f29"
+    }
+  ],
+  "finished_at": "2026-02-17T09:04:00Z",
+  "git_commit": "4f1c9ae37b62d0518c4a7e9f2b3d6084ac15e7d9",
+  "git_dirty": false,
+  "halt_reason": null,
+  "inputs": [
+    {
+      "bytes": 8265,
+      "path": "inputs/corpus.json",
+      "retrieved_at": "2026-02-17T09:00:00Z",
+      "sha256": "de9e2ab5b3671e3f5bc5b3dc7858a444f82335beceefdbd00da20798fe1cf307"
+    },
+    {
+      "bytes": 253,
+      "path": "inputs/criteria.json",
+      "retrieved_at": "2026-02-17T09:00:00Z",
+      "sha256": "aba3be7e9d9000d241951fc28b2b2018de1710a13d583638f91087ae1e2ced80"
+    },
+    {
+      "bytes": 94,
+      "path": "inputs/requirements.lock.txt",
+      "retrieved_at": "2026-02-17T09:00:00Z",
+      "sha256": "647c4240a9b1a1d8044dbfa88f3320842fdf728fd835c0fce96e14732bf0bce1"
+    }
+  ],
+  "lockfile_sha256": "647c4240a9b1a1d8044dbfa88f3320842fdf728fd835c0fce96e14732bf0bce1",
+  "mapping_ids": [
+    "MAP-INSTR-07"
+  ],
+  "models": [
+    {
+      "id": "stub-screener",
+      "seed": 20260217,
+      "temperature": 0.0,
+      "version": "2026-05-01"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 101,
+      "path": "outputs/summary.json",
+      "sha256": "15edb323db92b0235a85fa4fdd97e3952fb9ea9a81007a9853d7019d72342601"
+    },
+    {
+      "bytes": 5858,
+      "path": "outputs/verdicts.json",
+      "sha256": "77234cd04c78e6154916b56ad0102b4a2e4d7daed27375c3b82fd182be971fc8"
+    }
+  ],
+  "python_version": "3.11.9",
+  "run_id": "run-2026-02-17-a",
+  "started_at": "2026-02-17T09:00:00Z",
+  "status": "COMPLETE",
+  "trace_path": "run-2026-02-17-a.jsonl",
+  "trace_sha256": "9ab16b172336c975e37e3ac29eb697ebb04b06a96a41a0e97a575b7cb5ab9e1c"
+}

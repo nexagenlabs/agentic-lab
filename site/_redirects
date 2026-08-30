@@ -1,0 +1,52 @@
+# Netlify redirects for lab.nexagenlabs.com
+#
+# The book prints thirteen URLs and this file is the contract. Every printed
+# path has a rule here, nothing here is a path the book does not print, and
+# tests/test_site_urls.py asserts both, plus the one that actually matters:
+# that every destination is a path which exists in the repository. A redirect
+# to a folder that does not exist is a dead link in a printed book.
+#
+# 302, not 301, everywhere. A permanent redirect is cached by the browser, so
+# a reader who followed a printed URL once would keep going to the old
+# destination after it was corrected, and would have no way to know. Print
+# cannot be patched; this file is the only thing that can be, and caching it
+# permanently would throw that away to save a round trip.
+#
+# There is deliberately no rule for /ch01 or /ch02. Those chapters ship no
+# code, and inventing a destination for them would send a reader to the wrong
+# build. Unmatched paths fall through to 404.html, which explains the position
+# and offers the hub.
+
+# The hub. A rewrite rather than a redirect, so the URL a reader typed is the
+# URL they keep.
+/                    /index.html                                                                200
+
+# Chapter 0, setup. The clone, the virtual environment and the requirements.
+/setup               https://github.com/nexagenlabs/agentic-lab/blob/main/README.md             302
+
+# Chapter 3 covers Build 01 and Build 02. The printed URL lands on the first
+# of the pair; the hub lists both, and Build 02's README opens by saying what
+# it takes over from Build 01.
+/ch03                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/01-first-agent 302
+
+# Chapter 4 covers Build 03 and Build 04.
+/ch04                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/03-triage-agent 302
+
+/ch05                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/05-wrangler    302
+
+# Chapter 6 covers Build 06 and Build 07.
+/ch06                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/06-plate-mapper 302
+
+/ch07                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/08-dock-loop   302
+/ch08                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/09-eln-bridge  302
+/ch09                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/10-run-manifest 302
+/ch10                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/11-red-team    302
+
+# Chapter 11 ships templates rather than a build.
+/ch11                https://github.com/nexagenlabs/agentic-lab/tree/main/templates             302
+
+/ch12                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/12-repurposing-desk 302
+
+# Appendix D, the reference list itself rather than the rendered appendix, so
+# a reader gets the DOIs and the verification status alongside the citations.
+/references          https://github.com/nexagenlabs/agentic-lab/blob/main/references/references.yaml 302

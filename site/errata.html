@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Errata &middot; The Agentic Lab</title>
+<meta name="description" content="Corrections to The Agentic Lab, by printing and page.">
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2rem 1.1rem 4rem;
+    font: 1rem/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 .3rem; }
+  h2 { font-size: 1.1rem; margin: 2.2rem 0 .6rem; }
+  .sub { margin: 0 0 1.6rem; }
+  a { color: inherit; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .875em;
+  }
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td {
+    border: 1px solid currentColor;
+    padding: .45rem .6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { font-weight: 600; }
+  td.empty { text-align: center; opacity: .75; padding: 1.2rem .6rem; }
+  footer { margin-top: 3rem; font-size: .9rem; opacity: .8; }
+</style>
+</head>
+<body>
+
+<h1>Errata</h1>
+<p class="sub">
+  Corrections to <em>The Agentic Lab</em>.
+  <a href="/">Back to the hub</a>.
+</p>
+
+<p>
+  A printed page cannot be patched, so this is where corrections live. Entries
+  name the printing they apply to, because a correction made in the second
+  printing is not an error in the second printing.
+</p>
+
+<div class="scroll">
+<table>
+  <thead>
+    <tr>
+      <th>Printing</th>
+      <th>Page</th>
+      <th>Description</th>
+      <th>Correction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="empty" colspan="4">
+        No errata recorded. This page is where they will appear.
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Reporting one</h2>
+<p>
+  Please report anything that looks wrong, including in the code. Two ways,
+  and neither is preferred:
+</p>
+<ul>
+  <li>
+    Open an issue at
+    <a href="https://github.com/nexagenlabs/agentic-lab/issues">github.com/nexagenlabs/agentic-lab/issues</a>.
+  </li>
+  <li>
+    Or email <a href="mailto:biotech.suryaprakash@gmail.com">biotech.suryaprakash@gmail.com</a>,
+    if you would rather not use GitHub.
+  </li>
+</ul>
+<p>
+  It helps to include the printing, which is on the copyright page, and the
+  page number. For code, the build folder and the failing command are enough.
+</p>
+
+<h2>Code corrections</h2>
+<p>
+  Where a correction affects code rather than prose, the repository is fixed
+  as well, and the commit is the record. The listings in
+  <a href="https://github.com/nexagenlabs/agentic-lab/tree/main/listings">listings/</a>
+  are what the book prints, and a test asserts the repository still matches
+  them, so a divergence between page and code shows up as a failing build
+  rather than as a reader's afternoon.
+</p>
+
+<footer>
+  Code is MIT licensed. Book text is not.
+</footer>
+
+</body>
+</html>

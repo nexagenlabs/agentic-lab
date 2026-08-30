@@ -165,7 +165,17 @@ venv.bak/
 .ropeproject
 
 # mkdocs documentation
-/site
+#
+# /site used to be ignored here. That rule arrives with the standard Python
+# gitignore and means "mkdocs build output", which this repository has never
+# had: nothing here uses mkdocs. What /site does hold is the companion site
+# for lab.nexagenlabs.com, written by hand and committed on purpose, and the
+# inherited rule made the whole folder invisible to git.
+#
+# If mkdocs is ever added, give it a different output directory rather than
+# restoring this line. The thirteen URLs printed in the book resolve through
+# site/_redirects, and a build tool silently overwriting or hiding that file
+# would take every one of them down with it.
 
 # mypy
 .mypy_cache/

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Agentic Lab</title>
+<meta name="description" content="Companion code for The Agentic Lab: Build AI Agents for Biotech and Pharma R&amp;D. Twelve builds, one per chapter that ships code.">
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2rem 1.1rem 4rem;
+    font: 1rem/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 .3rem; }
+  h2 { font-size: 1.1rem; margin: 2.2rem 0 .6rem; }
+  .sub { margin: 0 0 1.6rem; }
+  a { color: inherit; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .875em;
+  }
+  .start {
+    border: 1px solid currentColor;
+    padding: .8rem 1rem;
+    margin: 1.5rem 0 0;
+  }
+  .start p { margin: 0; }
+  ul.builds { list-style: none; padding: 0; margin: 0; }
+  ul.builds li { margin: 0 0 1.15rem; }
+  .name { font-weight: 600; }
+  .url { display: block; margin-top: .15rem; opacity: .75; }
+  .note { opacity: .8; }
+  footer { margin-top: 3rem; font-size: .9rem; opacity: .8; }
+</style>
+</head>
+<body>
+
+<h1>The Agentic Lab</h1>
+<p class="sub">
+  Companion code for <em>The Agentic Lab: Build AI Agents for Biotech and
+  Pharma R&amp;D</em>, by Suryaprakash Tripathy.
+</p>
+
+<p>
+  Twelve builds, one folder each, in
+  <a href="https://github.com/nexagenlabs/agentic-lab">one repository</a>.
+  Clone it once and you have everything in the book. Each build stands alone:
+  open its folder, run its tests, and nothing else needs to be installed.
+</p>
+
+<div class="start">
+  <p>
+    <strong>Start here.</strong> Chapter 0 sets up the clone, the virtual
+    environment and the requirements:
+    <a href="/setup"><code>lab.nexagenlabs.com/setup</code></a>
+  </p>
+</div>
+
+<h2>The builds</h2>
+
+<ul class="builds">
+  <li>
+    <span class="name">01 First Agent</span> and
+    <span class="name">02 Tool Belt</span><br>
+    An agent loop written against the SDK and nothing else: a step cap, a
+    trace, a budget, an error policy and a write gate. Then the same tool
+    checks done properly, validated at the dispatch boundary.
+    <span class="url"><code>lab.nexagenlabs.com/ch03</code></span>
+  </li>
+  <li>
+    <span class="name">03 Triage Agent</span> and
+    <span class="name">04 Dual Screen</span><br>
+    Screening records against criteria somebody wrote down, where every record
+    leaves a verdict or a logged gap. Then two independent screens, their
+    agreement measured rather than assumed, and disagreements adjudicated.
+    <span class="url"><code>lab.nexagenlabs.com/ch04</code></span>
+  </li>
+  <li>
+    <span class="name">05 Wrangler</span><br>
+    An unfamiliar instrument export turned into a tidy table, with a column
+    mapping a human approves once and six assertions that run every time.
+    <span class="url"><code>lab.nexagenlabs.com/ch05</code></span>
+  </li>
+  <li>
+    <span class="name">06 Plate Mapper</span> and
+    <span class="name">07 Protocol Adapter</span><br>
+    A combination matrix with the dilution arithmetic checked before the
+    pipette, and the analysis committed before any data exists. Then a
+    protocol adapted to a different cell line, with a diff naming what
+    changed and what was carried over unchanged.
+    <span class="url"><code>lab.nexagenlabs.com/ch06</code></span>
+  </li>
+  <li>
+    <span class="name">08 Dock Loop</span><br>
+    Docking treated as a ranking rather than a measurement, with a redocking
+    control and an enrichment control the campaign runs on itself.
+    <span class="url"><code>lab.nexagenlabs.com/ch07</code></span>
+  </li>
+  <li>
+    <span class="name">09 ELN Bridge</span><br>
+    Read freely from a notebook, write only through an approval gate. The
+    interface has no update and no delete, and every number is checked against
+    the design file before a human sees the diff.
+    <span class="url"><code>lab.nexagenlabs.com/ch08</code></span>
+  </li>
+  <li>
+    <span class="name">10 Run Manifest</span><br>
+    Content-addressed provenance, and two kinds of replay: one that
+    re-executes and needs the model, one that rebuilds from the stored trace
+    and needs nothing at all.
+    <span class="url"><code>lab.nexagenlabs.com/ch09</code></span>
+  </li>
+  <li>
+    <span class="name">11 Red Team</span><br>
+    Thirty-one faults planted in the earlier builds on purpose, and an honest
+    count of how many their checks actually catch.
+    <span class="url"><code>lab.nexagenlabs.com/ch10</code></span>
+  </li>
+  <li>
+    <span class="name">Templates</span>
+    <span class="note">(no build)</span><br>
+    Chapter 11 ships paperwork rather than code: the documents that belong
+    around an agent rather than inside it.
+    <span class="url"><code>lab.nexagenlabs.com/ch11</code></span>
+  </li>
+  <li>
+    <span class="name">12 Repurposing Desk</span><br>
+    The eleven builds connected into one system, from literature to a ranked
+    shortlist, with three human checkpoints and a single manifest behind it.
+    <span class="url"><code>lab.nexagenlabs.com/ch12</code></span>
+  </li>
+</ul>
+
+<p class="note">
+  Chapters 1 and 2 ship no code, so there is no <code>/ch01</code> or
+  <code>/ch02</code>. If you typed one, you are in the right place already.
+</p>
+
+<h2>Model names</h2>
+<p>
+  Model names change faster than books do, so every build reads its name from
+  one configuration file rather than from source.
+  <a href="https://github.com/nexagenlabs/agentic-lab/blob/main/MODELS.md">MODELS.md</a>
+  holds the current list with a dated changelog.
+</p>
+
+<h2>References</h2>
+<p>
+  Appendix D as machine-readable data, with a DOI on every entry that has one
+  and the verification status of each:
+  <a href="/references"><code>lab.nexagenlabs.com/references</code></a>
+</p>
+
+<h2>Errata</h2>
+<p>
+  Corrections to the printed book are listed on the
+  <a href="/errata.html">errata page</a>. If you have found an error in the
+  book or the code, please report it: the page says how.
+</p>
+
+<footer>
+  Code is MIT licensed. Book text is not.
+</footer>
+
+</body>
+</html>

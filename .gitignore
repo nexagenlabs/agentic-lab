@@ -223,6 +223,7 @@ __marimo__/
 # of the repository, which is a small version of the failure this project is
 # about. The durable record is the commit history and the gates.
 HANDOFF.md
+HANDOFF.previous.md
 
 # Written by any stage file or agent.py that is actually run: one JSONL trace
 # per run. Useful to read, never to commit.

@@ -67,6 +67,24 @@ These come from the book's arguments and every build must follow them.
   its number from fixture data rather than reading it from a file alongside,
   a fixture that quietly made the check easy turns the check into decoration.
   Build 08's `fixtures/make_fixtures.py` is the pattern.
+- **When a test asserts that something cannot happen, first prove the
+  prohibition bites.** Trigger it, watch the test fail, and only then assert
+  the thing that should be safe. A patch that does nothing, a rule that matches
+  nothing and a stub that never misbehaves all pass silently, and a green test
+  that was never in danger of going red is decoration. This has been found
+  three times: the importlib false pass, `NaiveDraftingClient` in Build 09,
+  which follows every injected instruction so that the gate is stopping six
+  real attempts rather than congratulating a well-behaved stub, and Build 10's
+  `test_audit_replay_reproduces_outputs`, which patches six entry points and
+  then runs `verify_replay` through them to watch it die before trusting the
+  offline replay that follows.
+
+## The session report
+
+`HANDOFF.md` is the session report, gitignored, and overwritten by whoever runs
+next. **Before overwriting it, if it exists, rename it to
+`HANDOFF.previous.md`.** Both are ignored. One rename means a session never
+silently destroys the last one's notes.
 
 ## Cross-build imports: settled, do not redesign
 

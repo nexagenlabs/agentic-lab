@@ -1,0 +1,33 @@
+# Stack inventory for Build 05-wrangler, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "05-wrangler"
+chapter: 5
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "UNSPECIFIED"
+    note: "propose_mapping takes its client and its model name from the caller, so this build names neither. Deliberate rather than forgotten: nothing here may put a model near a number."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "none: the model is shown a profile of the file and asked for one mapping proposal. It calls nothing."
+    note: "the proposal is a mapping for a person to approve, not an action."
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "15 lines of the export and a shape summary, and nothing else"
+    note: "a model shown ten thousand rows starts forming opinions about the values."
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "approved mappings in mappings/, each carrying an approver and a timestamp"
+    note: "a mapping with no approved_at is refused, so what persists is what a person signed."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "the pandera schema in schema.py and the plate map in pipeline.py"
+    note: "the assertions read their bounds out of the schema rather than restating them, so there is one copy of every number."
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "agent once, script thereafter: one model call proposes a mapping, and every number after that is Python"
+    note: "the unit multiplier is selected by an approved mapping, not by the model, and the approval gate is what stands between a unit guess and a silent thousandfold error."
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "JSONL, one event per line"
+    note: "tracing.Trace, copied rather than imported."

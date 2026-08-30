@@ -1,0 +1,33 @@
+# Stack inventory for Build 09-eln-bridge, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "09-eln-bridge"
+chapter: 8
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "claude-sonnet-5, version 2026-08-01"
+    note: "AGENT_MODEL and AGENT_MODEL_VERSION, config.py. Both travel with every entry as machine attribution, because an entry nobody can attribute is an entry somebody will assume a person wrote."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "none: the model drafts, and every write is made by code after a person approves it"
+    note: "there is no update and no delete anywhere in the build. The absence is the safety property."
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "one record at a time: the record, the design it cites, and the draft"
+    note: "text arriving from a record is wrapped as untrusted before the model sees it."
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "the append-only ledger, one JSONL file per run, which the notebook cannot overwrite"
+    note: "opened in append mode and nothing else. The ledger and the notebook are written separately so the two can be compared."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "fixtures/designs, the design a proposal's numbers are cross-checked against"
+    note: "a proposal citing no design is reported rather than passed."
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "chain with a human gate, batched at 8 proposals to a screen: draft, cross-check, propose, approve, write twice"
+    note: "the gate costs more to approve than to reject, deliberately."
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "JSONL, one event per line"
+    note: "separate from the ledger, which is the record of what was written rather than of what happened."

@@ -1,0 +1,33 @@
+# Stack inventory for Build 11-red-team, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "11-red-team"
+chapter: 10
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "none: the harness calls no model"
+    note: "it runs the earlier builds' code in subprocesses and counts what their checks catch. A model here would be a second thing to debug."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "none"
+    note: ""
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "none: each fault is one job to one worker, and no worker sees another's result"
+    note: ""
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "the red team run manifest: what was planted, what was caught, what was missed, and what was missed silently"
+    note: "the silent misses are the number that matters. A fault that fails loudly is a fault somebody notices."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "catalogue.py, the fault definitions across 5 families, and the earlier builds' own fixtures"
+    note: "the faults are declared with the check that should catch each one, so a miss names the check that did not fire."
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "script: one subprocess worker per build, 120.0 seconds each, jobs on stdin and results on stdout"
+    note: "a subprocess rather than an import, because eleven builds share module names and importing them into one process would measure the wrong code."
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "the run manifest, written as JSON"
+    note: "no JSONL trace of its own: the trace that matters is the one each worker's build writes."

@@ -1,0 +1,57 @@
+# Stack Inventory
+#
+# Introduced in Chapter 2 of The Agentic Lab. Seven rows, one per thing an
+# agent is made of. Copy this file, answer every row, and keep it beside the
+# code rather than in a document nobody opens.
+#
+# The rule that makes it worth keeping: a row with no answer is written
+# UNSPECIFIED. It is never left blank and it is never left out. A blank row
+# reads as a system with nothing in that position, and an absent row reads as
+# a question nobody thought to ask. Neither is what an unanswered row means.
+# An unanswered row means nobody decided, and a step nobody decided is not a
+# default. It is an unbounded loop with your API key attached.
+#
+# Every build in this repository emits one of these from its own stack.py,
+# derived from its code rather than written from memory, and
+# tests/test_stack_inventory.py refuses any inventory missing a row.
+# The questions below are the ones the emitted inventories carry, word for
+# word, and that test holds them to it.
+
+build: "UNSPECIFIED"
+chapter: "UNSPECIFIED"
+
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "UNSPECIFIED"
+    note: ""
+
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "UNSPECIFIED"
+    note: ""
+
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "UNSPECIFIED"
+    note: ""
+
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "UNSPECIFIED"
+    note: ""
+
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "UNSPECIFIED"
+    note: ""
+
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "UNSPECIFIED"
+    note: ""
+
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "UNSPECIFIED"
+    note: ""

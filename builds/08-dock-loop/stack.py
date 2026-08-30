@@ -1,0 +1,125 @@
+"""Chapter 2's Stack Inventory for this build, derived from the code beside it.
+
+Seven questions, answered from the modules in this folder rather than from
+memory, so an answer that stops being true stops being emitted. A question this
+build does not settle is emitted as UNSPECIFIED rather than left out. An absent
+row reads as a system with nothing in that position; an unanswered row means
+nobody decided, and Chapter 2's argument is that a step nobody decided is not a
+default but an unbounded loop with your API key attached.
+
+Copied into every build rather than imported from one place, for the reason
+tracing.py is copied: a reader who opens this folder alone must find everything
+it needs inside it. tests/test_stack_inventory.py holds the twelve copies to
+the same seven questions as templates/stack.yaml.
+
+Run it:
+
+    python stack.py        # rewrites stack.yaml beside this file
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from campaign import SCORE_TOLERANCE
+
+# Word for word from templates/stack.yaml, and a test says so.
+QUESTIONS: dict[str, str] = {
+    "model":
+        "Which model answers, at which version, and where is that name configured?",
+    "tools":
+        "What can it call, and what can each of those reach?",
+    "working_memory":
+        "What does the loop carry from one step to the next, and what bounds it?",
+    "episodic_memory":
+        "What survives after the run ends, and who can read it back?",
+    "reference_memory":
+        "What does it consult that it cannot change?",
+    "orchestration":
+        "What decides the next step: the model, or the code?",
+    "trace":
+        "Where does the record of the run go, and what does it hold?",
+}
+
+UNSPECIFIED = "UNSPECIFIED"
+
+
+def row(value: str, note: str = "") -> tuple[str, str]:
+    """One answered row. A call rather than a tuple literal, because ruff
+    reads an implicit string concatenation inside a collection as a missing
+    comma, and it is usually right."""
+    return value, note
+
+BUILD = "08-dock-loop"
+CHAPTER = 7
+
+INVENTORY: dict[str, tuple[str, str]] = {
+    "model": row(
+        "none: this build makes no model call",
+        "structure retrieval, docking and parsing are tool calls made by code. "
+        "The agent loop the chapter describes is in Build 12.",
+    ),
+    "tools": row(
+        "none offered to a model. The docking engine is called by engine.py, "
+        "which raises engine_not_installed rather than pretending.",
+        "the tests replay recorded engine output and never run a docking "
+        "program.",
+    ),
+    "working_memory": row(
+        "none: there is no loop",
+        "",
+    ),
+    "episodic_memory": row(
+        "recorded engine output in fixtures/vina_output, replayed rather than "
+        "re-run",
+        "fabricated, and fixtures/README.md says so. A score here is a "
+        "stipulation, not a measurement.",
+    ),
+    "reference_memory": row(
+        f"fixtures/structures, structure records carrying their provenance, "
+        f"and the declared grid box. Scores are compared at "
+        f"{SCORE_TOLERANCE} tolerance.",
+        "a structure with no provenance is refused rather than docked.",
+    ),
+    "orchestration": row(
+        "script: acquire, dock, parse, rank, with the controls beside the "
+        "ranking",
+        "",
+    ),
+    "trace": row(
+        "JSONL, one event per line",
+        "tracing.Trace, copied rather than imported.",
+    ),
+}
+
+
+def as_yaml() -> str:
+    """The inventory as YAML, in the order Chapter 2 asks the questions."""
+    lines = [
+        f"# Stack inventory for Build {BUILD}, emitted by stack.py.",
+        "# Chapter 2 of The Agentic Lab. Regenerate rather than edit.",
+        f"build: {json.dumps(BUILD)}",
+        f"chapter: {CHAPTER}",
+        "stack_inventory:",
+    ]
+    for field, question in QUESTIONS.items():
+        value, note = INVENTORY[field]
+        lines += [
+            f"  {field}:",
+            f"    question: {json.dumps(question)}",
+            f"    value: {json.dumps(value)}",
+            f"    note: {json.dumps(note)}",
+        ]
+    return "\n".join(lines) + "\n"
+
+
+def write(path: str | Path | None = None) -> Path:
+    """Emit the inventory beside this file, or wherever the caller says."""
+    target = Path(path) if path else Path(__file__).resolve().parent / "stack.yaml"
+    target.write_text(as_yaml(), encoding="utf-8", newline="\n")
+    return target
+
+
+if __name__ == "__main__":
+    print(write())

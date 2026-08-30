@@ -1,0 +1,33 @@
+# Stack inventory for Build 12-repurposing-desk, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "12-repurposing-desk"
+chapter: 12
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "cheap: claude-haiku-4-5, workhorse: claude-sonnet-5, frontier: claude-opus-5, all at version 2026-08-01"
+    note: "three tiers and three variables. Routing by tier is the chapter's cost argument, so one name would not do: the frontier tier answers the judgement calls and the cheap tier answers the volume."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "none offered as tool calls: every model call goes through ask(), and the stages that use the answer are code"
+    note: "that is what makes the audit replay possible. The trace holds what the model said, in order, with the stage that asked."
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "one stage at a time. The two agent loops are capped at 4 and 3 steps."
+    note: "no stage sees another's messages: each receives the previous stage's output as data."
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "the run manifest, its JSONL trace, and the 3 recorded approvals"
+    note: "an approval is signed over the content it approved, so an approval for other content is refused rather than accepted."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "five earlier builds' fixture directories, read by path and never written"
+    note: "read by path rather than imported, because a build that imported five others would only run inside this repository."
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "9 stages, Table 12.1: 3 script, 1 chain, one model call per record, 2 agent loop, 1 agent once, script thereafter, 1 chain, 1 script with a gate"
+    note: "the level of each stage is a decision recorded in the table rather than a habit. Most of the system is script."
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "JSONL, workspace/<run_id>.jsonl, holding every model completion verbatim"
+    note: "which is what the offline replay reads. Nothing else needs to know about replay at all."

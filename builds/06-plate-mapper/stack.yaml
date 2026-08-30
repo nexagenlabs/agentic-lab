@@ -1,0 +1,33 @@
+# Stack inventory for Build 06-plate-mapper, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "06-plate-mapper"
+chapter: 6
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "none: this build makes no model call"
+    note: "the arithmetic a plate layout depends on is not a thing to ask a model for."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "none: nothing is offered to a model, because there is no model"
+    note: ""
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "none: there is no loop and no conversation"
+    note: ""
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "the committed design file in designs/, including its synergy model commitment and the timestamp on it"
+    note: "the commitment has to predate the data, which is the whole point of writing it down."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "the dilution and geometry rules in checks.py, including a 2.0 uL minimum reliable transfer, and the 4 synergy models a design may commit to"
+    note: ""
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "script: a design is validated, or it is refused with the check that refused it"
+    note: ""
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "UNSPECIFIED"
+    note: "this build writes no trace of its own. It is called by other code, and the run that matters is the caller's, which is where Build 10 and Build 12 record it. Worth deciding rather than inheriting."

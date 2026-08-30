@@ -1,0 +1,33 @@
+# Stack inventory for Build 08-dock-loop, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "08-dock-loop"
+chapter: 7
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "none: this build makes no model call"
+    note: "structure retrieval, docking and parsing are tool calls made by code. The agent loop the chapter describes is in Build 12."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "none offered to a model. The docking engine is called by engine.py, which raises engine_not_installed rather than pretending."
+    note: "the tests replay recorded engine output and never run a docking program."
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "none: there is no loop"
+    note: ""
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "recorded engine output in fixtures/vina_output, replayed rather than re-run"
+    note: "fabricated, and fixtures/README.md says so. A score here is a stipulation, not a measurement."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "fixtures/structures, structure records carrying their provenance, and the declared grid box. Scores are compared at 0.01 tolerance."
+    note: "a structure with no provenance is refused rather than docked."
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "script: acquire, dock, parse, rank, with the controls beside the ranking"
+    note: ""
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "JSONL, one event per line"
+    note: "tracing.Trace, copied rather than imported."

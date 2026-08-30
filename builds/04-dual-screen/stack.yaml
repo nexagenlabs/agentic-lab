@@ -1,0 +1,33 @@
+# Stack inventory for Build 04-dual-screen, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "04-dual-screen"
+chapter: 4
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "claude-sonnet-5 for screen A, claude-opus-5 for screen B"
+    note: "two variables, SCREEN_A_MODEL and SCREEN_B_MODEL. Setting AGENT_MODEL alone leaves screen B where it was, which is the point: a dual screen run twice on one model is one screen run twice."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "search_pubmed, fetch_abstract"
+    note: "the same belt for both screens. The screens differ in model and in prompt wording, not in what they can reach."
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "one messages list per record per screen, capped at 4 steps"
+    note: "screen B never sees screen A's verdicts: run_screen has no parameter through which they could arrive. The loop is injected rather than imported, and agent.py in this folder imports a name config.py does not define, so it is not the loop this build runs."
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "the metadata cache in cache.py, keyed by record with a digest over the payload"
+    note: "the caller names the directory. Nothing else survives a run."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "criteria/repurposing_v3.yaml, and a gold set built by a stated rule with seed 20260429 and 8 seeded negatives"
+    note: "the rule and the seed are recorded in the report, so the set can be rebuilt rather than trusted."
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "two screens over the same corpus, one model call per record each, joined only at scoring time"
+    note: "disagreements go to a person. A third model adjudicating would be a third opinion, not a resolution."
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "JSONL, one event per line, runs/<run_id>.jsonl"
+    note: "beside run_manifest.json, adjudication.json and screen_report.md, written at scoring time."

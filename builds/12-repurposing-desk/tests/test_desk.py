@@ -60,7 +60,9 @@ EXPECTED_TESTS = {
     "09-eln-bridge": 17,
     "10-run-manifest": 17,
     "11-red-team": 21,
-    "tests": 72,
+    # 72, plus the 38 cases of the stack inventory gate. The mutation gate
+    # is ignored below rather than counted.
+    "tests": 110,
 }
 
 

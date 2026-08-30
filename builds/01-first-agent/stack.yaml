@@ -1,0 +1,33 @@
+# Stack inventory for Build 01-first-agent, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "01-first-agent"
+chapter: 3
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "claude-sonnet-5"
+    note: "AGENT_MODEL, defaulted in config.py. The five stage files each name it once more, because a stage has to run on a machine holding only that one file."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "search_pubmed, save_note"
+    note: "save_note writes, and is refused unless the run was started with an approval for it."
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "one messages list per run, appended every turn, bounded at 20 steps and 100000 tokens"
+    note: "nothing is summarised or dropped: the bound is on the run rather than on the list."
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "none, beyond what save_note appends to notes.jsonl"
+    note: "no run reads that file back, so nothing carries from one run into the next."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "the stub corpus in fixtures/, which search_pubmed reads"
+    note: "read-only: no tool in this build writes to it."
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "agent loop: the model chooses the next tool each turn and the code decides whether to run it"
+    note: "one model call per turn, and a tool is disabled after three consecutive failures."
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "JSONL, one event per line, runs/<run_id>.jsonl"
+    note: "written by Trace in agent.py as the run happens; run_dir is a parameter of run_agent."

@@ -1,0 +1,33 @@
+# Stack inventory for Build 10-run-manifest, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "10-run-manifest"
+chapter: 9
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "UNSPECIFIED"
+    note: "screen() takes its client from the caller, so this build names no model. The manifest records the model that answered, with its version, temperature and seed, which is the stronger record: it names what ran rather than what was configured."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "none: one enrichment call per batch and one verdict per record, both made by code"
+    note: "every number in the outputs is counted in Python from the model's own words."
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "one batch of 6 records at a time"
+    note: "nothing is carried between batches except the trace."
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "the run manifest, the trace and the outputs, each addressed by content hash"
+    note: "this is the build. A manifest recording provenance nobody verifies is decorative, which is why the replay checks the input hashes."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "the criteria file and the corpus, recorded as inputs with their hashes and their retrieval times"
+    note: "plus the corpus snapshot id, so a replay that disagrees can say which version of the world it operated on."
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "chain, one model verdict per record. The replay path makes no model call at all."
+    note: "the deterministic half produces the outputs from the model's own words, which is what makes an offline replay possible."
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "JSONL, with its path and its hash both recorded in the manifest"
+    note: "a trace nobody hashed is a trace somebody can edit."

@@ -1,0 +1,33 @@
+# Stack inventory for Build 07-protocol-adapter, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "07-protocol-adapter"
+chapter: 6
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "claude-sonnet-5"
+    note: "AGENT_MODEL, defaulted in config.py."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "none: the model is asked to extract parameters from one protocol and calls nothing"
+    note: "every number it returns is checked against the source text before it is used, and a number the source never stated is named rather than filled in."
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "one protocol at a time: the source text and the extraction task"
+    note: "nothing from an earlier protocol is carried in."
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "the adapted protocol and its diff, written by the caller"
+    note: "the diff is the product: what changed, what was carried over, and what the source never stated."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "target_lines.json, the cell line facts an adaptation is checked against, and the 6 mandatory parameters in models.py"
+    note: ""
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "chain: extract, verify in code, then diff"
+    note: "the model proposes and Python disposes."
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "JSONL, one event per line"
+    note: "tracing.Trace, copied rather than imported."

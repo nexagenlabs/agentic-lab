@@ -1,0 +1,33 @@
+# Stack inventory for Build 03-triage-agent, emitted by stack.py.
+# Chapter 2 of The Agentic Lab. Regenerate rather than edit.
+build: "03-triage-agent"
+chapter: 4
+stack_inventory:
+  model:
+    question: "Which model answers, at which version, and where is that name configured?"
+    value: "claude-sonnet-5"
+    note: "AGENT_MODEL, defaulted in config.py."
+  tools:
+    question: "What can it call, and what can each of those reach?"
+    value: "search_pubmed, fetch_abstract"
+    note: "arguments are validated at the dispatch boundary and a rejection is written to the trace rather than returned as prose."
+  working_memory:
+    question: "What does the loop carry from one step to the next, and what bounds it?"
+    value: "one messages list per record screened, bounded at 20 steps and 100000 tokens"
+    note: "no verdict is carried between records: each starts from the criteria file."
+  episodic_memory:
+    question: "What survives after the run ends, and who can read it back?"
+    value: "the E-utilities response cache at cache"
+    note: "keyed by record and it survives runs. TRIAGE_CACHE_DIR moves it."
+  reference_memory:
+    question: "What does it consult that it cannot change?"
+    value: "criteria/repurposing_v3.yaml, versioned, and the fixture corpus"
+    note: "the criteria version is stamped on every verdict, so a criteria change shows up in the output rather than being inferred later."
+  orchestration:
+    question: "What decides the next step: the model, or the code?"
+    value: "agent loop over the tools, with one model call per record in screen.py"
+    note: "the model decides which tool; the code decides which record."
+  trace:
+    question: "Where does the record of the run go, and what does it hold?"
+    value: "JSONL, one event per line, runs/<run_id>.jsonl"
+    note: "written as the run happens rather than assembled at the end."

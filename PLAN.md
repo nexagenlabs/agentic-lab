@@ -530,3 +530,113 @@ Four items, chosen because each is wrong regardless of what the book says.
 Nothing in groups A, C or D is touched, and B1, B5 and A4 are untouched by
 design: each is waiting on a ruling where the obvious fix would close the
 finding rather than answer it.
+
+---
+
+# Addendum, 2026-08-30
+
+Appended rather than folded into the plan above, for the same reason the review
+carries its corrections at the end: the record of what was concluded, and what
+was later found wrong, is worth more than a document that has been tidied into
+agreement with itself.
+
+## Corrections
+
+**A2, A3 and disagreement 1 rest on a false premise.** The author grepped all
+fifteen manuscript files: `1.13`, `3.6` and `11 of 25` return zero hits each.
+They came from earlier sessions' build reports, and the review read those as
+the book. So:
+
+- **A2 and A3 are struck as book items.** No sentence in the manuscript
+  presents these stipulations as measurements, because no sentence mentions
+  them. The code half stands and is now the whole of it, with no print
+  deadline: a test asserting that a constructed value clears a threshold the
+  construction was built to clear is decoration whatever the book says.
+- **Disagreement 1 is withdrawn**, and it was arguing against a correction the
+  author was never going to make. The point underneath it survives and is
+  narrower than I put it: 11 of 25 is reproducible from this repository, so if
+  it ever does reach a page it needs only the clause about what it was measured
+  against.
+
+**3.9 does not reproduce.** Detail in REVIEW.md's correction note. Breaking
+Build 05 fails Build 12's end-to-end test in 74 seconds, naming the build. The
+finding is struck; the per-build count anchor it prompted is implemented.
+
+## Rulings received
+
+- **B5, screen independence: book, not code.** Enforcing independence by
+  construction would make the `agent_and_human` configuration impossible, since
+  a human screen arrives as a file passed in, so enforcement would contradict a
+  printed configuration. My disagreement 6 was wrong on this point and the
+  argument that beat it is not one I had: I was reasoning about how the
+  prompt builder could be constrained and not about what the configurations
+  have to permit. Chapter 4's wording changes instead. Code unchanged.
+- **A4, the docking control: required, and neither of my two options.** A
+  recorded real run. Vina is installed once, the control is run genuinely, that
+  output is committed as the fixture, and the book prints the number that run
+  produced with a note that the tests replay it. CI stays offline. This is
+  better than the book fix I recommended, because the printed number becomes
+  true rather than merely honest about being untrue, and it does not cost
+  hermeticity. Now genuinely optional, since Chapter 7 states what the
+  repository does.
+- **D2, assertion mutation: promoted to required, and implemented.** Below.
+- **B1, manifest field verification: the hash approach is refused.** Recomputing
+  the recorded hashes at replay time would replace one unverified field with
+  another and make audit replay require the world it exists to survive.
+
+## Done on the author's side
+
+Four book corrections: the sixty-line claim in Chapter 3, the
+single-configuration-file claim in Chapter 2, the independence wording in
+Chapter 4, and Chapter 7 now stating that the repository replays recorded
+output and proves nothing about the reader's docking setup.
+
+## B9, new: `approval_without_identity` survives in Build 12
+
+**Found by the mutation gate while it was being written, which is the argument
+for the gate in one sentence.**
+
+`checkpoints.py`, in `checkpoint()`, refuses an approval with no named approver
+and no written reason. Neutering that branch leaves Build 12's gate at 14
+passed. The comment above the tampering block in
+`test_no_stage_proceeds_past_an_unapproved_checkpoint` says "an approval with
+no named identity is refused too, and so is one signed over different content",
+and only the content half is exercised. The prose is the coverage.
+
+This is the fourth instance of documented-not-enforced, and the first one
+found by a machine rather than by somebody thinking to try. It is recorded in
+`SURVIVORS` in `tests/test_mutation_gate.py` alongside B3 and B4. Required
+before print, no ruling needed, one fixture and one assertion.
+
+## The mutation gate
+
+`tests/test_mutation_gate.py`. Fourteen guards, each neutered in a throwaway
+copy of the repository, each run against the test that should notice.
+Eighteen to twenty-five seconds, four workers, one repository copy per worker.
+
+Two properties keep it from becoming what it exists to prevent. A guard in
+`CAUGHT` must fail its *named* test, not merely some test, because coverage by
+accident lasts until somebody edits the accident. A guard in `SURVIVORS` must
+still survive, so the list of known holes can only shrink and a hole cannot be
+quietly re-admitted.
+
+Both directions were watched failing before either was trusted: emptying
+`test_row_conservation` made the gate report `row_conservation survived
+mutation`, and moving a caught guard into `SURVIVORS` made the gate report that
+it is now caught and the entry has to go.
+
+Three survivors are recorded, all pre-existing, none of them fixed here:
+`determinism_assertion` (B4), `machine_attribution` (B3) and
+`approval_without_identity` (B9). Recording them is not blessing them. Each is
+one test, none needs a ruling, and the gate now fails the day any of them is
+closed without the record being updated.
+
+## Still open
+
+- **B1**, manifest field verification, by re-derivation. The hash approach is
+  refused, above.
+- **B3, B4, B9**, the three recorded survivors.
+- **B6**, a test pinning Chapter 12's corrected argument.
+- **B8**, the no-dash rule.
+- **A4**, the recorded real docking run.
+- **A7 to A9**, and the empty `MODELS.md` table.

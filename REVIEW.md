@@ -510,3 +510,68 @@ The repository is in better shape than the book is. Every one of the three
 FALSE claims in Part 2 and the fourth found in Part 3 is a defect in the prose
 rather than in the code, and each is a sentence written from intention before
 there was a running system to check it against.
+
+---
+
+# Corrections, added after the review
+
+Appended rather than folded into the findings above. A review edited until it
+agrees with what was later learned is a review nobody can audit, and the
+distance between what was concluded and what turned out to be true is the most
+useful thing in this file.
+
+## 1.13, 3.6 and "11 of 25" are not in the manuscript
+
+**Author's correction, 2026-08-30. Sections 3.2, 3.3 and the closing list are
+wrong about where these numbers appear.**
+
+The author grepped all fifteen manuscript files. `1.13`, `3.6` and `11 of 25`
+return zero hits each. They appeared in build reports written by earlier
+sessions, and this review read those reports as though they were the book. No
+sentence in the book presents a stipulated fixture value as a measurement,
+because no sentence in the book mentions these values at all.
+
+What falls away: the claim that the book prints stipulations as findings, and
+the three REQUIRED book items that followed from it.
+
+What stands, unchanged, because it is a fact about the code rather than about
+the manuscript:
+
+- `builds/08-dock-loop/fixtures/make_fixtures.py:126` sets
+  `step = 1.13 / sqrt(3)`, so the redocking RMSD is 1.13 by construction and
+  the fixture encodes its own pass.
+- The enrichment separation is drawn from two fixed distributions at a fixed
+  seed.
+- A test asserting a constructed value clears a threshold the construction was
+  built to clear is decoration, whatever the book does or does not say.
+
+The distinction matters for what happens next: these are now code and fixture
+questions with no print deadline attached, rather than sentences that had to
+change before the book went to press.
+
+## 3.9, the end-to-end gate, does not reproduce
+
+**Checked 2026-08-30, at `2a53a77`, and the finding is wrong.**
+
+The claim in circulation was that Build 12 recomputes what its gates check, so
+`test_all_prior_gates_pass_in_sequence` cannot fail on a defect in Builds 01 to
+11. It can, and it does.
+
+`TO_NM["uM"]` in `builds/05-wrangler/transform.py:41` was changed from `1000.0`
+to `1.0`, a silent thousandfold unit error. Build 05's own gate reported 1
+failed, 14 passed. Build 12's end-to-end test then failed in 74 seconds with
+`AssertionError: 05-wrangler failed 1 of 15`, naming the build. The test shells
+out to pytest over the eleven build gates and the root suite, parses the JUnit
+XML, and asserts per build that there were no failures. The mechanism is
+build-agnostic.
+
+What is true nearby, and is a different sentence: the desk *run* is Build 12's
+own implementation. `stages.py:63-67` reads five other builds' fixture
+directories by path and never executes their code. So the earlier builds are
+exercised by their own gates inside that subprocess, not by the shortlist
+moving.
+
+One real weakness was found while checking, and is fixed: the gate asserted
+`counts["tests"] > 0` and a total above 200 against an actual 263, so deleted
+tests were invisible until a whole build reached zero. Per-build counts are now
+anchored in `EXPECTED_TESTS`.

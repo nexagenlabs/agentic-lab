@@ -29,19 +29,19 @@
     "found_title": "SciAgents: Automating Scientific Discovery Through Bioinspired Multi\u2010Agent Intelligent Graph Reasoning",
     "found_year": 2025,
     "claimed_year": 2025,
-    "title_score": 65.95744680851064,
-    "note": "title similarity 66 is below 88"
+    "title_score": 63.03030303030304,
+    "note": "title similarity 63 is below 88"
   },
   {
     "ref_id": "mitchener2025bixbench",
     "claimed_title": "BixBench: a comprehensive benchmark for LLM-based agents in computational biology",
-    "status": "MISMATCH",
-    "doi": "10.1039/d5dd00519a/v3/review2",
-    "found_title": "Review for \"OPENXRD: A Comprehensive Benchmark Framework for LLM/MLLM XRD Question Answering\"",
-    "found_year": 2026,
+    "status": "UNRESOLVED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
     "claimed_year": 2025,
-    "title_score": 56.470588235294116,
-    "note": "title similarity 56 is below 88"
+    "title_score": null,
+    "note": "no Crossref result"
   },
   {
     "ref_id": "qu2026biomnibench",
@@ -56,14 +56,25 @@
   },
   {
     "ref_id": "szymanski2023alab",
-    "claimed_title": "An autonomous laboratory for the accelerated synthesis of novel materials",
-    "status": "MISMATCH",
-    "doi": "10.1149/ma2023-01361990mtgabs",
-    "found_title": "Autonomous Materials Synthesis Strategies Towards Accelerated Discovery of Novel Functional Nanomaterials for Green Energy Production",
+    "claimed_title": "An autonomous laboratory for the accelerated synthesis of inorganic materials",
+    "status": "CONFIRMED",
+    "doi": "10.1038/s41586-023-06734-w",
+    "found_title": "An autonomous laboratory for the accelerated synthesis of inorganic materials",
     "found_year": 2023,
     "claimed_year": 2023,
-    "title_score": 85.9375,
-    "note": "title similarity 86 is below 88"
+    "title_score": 100.0,
+    "note": "resolved by DOI"
+  },
+  {
+    "ref_id": "szymanski2026correction",
+    "claimed_title": "Author Correction: An autonomous laboratory for the accelerated synthesis of inorganic materials",
+    "status": "CONFIRMED",
+    "doi": "10.1038/s41586-025-09992-y",
+    "found_title": "Author Correction: An autonomous laboratory for the accelerated synthesis of inorganic materials",
+    "found_year": 2026,
+    "claimed_year": 2026,
+    "title_score": 100.0,
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "fda_ema_2026_principles",
@@ -201,8 +212,8 @@
     "ref_id": "errington2021cancerbiology",
     "claimed_title": "Investigating the replicability of preclinical cancer biology",
     "status": "CONFIRMED",
-    "doi": "10.7554/elife.71601.sa1",
-    "found_title": "Decision letter: Investigating the replicability of preclinical cancer biology",
+    "doi": "10.7554/elife.71601",
+    "found_title": "Investigating the replicability of preclinical cancer biology",
     "found_year": 2021,
     "claimed_year": 2021,
     "title_score": 100.0,
@@ -233,13 +244,13 @@
   {
     "ref_id": "wickham2014tidydata",
     "claimed_title": "Tidy data",
-    "status": "CONFIRMED",
-    "doi": "10.32614/cran.package.tidyr",
-    "found_title": "tidyr: Tidy Messy Data",
+    "status": "UNRESOLVED",
+    "doi": null,
+    "found_title": "R package to convert statistical analysis objects to tidy data frames",
     "found_year": 2014,
     "claimed_year": 2014,
-    "title_score": 100.0,
-    "note": "matched by title search"
+    "title_score": 23.076923076923073,
+    "note": "best Crossref hit scored 23, below the floor of 55, so nothing matching was found."
   },
   {
     "ref_id": "ioannidis2005false",

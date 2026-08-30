@@ -74,18 +74,41 @@ references:
   - id: szymanski2023alab
     chapter: 1
     kind: article
-    title: "An autonomous laboratory for the accelerated synthesis of novel materials"
+    title: "An autonomous laboratory for the accelerated synthesis of inorganic materials"
     authors: "Szymanski, N. J., Rendy, B., Fei, Y. et al."
     venue: "Nature"
     volume: "624"
     pages: "86-91"
     year: 2023
-    verified: false
+    doi: "10.1038/s41586-023-06734-w"
+    verified: true
     note: >
-      Secondary sources render the title inconsistently, some giving
-      "inorganic materials". Confirm against the journal. The January 2026
-      correction notice is a separate record and needs its own entry once
-      resolved.
+      Both titles in circulation are correct, at different times. The article
+      was published in November 2023 as "the accelerated synthesis of NOVEL
+      materials". The January 2026 author correction changed the title to
+      "INORGANIC materials", because the concerns raised were about the
+      novelty claims. Crossref now holds the corrected title against this
+      DOI; PubMed and OSTI still carry the original. Cite the current title.
+      The word that left the title is the word the correction was about.
+
+  - id: szymanski2026correction
+    chapter: 1
+    kind: article
+    title: "Author Correction: An autonomous laboratory for the accelerated synthesis of inorganic materials"
+    authors: "Szymanski, N. J., Rendy, B., Fei, Y. et al."
+    venue: "Nature"
+    volume: "650"
+    pages: "E1"
+    year: 2026
+    doi: "10.1038/s41586-025-09992-y"
+    verified: true
+    note: >
+      The correction states that concerns were raised about the unambiguous
+      identification of compound structures by diffraction and about the
+      original claims of material novelty, and that the novelty claims were
+      intended to mean new to the prediction platform rather than new to
+      science. The tool skips titles beginning "Author Correction" when
+      searching, so this entry is resolved by DOI.
 
   - id: fda_ema_2026_principles
     chapter: 1

@@ -35,6 +35,20 @@ MAILTO = "biotech.suryaprakash@gmail.com"   # polite pool, per Crossref etiquett
 TITLE_MATCH_THRESHOLD = 88     # below this, a human looks
 UNRESOLVED_FLOOR = 55          # below this, Crossref did not find it at all
 
+# Crossref indexes far more than articles. A decision letter, a CRAN package
+# record or a review wrapper can carry a title containing the claimed title
+# in full, and token_set_ratio scores that 100. Filtering by type is what
+# stops a wrong record being silently confirmed.
+ACCEPT_TYPES = {
+    "journal-article", "posted-content", "proceedings-article",
+    "book", "book-chapter", "report", "monograph", "reference-entry",
+}
+REJECT_TITLE_PREFIXES = (
+    "review for", "decision letter", "author response", "reviewer response",
+    "correction to", "author correction", "publisher correction",
+    "erratum", "retraction", "comment on", "reply to", "editorial expression",
+)
+
 
 @dataclass
 class Result:
@@ -87,7 +101,26 @@ def query_crossref(client: httpx.Client, title: str, year: int | None) -> dict |
         return None
 
     items = r.json().get("message", {}).get("items", [])
-    return items[0] if items else None
+    for item in items:
+        if acceptable(item):
+            return item
+    return None
+
+
+def acceptable(item: dict) -> bool:
+    """Is this Crossref record the kind of thing a reference can point at?
+
+    Written after two entries were silently CONFIRMED against the wrong
+    record: a JSS paper matched to its CRAN package, and an eLife article
+    matched to the decision letter reviewing it. Both scored 100, because a
+    claimed title that is a subset of a found title scores 100 under
+    token_set_ratio. A wrong match reported as success is worse than a
+    mismatch, because nothing flags it.
+    """
+    if item.get("type") not in ACCEPT_TYPES:
+        return False
+    title = (item.get("title") or [""])[0].lower().strip()
+    return not title.startswith(REJECT_TITLE_PREFIXES)
 
 
 def year_of(item: dict) -> int | None:
@@ -142,7 +175,12 @@ def verify(entry: dict, client: httpx.Client) -> Result:
     found_title = (item.get("title") or ["<none>"])[0]
     found_year = year_of(item)
     doi = item.get("DOI")
-    score = fuzz.token_set_ratio(title.lower(), found_title.lower())
+    # token_sort_ratio is symmetric: it will not score 100 merely because the
+    # claimed title is contained within a longer found title. token_set_ratio
+    # is kept for diagnosis only, because a large gap between the two is
+    # itself the signal that one title contains the other.
+    score = fuzz.token_sort_ratio(title.lower(), found_title.lower())
+    containment = fuzz.token_set_ratio(title.lower(), found_title.lower())
 
     # A title search returning something barely related has not found the work.
     # Reporting that as a mismatch blames the entry for the tool's failure to
@@ -160,6 +198,11 @@ def verify(entry: dict, client: httpx.Client) -> Result:
                       f"{UNRESOLVED_FLOOR}, so nothing matching was found.{hint}")
 
     notes = []
+    if containment - score > 25:
+        notes.append(
+            f"the claimed title appears to be contained in a longer found "
+            f"title (containment {containment:.0f} against similarity "
+            f"{score:.0f}); check this is the work and not a wrapper record")
     if score < TITLE_MATCH_THRESHOLD:
         notes.append(f"title similarity {score:.0f} is below {TITLE_MATCH_THRESHOLD}")
     if claimed_year and found_year and abs(claimed_year - found_year) > 1:

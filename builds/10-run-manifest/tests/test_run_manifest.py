@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import shutil
 import socket
+from datetime import datetime, timezone
 from pathlib import Path
 
 import httpx
@@ -21,12 +22,14 @@ from difference import difference_report, summarise
 from hashing import hash_file, hash_json, hash_text
 from models import (
     IncompleteRun,
+    ManifestBuilder,
     RunManifest,
     corpus_snapshot,
     load_manifest,
     require_complete,
 )
 from pipeline import SUMMARY_PATH, VERDICTS_PATH, outputs_from_completions
+from pydantic import ValidationError
 from replay import ReplayHalted, audit_replay, verify_inputs, verify_replay
 from stub_client import ForbiddenClient, ModelWasCalled, StubModel
 from tracing import Trace, completions, external_responses, read_trace
@@ -174,6 +177,48 @@ def test_incomplete_runs_are_marked():
     )
     assert summary["corpus_size"] == 20
     assert manifest.describe().endswith(f"halted because {manifest.halt_reason}.")
+
+
+def test_a_complete_run_may_not_carry_a_halt_reason():
+    """The one state a manifest must not be able to record.
+
+    COMPLETE says the run finished; a halt reason says it stopped early. A
+    manifest holding both hands a different answer to every consumer that
+    reads it, because ``require_complete`` looks at the status and
+    ``describe`` looks at the halt reason, and the consumer that reads the
+    status is the one that turns partial work into a result.
+    """
+    body = json.loads((STORED / "manifest.json").read_text(encoding="utf-8"))
+    assert body["status"] == "COMPLETE" and body["halt_reason"] is None
+
+    body["halt_reason"] = "step cap of 20 reached with 16 records unscreened"
+    with pytest.raises(ValidationError) as raised:
+        RunManifest(**body)
+    assert "halt_reason" in str(raised.value)
+
+    # The state is refused wherever it is assembled, not only where it is
+    # read back, so a run cannot write one and be rejected only on reload.
+    builder = ManifestBuilder(
+        run_id="coherence-check",
+        started_at=datetime(2026, 8, 30, tzinfo=timezone.utc),
+        python_version="3.11.9",
+        lockfile_sha256=hash_text("lock"),
+        git_commit="0" * 40,
+        git_dirty=False,
+    )
+    with pytest.raises(ValidationError):
+        builder.finish(
+            status="COMPLETE",
+            finished_at=datetime(2026, 8, 30, 1, tzinfo=timezone.utc),
+            trace_path="trace.jsonl",
+            trace_sha256=hash_text(""),
+            halt_reason="step cap reached",
+        )
+
+    # Both coherent shapes still load, or the check above is refusing
+    # everything and proving nothing.
+    assert manifest_at(STORED).halt_reason is None
+    assert manifest_at(INCOMPLETE).halt_reason
 
 
 def test_dirty_tree_is_recorded():

@@ -24,6 +24,12 @@ biopython>=1.83
 pytest>=8.0,<10.0
 pyyaml>=6.0
 
+# The lint gate. CLAUDE.md makes `ruff check` the second of the two
+# checks a build has to pass, and README.md tells a reader to install
+# from this file, so a gate the documented install cannot run is a gate
+# only people with ruff already on their machine have ever run.
+ruff>=0.6,<1.0
+
 # tools/verify_references.py only. Title comparison against what Crossref
 # returns, so a reference whose title drifted from the record is a score
 # rather than an argument. No build imports it and no test needs it.

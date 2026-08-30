@@ -40,7 +40,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 from hashing import hash_text
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class ModelUse(BaseModel):
@@ -128,6 +128,29 @@ class RunManifest(BaseModel):
     corpus_snapshot_id: str = ""
 
     model_config = ConfigDict(protected_namespaces=())
+
+    @model_validator(mode="after")
+    def _halt_reason_agrees_with_status(self) -> RunManifest:
+        """A run cannot have both finished and halted.
+
+        The two fields answer the same question and a manifest carrying both
+        answers is not a record anybody can act on: ``require_complete`` reads
+        the status and hands the outputs downstream, while
+        ``IncompleteRun.as_dict`` and ``describe`` read the halt reason and
+        report a run that stopped early. Whichever a consumer happens to read
+        first decides whether partial work becomes a result, which is Build
+        01's failure with the decision moved into a data file.
+
+        Refused here rather than at one call site, so it holds for a manifest
+        loaded from disk as well as one this build assembled.
+        """
+        if self.status == "COMPLETE" and self.halt_reason is not None:
+            raise ValueError(
+                f"run {self.run_id} has status COMPLETE and halt_reason "
+                f"{self.halt_reason!r}. A completed run did not halt; a run "
+                "that halted is INCOMPLETE or FAILED."
+            )
+        return self
 
     def describe(self) -> str:
         """The sentence that belongs at the top of every difference report.

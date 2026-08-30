@@ -2,7 +2,7 @@
 
 Checked 47 entries against Crossref.
 
-Of 23 confirmations, 7 were resolved by DOI and 16 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
+Of 23 confirmations, 23 were resolved by DOI and 0 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
 
 - CONFIRMED: 23
 - MISMATCH: 0
@@ -130,7 +130,7 @@ Of 23 confirmations, 7 were resolved by DOI and 16 by title search. A DOI is che
   claimed: BiomniBench: process-level evaluation of LLM agents for real-world biomedical research
   found:   BiomniBench: Process-level Evaluation of LLM Agents for Real-world Biomedical Research
   doi:     10.64898/2026.05.12.724604
-  note:    matched by title search
+  note:    resolved by DOI
 
 **szymanski2023alab**
   claimed: An autonomous laboratory for the accelerated synthesis of inorganic materials
@@ -154,61 +154,61 @@ Of 23 confirmations, 7 were resolved by DOI and 16 by title search. A DOI is che
   claimed: Why do multi-agent LLM systems fail?
   found:   Why Do Multi-Agent LLM Systems Fail?
   doi:     10.52202/085713-4082
-  note:    matched by title search
+  note:    resolved by DOI
 
 **ziemann2016genenames**
   claimed: Gene name errors are widespread in the scientific literature
   found:   Gene name errors are widespread in the scientific literature
   doi:     10.1186/s13059-016-1044-7
-  note:    matched by title search
+  note:    resolved by DOI
 
 **abeysooriya2021genenames**
   claimed: Gene name errors: lessons not learned
   found:   Gene name errors: Lessons not learned
   doi:     10.1371/journal.pcbi.1008984
-  note:    matched by title search
+  note:    resolved by DOI
 
 **yadav2015zip**
   claimed: Searching for drug synergy in complex dose-response landscapes using an interaction potency model
   found:   Searching for Drug Synergy in Complex Dose–Response Landscapes Using an Interaction Potency Model
   doi:     10.1016/j.csbj.2015.09.001
-  note:    matched by title search
+  note:    resolved by DOI
 
 **ianevski2022synergyfinder**
   claimed: SynergyFinder 3.0: an interactive analysis and consensus interpretation of multi-drug synergies across multiple samples
   found:   SynergyFinder 3.0: an interactive analysis and consensus interpretation of multi-drug synergies across multiple samples
   doi:     10.1093/nar/gkac382
-  note:    matched by title search
+  note:    resolved by DOI
 
 **trott2010vina**
   claimed: AutoDock Vina: improving the speed and accuracy of docking with a new scoring function, efficient optimization, and multithreading
   found:   AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function, efficient optimization, and multithreading
   doi:     10.1002/jcc.21334
-  note:    matched by title search
+  note:    resolved by DOI
 
 **wojcikowski2017mlsf**
   claimed: Performance of machine-learning scoring functions in structure-based virtual screening
   found:   Performance of machine-learning scoring functions in structure-based virtual screening
   doi:     10.1038/srep46710
-  note:    matched by title search
+  note:    resolved by DOI
 
 **landis1977kappa**
   claimed: The measurement of observer agreement for categorical data
   found:   The Measurement of Observer Agreement for Categorical Data
   doi:     10.2307/2529310
-  note:    matched by title search
+  note:    resolved by DOI
 
 **byrt1993pabak**
   claimed: Bias, prevalence and kappa
   found:   Bias, prevalence and kappa
   doi:     10.1016/0895-4356(93)90018-v
-  note:    matched by title search
+  note:    resolved by DOI
 
 **gwet2008ac1**
   claimed: Computing inter-rater reliability and its variance in the presence of high agreement
   found:   Computing inter‐rater reliability and its variance in the presence of high agreement
   doi:     10.1348/000711006x126600
-  note:    matched by title search
+  note:    resolved by DOI
 
 **errington2021cancerbiology**
   claimed: Investigating the replicability of preclinical cancer biology
@@ -220,13 +220,13 @@ Of 23 confirmations, 7 were resolved by DOI and 16 by title search. A DOI is che
   claimed: 1,500 scientists lift the lid on reproducibility
   found:   1,500 scientists lift the lid on reproducibility
   doi:     10.1038/533452a
-  note:    matched by title search
+  note:    resolved by DOI
 
 **wilson2017goodenough**
   claimed: Good enough practices in scientific computing
   found:   Good enough practices in scientific computing
   doi:     10.1371/journal.pcbi.1005510
-  note:    matched by title search
+  note:    resolved by DOI
 
 **wickham2014tidydata**
   claimed: Tidy data
@@ -238,16 +238,16 @@ Of 23 confirmations, 7 were resolved by DOI and 16 by title search. A DOI is che
   claimed: Why most published research findings are false
   found:   Why Most Published Research Findings Are False
   doi:     10.1371/journal.pmed.0020124
-  note:    matched by title search
+  note:    resolved by DOI
 
 **liu2024lostmiddle**
   claimed: Lost in the middle: how language models use long contexts
   found:   Lost in the Middle: How Language Models Use Long Contexts
   doi:     10.1162/tacl_a_00638
-  note:    matched by title search
+  note:    resolved by DOI
 
 **zhan2024injecagent**
   claimed: InjecAgent: benchmarking indirect prompt injections in tool-integrated large language model agents
   found:   InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents
   doi:     10.18653/v1/2024.findings-acl.624
-  note:    matched by title search
+  note:    resolved by DOI

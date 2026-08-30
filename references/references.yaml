@@ -69,6 +69,7 @@ references:
     title: "BiomniBench: process-level evaluation of LLM agents for real-world biomedical research"
     authors: "Qu, Y., Lu, Y., Tu, X. et al."
     year: 2026
+    doi: "10.64898/2026.05.12.724604"
     verified: false
 
   - id: szymanski2023alab
@@ -140,6 +141,7 @@ references:
     authors: "Cemri, M. et al."
     venue: "NeurIPS Datasets and Benchmarks"
     year: 2025
+    doi: "10.52202/085713-4082"
     verified: false
 
   # ---------------- Chapter 5 ----------------
@@ -153,6 +155,7 @@ references:
     volume: "17"
     pages: "177"
     year: 2016
+    doi: "10.1186/s13059-016-1044-7"
     verified: false
 
   - id: abeysooriya2021genenames
@@ -164,6 +167,7 @@ references:
     volume: "17"
     pages: "e1008984"
     year: 2021
+    doi: "10.1371/journal.pcbi.1008984"
     verified: false
 
   # ---------------- Chapter 6 ----------------
@@ -177,6 +181,7 @@ references:
     volume: "13"
     pages: "504-513"
     year: 2015
+    doi: "10.1016/j.csbj.2015.09.001"
     verified: false
 
   - id: ianevski2022synergyfinder
@@ -188,6 +193,7 @@ references:
     volume: "50"
     pages: "W739-W743"
     year: 2022
+    doi: "10.1093/nar/gkac382"
     verified: false
 
   # ---------------- Chapter 7 ----------------
@@ -201,6 +207,7 @@ references:
     volume: "31"
     pages: "455-461"
     year: 2010
+    doi: "10.1002/jcc.21334"
     verified: false
 
   - id: wojcikowski2017mlsf
@@ -212,6 +219,7 @@ references:
     volume: "7"
     pages: "46710"
     year: 2017
+    doi: "10.1038/srep46710"
     verified: false
 
   # ---------------- Chapter 4 ----------------
@@ -225,6 +233,7 @@ references:
     volume: "33"
     pages: "159-174"
     year: 1977
+    doi: "10.2307/2529310"
     verified: false
 
   - id: byrt1993pabak
@@ -236,6 +245,7 @@ references:
     volume: "46"
     pages: "423-429"
     year: 1993
+    doi: "10.1016/0895-4356(93)90018-v"
     verified: false
 
   - id: gwet2008ac1
@@ -247,6 +257,7 @@ references:
     volume: "61"
     pages: "29-48"
     year: 2008
+    doi: "10.1348/000711006x126600"
     verified: false
 
   # ---------------- Chapter 9 ----------------
@@ -278,6 +289,7 @@ references:
     volume: "533"
     pages: "452-454"
     year: 2016
+    doi: "10.1038/533452a"
     verified: false
 
   # ---------------- Further reading ----------------
@@ -291,6 +303,7 @@ references:
     volume: "13"
     pages: "e1005510"
     year: 2017
+    doi: "10.1371/journal.pcbi.1005510"
     verified: false
 
   - id: wickham2014tidydata
@@ -321,6 +334,7 @@ references:
     volume: "2"
     pages: "e124"
     year: 2005
+    doi: "10.1371/journal.pmed.0020124"
     verified: false
 
   # ---------------- Standards and regulations, verified by URL ----------------
@@ -386,6 +400,7 @@ references:
     volume: "12"
     pages: "157-173"
     year: 2024
+    doi: "10.1162/tacl_a_00638"
     verified: false
 
   - id: chroma2025contextrot
@@ -465,6 +480,7 @@ references:
     title: "InjecAgent: benchmarking indirect prompt injections in tool-integrated large language model agents"
     authors: "Zhan, Q. et al."
     year: 2024
+    doi: "10.18653/v1/2024.findings-acl.624"
     verified: false
     note: >
       Published at ACL Findings 2024 as well as on arXiv. Cite the published

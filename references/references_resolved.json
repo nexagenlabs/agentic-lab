@@ -52,7 +52,7 @@
     "found_year": 2026,
     "claimed_year": 2026,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "szymanski2023alab",
@@ -107,7 +107,7 @@
     "found_year": 2025,
     "claimed_year": 2025,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "ziemann2016genenames",
@@ -118,7 +118,7 @@
     "found_year": 2016,
     "claimed_year": 2016,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "abeysooriya2021genenames",
@@ -129,7 +129,7 @@
     "found_year": 2021,
     "claimed_year": 2021,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "yadav2015zip",
@@ -140,7 +140,7 @@
     "found_year": 2015,
     "claimed_year": 2015,
     "title_score": 98.96907216494846,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "ianevski2022synergyfinder",
@@ -151,7 +151,7 @@
     "found_year": 2022,
     "claimed_year": 2022,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "trott2010vina",
@@ -162,7 +162,7 @@
     "found_year": 2010,
     "claimed_year": 2010,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "wojcikowski2017mlsf",
@@ -173,7 +173,7 @@
     "found_year": 2017,
     "claimed_year": 2017,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "landis1977kappa",
@@ -184,7 +184,7 @@
     "found_year": 1977,
     "claimed_year": 1977,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "byrt1993pabak",
@@ -195,7 +195,7 @@
     "found_year": 1993,
     "claimed_year": 1993,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "gwet2008ac1",
@@ -206,7 +206,7 @@
     "found_year": 2008,
     "claimed_year": 2008,
     "title_score": 98.80952380952381,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "errington2021cancerbiology",
@@ -228,7 +228,7 @@
     "found_year": 2016,
     "claimed_year": 2016,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "wilson2017goodenough",
@@ -239,7 +239,7 @@
     "found_year": 2017,
     "claimed_year": 2017,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "wickham2014tidydata",
@@ -261,7 +261,7 @@
     "found_year": 2005,
     "claimed_year": 2005,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "cfr21part11",
@@ -338,7 +338,7 @@
     "found_year": 2024,
     "claimed_year": 2024,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "chroma2025contextrot",
@@ -426,7 +426,7 @@
     "found_year": 2024,
     "claimed_year": 2024,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "anthropic_opus45_card",

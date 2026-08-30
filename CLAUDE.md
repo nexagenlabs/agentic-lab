@@ -102,6 +102,18 @@ reference in Appendix D resolves to a real record whose title matches what the
 book claims, and a stubbed Crossref would verify nothing. It is run by hand or
 in CI, never by `pytest`, and no build imports it.
 
+`tools/verify_printed_urls.py` is the same case and the same exception. It
+requests every URL printed in the book against the live site, over real HTTPS
+with certificate verification on, and asserts where each one lands.
+`tests/test_site_urls.py` checks the map, that `site/_redirects` names paths
+which exist in this repository, and that check runs offline. This one checks
+the territory: DNS, TLS, whether Netlify deployed, whether GitHub still serves
+that URL scheme. Neither substitutes for the other.
+
+Both are deliberately absent from `testpaths` and must stay absent. A suite
+that fails when the internet is down is a suite people learn to ignore, and an
+ignored suite is worse than no suite, because it still looks like coverage.
+
 So: a network call inside `builds/*/tests/` is a defect. A network call inside
 `tools/` may be the point of the file. If a later session finds one there, read
 what it is for before removing it.

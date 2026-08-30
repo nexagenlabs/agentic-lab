@@ -235,6 +235,14 @@ __marimo__/
 HANDOFF.md
 HANDOFF.previous.md
 
+# tools/verify_printed_urls.py writes these. They record what was live at one
+# moment, so they are stale the moment they are written, and a committed copy
+# would have the repository asserting something it cannot know is still true.
+# Run the tool to get a current one. The reference reports are different and
+# are committed, because they check data that lives in this repository.
+printed_urls_report.md
+printed_urls_report.json
+
 # Written by any stage file or agent.py that is actually run: one JSONL trace
 # per run. Useful to read, never to commit.
 runs/

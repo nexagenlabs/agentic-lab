@@ -575,3 +575,76 @@ One real weakness was found while checking, and is fixed: the gate asserted
 `counts["tests"] > 0` and a total above 200 against an actual 263, so deleted
 tests were invisible until a whole build reached zero. Per-build counts are now
 anchored in `EXPECTED_TESTS`.
+
+## `test_row_conservation`: checked, and the framing does not hold
+
+**Checked 2026-08-30 at `74b1ba4`. Recorded because it was asked for by name,
+and it is not what it was thought to be.**
+
+The claim was that `test_row_conservation` proves the assertion function works
+and not that the pipeline calls it. It proves both. The test drives
+`pipeline.run`, not `assert_row_conservation`,
+`builds/05-wrangler/tests/test_wrangler.py:61-78`, and two separate mutations
+confirm it:
+
+- Neutering the condition inside `assert_row_conservation` fails
+  `test_row_conservation`. This is the mutation gate's `row_conservation`
+  entry, and it is in `CAUGHT` for this reason.
+- Deleting the *call* from `pipeline.run` also fails it.
+
+The second probe was run over all six call sites, because a guard that is
+called nowhere would pass a condition mutation and look identical to a guard
+nobody tests:
+
+| Call removed from `pipeline.run` | Result |
+|---|---|
+| `assert_row_conservation` | caught, `test_row_conservation` |
+| `assert_no_silent_nulls` | caught, `test_schema_rejects_known_corruptions` |
+| `assert_units_declared` | caught, same |
+| `assert_ranges_plausible` | caught, same |
+| `assert_identifier_integrity` | caught, same |
+| `assert_deterministic` | **15 passed. Silent.** |
+
+Five of six call sites are verified reachable and checked. The sixth is the
+survivor already recorded as PLAN B4, and it now has a second piece of evidence
+against it: not only can the comparison be removed, so can the call.
+
+**What is true, smaller, and new.** Of the six numbered assertions, four have a
+broken fixture declaring which assertion should fire: 2 in `excel_mangled`, 3
+in `extra_column` and both `unit_collision` files, 4 in
+`percentage_as_fraction`, 5 in `shifted_labels` and `transposed_plate`.
+Assertions **1 and 6 have none**. Row conservation is demonstrated by raising
+the declared expectation to `WELLS + 1` rather than by an export that lost a
+row, so no fixture in the set ever shows the pipeline detecting a real row
+loss. The comparison is the same either way, `actual != expected.expected_rows`,
+so this is a gap in the fixture set rather than a hole in the coverage, and it
+is recorded at that size.
+
+## What the mutation gate cannot tell you
+
+**Read this before quoting a mutation score.**
+
+A surviving mutant means one thing only: the named test still passed after that
+text changed. Three different situations produce it and the harness cannot
+distinguish them.
+
+1. **Nothing tests the guard.** The case the gate exists to find.
+2. **Nothing can reach the guard.** A condition that is already unreachable
+   cannot be made more unreachable, so dead code scores exactly like untested
+   code. This is the reading that flatters the repository and it is the one to
+   rule out first.
+3. **The mutation was semantically null.** An anchor that no longer matches
+   what the guard does, or a replacement that happens to preserve behaviour,
+   both report a clean pass. `test_every_guard_in_the_registry_is_reachable`
+   catches the first of those and nothing catches the second.
+
+Telling them apart takes a second probe and a human reading of the guard. The
+call-site table above is an example: neutering `assert_deterministic`'s
+comparison and deleting its call from the pipeline both survive, which rules
+out unreachability and leaves case 1.
+
+So the number is a floor on what is untested, never a measure of what is
+tested. Eleven of fourteen guards caught says eleven guards have a test that
+notices their removal. It says nothing about the other several hundred lines
+of each build, and a run with no survivors would not mean the suite is
+complete. It would mean these fourteen anchors are covered.

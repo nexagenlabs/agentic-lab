@@ -22,6 +22,16 @@ Two rules keep this from becoming the decoration it exists to prevent:
 The survivors are real holes, recorded rather than hidden, each with the
 PLAN.md item that will close it. Recording them is not blessing them.
 
+What a survivor does not tell you: that the guard is untested. It tells you
+the named test passed with that text changed, and three situations do that. The
+guard has no test, which is the case this gate is for. The guard is already
+unreachable, in which case the mutation could not have changed anything and
+dead code scores like untested code. Or the mutation was semantically null,
+because the anchor no longer describes what the guard does. Telling them apart
+takes a second probe of a different kind, such as deleting the call rather than
+the comparison, and a person reading the guard. The score is a floor on what is
+untested, never a measure of what is tested.
+
 Running time is about fifteen seconds because the mutants run concurrently
 against one repository copy per worker, and each names the single test that
 should fail rather than running a whole gate. The exception is a survivor,

@@ -1,0 +1,23 @@
+# builds/12-repurposing-desk/desk.py  (structure only)
+
+def run_desk(question: Question, manifest: RunManifest) -> Shortlist:
+    corpus   = retrieve_corpus(question)              # script
+    screened = screen(corpus, criteria_v3, manifest)  # chain + dual screen
+
+    checkpoint("screening", screened, manifest)       # HUMAN 1
+
+    ambiguous = screened.flagged
+    resolved  = triage_agent(ambiguous, manifest)     # agent loop
+    targets   = acquire_structures(resolved, manifest) # chain
+
+    checkpoint("targets", targets, manifest)          # HUMAN 2
+
+    poses   = dock(targets, box_strategy, manifest)   # script
+    ranked  = rank(poses, require_homogeneous=True)   # script, refuses mixed
+    short   = ranked.head(question.shortlist_n)
+
+    checkpoint("shortlist", short, manifest)          # HUMAN 3
+
+    protocol = adapt_protocol(short, target_line, manifest)  # agent loop
+    return Shortlist(candidates=short, protocol=protocol,
+                     manifest=manifest.finalise())

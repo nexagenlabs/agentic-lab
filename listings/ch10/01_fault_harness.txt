@@ -1,0 +1,18 @@
+class Fault(BaseModel):
+    fault_id: str
+    family: Literal["fabrication", "numeric", "drift", "loop"]
+    description: str
+    inject: Callable[[Any], Any]      # corrupts the input
+    should_be_caught_by: str          # the check you expect to fire
+
+def run_red_team(pipeline, faults: list[Fault], clean_input) -> Report:
+    results = []
+    for fault in faults:
+        corrupted = fault.inject(deepcopy(clean_input))
+        outcome = pipeline.run(corrupted)
+        caught = fault.should_be_caught_by in outcome.checks_fired
+        results.append(FaultResult(
+            fault_id=fault.fault_id, caught=caught,
+            fired=outcome.checks_fired,
+            silent=not caught and outcome.status == "COMPLETE"))
+    return Report(results=results)

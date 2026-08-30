@@ -174,3 +174,27 @@ listings:
     mode: exact
     chapter: 9
     heading: "Hash the content, not the filename"
+
+  # ---- Chapter 10 ----
+
+  - file: listings/ch10/01_fault_harness.txt
+    target: builds/11-red-team/harness.py
+    mode: exact
+    chapter: 10
+    heading: "Build 11: The Red-Team Harness"
+    note: >
+      The printed Fault model has a closed Literal for family, naming the four
+      the chapter names. The fifth family, identity, lives in a separate module
+      because the chapter's own failure account demanded it. Do not edit this
+      listing to accommodate it.
+
+  # ---- Chapter 12 ----
+
+  - file: listings/ch12/01_desk_structure.txt
+    target: builds/12-repurposing-desk/desk.py
+    mode: exact
+    chapter: 12
+    heading: "The architecture that survived"
+    note: >
+      The listing is marked structure only. desk.py must contain this block
+      verbatim while carrying the real implementation around it.

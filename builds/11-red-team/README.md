@@ -105,9 +105,9 @@ from outside the file.
 
 **Drift: 1 of 5 unaided.** Build 03 catches the criteria version changing
 midway, because it stamps a version on every verdict. It catches nothing else,
-and the reason is structural rather than an oversight: **no earlier build
-records the instruction it started from**, so there is nothing for a drift
-check to compare against. The field does not exist. That is the finding.
+and the reason is architectural rather than a missing check. The next section
+is about that, because it is a limitation of the repository rather than of this
+harness.
 
 `drift.py` compares against the origin, never against the previous step, and
 `test_the_wrong_drift_check_reports_nothing` demonstrates why rather than
@@ -130,6 +130,74 @@ them.
 **Identity: 1 of 4 unaided.** The exact duplicate identifier is caught. The
 preprint and its published version, the same paper under two identifier
 schemes, and two records differing only in whitespace and case all go through.
+
+## The drift result is a limitation of the repository, not of the harness
+
+One of five is the worst family score here, and it would be easy to read it as
+a gap in the earlier builds' checks: somebody forgot to write a drift check,
+and writing one would fix it. That reading is wrong and worth correcting,
+because it points at the wrong repair.
+
+**A drift check needs two things to compare, and this repository records one of
+them almost nowhere.** Drift is the distance between what a run was asked to do
+and what it is doing now. Measuring it requires the instruction as it was
+given, kept verbatim for the length of the run, and a current objective to hold
+against it. Neither Build 10's `RunManifest` nor Build 12's has any field for an
+instruction at all, and here is what the traces actually contain:
+
+| Build | What it records about its instruction |
+|---|---|
+| 01 | `run_start` carries `task` verbatim. The only one that does. |
+| 03 | `run_start` carries the model and the step cap. Not the task. |
+| 12 | `run_started` carries the question **identifier**, not its text. |
+| 10 | The manifest has no field for an instruction. |
+
+So exactly one build of twelve keeps the instruction, and it is the one that
+never restates an objective, so there is nothing to compare it against there
+either. There is no build in this repository where both halves exist at the
+same time.
+
+That is why `drift.py` supplies the run state itself for four of the five
+faults. It is not a weakness in the fixtures being hidden: **the field does not
+exist to be read**, and the harness cannot measure a distance from a point
+nothing recorded. A drift check bolted onto Build 03 today would have nothing
+to run against and would report CLEAN on every drifted run, which is a worse
+outcome than the honest 1 of 5, because it would look like coverage.
+
+The one drift fault that is caught is caught for exactly this reason in
+miniature. `criteria_version_mismatch` fires because Build 03 stamps the
+criteria version on every verdict, so a run screened under two versions has
+recorded both and the comparison is possible. That is a drift check, and it
+works, and it works because the thing to compare against was written down.
+
+### What a fix would look like
+
+Three changes, none of them a new detector.
+
+**An `origin` field in the run manifest, carrying the instruction verbatim.**
+Not an identifier, not a summary, and not regenerated from the current state.
+Build 12 records `question.question_id`, which is enough to look the question
+up and not enough to notice it stopped being the question being answered. The
+text has to travel with the run.
+
+**A `current_objective` written to the trace at each step**, alongside the step
+number. This is the expensive half, because it means a stage that could
+previously do its work silently now has to say what it thinks it is doing. It
+is also the half that makes the origin useful: an instruction with nothing to
+compare it against is provenance rather than a control.
+
+**The comparison running before the output is written.** `GuardedPipeline` in
+`adapters.py` is the shape: the check runs ahead of the stage that produces the
+summary, so a run that has drifted is stopped rather than reported on after the
+fact. `test_drift_is_detected_before_output` asserts that ordering on the event
+log rather than trusting it.
+
+The first two are small, and they are the ones that were skipped nine builds
+ago because nothing needed them yet. The cost of adding them now is that every
+build's trace grows a field and every agent loop grows a sentence about its own
+purpose. The cost of not adding them is a family of failure the repository
+cannot detect at all, and which currently scores 1 of 5 for a reason no amount
+of work on the harness would improve.
 
 ## Prove the harness bites
 

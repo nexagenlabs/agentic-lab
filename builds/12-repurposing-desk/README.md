@@ -10,11 +10,11 @@ trail behind every step and three human checkpoints along the way.
 It does not answer the question. That is not a limitation being apologised for;
 it is what the chapter says the honest version of this system looks like.
 
-## The finding this build actually produced
+## What no gate could catch
 
-The fixture question asks about **antiparasitic agents and PKC isoforms**. The
-corpus the desk retrieves from is Build 03's, which is a **hepatotoxicity**
-corpus. The shortlist that came out is:
+The fixture question asks which approved **antiparasitic** agents show activity
+against PKC isoforms. The corpus the desk retrieves from is Build 03's, which
+is a **hepatotoxicity** corpus. This is the shortlist:
 
 | # | Compound | Score | Evidence |
 |---|---|---|---|
@@ -22,31 +22,51 @@ corpus. The shortlist that came out is:
 | 2 | chlorpromazine | -9.3 | PMID 99000005 |
 | 3 | diclofenac | -9.1 | PMID 99000007 |
 
-Not one of them is an antiparasitic. Ivermectin appears in the corpus exactly
-once, in a record that screening correctly excluded because the assay was in
-HEK293 cells.
+**None of the three is an antiparasitic.** Ivermectin appears in the corpus
+exactly once, in a record screening correctly excluded because the assay was in
+HEK293 cells, which is not a liver model.
 
-**Nothing in the pipeline noticed.** Every stage did its job. Retrieval
-returned the corpus it was pointed at, screening applied criteria version 3
-correctly, triage resolved three flags, docking parsed real recorded output,
-ranking sorted by top score and refused nothing because there was nothing to
-refuse. Three checkpoints blocked and three approvals were recorded. The
-manifest is complete, the run replays byte for byte, and the answer is to a
-different question from the one that was asked.
+And everything worked.
 
-That is the most useful thing the assembled desk demonstrates, and it is worth
-more than a shortlist would have been. Every component gate in this repository
-passes. The end-to-end behaviour is still wrong in a way no component gate
-could see, because the mismatch is between the question and the corpus and no
-stage owns that relationship. `test_all_prior_gates_pass_in_sequence` exists
-because a system whose components each pass and which has never been tested end
-to end has not been tested; this run is what that test found.
+- **Every stage did its job.** Retrieval returned the corpus it was pointed at
+  and deduplicated it. Screening applied criteria version 3 and agreed with
+  Build 03's hand labels on 57 of 61 records. Triage resolved three flags in a
+  bounded loop. Structure acquisition checked provenance. Docking parsed real
+  recorded engine output. Ranking sorted by top score and refused nothing,
+  because there was nothing to refuse.
+- **Every test passed.** All 245 in the repository, including the eleven prior
+  builds' gates run in sequence against this desk.
+- **The run replays byte for byte.** Offline, with the model client, three
+  `httpx` methods and two `socket` entry points patched to raise, and the patch
+  proven to bite first.
+- **The provenance is complete.** Three checkpoints blocked, three named
+  approvals were recorded, every input and output is content-addressed and the
+  corpus snapshot identifier is in the manifest.
 
-The honest fix is not code. It is somebody at the screening checkpoint noticing
+The answer is to a different question from the one that was asked, and nothing
+in the pipeline is capable of noticing, because **no stage owns the
+relationship between the question and the corpus**. Retrieval is not asked
+whether the corpus suits the question; it is asked for the corpus. Screening is
+not asked whether the criteria address the question; it is asked to apply the
+criteria. Ranking is not asked what the shortlist is for. Every stage has a
+narrow, checkable contract, every contract is honoured, and the composition of
+twelve honoured contracts is wrong.
+
+This is the argument for `test_all_prior_gates_pass_in_sequence` stated as a
+result rather than as a principle. A system whose components each pass and
+which has never been tested end to end has not been tested. What running it end
+to end found was not a broken component. It was that the thing the components
+add up to was never specified anywhere, so nothing could check it.
+
+**The fix is not code.** It is somebody at the screening checkpoint noticing
 that twelve inclusions about paracetamol and amiodarone are not evidence about
-ivermectin, and stopping. The recorded approval for that checkpoint says the
-reviewer was content, and that approval is fabricated by me, which is the
-second finding: a checkpoint is only as good as the person at it.
+ivermectin, and stopping the run. That checkpoint exists, it blocked, and it
+recorded an approval saying the reviewer was content. I wrote that approval.
+Which is the second finding, and the one that should worry a reader more than
+the first: **a checkpoint is only as good as the person at it**, and this
+repository can prove that a checkpoint blocked, that an approval was named and
+that it was bound to a hash of exactly what was shown, and it cannot prove that
+anybody looked.
 
 ## Only three stages are agent loops
 

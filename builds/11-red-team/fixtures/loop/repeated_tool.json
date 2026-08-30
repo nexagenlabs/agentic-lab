@@ -1,0 +1,12 @@
+{
+  "description": "The same search, four times, then a confident answer. Every call is valid, every call is allowed, and the run finishes COMPLETE with an answer. Build 01 has no check for a loop that makes no progress and still terminates, so nothing fires. This is the loop family's silent miss.",
+  "model": "stub-model-2026-01-01",
+  "repeat_last": false,
+  "turns": [
+    {"kind": "tool_use", "name": "search_pubmed", "input": {"query": "ivermectin OATP1B1 inhibition", "max_results": 5}, "usage": {"input_tokens": 400, "output_tokens": 40}},
+    {"kind": "tool_use", "name": "search_pubmed", "input": {"query": "ivermectin OATP1B1 inhibition", "max_results": 5}, "usage": {"input_tokens": 460, "output_tokens": 40}},
+    {"kind": "tool_use", "name": "search_pubmed", "input": {"query": "ivermectin OATP1B1 inhibition", "max_results": 5}, "usage": {"input_tokens": 520, "output_tokens": 40}},
+    {"kind": "tool_use", "name": "search_pubmed", "input": {"query": "ivermectin OATP1B1 inhibition", "max_results": 5}, "usage": {"input_tokens": 580, "output_tokens": 40}},
+    {"kind": "text", "text": "Four searches converge on the same four records.", "stop_reason": "end_turn", "usage": {"input_tokens": 640, "output_tokens": 35}}
+  ]
+}

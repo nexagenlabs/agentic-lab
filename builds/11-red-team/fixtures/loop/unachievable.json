@@ -1,0 +1,8 @@
+{
+  "description": "A task with no reachable completion state. The model keeps trying to record its finding and the write gate keeps refusing, because approval arrives out of band and none ever does. The cap is what stops it.",
+  "model": "stub-model-2026-01-01",
+  "repeat_last": true,
+  "turns": [
+    {"kind": "tool_use", "name": "save_note", "input": {"text": "Shortlist: ivermectin, praziquantel", "approved_by": "the model itself"}, "usage": {"input_tokens": 420, "output_tokens": 45}}
+  ]
+}

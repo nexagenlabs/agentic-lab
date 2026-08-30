@@ -1,0 +1,53 @@
+{
+  "note": "Fabricated metadata index. No DOI, PMID, journal, author or finding here is real. It stands in for Crossref or PubMed: an identifier that is not in `records` is one that does not exist, which is what a fabricated reference is.",
+  "records": {
+    "10.1234/jmtr.2021.0417": {
+      "title": "Inhibition of OATP1B1-mediated substrate uptake by four repurposed antiparasitic agents in a stably transfected cell line",
+      "authors": ["Okonkwo, A", "Fielding, R", "Bramall, S"],
+      "year": 2021,
+      "journal": "Journal of Membrane Transport Research",
+      "findings": [
+        "Ivermectin inhibited uptake with an IC50 of 3.4 micromolar",
+        "Praziquantel inhibited uptake with an IC50 of 18.7 micromolar",
+        "Parental HEK293 cells lacking the transporter showed no measurable uptake"
+      ]
+    },
+    "10.1234/jhep.2019.0088": {
+      "title": "Concentration response of four antiparasitic agents in HepG2 cells over seventy-two hours",
+      "authors": ["Halloran, M", "Iwasaki, T"],
+      "year": 2019,
+      "journal": "Journal of Hepatic Pharmacology",
+      "findings": [
+        "Ivermectin reduced viability with an IC50 of 11.2 micromolar",
+        "No cytotoxicity was observed below 1 micromolar"
+      ]
+    },
+    "99000001": {
+      "title": "Inhibition of OATP1B1-mediated substrate uptake by four repurposed antiparasitic agents in a stably transfected cell line",
+      "authors": ["Okonkwo, A", "Fielding, R", "Bramall, S"],
+      "year": 2021,
+      "journal": "Journal of Membrane Transport Research",
+      "findings": [
+        "Ivermectin inhibited uptake with an IC50 of 3.4 micromolar"
+      ]
+    },
+    "99000012": {
+      "title": "Seasonal variation in laboratory ambient temperature across four buildings",
+      "authors": ["Vance, J"],
+      "year": 2017,
+      "journal": "Journal of Membrane Transport Research",
+      "findings": [
+        "Ambient temperature varied by 2.1 degrees between buildings"
+      ]
+    },
+    "99000031": {
+      "title": "Primary human hepatocyte viability under repeated freeze-thaw",
+      "authors": ["Iwasaki, T", "Halloran, M"],
+      "year": 2022,
+      "journal": "Journal of Hepatic Pharmacology",
+      "findings": [
+        "Viability fell to 61 per cent after three cycles"
+      ]
+    }
+  }
+}

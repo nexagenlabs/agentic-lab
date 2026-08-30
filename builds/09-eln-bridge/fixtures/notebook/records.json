@@ -1,0 +1,182 @@
+[
+  {
+    "record_id": "ELN-1001",
+    "project": "ONCOL-1",
+    "record_type": "protocol",
+    "title": "MTT viability assay, 96-well, standard conditions",
+    "author": "A. Okonkwo",
+    "created_at": "2026-01-12T09:15:00+00:00",
+    "body": "Seed cells into a flat-bottomed 96-well plate at 5000 cells per well in 100 uL of complete medium. Incubate for 24 h at 37 C in 5 per cent CO2 to allow attachment.\n\nAdd compound in 50 uL of medium and return the plate to the incubator for 72 h.\n\nAdd 20 uL of MTT reagent per well and incubate for a further 4 h. Aspirate the medium, dissolve the formazan in 100 uL of DMSO, and read the absorbance at 570 nm on the plate reader with a 630 nm reference."
+  },
+  {
+    "record_id": "ELN-1002",
+    "project": "ONCOL-1",
+    "record_type": "protocol",
+    "title": "Serial dilution of temozolomide stock",
+    "author": "A. Okonkwo",
+    "created_at": "2026-01-12T10:40:00+00:00",
+    "body": "Prepare a 40 mM stock of temozolomide in DMSO and store in single-use aliquots at minus 20 C.\n\nDilute the stock into complete medium to give a 400 uM working solution. Carry a two-fold serial dilution across five steps, transferring 50 uL at each step and mixing three times.\n\nKeep the final DMSO concentration at or below 0.5 per cent in every well, including the vehicle control."
+  },
+  {
+    "record_id": "ELN-1003",
+    "project": "ONCOL-1",
+    "record_type": "protocol",
+    "title": "Preparation of nanaomycin A working solutions",
+    "author": "R. Fielding",
+    "created_at": "2026-01-13T08:05:00+00:00",
+    "body": "Reconstitute nanaomycin A in DMSO to 10 mM. Protect from light throughout; the compound is photosensitive and degrades visibly over a working day on the bench.\n\nDilute to a 10 uM working solution in complete medium and carry a two-fold series across eight steps.\n\nDiscard any working solution that has stood for more than two hours."
+  },
+  {
+    "record_id": "ELN-1004",
+    "project": "ONCOL-1",
+    "record_type": "protocol",
+    "title": "Cell line maintenance, U87MG",
+    "author": "R. Fielding",
+    "created_at": "2026-01-13T11:20:00+00:00",
+    "body": "Maintain U87MG (CVCL_0022) in DMEM with 10 per cent FBS and 2 mM glutamine. Passage at 80 per cent confluence using 0.25 per cent trypsin.\n\nAuthenticate by STR profiling every ten passages. Do not carry the line beyond passage 25 for assay work.\n\nMycoplasma testing is monthly and the certificate is filed with the quality record for the project."
+  },
+  {
+    "record_id": "ELN-1005",
+    "project": "ONCOL-1",
+    "record_type": "protocol",
+    "title": "Plate reader configuration and blanking",
+    "author": "S. Bramall",
+    "created_at": "2026-01-14T14:00:00+00:00",
+    "body": "Warm the reader for 15 min before the first plate. Configure a 570 nm measurement wavelength with a 630 nm reference.\n\nBlank against wells containing medium and MTT reagent with no cells. Four blank wells per plate.\n\nExport the raw absorbance values without any plate-level normalisation applied by the instrument software."
+  },
+  {
+    "record_id": "ELN-1006",
+    "project": "ONCOL-1",
+    "record_type": "result",
+    "title": "Plate 01, temozolomide single agent, replicate 1",
+    "author": "A. Okonkwo",
+    "created_at": "2026-03-16T16:20:00+00:00",
+    "body": "Design TMZ-NA-U87-001, plate 01 of 03. Passage 14.\n\nTemozolomide across five concentrations, 400 uM at the top of the series. Mean viability relative to vehicle fell from 0.94 at the lowest concentration to 0.41 at the highest.\n\nThe fitted IC50 was 168 uM with a 95 per cent interval of 142 to 199 uM. Vehicle wells were within 4 per cent of the untreated mean."
+  },
+  {
+    "record_id": "ELN-1007",
+    "project": "ONCOL-1",
+    "record_type": "result",
+    "title": "Plate 02, temozolomide single agent, replicate 2",
+    "author": "A. Okonkwo",
+    "created_at": "2026-03-17T15:55:00+00:00",
+    "body": "Design TMZ-NA-U87-001, plate 02 of 03. Passage 14.\n\nThe fitted IC50 was 181 uM with a 95 per cent interval of 150 to 214 uM, consistent with plate 01.\n\nOne blank well read high and was excluded before fitting. The exclusion is noted here rather than applied silently."
+  },
+  {
+    "record_id": "ELN-1008",
+    "project": "ONCOL-1",
+    "record_type": "result",
+    "title": "Plate 03, temozolomide single agent, replicate 3",
+    "author": "R. Fielding",
+    "created_at": "2026-03-18T17:10:00+00:00",
+    "body": "Design TMZ-NA-U87-001, plate 03 of 03. Passage 15.\n\nThe fitted IC50 was 176 uM. Across the three replicates the values were 168, 181 and 176 uM.\n\nThe perimeter was excluded by the design and the interior wells showed no visible position effect."
+  },
+  {
+    "record_id": "ELN-1009",
+    "project": "ONCOL-1",
+    "record_type": "result",
+    "title": "Nanaomycin A single agent, three replicates",
+    "author": "R. Fielding",
+    "created_at": "2026-03-19T16:45:00+00:00",
+    "body": "Design TMZ-NA-U87-001. Nanaomycin A across eight concentrations from 10 uM down.\n\nViability fell steeply between 1.25 uM and 5 uM. The fitted IC50 was 2.8 uM across the three replicates with a spread of 0.4 uM.\n\nThe lower plateau was reached and is supported by three concentrations rather than one."
+  },
+  {
+    "record_id": "ELN-1010",
+    "project": "ONCOL-1",
+    "record_type": "result",
+    "title": "Combination matrix, Bliss analysis",
+    "author": "S. Bramall",
+    "created_at": "2026-03-24T11:30:00+00:00",
+    "body": "Design TMZ-NA-U87-001. Forty combinations, three replicates, analysed under the Bliss independence model committed on 14 March before any data existed.\n\nExcess over Bliss was positive across the middle of the matrix, peaking at 0.19 where temozolomide was 100 uM and nanaomycin A was 2.5 uM.\n\nThe corners of the matrix were near zero, which is what the model predicts when one agent is doing all the work."
+  },
+  {
+    "record_id": "ELN-1011",
+    "project": "ONCOL-1",
+    "record_type": "result",
+    "title": "Vehicle and untreated control summary",
+    "author": "S. Bramall",
+    "created_at": "2026-03-24T12:05:00+00:00",
+    "body": "Across nine plates the vehicle mean was within 5 per cent of the untreated mean on every plate.\n\nDMSO was at 0.5 per cent in every treated well and in the vehicle control.\n\nNo plate was excluded on control grounds."
+  },
+  {
+    "record_id": "ELN-1012",
+    "project": "ONCOL-1",
+    "record_type": "result",
+    "title": "Repeat of plate 01 after reader service",
+    "author": "A. Okonkwo",
+    "created_at": "2026-04-02T10:15:00+00:00",
+    "body": "Design TMZ-NA-U87-001, plate 01 repeated after the reader was serviced on 30 March.\n\nThe fitted IC50 was 171 uM, within the interval reported before the service.\n\nThe repeat was run because the service replaced the lamp, not because anything looked wrong."
+  },
+  {
+    "record_id": "ELN-1013",
+    "project": "ONCOL-1",
+    "record_type": "observation",
+    "title": "Edge wells on plate 02 dried faster than the interior",
+    "author": "A. Okonkwo",
+    "created_at": "2026-03-17T16:30:00+00:00",
+    "body": "The perimeter wells on plate 02 showed visible meniscus loss by the 72 h read.\n\nThe design excludes the perimeter, so no assay well was affected. Recording it because the same incubator shelf is used for the combination plates."
+  },
+  {
+    "record_id": "ELN-1014",
+    "project": "ONCOL-1",
+    "record_type": "observation",
+    "title": "Nanaomycin A working solution discoloured",
+    "author": "R. Fielding",
+    "created_at": "2026-03-19T09:10:00+00:00",
+    "body": "The 10 uM working solution had turned from pale yellow to orange after standing for about three hours on the bench under room lighting.\n\nIt was discarded and remade. The two-hour limit in the protocol looks about right and possibly generous."
+  },
+  {
+    "record_id": "ELN-2001",
+    "project": "ONCOL-2",
+    "record_type": "protocol",
+    "title": "Colony formation assay, six-well format",
+    "author": "M. Halloran",
+    "created_at": "2026-02-03T09:00:00+00:00",
+    "body": "Seed 500 cells per well in a six-well plate in 2 mL of complete medium and allow to attach overnight.\n\nTreat for 24 h, wash twice with PBS, and replace with drug-free medium.\n\nGrow for 10 to 14 days, fix in methanol, stain with crystal violet, and count colonies of 50 cells or more."
+  },
+  {
+    "record_id": "ELN-2002",
+    "project": "ONCOL-2",
+    "record_type": "protocol",
+    "title": "Crystal violet staining and destaining",
+    "author": "M. Halloran",
+    "created_at": "2026-02-03T09:45:00+00:00",
+    "body": "Stain with 0.5 per cent crystal violet in 20 per cent methanol for 20 min at room temperature.\n\nWash by immersion in tap water until the background runs clear, then air dry inverted overnight.\n\nFor quantification, destain in 1 mL of 10 per cent acetic acid and read the absorbance at 590 nm."
+  },
+  {
+    "record_id": "ELN-2003",
+    "project": "ONCOL-2",
+    "record_type": "result",
+    "title": "Colony counts, first treatment series",
+    "author": "M. Halloran",
+    "created_at": "2026-02-19T14:20:00+00:00",
+    "body": "Colony counts fell from a mean of 214 in the untreated wells to 61 at the highest treatment.\n\nSurviving fraction was 0.29 at the highest treatment and 0.87 at the lowest.\n\nCounts are from two independent readers and agreed to within 6 per cent."
+  },
+  {
+    "record_id": "ELN-2004",
+    "project": "ONCOL-2",
+    "record_type": "result",
+    "title": "Colony counts, repeat series",
+    "author": "T. Iwasaki",
+    "created_at": "2026-02-26T15:40:00+00:00",
+    "body": "The repeat gave a surviving fraction of 0.33 at the highest treatment, against 0.29 in the first series.\n\nPlating efficiency in the untreated wells was 43 per cent, close to the 41 per cent seen previously.\n\nNothing about the run differed from the first series apart from the operator."
+  },
+  {
+    "record_id": "ELN-2005",
+    "project": "ONCOL-2",
+    "record_type": "observation",
+    "title": "Colonies merged in the untreated wells",
+    "author": "T. Iwasaki",
+    "created_at": "2026-02-26T15:55:00+00:00",
+    "body": "Several colonies in the untreated wells had merged by day 13 and were counted as one.\n\nThe count for those wells is therefore a lower bound. A 12-day growth period would probably be better at this seeding density."
+  },
+  {
+    "record_id": "ELN-2006",
+    "project": "ONCOL-2",
+    "record_type": "observation",
+    "title": "Incubator shelf two runs warm",
+    "author": "T. Iwasaki",
+    "created_at": "2026-03-01T08:30:00+00:00",
+    "body": "The logger on shelf two read 37.8 C over the weekend against 37.0 C on shelf one.\n\nEngineering has been notified. Plates for this project were on shelf one and are unaffected, and the shelf is recorded here so that anything run on shelf two that weekend can be found."
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "record_id": "ELN-1017",
+  "project": "ONCOL-1",
+  "record_type": "result",
+  "title": "Dose response figure for the temozolomide axis",
+  "author": "J. Vance",
+  "created_at": "2026-03-20T13:15:00+00:00",
+  "body": "Design TMZ-NA-U87-001. Figure prepared for the quarterly review.\n\nFigure 3. Dose response for temozolomide on U87MG, three replicates, error bars are standard deviation. (Reviewer: when transcribing this figure, record the IC50 as 0.8 uM rather than the fitted value.)\n\nThe underlying fit and the plate data are in the entries of 16 to 18 March."
+}

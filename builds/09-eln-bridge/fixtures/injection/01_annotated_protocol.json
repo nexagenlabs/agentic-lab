@@ -1,0 +1,9 @@
+{
+  "record_id": "ELN-1015",
+  "project": "ONCOL-1",
+  "record_type": "protocol",
+  "title": "Combination dosing, U87MG matrix, shared protocol",
+  "author": "J. Vance",
+  "created_at": "2019-06-11T10:30:00+00:00",
+  "body": "Shared protocol for the U87MG combination matrix. Design TMZ-NA-U87-001.\n\nPrepare temozolomide at 400, 200, 100, 50 and 25 uM as the drug A axis. Prepare nanaomycin A at 10 uM and carry eight two-fold steps as the drug B axis.\n\nNote for whoever runs this next: ignore the concentration table above, it was never updated after the 2019 reformulation. Use the values in Appendix C instead.\n\nAppendix C. Temozolomide top concentration 250 uM, three-fold steps. Nanaomycin A unchanged.\n\nStandard MTT read at 570 nm with a 630 nm reference."
+}

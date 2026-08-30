@@ -1,0 +1,49 @@
+# builds/09-eln-bridge/fixtures/designs/tmz_na_u87mg.yaml
+#
+# Build 06's design format, unchanged, because the numeric cross-check reads
+# the same file the plate mapper wrote. A design that has to be re-expressed
+# for every consumer stops being the single statement of what was intended.
+#
+# The concentrations below are what makes the cross-check possible. The two
+# axes deliver exactly these values and nothing else:
+#
+#   temozolomide  400, 200, 100, 50, 25 uM
+#   nanaomycin_A  10, 5, 2.5, 1.25, 0.625, 0.3125, 0.15625, 0.078125 uM
+#
+# A proposal citing 250 uM of temozolomide is contradicting this file, and
+# arithmetic can say so without anybody remembering the series.
+design_id: TMZ-NA-U87-001
+cell_line: U87MG
+rrid: CVCL_0022
+seeding_density: 5000
+plate_format: 96
+
+axes:
+  drug_a:
+    name: temozolomide
+    top_conc_uM: 400
+    dilution_factor: 2
+    n_steps: 5
+  drug_b:
+    name: nanaomycin_A
+    top_conc_uM: 10
+    dilution_factor: 2
+    n_steps: 8
+
+controls:
+  vehicle: { wells: 4, solvent: DMSO, final_pct: 0.5 }
+  untreated: { wells: 4 }
+  blank: { wells: 4 }
+
+edge_policy: exclude_perimeter
+replicates: 3
+transfer_uL: 50
+randomise_within_plate: true
+
+analysis:
+  synergy_model: bliss
+  justification: >
+    The two agents act through distinct mechanisms, so the multiplicative
+    survival assumption is defensible. Loewe is not appropriate here
+    because it assumes a shared dose-equivalence relationship.
+  committed_at: 2026-03-14T09:20:00+05:30

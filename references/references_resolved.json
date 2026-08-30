@@ -2,13 +2,13 @@
   {
     "ref_id": "huang2026biomni",
     "claimed_title": "Autonomous biomedical research with an artificial intelligence agent",
-    "status": "MISMATCH",
-    "doi": "10.37591/joaira.v13i01.235973",
-    "found_title": "Autonomous Agent Contracts for Adaptive Supply Chains",
+    "status": "CONFIRMED",
+    "doi": "10.1126/science.adz4351",
+    "found_title": "Autonomous biomedical research with an artificial intelligence agent",
     "found_year": 2026,
     "claimed_year": 2026,
-    "title_score": 51.239669421487605,
-    "note": "title similarity 51 is below 88; DOI in the entry does not match Crossref: 10.1126/science.adz4351 vs 10.37591/joaira.v13i01.235973"
+    "title_score": 100.0,
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "swanson2025virtuallab",
@@ -19,7 +19,7 @@
     "found_year": 2025,
     "claimed_year": 2025,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "ghareeb2025robin",
@@ -52,7 +52,7 @@
     "found_year": 2026,
     "claimed_year": 2026,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "szymanski2023alab",
@@ -85,7 +85,7 @@
     "found_year": 2023,
     "claimed_year": 2023,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "cemri2025mast",
@@ -96,7 +96,7 @@
     "found_year": 2025,
     "claimed_year": 2025,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "ziemann2016genenames",
@@ -107,7 +107,7 @@
     "found_year": 2016,
     "claimed_year": 2016,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "abeysooriya2021genenames",
@@ -118,7 +118,7 @@
     "found_year": 2021,
     "claimed_year": 2021,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "yadav2015zip",
@@ -129,7 +129,7 @@
     "found_year": 2015,
     "claimed_year": 2015,
     "title_score": 98.96907216494846,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "ianevski2022synergyfinder",
@@ -140,7 +140,7 @@
     "found_year": 2022,
     "claimed_year": 2022,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "trott2010vina",
@@ -151,7 +151,7 @@
     "found_year": 2010,
     "claimed_year": 2010,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "wojcikowski2017mlsf",
@@ -162,7 +162,7 @@
     "found_year": 2017,
     "claimed_year": 2017,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "landis1977kappa",
@@ -173,7 +173,7 @@
     "found_year": 1977,
     "claimed_year": 1977,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "byrt1993pabak",
@@ -184,7 +184,7 @@
     "found_year": 1993,
     "claimed_year": 1993,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "gwet2008ac1",
@@ -195,7 +195,7 @@
     "found_year": 2008,
     "claimed_year": 2008,
     "title_score": 98.80952380952381,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "errington2021cancerbiology",
@@ -206,7 +206,7 @@
     "found_year": 2021,
     "claimed_year": 2021,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "baker2016reproducibility",
@@ -217,7 +217,7 @@
     "found_year": 2016,
     "claimed_year": 2016,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "wilson2017goodenough",
@@ -228,7 +228,7 @@
     "found_year": 2017,
     "claimed_year": 2017,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "wickham2014tidydata",
@@ -239,7 +239,7 @@
     "found_year": 2014,
     "claimed_year": 2014,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "ioannidis2005false",
@@ -250,7 +250,7 @@
     "found_year": 2005,
     "claimed_year": 2005,
     "title_score": 100.0,
-    "note": "matched"
+    "note": "matched by title search"
   },
   {
     "ref_id": "cfr21part11",
@@ -306,5 +306,203 @@
     "claimed_year": 2026,
     "title_score": null,
     "note": "kind=documentation, verify by URL: https://modelcontextprotocol.io/"
+  },
+  {
+    "ref_id": "patil_bfcl",
+    "claimed_title": "Berkeley Function Calling Leaderboard",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2024,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://gorilla.cs.berkeley.edu/leaderboard.html"
+  },
+  {
+    "ref_id": "liu2024lostmiddle",
+    "claimed_title": "Lost in the middle: how language models use long contexts",
+    "status": "CONFIRMED",
+    "doi": "10.1162/tacl_a_00638",
+    "found_title": "Lost in the Middle: How Language Models Use Long Contexts",
+    "found_year": 2024,
+    "claimed_year": 2024,
+    "title_score": 100.0,
+    "note": "matched by title search"
+  },
+  {
+    "ref_id": "chroma2025contextrot",
+    "claimed_title": "Context rot: how increasing input tokens impacts LLM performance",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2025,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://research.trychroma.com/context-rot"
+  },
+  {
+    "ref_id": "anthropic_tools",
+    "claimed_title": "Writing effective tools for agents",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2025,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://www.anthropic.com/engineering"
+  },
+  {
+    "ref_id": "anthropic_effective_agents",
+    "claimed_title": "Building effective agents",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2024,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://www.anthropic.com/engineering/building-effective-agents"
+  },
+  {
+    "ref_id": "gartner2025agentic",
+    "claimed_title": "Press release on agentic AI project cancellation rates through 2027",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2025,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://www.gartner.com/en/newsroom"
+  },
+  {
+    "ref_id": "langgraph_docs",
+    "claimed_title": "LangGraph documentation and release notes",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2024,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://langchain-ai.github.io/langgraph/"
+  },
+  {
+    "ref_id": "fda2018dataintegrity",
+    "claimed_title": "Data integrity and compliance with drug CGMP: questions and answers. Guidance for industry",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2018,
+    "title_score": null,
+    "note": "kind=regulation, verify by URL: https://www.fda.gov/regulatory-information/search-fda-guidance-documents"
+  },
+  {
+    "ref_id": "owasp_agentic_top10",
+    "claimed_title": "OWASP Top 10 for agentic applications",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2026,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://owasp.org/"
+  },
+  {
+    "ref_id": "zhan2024injecagent",
+    "claimed_title": "InjecAgent: benchmarking indirect prompt injections in tool-integrated large language model agents",
+    "status": "CONFIRMED",
+    "doi": "10.18653/v1/2024.findings-acl.624",
+    "found_title": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents",
+    "found_year": 2024,
+    "claimed_year": 2024,
+    "title_score": 100.0,
+    "note": "matched by title search"
+  },
+  {
+    "ref_id": "anthropic_opus45_card",
+    "claimed_title": "Claude Opus 4.5 system card",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2025,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://www.anthropic.com/"
+  },
+  {
+    "ref_id": "cve_2026_22708",
+    "claimed_title": "CVE-2026-22708: allowlist bypass in an agentic coding assistant",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2026,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://nvd.nist.gov/vuln/detail/CVE-2026-22708"
+  },
+  {
+    "ref_id": "eu_digital_omnibus",
+    "claimed_title": "Digital Omnibus amending Regulation (EU) 2024/1689",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2026,
+    "title_score": null,
+    "note": "kind=regulation, verify by URL: https://eur-lex.europa.eu/"
+  },
+  {
+    "ref_id": "ich_e6r3",
+    "claimed_title": "Good clinical practice guideline E6(R3)",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2025,
+    "title_score": null,
+    "note": "kind=standard, verify by URL: https://www.ich.org/page/efficacy-guidelines"
+  },
+  {
+    "ref_id": "uiuc2026_token_overhead",
+    "claimed_title": "Token consumption in multi-agent versus single-agent systems",
+    "status": "UNSOURCED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2026,
+    "title_score": null,
+    "note": "This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports."
+  },
+  {
+    "ref_id": "practitioner2026_coordination",
+    "claimed_title": "Orchestration overhead and coordination cost in production agent pipelines",
+    "status": "UNSOURCED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2026,
+    "title_score": null,
+    "note": "This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports."
+  },
+  {
+    "ref_id": "clinical2026_load_comparison",
+    "claimed_title": "Comparative evaluation of single-agent and orchestrated multi-agent configurations under increasing task load in a clinical setting",
+    "status": "UNSOURCED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2026,
+    "title_score": null,
+    "note": "This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports."
+  },
+  {
+    "ref_id": "anthropic_multiagent_research",
+    "claimed_title": "How we built our multi-agent research system",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2025,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://www.anthropic.com/engineering/multi-agent-research-system"
   }
 ]

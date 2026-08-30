@@ -327,6 +327,210 @@ references:
     url: "https://modelcontextprotocol.io/"
     verified: false
 
-# Entries still to be added from Appendix D: the remaining Chapter 2, 3, 8, 11
-# and 12 references. Add them here rather than editing the appendix directly,
-# and regenerate the appendix from this file once the script reports clean.
+# ---------------- Chapter 2 ----------------
+
+  - id: patil_bfcl
+    chapter: 2
+    kind: documentation
+    title: "Berkeley Function Calling Leaderboard"
+    authors: "Patil, S. G. et al."
+    venue: "University of California, Berkeley, Gorilla project"
+    year: 2024
+    url: "https://gorilla.cs.berkeley.edu/leaderboard.html"
+    verified: false
+
+  - id: liu2024lostmiddle
+    chapter: 2
+    kind: article
+    title: "Lost in the middle: how language models use long contexts"
+    authors: "Liu, N. F. et al."
+    venue: "Transactions of the Association for Computational Linguistics"
+    volume: "12"
+    pages: "157-173"
+    year: 2024
+    verified: false
+
+  - id: chroma2025contextrot
+    chapter: 2
+    kind: documentation
+    title: "Context rot: how increasing input tokens impacts LLM performance"
+    authors: "Chroma Research"
+    year: 2025
+    url: "https://research.trychroma.com/context-rot"
+    verified: false
+
+  - id: anthropic_tools
+    chapter: 2
+    kind: documentation
+    title: "Writing effective tools for agents"
+    authors: "Anthropic"
+    year: 2025
+    url: "https://www.anthropic.com/engineering"
+    verified: false
+
+  # ---------------- Chapter 3 ----------------
+
+  - id: anthropic_effective_agents
+    chapter: 3
+    kind: documentation
+    title: "Building effective agents"
+    authors: "Anthropic"
+    year: 2024
+    url: "https://www.anthropic.com/engineering/building-effective-agents"
+    verified: false
+
+  - id: gartner2025agentic
+    chapter: 3
+    kind: documentation
+    title: "Press release on agentic AI project cancellation rates through 2027"
+    authors: "Gartner"
+    year: 2025
+    url: "https://www.gartner.com/en/newsroom"
+    verified: false
+    note: >
+      The chapter quotes "more than forty per cent cancelled by end of 2027".
+      Confirm that figure and its scope against the release itself, not
+      against secondary coverage, which has rendered it inconsistently.
+
+  - id: langgraph_docs
+    chapter: 3
+    kind: documentation
+    title: "LangGraph documentation and release notes"
+    authors: "LangChain"
+    year: 2024
+    url: "https://langchain-ai.github.io/langgraph/"
+    verified: false
+
+  # ---------------- Chapter 8 ----------------
+
+  - id: fda2018dataintegrity
+    chapter: 8
+    kind: regulation
+    title: "Data integrity and compliance with drug CGMP: questions and answers. Guidance for industry"
+    authors: "US Food and Drug Administration"
+    year: 2018
+    url: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents"
+    verified: false
+
+  - id: owasp_agentic_top10
+    chapter: 8
+    kind: documentation
+    title: "OWASP Top 10 for agentic applications"
+    authors: "OWASP"
+    year: 2026
+    url: "https://owasp.org/"
+    verified: false
+
+  - id: zhan2024injecagent
+    chapter: 8
+    kind: preprint
+    title: "InjecAgent: benchmarking indirect prompt injections in tool-integrated large language model agents"
+    authors: "Zhan, Q. et al."
+    year: 2024
+    verified: false
+    note: >
+      Published at ACL Findings 2024 as well as on arXiv. Cite the published
+      version if the Crossref record resolves; otherwise the arXiv ID.
+
+  - id: anthropic_opus45_card
+    chapter: 8
+    kind: documentation
+    title: "Claude Opus 4.5 system card"
+    authors: "Anthropic"
+    year: 2025
+    url: "https://www.anthropic.com/"
+    verified: false
+    note: >
+      Source of the 4.7, 33.6 and 63.0 per cent injection figures at one, ten
+      and one hundred attempts. Confirm the exact numbers and the evaluation
+      setting against the card, because the chapter scopes them explicitly to
+      that model, harness and attack suite.
+
+  - id: cve_2026_22708
+    chapter: 8
+    kind: documentation
+    title: "CVE-2026-22708: allowlist bypass in an agentic coding assistant"
+    year: 2026
+    url: "https://nvd.nist.gov/vuln/detail/CVE-2026-22708"
+    verified: false
+
+  # ---------------- Chapter 11 ----------------
+
+  - id: eu_digital_omnibus
+    chapter: 11
+    kind: regulation
+    title: "Digital Omnibus amending Regulation (EU) 2024/1689"
+    year: 2026
+    url: "https://eur-lex.europa.eu/"
+    verified: false
+    note: >
+      In force 27 July 2026. The chapter cites the revised high-risk dates of
+      2 December 2027 and 2 August 2028. Confirm both against the published
+      text, since these dates moved once already during writing.
+
+  - id: ich_e6r3
+    chapter: 11
+    kind: standard
+    title: "Good clinical practice guideline E6(R3)"
+    authors: "International Council for Harmonisation"
+    year: 2025
+    url: "https://www.ich.org/page/efficacy-guidelines"
+    verified: false
+
+  # ---------------- Chapter 12 ----------------
+  #
+  # These three are the weakest entries in the whole list and they are marked
+  # so deliberately. Each is currently a description of a finding rather than
+  # a citation of a work: the chapter quotes a number, and the entry names
+  # roughly where the number came from. None can be resolved by any script,
+  # because none names a title or an author. They must either be sourced
+  # properly or the claims must be softened before print.
+
+  - id: uiuc2026_token_overhead
+    chapter: 12
+    kind: unsourced
+    title: "Token consumption in multi-agent versus single-agent systems"
+    venue: "University of Illinois Urbana-Champaign"
+    year: 2026
+    verified: false
+    note: >
+      Backs the claim of four to two hundred and twenty times more tokens.
+      NEEDS SOURCING: no title, no authors, no venue beyond the institution.
+      Either find the paper or remove the range from Chapter 12.
+
+  - id: practitioner2026_coordination
+    chapter: 12
+    kind: unsourced
+    title: "Orchestration overhead and coordination cost in production agent pipelines"
+    year: 2026
+    verified: false
+    note: >
+      Backs the 950 milliseconds against 500, and the eighty per cent of
+      tokens spent on inter-agent description. NEEDS SOURCING: practitioner
+      writing, so it may be a blog post with a stable URL. Find it or attribute
+      the figures as one team's reported measurement rather than a study.
+
+  - id: clinical2026_load_comparison
+    chapter: 12
+    kind: unsourced
+    title: "Comparative evaluation of single-agent and orchestrated multi-agent configurations under increasing task load in a clinical setting"
+    year: 2026
+    verified: false
+    note: >
+      Backs the 25,000 to 3.9 million against 3,700 to 60,000 token figures.
+      NEEDS SOURCING. This is the chapter's counter-evidence and the strongest
+      argument against its own thesis, so it is the one that most needs a
+      resolvable source.
+
+  - id: anthropic_multiagent_research
+    chapter: 12
+    kind: documentation
+    title: "How we built our multi-agent research system"
+    authors: "Anthropic"
+    year: 2025
+    url: "https://www.anthropic.com/engineering/multi-agent-research-system"
+    verified: false
+
+# All Appendix D entries are now present. Add nothing here from recall: an
+# entry that is plausible and wrong is the failure this book is about, and a
+# title check cannot catch a real paper that is not the one the book cites.

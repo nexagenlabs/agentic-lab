@@ -32,20 +32,41 @@ from rapidfuzz import fuzz
 
 CROSSREF = "https://api.crossref.org/works"
 MAILTO = "biotech.suryaprakash@gmail.com"   # polite pool, per Crossref etiquette
-TITLE_MATCH_THRESHOLD = 88                  # below this, a human looks
+TITLE_MATCH_THRESHOLD = 88     # below this, a human looks
+UNRESOLVED_FLOOR = 55          # below this, Crossref did not find it at all
 
 
 @dataclass
 class Result:
     ref_id: str
     claimed_title: str
-    status: str          # CONFIRMED | MISMATCH | UNRESOLVED | SKIPPED
+    status: str          # CONFIRMED | MISMATCH | UNRESOLVED | UNSOURCED | SKIPPED
     doi: str | None
     found_title: str | None
     found_year: int | None
     claimed_year: int | None
     title_score: float | None
     note: str
+
+
+def fetch_by_doi(client: httpx.Client, doi: str) -> dict | None:
+    """Resolve a DOI directly. Always preferred over a title search.
+
+    The first version of this script did not do this, and the consequence was
+    worse than a missing feature: an entry carrying a correct, hand-verified
+    DOI was searched by title, matched against an unrelated paper, and then
+    failed on a DOI mismatch the tool had itself introduced. A verification
+    tool that manufactures the error it reports is worse than no tool.
+    """
+    try:
+        r = client.get(f"{CROSSREF}/{doi}", params={"mailto": MAILTO}, timeout=30.0)
+        if r.status_code == 404:
+            return None
+        r.raise_for_status()
+    except httpx.HTTPError as exc:
+        print(f"    crossref DOI error: {exc}", file=sys.stderr)
+        return None
+    return r.json().get("message")
 
 
 def query_crossref(client: httpx.Client, title: str, year: int | None) -> dict | None:
@@ -85,6 +106,12 @@ def verify(entry: dict, client: httpx.Client) -> Result:
     # Standards, regulations and preprints without a Crossref record are
     # verified by URL rather than by DOI. Skipping them is a decision, not
     # an omission, so it is recorded as one.
+    if entry.get("kind") == "unsourced":
+        return Result(ref_id, title, "UNSOURCED", None, None, None, claimed_year, None,
+                      "This entry names a finding, not a work. It has no title, "
+                      "author or venue that any tool can resolve. Source it or "
+                      "remove the claim it supports.")
+
     if entry.get("kind") in {"standard", "regulation", "documentation", "dataset"}:
         return Result(ref_id, title, "SKIPPED", entry.get("doi"), None, None,
                       claimed_year, None,
@@ -94,7 +121,20 @@ def verify(entry: dict, client: httpx.Client) -> Result:
         return Result(ref_id, title, "UNRESOLVED", None, None, None, claimed_year, None,
                       "no title in the entry to search on")
 
-    item = query_crossref(client, title, claimed_year)
+    # An entry carrying a DOI is resolved by that DOI, never by title search.
+    by_doi = False
+    item = None
+    if entry.get("doi"):
+        item = fetch_by_doi(client, entry["doi"])
+        by_doi = item is not None
+        if item is None:
+            return Result(ref_id, title, "MISMATCH", entry["doi"], None, None,
+                          claimed_year, None,
+                          "the DOI in this entry does not resolve at Crossref")
+
+    if item is None:
+        item = query_crossref(client, title, claimed_year)
+
     if item is None:
         return Result(ref_id, title, "UNRESOLVED", None, None, None, claimed_year, None,
                       "no Crossref result")
@@ -104,17 +144,34 @@ def verify(entry: dict, client: httpx.Client) -> Result:
     doi = item.get("DOI")
     score = fuzz.token_set_ratio(title.lower(), found_title.lower())
 
+    # A title search returning something barely related has not found the work.
+    # Reporting that as a mismatch blames the entry for the tool's failure to
+    # find it, which is what arXiv preprints Crossref does not hold produced in
+    # the first run. Below the floor, the honest verdict is UNRESOLVED.
+    if not by_doi and score < UNRESOLVED_FLOOR:
+        hint = ""
+        if entry.get("arxiv"):
+            hint = f" Verify by arXiv ID {entry['arxiv']} instead."
+        elif entry.get("kind") == "preprint":
+            hint = " Preprints are often absent from Crossref; verify at the server."
+        return Result(ref_id, title, "UNRESOLVED", None, found_title, found_year,
+                      claimed_year, score,
+                      f"best Crossref hit scored {score:.0f}, below the floor of "
+                      f"{UNRESOLVED_FLOOR}, so nothing matching was found.{hint}")
+
     notes = []
     if score < TITLE_MATCH_THRESHOLD:
         notes.append(f"title similarity {score:.0f} is below {TITLE_MATCH_THRESHOLD}")
     if claimed_year and found_year and abs(claimed_year - found_year) > 1:
         notes.append(f"year claimed {claimed_year}, Crossref says {found_year}")
-    if entry.get("doi") and entry["doi"].lower() != (doi or "").lower():
-        notes.append(f"DOI in the entry does not match Crossref: {entry['doi']} vs {doi}")
+    if entry.get("doi") and not by_doi and entry["doi"].lower() != (doi or "").lower():
+        notes.append(f"DOI in the entry does not match the title search result: "
+                     f"{entry['doi']} vs {doi}")
 
     status = "CONFIRMED" if not notes else "MISMATCH"
+    how = "resolved by DOI" if by_doi else "matched by title search"
     return Result(ref_id, title, status, doi, found_title, found_year,
-                  claimed_year, score, "; ".join(notes) or "matched")
+                  claimed_year, score, "; ".join(notes) or how)
 
 
 def main() -> int:
@@ -140,11 +197,12 @@ def main() -> int:
     lines = ["# Reference verification report", ""]
     lines.append(f"Checked {len(results)} entries against Crossref.")
     lines.append("")
-    for status in ("CONFIRMED", "MISMATCH", "UNRESOLVED", "SKIPPED"):
+    for status in ("CONFIRMED", "MISMATCH", "UNRESOLVED", "UNSOURCED", "SKIPPED"):
         lines.append(f"- {status}: {counts.get(status, 0)}")
     lines.append("")
 
     for status, heading in (
+        ("UNSOURCED", "Unsourced, which need a source or a softened claim"),
         ("MISMATCH", "Mismatches, which need a human"),
         ("UNRESOLVED", "Unresolved, which need a human"),
         ("SKIPPED", "Skipped by kind, verify by URL"),
@@ -170,10 +228,11 @@ def main() -> int:
                          encoding="utf-8")
 
     print(f"\nWrote {args.out} and {args.json}")
-    for status in ("CONFIRMED", "MISMATCH", "UNRESOLVED", "SKIPPED"):
+    for status in ("CONFIRMED", "MISMATCH", "UNRESOLVED", "UNSOURCED", "SKIPPED"):
         print(f"  {status}: {counts.get(status, 0)}")
 
-    bad = counts.get("MISMATCH", 0) + counts.get("UNRESOLVED", 0)
+    bad = (counts.get("MISMATCH", 0) + counts.get("UNRESOLVED", 0)
+           + counts.get("UNSOURCED", 0))
     if bad:
         print(f"\n{bad} entries need a human before this list can be printed.")
         return 1

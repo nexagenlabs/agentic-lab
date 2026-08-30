@@ -2,39 +2,29 @@
 
 Checked 47 entries against Crossref.
 
-Of 23 confirmations, 23 were resolved by DOI and 0 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
+Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
 
-- CONFIRMED: 23
+- CONFIRMED: 24
 - MISMATCH: 0
-- UNRESOLVED: 1
-- UNSOURCED: 3
-- SKIPPED: 20
+- UNRESOLVED: 0
+- UNSOURCED: 1
+- SKIPPED: 22
 
 ## Unsourced, which need a source or a softened claim
-
-**uiuc2026_token_overhead**
-  claimed: Token consumption in multi-agent versus single-agent systems
-  note:    This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports.
 
 **practitioner2026_coordination**
   claimed: Orchestration overhead and coordination cost in production agent pipelines
   note:    This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports.
-
-**clinical2026_load_comparison**
-  claimed: Comparative evaluation of single-agent and orchestrated multi-agent configurations under increasing task load in a clinical setting
-  note:    This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports.
-
-## Unresolved, which need a human
-
-**mitchener2025bixbench**
-  claimed: BixBench: a comprehensive benchmark for LLM-based agents in computational biology
-  note:    no Crossref result
 
 ## Skipped by kind, verify by URL
 
 **ghareeb2025robin**
   claimed: Robin: a multi-agent system for automating scientific discovery
   note:    arXiv preprint, verify at arxiv.org/abs/2505.13400
+
+**mitchener2025bixbench**
+  claimed: BixBench: a comprehensive benchmark for LLM-based agents in computational biology
+  note:    arXiv preprint, verify at arxiv.org/abs/2503.00096
 
 **fda_ema_2026_principles**
   claimed: Guiding principles of good artificial intelligence practice in drug development
@@ -107,6 +97,10 @@ Of 23 confirmations, 23 were resolved by DOI and 0 by title search. A DOI is che
 **ich_e6r3**
   claimed: Good clinical practice guideline E6(R3)
   note:    kind=standard, verify by URL: https://www.ich.org/page/efficacy-guidelines
+
+**mas_vs_sas_2025**
+  claimed: Single-agent or Multi-agent Systems? Why Not Both?
+  note:    arXiv preprint, verify at arxiv.org/abs/2505.18286
 
 **anthropic_multiagent_research**
   claimed: How we built our multi-agent research system
@@ -250,4 +244,10 @@ Of 23 confirmations, 23 were resolved by DOI and 0 by title search. A DOI is che
   claimed: InjecAgent: benchmarking indirect prompt injections in tool-integrated large language model agents
   found:   InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents
   doi:     10.18653/v1/2024.findings-acl.624
+  note:    resolved by DOI
+
+**clinical_scale_orchestration_2025**
+  claimed: Orchestrated multi agents sustain accuracy under clinical-scale workloads compared to a single agent
+  found:   Orchestrated multi agents sustain accuracy under clinical-scale workloads compared to a single agent
+  doi:     10.1101/2025.08.22.25334049
   note:    resolved by DOI

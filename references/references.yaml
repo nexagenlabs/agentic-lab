@@ -59,9 +59,16 @@ references:
     chapter: 1
     kind: preprint
     title: "BixBench: a comprehensive benchmark for LLM-based agents in computational biology"
-    authors: "Mitchener, L. et al."
+    authors: "Mitchener, L., Laurent, J. M., Andonian, A., Tenmann, B., Narayanan, S., Wellawatte, G. P., White, A., Sani, L. and Rodriques, S. G."
+    venue: "arXiv"
+    arxiv: "2503.00096"
     year: 2025
-    verified: false
+    verified: true
+    note: >
+      Deliberately carries no DOI. arXiv registers DOIs with DataCite rather
+      than Crossref, so pinning one would make this script report a failure it
+      had itself manufactured. The arxiv field moves the entry to SKIPPED,
+      verified at the abstract page instead.
 
   - id: qu2026biomnibench
     chapter: 1
@@ -540,17 +547,23 @@ references:
   # because none names a title or an author. They must either be sourced
   # properly or the claims must be softened before print.
 
-  - id: uiuc2026_token_overhead
+  - id: mas_vs_sas_2025
     chapter: 12
-    kind: unsourced
-    title: "Token consumption in multi-agent versus single-agent systems"
-    venue: "University of Illinois Urbana-Champaign"
-    year: 2026
-    verified: false
+    kind: preprint
+    title: "Single-agent or Multi-agent Systems? Why Not Both?"
+    venue: "arXiv"
+    arxiv: "2505.18286"
+    year: 2025
+    verified: true
     note: >
-      Backs the claim of four to two hundred and twenty times more tokens.
-      NEEDS SOURCING: no title, no authors, no venue beyond the institution.
-      Either find the paper or remove the range from Chapter 12.
+      Source of the four to two hundred and twenty times figure. Two
+      corrections came out of resolving it. The range is for INPUT, prefill
+      tokens across seven datasets, not tokens in general, and Chapter 12 said
+      tokens without qualification until this pass. The paper also reports a
+      second figure the chapter had missed and now carries: assuming perfect
+      context reuse, the multi-agent configuration still needs two to twelve
+      times more tokens for response generation. That is the floor that
+      survives optimisation and it is the number to budget against.
 
   - id: practitioner2026_coordination
     chapter: 12
@@ -559,22 +572,29 @@ references:
     year: 2026
     verified: false
     note: >
-      Backs the 950 milliseconds against 500, and the eighty per cent of
-      tokens spent on inter-agent description. NEEDS SOURCING: practitioner
-      writing, so it may be a blog post with a stable URL. Find it or attribute
-      the figures as one team's reported measurement rather than a study.
+      STILL UNSOURCED, and the chapter has been changed rather than left to
+      rest on it. The specific figures of 950 milliseconds against 500 and
+      29,000 tokens against 10,000 have been removed from Chapter 12. What
+      remains is the shape of the finding, attributed as practitioner
+      experience rather than measurement, and the eighty per cent claim is now
+      explicitly labelled as one team's report. If a stable source is found,
+      the numbers can return; until then the softened text stands and this
+      entry stays UNSOURCED so the gate keeps failing.
 
-  - id: clinical2026_load_comparison
+  - id: clinical_scale_orchestration_2025
     chapter: 12
-    kind: unsourced
-    title: "Comparative evaluation of single-agent and orchestrated multi-agent configurations under increasing task load in a clinical setting"
-    year: 2026
-    verified: false
+    kind: preprint
+    title: "Orchestrated multi agents sustain accuracy under clinical-scale workloads compared to a single agent"
+    venue: "medRxiv"
+    doi: "10.1101/2025.08.22.25334049"
+    year: 2025
+    verified: true
     note: >
-      Backs the 25,000 to 3.9 million against 3,700 to 60,000 token figures.
-      NEEDS SOURCING. This is the chapter's counter-evidence and the strongest
-      argument against its own thesis, so it is the one that most needs a
-      resolvable source.
+      The chapter's counter-evidence, and the strongest argument against its
+      own thesis, so it needed a resolvable source most of all. Batch sizes
+      from 5 to 80 across retrieval, extraction and dosing tasks. Confirm the
+      exact token and latency figures against the paper before print; the
+      chapter quotes several.
 
   - id: anthropic_multiagent_research
     chapter: 12

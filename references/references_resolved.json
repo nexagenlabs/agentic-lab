@@ -35,13 +35,13 @@
   {
     "ref_id": "mitchener2025bixbench",
     "claimed_title": "BixBench: a comprehensive benchmark for LLM-based agents in computational biology",
-    "status": "UNRESOLVED",
+    "status": "SKIPPED",
     "doi": null,
     "found_title": null,
     "found_year": null,
     "claimed_year": 2025,
     "title_score": null,
-    "note": "no Crossref result"
+    "note": "arXiv preprint, verify at arxiv.org/abs/2503.00096"
   },
   {
     "ref_id": "qu2026biomnibench",
@@ -473,15 +473,15 @@
     "note": "kind=standard, verify by URL: https://www.ich.org/page/efficacy-guidelines"
   },
   {
-    "ref_id": "uiuc2026_token_overhead",
-    "claimed_title": "Token consumption in multi-agent versus single-agent systems",
-    "status": "UNSOURCED",
+    "ref_id": "mas_vs_sas_2025",
+    "claimed_title": "Single-agent or Multi-agent Systems? Why Not Both?",
+    "status": "SKIPPED",
     "doi": null,
     "found_title": null,
     "found_year": null,
-    "claimed_year": 2026,
+    "claimed_year": 2025,
     "title_score": null,
-    "note": "This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports."
+    "note": "arXiv preprint, verify at arxiv.org/abs/2505.18286"
   },
   {
     "ref_id": "practitioner2026_coordination",
@@ -495,15 +495,15 @@
     "note": "This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports."
   },
   {
-    "ref_id": "clinical2026_load_comparison",
-    "claimed_title": "Comparative evaluation of single-agent and orchestrated multi-agent configurations under increasing task load in a clinical setting",
-    "status": "UNSOURCED",
-    "doi": null,
-    "found_title": null,
-    "found_year": null,
-    "claimed_year": 2026,
-    "title_score": null,
-    "note": "This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports."
+    "ref_id": "clinical_scale_orchestration_2025",
+    "claimed_title": "Orchestrated multi agents sustain accuracy under clinical-scale workloads compared to a single agent",
+    "status": "CONFIRMED",
+    "doi": "10.1101/2025.08.22.25334049",
+    "found_title": "Orchestrated multi agents sustain accuracy under clinical-scale workloads compared to a single agent",
+    "found_year": 2025,
+    "claimed_year": 2025,
+    "title_score": 100.0,
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "anthropic_multiagent_research",

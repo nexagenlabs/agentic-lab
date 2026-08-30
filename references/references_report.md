@@ -2,11 +2,13 @@
 
 Checked 47 entries against Crossref.
 
-- CONFIRMED: 22
-- MISMATCH: 1
-- UNRESOLVED: 2
+Of 23 confirmations, 7 were resolved by DOI and 16 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
+
+- CONFIRMED: 23
+- MISMATCH: 0
+- UNRESOLVED: 1
 - UNSOURCED: 3
-- SKIPPED: 19
+- SKIPPED: 20
 
 ## Unsourced, which need a source or a softened claim
 
@@ -22,26 +24,17 @@ Checked 47 entries against Crossref.
   claimed: Comparative evaluation of single-agent and orchestrated multi-agent configurations under increasing task load in a clinical setting
   note:    This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports.
 
-## Mismatches, which need a human
-
-**ghareeb2025robin**
-  claimed: Robin: a multi-agent system for automating scientific discovery
-  found:   SciAgents: Automating Scientific Discovery Through Bioinspired Multi‐Agent Intelligent Graph Reasoning
-  doi:     10.1002/adma.202413523
-  note:    title similarity 63 is below 88
-
 ## Unresolved, which need a human
 
 **mitchener2025bixbench**
   claimed: BixBench: a comprehensive benchmark for LLM-based agents in computational biology
   note:    no Crossref result
 
-**wickham2014tidydata**
-  claimed: Tidy data
-  found:   R package to convert statistical analysis objects to tidy data frames
-  note:    best Crossref hit scored 23, below the floor of 55, so nothing matching was found.
-
 ## Skipped by kind, verify by URL
+
+**ghareeb2025robin**
+  claimed: Robin: a multi-agent system for automating scientific discovery
+  note:    arXiv preprint, verify at arxiv.org/abs/2505.13400
 
 **fda_ema_2026_principles**
   claimed: Guiding principles of good artificial intelligence practice in drug development
@@ -221,7 +214,7 @@ Checked 47 entries against Crossref.
   claimed: Investigating the replicability of preclinical cancer biology
   found:   Investigating the replicability of preclinical cancer biology
   doi:     10.7554/elife.71601
-  note:    matched by title search
+  note:    resolved by DOI
 
 **baker2016reproducibility**
   claimed: 1,500 scientists lift the lid on reproducibility
@@ -234,6 +227,12 @@ Checked 47 entries against Crossref.
   found:   Good enough practices in scientific computing
   doi:     10.1371/journal.pcbi.1005510
   note:    matched by title search
+
+**wickham2014tidydata**
+  claimed: Tidy data
+  found:   Tidy Data
+  doi:     10.18637/jss.v059.i10
+  note:    resolved by DOI
 
 **ioannidis2005false**
   claimed: Why most published research findings are false

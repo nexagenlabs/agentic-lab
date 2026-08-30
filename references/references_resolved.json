@@ -24,13 +24,13 @@
   {
     "ref_id": "ghareeb2025robin",
     "claimed_title": "Robin: a multi-agent system for automating scientific discovery",
-    "status": "MISMATCH",
-    "doi": "10.1002/adma.202413523",
-    "found_title": "SciAgents: Automating Scientific Discovery Through Bioinspired Multi\u2010Agent Intelligent Graph Reasoning",
-    "found_year": 2025,
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
     "claimed_year": 2025,
-    "title_score": 63.03030303030304,
-    "note": "title similarity 63 is below 88"
+    "title_score": null,
+    "note": "arXiv preprint, verify at arxiv.org/abs/2505.13400"
   },
   {
     "ref_id": "mitchener2025bixbench",
@@ -217,7 +217,7 @@
     "found_year": 2021,
     "claimed_year": 2021,
     "title_score": 100.0,
-    "note": "matched by title search"
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "baker2016reproducibility",
@@ -244,13 +244,13 @@
   {
     "ref_id": "wickham2014tidydata",
     "claimed_title": "Tidy data",
-    "status": "UNRESOLVED",
-    "doi": null,
-    "found_title": "R package to convert statistical analysis objects to tidy data frames",
+    "status": "CONFIRMED",
+    "doi": "10.18637/jss.v059.i10",
+    "found_title": "Tidy Data",
     "found_year": 2014,
     "claimed_year": 2014,
-    "title_score": 23.076923076923073,
-    "note": "best Crossref hit scored 23, below the floor of 55, so nothing matching was found."
+    "title_score": 100.0,
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "ioannidis2005false",

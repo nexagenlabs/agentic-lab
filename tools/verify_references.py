@@ -145,6 +145,17 @@ def verify(entry: dict, client: httpx.Client) -> Result:
                       "author or venue that any tool can resolve. Source it or "
                       "remove the claim it supports.")
 
+    # An arXiv preprint that Crossref does not index cannot be verified here,
+    # and sending it to a title search produces a lexically similar paper on
+    # the same topic and calls it a mismatch. Two papers about multi-agent
+    # scientific discovery share most of their content words because they are
+    # about the same thing; no string metric separates them, and raising the
+    # floor far enough to try would discard genuine near-matches. Verify these
+    # by arXiv ID instead, and record that as a decision.
+    if entry.get("kind") == "preprint" and entry.get("arxiv"):
+        return Result(ref_id, title, "SKIPPED", None, None, None, claimed_year, None,
+                      f"arXiv preprint, verify at arxiv.org/abs/{entry['arxiv']}")
+
     if entry.get("kind") in {"standard", "regulation", "documentation", "dataset"}:
         return Result(ref_id, title, "SKIPPED", entry.get("doi"), None, None,
                       claimed_year, None,
@@ -238,7 +249,18 @@ def main() -> int:
         counts[r.status] = counts.get(r.status, 0) + 1
 
     lines = ["# Reference verification report", ""]
+    by_doi_count = sum(1 for r in results
+                       if r.status == "CONFIRMED" and "by DOI" in r.note)
+    confirmed = sum(1 for r in results if r.status == "CONFIRMED")
     lines.append(f"Checked {len(results)} entries against Crossref.")
+    lines.append("")
+    lines.append(
+        f"Of {confirmed} confirmations, {by_doi_count} were resolved by DOI and "
+        f"{confirmed - by_doi_count} by title search. A DOI is checked; a title "
+        f"match is inferred. Adding a DOI to an entry is the single highest "
+        f"value change available here, and it is safe to add one from any "
+        f"source, because this script resolves it and will report a mismatch "
+        f"if it is wrong.")
     lines.append("")
     for status in ("CONFIRMED", "MISMATCH", "UNRESOLVED", "UNSOURCED", "SKIPPED"):
         lines.append(f"- {status}: {counts.get(status, 0)}")

@@ -260,7 +260,14 @@ references:
     volume: "10"
     pages: "e71601"
     year: 2021
+    doi: "10.7554/eLife.71601"
     verified: false
+    note: >
+      Before the type filter existed, this entry was silently confirmed
+      against 10.7554/elife.71601.sa1, the decision letter reviewing the
+      article, which scored 100 because the article title is contained in the
+      letter title. Adding the DOI removes the title search from the path
+      entirely.
 
   - id: baker2016reproducibility
     chapter: 9
@@ -293,9 +300,17 @@ references:
     authors: "Wickham, H."
     venue: "Journal of Statistical Software"
     volume: "59"
+    issue: "10"
     pages: "1-23"
     year: 2014
+    doi: "10.18637/jss.v059.i10"
     verified: false
+    note: >
+      The DOI encodes v059.i10, which matches the volume and issue claimed
+      here. Adding it is safe even though it came from recall, because this
+      script resolves DOIs directly and will report a mismatch if it is wrong.
+      That asymmetry is worth internalising: a title cannot be checked by the
+      tool, a DOI can.
 
   - id: ioannidis2005false
     chapter: 0

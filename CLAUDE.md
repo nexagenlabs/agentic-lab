@@ -79,6 +79,18 @@ These come from the book's arguments and every build must follow them.
   then runs `verify_replay` through them to watch it die before trusting the
   offline replay that follows.
 
+- **Before creating a new top-level directory, check it is not already
+  ignored.** `git check-ignore -v <path>` before you write the first file.
+  `site/` was ignored by `/site` in `.gitignore`, a rule inherited from the
+  standard Python template where it means "mkdocs build output". This
+  repository has never used mkdocs. Four files were written, `git status`
+  showed nothing, `git add` said nothing, and there was no error anywhere: the
+  companion site behind thirteen printed URLs was invisible to version
+  control. The fix was to remove the rule, not to work around it, and
+  restoring it would be wrong for the same reason it was wrong to begin with,
+  because `site/` is hand-written content rather than build output. If mkdocs
+  is ever added, give it a different output directory.
+
 ## Tools may use the network. Tests may not.
 
 The rule above is **"tests must never make live API calls"**, and it means

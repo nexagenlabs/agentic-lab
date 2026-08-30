@@ -24,18 +24,21 @@
 # Chapter 0, setup. The clone, the virtual environment and the requirements.
 /setup               https://github.com/nexagenlabs/agentic-lab/blob/main/README.md             302
 
-# Chapter 3 covers Build 01 and Build 02. The printed URL lands on the first
-# of the pair; the hub lists both, and Build 02's README opens by saying what
-# it takes over from Build 01.
-/ch03                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/01-first-agent 302
-
-# Chapter 4 covers Build 03 and Build 04.
-/ch04                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/03-triage-agent 302
+# Chapters 3, 4 and 6 cover two builds each, so no single folder is the right
+# answer: landing on one would hide the other, and a reader who never finds
+# Build 02 has no way to know it exists. These three go to the builds tree,
+# which lists all twelve in one view, and the hub carries the chapter to build
+# mapping so a reader arriving from /ch03 knows to open 01 and 02.
+#
+# Single-build chapters are not made to follow suit. Uniformity would cost
+# eight readers a step and a choice to spare three from an ambiguity they do
+# not have. Where one folder is the whole answer, the printed URL goes there.
+/ch03                https://github.com/nexagenlabs/agentic-lab/tree/main/builds                302
+/ch04                https://github.com/nexagenlabs/agentic-lab/tree/main/builds                302
 
 /ch05                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/05-wrangler    302
 
-# Chapter 6 covers Build 06 and Build 07.
-/ch06                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/06-plate-mapper 302
+/ch06                https://github.com/nexagenlabs/agentic-lab/tree/main/builds                302
 
 /ch07                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/08-dock-loop   302
 /ch08                https://github.com/nexagenlabs/agentic-lab/tree/main/builds/09-eln-bridge  302

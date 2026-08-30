@@ -57,6 +57,20 @@ PRINTED_PATHS = (
 
 NEVER_PRINTED = ("/ch01", "/ch02")
 
+# Which builds each chapter covers, from the table in README.md. Three
+# chapters cover two builds, and that is why they are redirected differently.
+CHAPTER_BUILDS = {
+    "/ch03": ("01-first-agent", "02-tool-belt"),
+    "/ch04": ("03-triage-agent", "04-dual-screen"),
+    "/ch05": ("05-wrangler",),
+    "/ch06": ("06-plate-mapper", "07-protocol-adapter"),
+    "/ch07": ("08-dock-loop",),
+    "/ch08": ("09-eln-bridge",),
+    "/ch09": ("10-run-manifest",),
+    "/ch10": ("11-red-team",),
+    "/ch12": ("12-repurposing-desk",),
+}
+
 
 def rules() -> dict[str, tuple[str, str]]:
     """Every rule in _redirects, as {source: (destination, status)}."""
@@ -146,6 +160,54 @@ def test_every_destination_exists_in_the_repository(path: str):
         "does not exist in this repository. That is a dead link in a printed "
         "book."
     )
+
+
+@pytest.mark.parametrize("path", sorted(CHAPTER_BUILDS))
+def test_a_chapter_lands_where_all_of_its_code_is(path: str):
+    """One build, land in it. Two builds, land on the list of all of them.
+
+    A chapter covering two builds cannot be served by one folder: whichever is
+    chosen, the reader never learns the other exists, and a reader who follows
+    Chapter 3's printed address and never finds Build 02 is the exact failure
+    this scheme is for. Those three go to the builds tree, and the hub carries
+    the mapping.
+
+    Single-build chapters deliberately do not follow suit. Uniformity would
+    cost eight readers a step and a choice, to spare three from an ambiguity
+    they do not have. This test pins both halves, so a later tidy-up cannot
+    quietly collapse them into one rule.
+    """
+    destination, _status = rules()[path]
+    target = repository_path(destination)
+    assert target is not None
+    relative = target.relative_to(REPO_ROOT).as_posix()
+    builds = CHAPTER_BUILDS[path]
+
+    if len(builds) > 1:
+        assert relative == "builds", (
+            f"{path} covers {len(builds)} builds and points at {relative}. A "
+            "single folder hides the rest of the chapter."
+        )
+    else:
+        assert relative == f"builds/{builds[0]}", (
+            f"{path} covers exactly one build and should land in it, not on "
+            f"{relative}."
+        )
+
+
+def test_the_hub_maps_every_chapter_to_its_builds():
+    """A reader arriving from /ch03 has to be told they want 01 and 02."""
+    hub = flatten((SITE / "index.html").read_text(encoding="utf-8"))
+    for path, builds in CHAPTER_BUILDS.items():
+        if len(builds) == 1:
+            continue
+        assert flatten(path) in hub, f"the hub does not mention {path}"
+        for build in builds:
+            assert flatten(build) in hub, (
+                f"{path} covers {build} and the hub does not say so, so a "
+                "reader landing on the builds tree cannot tell which two are "
+                "theirs"
+            )
 
 
 def test_redirects_are_temporary_so_a_correction_can_reach_a_reader():

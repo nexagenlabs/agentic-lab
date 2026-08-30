@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 import ssl
 import sys
 from dataclasses import asdict, dataclass
@@ -50,13 +51,35 @@ SITE = "https://lab.nexagenlabs.com"
 HUB_HOST = "lab.nexagenlabs.com"
 CODE_HOST = "github.com"
 
-# Paths the book never prints. A reader who mistypes one should still land
-# somewhere useful rather than dead-ending.
+# Paths the book never prints, because Chapters 1 and 2 ship no code.
+#
+# These return 404, and that is correct rather than a defect. Do not "fix" it.
+# Three reasons, in order of how expensive they are to relearn:
+#
+#   1. The resource genuinely does not exist. Returning 200 for a page that is
+#      not there is a soft 404: it misleads every cache and crawler that meets
+#      it, and it has the site assert that /ch01 is a real page.
+#   2. site/404.html explains that Chapters 1 and 2 ship no code, and links to
+#      the hub. That is strictly more informative than a silent redirect,
+#      which would leave a reader wondering whether the hub is the Chapter 1
+#      page they were looking for.
+#   3. The only routes to a 200 are a redirect rule for these exact paths,
+#      which tests/test_site_urls.py forbids because inventing a destination
+#      sends a reader to the wrong build, or a catch-all splat, which would
+#      swallow every legitimate typo along with these two.
+#
+# So the assertion here is not "reaches the hub". It is "does not dead-end":
+# a 404 status, the explanatory page, a link to the hub, and that link
+# actually working. An explanation pointing nowhere is worse than a bare 404.
 NEVER_PRINTED = ("/ch01", "/ch02")
+EXPECTED_UNPRINTED_STATUS = 404
 
 # A string that appears on the hub and nowhere else, so "did this reach the
 # hub" is answered by what was served rather than by the status code alone.
 HUB_MARKER = "Which builds belong to which chapter"
+
+# The same, for the explanatory page, so a bare server error cannot pass as it.
+NOT_FOUND_MARKER = "That address does not exist here"
 
 TIMEOUT = 30.0
 
@@ -65,7 +88,9 @@ TIMEOUT = 30.0
 class Result:
     path: str
     requested: str
-    status: str          # OK | CERTIFICATE | UNREACHABLE | STATUS | HOST | CONTENT
+    # OK | CERTIFICATE | UNREACHABLE | STATUS | HOST | CONTENT
+    # | NO_HUB_LINK | HUB_LINK_DEAD
+    status: str
     http_status: int | None
     final_url: str | None
     final_host: str | None
@@ -146,6 +171,70 @@ def check(client: httpx.Client, path: str, expected_host: str,
                   hops, "resolved, valid certificate, 200")
 
 
+HUB_LINK = re.compile(r'href="(/|https://lab\.nexagenlabs\.com/?)"')
+
+
+def check_unprinted(client: httpx.Client, path: str) -> Result:
+    """A path the book never prints must not dead-end. It may still 404.
+
+    Four things, and the last is the one people leave out: the status is 404,
+    the explanatory page was served rather than a bare error, that page links
+    to the hub, and following the link actually works. An explanation pointing
+    nowhere is worse than a bare 404, because it costs the reader a second
+    attempt before they give up.
+    """
+    url = f"{SITE}{path}"
+    try:
+        response = client.get(url)
+    except Exception as error:  # noqa: BLE001 - classified, then reported
+        tls = certificate_problem(error)
+        if tls:
+            return Result(path, url, "CERTIFICATE", None, None, None, 0, tls)
+        return Result(path, url, "UNREACHABLE", None, None, None, 0,
+                      f"{type(error).__name__}: {error}")
+
+    final_url = str(response.url)
+    final_host = urlparse(final_url).netloc
+    hops = len(response.history)
+
+    if response.status_code != EXPECTED_UNPRINTED_STATUS:
+        return Result(path, url, "STATUS", response.status_code, final_url,
+                      final_host, hops,
+                      f"status {response.status_code}, expected "
+                      f"{EXPECTED_UNPRINTED_STATUS}. A path that does not "
+                      "exist should say so.")
+
+    if NOT_FOUND_MARKER not in response.text:
+        return Result(path, url, "CONTENT", response.status_code, final_url,
+                      final_host, hops,
+                      "404 was returned but the explanatory page was not "
+                      "served, so the reader gets a bare error and no way on")
+
+    if not HUB_LINK.search(response.text):
+        return Result(path, url, "NO_HUB_LINK", response.status_code,
+                      final_url, final_host, hops,
+                      "the explanatory page does not link to the hub, so a "
+                      "reader who mistyped has nowhere to go")
+
+    # The link has to work. This is the assertion that would have caught a
+    # hub that stopped resolving while the 404 page still cheerfully pointed
+    # at it.
+    try:
+        onward = client.get(f"{SITE}/")
+    except Exception as error:  # noqa: BLE001
+        return Result(path, url, "HUB_LINK_DEAD", response.status_code,
+                      final_url, final_host, hops,
+                      f"the hub link does not resolve: {error}")
+    if onward.status_code != 200 or HUB_MARKER not in onward.text:
+        return Result(path, url, "HUB_LINK_DEAD", response.status_code,
+                      final_url, final_host, hops,
+                      f"the hub link returns {onward.status_code} and does "
+                      "not serve the hub")
+
+    return Result(path, url, "OK", response.status_code, final_url, final_host,
+                  hops, "404 as it should, explains why, and the hub link works")
+
+
 def render(results: list[Result], unprinted: list[Result]) -> str:
     lines = ["# Printed URL verification", ""]
     lines.append(f"Checked {len(results)} printed URLs and "
@@ -175,14 +264,16 @@ def render(results: list[Result], unprinted: list[Result]) -> str:
 
     lines.append("## Paths the book never prints")
     lines.append("")
-    lines.append("A reader who mistypes one character should not dead-end.")
+    lines.append("These must not dead-end. A 404 is correct here, because "
+                 "the page does not exist; what is asserted is that the "
+                 "explanatory page is served and its link to the hub works.")
     lines.append("")
-    lines.append("| Path | Status | HTTP | Landed on |")
+    lines.append("| Path | Status | HTTP | Behaviour |")
     lines.append("|---|---|---|---|")
     for result in unprinted:
         lines.append(
             f"| `{result.path}` | {result.status} | "
-            f"{result.http_status or '-'} | {result.final_url or '-'} |"
+            f"{result.http_status or '-'} | {result.note} |"
         )
     lines.append("")
 
@@ -220,8 +311,7 @@ def main() -> int:
                                  expect_hub_content=(path == "/")))
         for path in NEVER_PRINTED:
             print(f"  {path} (never printed)")
-            unprinted.append(check(client, path, HUB_HOST,
-                                   expect_hub_content=True))
+            unprinted.append(check_unprinted(client, path))
 
     report = render(results, unprinted)
     # Deliberately not written into site/. That is Netlify's publish

@@ -1,0 +1,14 @@
+class WriteProposal(BaseModel):
+    proposal_id: str
+    target_system: str
+    target_record: str | None          # None means create
+    operation: Literal["create", "append"]   # note: no update, no delete
+    payload: dict
+    derived_from: list[str]            # record IDs that informed this
+    model_id: str
+    model_version: str
+    run_id: str
+    proposed_at: datetime
+    approved_by: str | None = None
+    approved_at: datetime | None = None
+    approval_note: str | None = None

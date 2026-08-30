@@ -146,3 +146,31 @@ listings:
     note: >
       Both Chapter 7 listings target the same file and must appear as two
       separate verbatim blocks.
+
+  # ---- Chapter 8 ----
+
+  - file: listings/ch08/01_retrieved_content.txt
+    target: builds/09-eln-bridge/untrusted.py
+    mode: exact
+    chapter: 8
+    heading: "Stage one: everything read is untrusted input"
+
+  - file: listings/ch08/02_write_proposal.txt
+    target: builds/09-eln-bridge/models.py
+    mode: exact
+    chapter: 8
+    heading: "Stage two: the agent proposes, it does not write"
+
+  # ---- Chapter 9 ----
+
+  - file: listings/ch09/01_run_manifest.txt
+    target: builds/10-run-manifest/models.py
+    mode: exact
+    chapter: 9
+    heading: "The manifest itself"
+
+  - file: listings/ch09/02_hash_file.txt
+    target: builds/10-run-manifest/hashing.py
+    mode: exact
+    chapter: 9
+    heading: "Hash the content, not the filename"

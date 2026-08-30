@@ -1,0 +1,30 @@
+class RunManifest(BaseModel):
+    run_id: str
+    started_at: datetime
+    finished_at: datetime | None
+    status: Literal["COMPLETE", "INCOMPLETE", "FAILED"]
+    halt_reason: str | None
+
+    # environment
+    python_version: str
+    lockfile_sha256: str
+    git_commit: str
+    git_dirty: bool                  # uncommitted changes present
+
+    # models, one entry per distinct model used
+    models: list[ModelUse]           # id, version, temperature, seed
+
+    # inputs, addressed by content rather than by name
+    inputs: list[InputRecord]        # path, sha256, bytes, retrieved_at
+    external_calls: list[ExternalCall]   # endpoint, query, response_sha256
+
+    # decisions carried from earlier chapters
+    criteria_version: int | None
+    mapping_ids: list[str]
+    design_ids: list[str]
+    approvals: list[str]
+
+    # outputs
+    outputs: list[OutputRecord]      # path, sha256
+    trace_path: str
+    trace_sha256: str

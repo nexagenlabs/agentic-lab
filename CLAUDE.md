@@ -79,6 +79,21 @@ These come from the book's arguments and every build must follow them.
   then runs `verify_replay` through them to watch it die before trusting the
   offline replay that follows.
 
+## Tools may use the network. Tests may not.
+
+The rule above is **"tests must never make live API calls"**, and it means
+tests. `tools/` is not covered by it.
+
+`tools/verify_references.py` queries Crossref over the network, deliberately,
+and cannot do its job any other way: it exists to establish that every
+reference in Appendix D resolves to a real record whose title matches what the
+book claims, and a stubbed Crossref would verify nothing. It is run by hand or
+in CI, never by `pytest`, and no build imports it.
+
+So: a network call inside `builds/*/tests/` is a defect. A network call inside
+`tools/` may be the point of the file. If a later session finds one there, read
+what it is for before removing it.
+
 ## The session report
 
 `HANDOFF.md` is the session report, gitignored, and overwritten by whoever runs

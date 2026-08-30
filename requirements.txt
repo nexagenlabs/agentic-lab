@@ -24,5 +24,10 @@ biopython>=1.83
 pytest>=8.0,<10.0
 pyyaml>=6.0
 
+# tools/verify_references.py only. Title comparison against what Crossref
+# returns, so a reference whose title drifted from the record is a score
+# rather than an argument. No build imports it and no test needs it.
+rapidfuzz>=3.0,<4.0
+
 # Introduced in Chapter 3, after the raw loop
 langgraph>=1.0,<2.0

@@ -1,0 +1,50 @@
+# builds/12-repurposing-desk/fixtures/question.yaml
+#
+# The question the chapter asks. Read the note in fixtures/README.md before
+# reading the shortlist this produces: the corpus this desk retrieves from is
+# Build 03's hepatotoxicity corpus, and it does not contain the evidence this
+# question is asking about. That mismatch is not a defect in the fixture. It
+# is the most useful thing the assembled desk demonstrates, and the README
+# says why at length.
+question_id: Q-IVM-PKC-001
+text: >
+  Which approved antiparasitic agents show evidence of activity against PKC
+  isoforms in liver-derived human cell models, and which of them are worth
+  docking against the target?
+
+# Build 08's fabricated receptors stand in for the isoform. KIN-BETA is the
+# one with a recorded docking library behind it.
+target: KIN-BETA
+target_line: U87MG
+shortlist_n: 3
+criteria_version: 3
+
+# Compound name to the ligand identifier a docking run can address. In a real
+# desk this comes from a chemical registry; here it is a declared input with a
+# hash in the manifest, so the connection between a name in an abstract and a
+# structure on disk is a recorded decision rather than one somebody made in
+# their head between two stages.
+#
+# Assigned alphabetically to Build 08's recorded ligands. Alphabetical because
+# it is a rule stated in advance rather than an arrangement chosen after
+# seeing the scores, which matters: the ranking is by docking score, so
+# choosing this mapping after looking would be choosing the shortlist.
+compound_ligands:
+  albendazole: ACT-001
+  amiodarone: ACT-002
+  chlorpromazine: ACT-003
+  clozapine: ACT-004
+  diclofenac: ACT-005
+  fluconazole: ACT-006
+  itraconazole: ACT-007
+  ivermectin: ACT-008
+  ketoconazole: DEC-001
+  mebendazole: DEC-002
+  metformin: DEC-003
+  olanzapine: DEC-004
+  paracetamol: DEC-005
+  praziquantel: DEC-006
+  rifampicin: DEC-007
+  silibinin: DEC-008
+  simvastatin: DEC-009
+  troglitazone: DEC-010

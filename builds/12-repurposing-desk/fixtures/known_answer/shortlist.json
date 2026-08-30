@@ -1,0 +1,42 @@
+{
+  "note": "Produced by hand, not by the desk. make_checkpoints.py does not touch this file. A known answer produced by the system it checks is a tautology.",
+  "how_it_was_derived": [
+    "1. Take the records Build 03's committed gold.json labels 'include'. Those labels were hand-written for Build 03 and this build did not produce them, so the survivor set does not come from this desk's screening stub.",
+    "2. Read each included abstract for a compound name appearing in the question's compound_ligands map.",
+    "3. Map each compound to its ligand by the alphabetical rule the question declares, which was fixed before any score was looked at.",
+    "4. Read the best REMARK VINA RESULT from Build 08's recorded output for KIN-BETA and that ligand.",
+    "5. Sort ascending by that score and take three."
+  ],
+  "what_agreement_would_prove": "That the desk's screening agrees with Build 03's gold labels on the records that decide the top three, and that the compound-to-ligand mapping, the pdbqt parsing and the ranking arithmetic are all right. It would prove nothing about whether these three compounds are worth anybody's time.",
+  "what_agreement_would_not_prove": "The corpus, the gold labels, the docking scores and this file were all produced by the same project. Agreement is consistency across artefacts that share an origin, which is weaker than validation and should be read as such.",
+  "gold_included_compounds": 15,
+  "target": "KIN-BETA",
+  "shortlist": [
+    {
+      "position": 1,
+      "compound": "clozapine",
+      "ligand_id": "ACT-004",
+      "score": -9.6,
+      "evidence_pmids": ["99000005"]
+    },
+    {
+      "position": 2,
+      "compound": "chlorpromazine",
+      "ligand_id": "ACT-003",
+      "score": -9.3,
+      "evidence_pmids": ["99000005"]
+    },
+    {
+      "position": 3,
+      "compound": "diclofenac",
+      "ligand_id": "ACT-005",
+      "score": -9.1,
+      "evidence_pmids": ["99000007"]
+    }
+  ],
+  "next_out": [
+    {"compound": "albendazole", "ligand_id": "ACT-001", "score": -9.0},
+    {"compound": "simvastatin", "ligand_id": "DEC-009", "score": -8.8}
+  ],
+  "the_finding": "None of these three is an antiparasitic agent, and the question asked about antiparasitic agents. Build 03's corpus is a hepatotoxicity corpus. The desk answered the question the corpus could support rather than the question that was asked, and nothing in the pipeline noticed. See the build README."
+}

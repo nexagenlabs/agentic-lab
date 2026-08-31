@@ -14,6 +14,22 @@ and every input is a file. The agent's job in this chapter is to propose a
 layout and record a claim; the checking is Python, and Python is the only
 thing that touches a number.
 
+## What the chapter prints
+
+Two of the files here appear verbatim in Chapter 6, and
+`tests/test_listings.py` holds them to it.
+
+| File | Printed as |
+| --- | --- |
+| `designs/tmz_na_u87mg.yaml` | The design is a declaration, and it comes first |
+| `checks.py` | Arithmetic in Python, before the pipette |
+
+`EXPECTED_IC50` and `MIN_RELIABLE_UL` are referenced by the printed check
+without being printed themselves. They are module constants in `checks.py`,
+each carrying a comment saying where its value comes from, because a threshold
+with no stated origin is a number somebody will later adjust to make a test
+pass.
+
 ## The timestamp is the point
 
 Chapter 6 opens with an admission: the matrices were run, and the synergy
@@ -145,6 +161,6 @@ check refused it.
 
 ## What is not here
 
-Protocol adaptation is Build 07, whose listing sits in the manifest set to
-`skip` and whose target is `builds/07-protocol-adapter/models.py`. It has not
-been started.
+Protocol adaptation is Build 07, which takes the second half of Chapter 6 and
+carries that chapter's third listing in
+`builds/07-protocol-adapter/models.py`.

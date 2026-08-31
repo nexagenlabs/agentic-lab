@@ -38,9 +38,26 @@ evidence.
 under the schema. Type inference is how a well identifier becomes a float and
 a sample code becomes a date.
 
+## What the chapter prints
+
+Four of the files here appear verbatim in Chapter 5, and
+`tests/test_listings.py` holds them to it.
+
+| File | Printed as |
+| --- | --- |
+| `profile.py` | Stage one: profile before parsing |
+| `models.py` | Stage two: the mapping is a proposal, and it is data |
+| `transform.py` | Stage three: the transformation, with no model in sight |
+| `schema.py` | Stage four: a schema that knows about units |
+
+`_sniff` in `profile.py` is referenced by the printed listing without being
+printed itself. It returns `None` rather than raising, because `csv.Sniffer`
+throws readily on real exports and a profiler that dies on an awkward
+delimiter is no use on the files this build exists for.
+
 ## The fixtures are the deliverable
 
-`fixtures/` holds nine exports. The seven broken ones matter more than the
+`fixtures/` holds ten exports. The eight broken ones matter more than the
 code that catches them, and each carries a `.expected.json` naming the
 assertion that must fire.
 

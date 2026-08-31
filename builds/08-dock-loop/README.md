@@ -6,6 +6,21 @@ Structure Tools Inside an Agent Loop".
 Structure retrieval with provenance, a declared grid box, a docking run,
 result parsing, and a ranking that carries its own controls.
 
+## What the chapter prints
+
+Chapter 7's two listings both target `models.py`, so that file carries them as
+two separate verbatim blocks, and `tests/test_listings.py` holds it to both.
+
+| Block in `models.py` | Printed as |
+| --- | --- |
+| `StructureRecord` | Stage one: acquisition carries provenance |
+| `DockingBox` | Stage two: the grid box is a declared parameter |
+
+Both are declarations rather than logic, which is the chapter's point: where a
+structure came from and where the box was placed are parameters somebody chose,
+so they are recorded as data and travel with the result instead of living in
+whoever ran it.
+
 ## A docking score is a ranking, not a measurement
 
 Score to affinity correlations run from 0.10 to 0.38 across seven programs on

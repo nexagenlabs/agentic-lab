@@ -72,10 +72,16 @@ about them.
 
 ## Cross-build imports: settled
 
-Builds deliberately share module names. Four carry `config.py`, five carry
-`models.py`, four carry `tracing.py`, and they import each other's modules by
-bare name because the book prints `from config import MODEL` and a reader has
-to be able to open one folder and run `python profile.py` inside it.
+Builds deliberately share module names. Most of the twelve carry some of
+`config.py`, `models.py`, `tracing.py` and `stub_client.py`, and they import
+each other's modules by bare name because the book prints
+`from config import MODEL` and a reader has to be able to open one folder and
+run `python profile.py` inside it.
+
+The counts are left vague on purpose. An earlier version of this paragraph
+gave exact ones, they were correct when written, builds were added, and they
+were wrong for a long time before anyone noticed. Nothing depends on the
+number, only on the collision, so the number is not worth stating.
 
 Two obvious fixes were considered and both are wrong:
 
@@ -147,8 +153,8 @@ like coverage.
 
 ## A test that asserts something cannot happen must first be shown to bite
 
-Trigger the prohibition, watch the test fail, and only then assert the thing
-that should be safe.
+The pattern is to trigger the prohibition, watch the test fail, and only then
+assert the thing that should be safe.
 
 A patch that does nothing, a rule that matches nothing and a stub that never
 misbehaves all pass silently. A green test that was never in danger of going
@@ -179,7 +185,8 @@ QR codes for the two addresses the book does not print. Nothing owned the
 relationship between the two meanings, which is Chapter 12's failure account
 in miniature, inside the tooling for the book that contains it.
 
-Grep for a field before widening what it means.
+The lesson is that widening a field's meaning is not a local change, and every
+reader of it has to be found before the meaning moves.
 
 ## A figure quoted from a specification is not a measurement
 
@@ -206,10 +213,30 @@ its number from fixture data rather than reading it from a file alongside, a
 fixture that quietly made the check easy turns the check into decoration.
 Build 08's `fixtures/make_fixtures.py` is the pattern.
 
-## New top-level directories
+## How the repository is laid out
 
-Check that a directory is not already ignored before writing the first file
-into it.
+Nothing at the top level is build output. Every directory here is written by
+hand and committed, which is why the `.gitignore` note at the end of this
+section matters more than it looks.
+
+| Directory | What it holds |
+| --- | --- |
+| `builds/` | The twelve builds, one folder each, each standing alone. |
+| `listings/` | The code exactly as printed, plus `manifest.yaml` mapping each listing to the file that must contain it. |
+| `templates/` | Chapter 11's paperwork, plus the Chapter 2 and Chapter 4 templates. |
+| `tests/` | Repository-wide gates: listings, artefacts, build isolation, the stack inventory, the mutation gate, the site map. |
+| `tools/` | Run by hand or in CI, never by pytest. The three network-using files live here. |
+| `references/` | Appendix D's bibliography and its resolved records. |
+| `site/` | The companion site behind the thirteen printed URLs, including `_redirects`. |
+| `qr/` | One QR code per printed URL, with the decode report that verified them. |
+| `docs/` | This file. |
+
+`README.md`, `MODELS.md` and `LICENSE` are the front door. `REVIEW.md`,
+`CLAIMS.md` and `PLAN.md` are a record: an adversarial review performed
+against a fresh clone, the behavioural claims the book makes that no gate can
+check, and what was and was not fixed in response.
+
+### `site/` was invisible for a while, and that is worth knowing
 
 `site/` was ignored by `/site` in `.gitignore`, a rule inherited from the
 standard Python template where it means "mkdocs build output". This repository
@@ -221,14 +248,14 @@ for the same reason it was wrong to begin with, because `site/` is hand
 written content rather than build output. If mkdocs is ever added, it gets a
 different output directory.
 
-`git check-ignore -v <path>` is the check, and it has a trap. Given a
-directory that does not exist yet and a trailing slash, it reports a match
-against a blank line in `.gitignore` and exits 0 for any name at all, so
+`git check-ignore -v` is the natural check, and it has a trap worth recording.
+Given a directory that does not exist yet and a trailing slash, it reports a
+match against a blank line in `.gitignore` and exits 0 for any name at all:
 `docs/`, `zzz/` and `notreal/` all come back "ignored" when none of them is.
-Query the path without a trailing slash, and confirm with the two things that
-actually failed during the `site/` incident: `git status` should show the
-directory as untracked, and `git add --dry-run` should print the file it
-would add.
+Without the trailing slash it answers correctly. The two signals that actually
+failed during the `site/` incident are the reliable ones, since they are the
+ones that went quiet: an untracked directory shows up in `git status`, and
+`git add --dry-run` names the file it would add.
 
 ## Style
 

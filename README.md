@@ -30,6 +30,37 @@ pip install -r requirements.txt
 | 11 | Red Team | 10 |
 | 12 | Repurposing Desk | 12 |
 
+Chapters 1 and 2 ship no code. Chapter 11 ships paperwork rather than a build,
+and it lives in [templates/](templates/).
+
+Each build folder has its own README saying what it does, which files the
+chapter prints, and how to run it.
+
+## What else is here
+
+| | |
+|---|---|
+| [`templates/`](templates/) | Chapter 11's Context of Use, plus the Chapter 2 and Chapter 4 templates. |
+| [`listings/`](listings/) | The code as printed, and the manifest that holds the repository to it. |
+| [`tools/`](tools/) | Reference, URL and QR checks. Run by hand, never by the test suite. |
+| [`references/`](references/) | Appendix D, with every citation resolved against Crossref. |
+| [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) | How the repository is organised and why, including the decisions that are easy to undo by accident. |
+
+[REVIEW.md](REVIEW.md) is an adversarial review of this repository performed
+against a fresh clone, [CLAIMS.md](CLAIMS.md) lists the behavioural claims the
+book makes that no gate can check, and [PLAN.md](PLAN.md) records what was
+fixed in response and what was not.
+
+## Run the tests
+
+```bash
+pytest
+```
+
+No API key is needed and nothing reaches the network: every model response in
+every build comes from a committed fixture replayed by a stub client. To run
+one build on its own, `pytest builds/05-wrangler/tests/`.
+
 ## Model names
 
 Model names change faster than books do. See [MODELS.md](MODELS.md) for the

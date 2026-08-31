@@ -6,6 +6,19 @@ Adapt a published protocol to a different cell line, and emit a diff naming
 every parameter that changed, every parameter carried over unchanged, and
 every parameter the source never stated.
 
+## What the chapter prints
+
+One file here appears verbatim in Chapter 6, and `tests/test_listings.py`
+holds it to it.
+
+| File | Printed as |
+| --- | --- |
+| `models.py` | Build 07: The Protocol Adapter |
+
+`Adaptation` is the shape the rest of the build is arranged around: four lists
+that every parameter must land in exactly one of, checked by a validator on
+the model rather than by an instruction in a prompt.
+
 ## The adapted protocol is not the product. The diff is.
 
 Chapter 6's failure account is an adapter that changed the concentrations it

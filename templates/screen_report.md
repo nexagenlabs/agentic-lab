@@ -1,6 +1,6 @@
 # Screening report
 
-**Template for Chapter 4.** `builds/04-dual-screen/reporting.py` fills this in
+**Template for Chapter 4.** `builds/04-dual-screen/report.py` fills this in
 from a run. This copy exists so you can see the shape without running anything,
 and so you can adapt it for a screen built outside this repository.
 

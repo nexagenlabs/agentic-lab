@@ -60,9 +60,16 @@ modules called `agent`, `config` and `stub_client`: each build has to stand
 alone for a reader who opens only that folder. Python caches modules by name,
 so without help the build collected first would hand its modules to the
 second. Two things prevent it. `pyproject.toml` sets
-`--import-mode=importlib`, which settles the test module names, and each
-build's `tests/conftest.py` drops any cached module belonging to a different
-build before importing its own.
+`--import-mode=importlib`, which settles the test module names, and the
+repository root `conftest.py` keeps exactly one build importable at a time,
+moving the other builds' modules into a per-build cache and putting them back
+when that build runs again. They are parked rather than discarded: a module
+that is thrown away gets re-executed on the next import, which quietly
+produces a second copy of every class in it.
+
+The `tests/conftest.py` in this folder does something smaller and separate. It
+puts this build's directory on the path, so a reader who copies out only this
+folder still gets `import config` working.
 
 Both builds also carry `test_this_build_imported_its_own_modules`, which fails
 loudly if that ever stops working. Without it the symptom is not an error: the

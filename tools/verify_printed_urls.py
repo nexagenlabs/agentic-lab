@@ -14,7 +14,8 @@ Exit code is non-zero if any printed URL fails, so it can gate a print run.
 ## This is a tool, not a test
 
 It makes real network requests, exactly as `tools/verify_references.py` does,
-and the CLAUDE.md rule against live calls governs tests rather than tools. It
+and the rule against live calls in `docs/CONVENTIONS.md` governs tests rather
+than tools. It
 is deliberately not in `testpaths` and must never be added: a suite that fails
 when the internet is down is a suite people learn to ignore, and the one thing
 worse than an unchecked reference list is a checked one nobody reads any more.

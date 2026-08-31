@@ -201,7 +201,7 @@ of work on the harness would improve.
 
 ## Prove the harness bites
 
-Per the rule in `CLAUDE.md` that this session added, a check that asserts
+Per the rule in `docs/CONVENTIONS.md`, a check that asserts
 something cannot happen has to be shown failing first. Two parametrised tests
 do it for every family:
 

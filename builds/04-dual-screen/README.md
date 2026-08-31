@@ -8,8 +8,8 @@ Screening That Survives Peer Review", second half.
 Chapter 4 prints three code listings and all three belong to Build 03. Nothing
 in this build appears verbatim on a printed page, so
 `tests/test_listings.py` has no entry for it and the fourth point in the
-project's definition of done is vacant here rather than unmet. The `SPEC.md`
-beside this file is the whole specification.
+project's definition of done is vacant here rather than unmet. What this build
+does is described below rather than pinned to a page.
 
 ## What this build does
 

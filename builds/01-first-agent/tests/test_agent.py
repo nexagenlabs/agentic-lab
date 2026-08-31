@@ -72,7 +72,7 @@ def test_rejections_reach_the_trace(tmp_path: Path) -> None:
     """dispatch takes no trace, so the loop has to record the refusal.
 
     A rejection nobody can count is a rejection nobody will fix, which is why
-    CLAUDE.md rule 5 asks for it in the trace whoever writes it there.
+    convention 5 asks for it in the trace whoever writes it there.
     """
     client = StubClient.from_fixture("malformed_arguments")
 

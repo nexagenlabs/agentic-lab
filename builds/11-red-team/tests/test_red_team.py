@@ -211,7 +211,7 @@ def test_families_are_open():
 
 @pytest.mark.parametrize("family", FAMILIES)
 def test_each_family_has_a_fault_the_bare_builds_miss(bare, family):
-    """The CLAUDE.md rule, applied to the harness itself.
+    """The prove-it-bites rule, applied to the harness itself.
 
     A red team that only ever reports successes has reproduced this chapter's
     failure one level up. For every family there is a fault the earlier builds

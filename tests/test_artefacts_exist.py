@@ -20,6 +20,19 @@ ABSENT, with the same rule the mutation gate uses for its survivors: each must
 still be absent, so the moment somebody writes one this gate fails and asks for
 it to be moved into ARTEFACTS. A recorded absence is a finding kept in view,
 never permission to stay missing.
+
+Deliberately removed, and so in neither list: `CLAUDE.md` and the twelve
+`builds/*/SPEC.md`. They were internal production scaffolding and were trimmed
+from HEAD, where a visitor now sees the companion code rather than the
+machinery that produced it. Both remain in history, and the substance of
+`CLAUDE.md` is in `docs/CONVENTIONS.md`, which is checked below in its place.
+
+They are not in ABSENT because ABSENT means "still owed", and these are not
+owed. That leaves one question open which this file cannot settle: their
+entries here were annotated "Appendix B", so if that appendix prints a tree
+naming them, the page and the tree now disagree and it is the page that has to
+change. Nothing in this repository holds Appendix B, so nothing here can check
+it.
 """
 
 from __future__ import annotations
@@ -67,7 +80,7 @@ def _artefacts() -> tuple[Artefact, ...]:
         Artefact("requirements.txt", "Chapter 1's install instruction"),
         Artefact("requirements.lock.txt", "Chapter 1, the tested versions"),
         Artefact("MODELS.md", "Chapter 2, and README.md sends readers to it"),
-        Artefact("CLAUDE.md", "Appendix B, the standing instructions"),
+        Artefact("docs/CONVENTIONS.md", "the conventions the builds follow"),
 
         # Chapter 11 ships paperwork rather than a build, and Chapter 2 and
         # Chapter 4 each contribute a template to the same folder.
@@ -106,7 +119,6 @@ def _artefacts() -> tuple[Artefact, ...]:
         named += [
             Artefact(f"builds/{build}", "Appendix B's tree", "dir"),
             Artefact(f"builds/{build}/README.md", "the build's own chapter"),
-            Artefact(f"builds/{build}/SPEC.md", "Appendix B, one spec per build"),
             Artefact(f"builds/{build}/stack.yaml", "Chapter 2, emitted per build"),
             Artefact(f"builds/{build}/stack.py", "Chapter 2, the emitter"),
             Artefact(f"builds/{build}/tests", "Appendix B, one gate per build",

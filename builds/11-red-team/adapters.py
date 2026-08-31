@@ -2,7 +2,8 @@
 
 ## Why subprocesses
 
-The spec offers a choice: use the isolation mechanism settled in `CLAUDE.md`,
+There are two ways to reach the earlier builds: the isolation mechanism
+settled in `docs/CONVENTIONS.md`,
 or wrap each build behind a subprocess. This build uses subprocesses, for two
 reasons.
 

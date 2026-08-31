@@ -648,3 +648,55 @@ tested. Eleven of fourteen guards caught says eleven guards have a test that
 notices their removal. It says nothing about the other several hundred lines
 of each build, and a run with no survivors would not mean the suite is
 complete. It would mean these fourteen anchors are covered.
+
+## The printed URLs: the map is gated, the territory is not
+
+**Added after the review.** This addendum exists because a different one was
+proposed for this section, checked against the code, and found to be false: it
+claimed `tools/verify_printed_urls.py` reads `site/_redirects` rather than
+requesting the paths, leaving `/ch01` and `/ch02` verified as map only. It does
+request them. `check_unprinted` performs a live `client.get` for both and
+asserts four things about each. The finding below is what survived checking.
+
+Thirteen URLs are printed in the book. Two checks stand behind them and they
+verify different things.
+
+`tests/test_site_urls.py` runs in `pytest`, offline. It asserts that every
+printed path has a rule in `site/_redirects`, that no rule invents a chapter
+shipping no code, that the redirects are temporary so a correction can still
+reach a reader, and, in the test its own docstring calls "the one that
+matters", that every destination resolves to a path which exists **in this
+repository**. `repository_path` maps the destination back onto the local tree
+and `target.exists()` is checked there. That is an assertion about the map.
+
+`tools/verify_printed_urls.py` requests all thirteen against the live site over
+real HTTPS with certificate verification left at its default, follows the
+redirect chain, and checks where each one lands. It then checks `/ch01` and
+`/ch02`, which the book never prints, for a 404 that serves the explanatory
+page, links to the hub, and whose hub link actually resolves. That is an
+assertion about the territory.
+
+**The gap.** Nothing in `pytest` closes it, and that is deliberate. The tool is
+absent from `testpaths` and must stay absent, because a suite that fails when
+the internet is down is a suite people learn to ignore, and an ignored suite is
+worse than none since it still looks like coverage. The consequence is worth
+stating at full size: the offline gate cannot see DNS, cannot see TLS, cannot
+see whether Netlify deployed, cannot see whether GitHub renamed its URL scheme,
+and cannot see whether the destination still exists on the remote rather than
+only in the local clone. Every printed URL can be green in `pytest` for the
+life of the repository and dead in the world on the day somebody scans it.
+
+This applies to all thirteen, not to a subset. `/ch01` and `/ch02` are the two
+paths where the coverage is strongest rather than weakest: they are the only
+ones for which any check confirms that an onward link actually works.
+
+**A smaller thing that follows.** The tool writes `printed_urls_report.md` and
+`printed_urls_report.json`, and both are gitignored, for the good reason that a
+report of what was live at one moment goes stale immediately and a committed
+one would have the repository asserting something it cannot know is still true.
+The effect is that nothing in the repository records when the territory was
+last checked, or what it said. `tools/generate_qr_codes.py` refuses to run
+without that report, so the QR codes cannot be generated from a stale one, but
+that is a constraint on the codes rather than a record of the URLs. Between
+print runs the only evidence that the thirteen addresses resolve is somebody
+having run the tool and remembered the result.

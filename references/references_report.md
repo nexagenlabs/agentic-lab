@@ -31,11 +31,11 @@ Of 42 confirmations, 42 were resolved by DOI and 0 by title search. A DOI is che
   note:    kind=regulation, verify by URL: https://www.ema.europa.eu/en/documents/other/guiding-principles-good-ai-practice-drug-development_en.pdf
 
 **cfr21part11**
-  claimed: 21 CFR Part 11: Electronic records; electronic signatures
+  claimed: US Code of Federal Regulations, Title 21, Part 11: Electronic records; electronic signatures
   note:    kind=regulation, verify by URL: https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11
 
 **eu_ai_act**
-  claimed: Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence
+  claimed: Regulation (EU) 2024/1689 of the European Parliament and of the Council laying down harmonised rules on artificial intelligence
   note:    kind=regulation, verify by URL: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
 
 **fda2025ai_guidance**

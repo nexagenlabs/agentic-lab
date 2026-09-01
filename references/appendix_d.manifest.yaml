@@ -37,6 +37,20 @@
 #               entry's id, title or note, so an entry cannot be resolved from
 #               a description into a real paper without recording what the
 #               appendix itself says.
+# entries[].printed_as
+#               "description" where the printed row still gives a description
+#               of a finding instead of a bibliographic citation. Those rows
+#               carry no title or author to check, so tools/appendix_render.py
+#               checks no fields on them and counts them instead. Run
+#               `python tools/appendix_render.py --emit` to get the string that
+#               turns one into a citation.
+# entries[].omits
+#               fields the printed row deliberately does not carry. The house
+#               style prints a DOI on some rows and not others, omits pages on
+#               a working paper, and dates no documentation. Omission is an
+#               editorial choice; contradiction is the error. Naming the
+#               omitted field keeps the choice explicit instead of relaxing the
+#               check for everybody.
 # entries[].duplicate_of
 #               present only where the appendix prints the same work twice.
 #               Names the earlier printed number. Such a row shares its id, and
@@ -61,6 +75,7 @@ appendix_d:
       id: mitchener2025bixbench
       chapter: 1
       phrase: "BixBench: a comprehensive benchmark for LLM-based agents in computational biology"
+      omits: [arxiv]
     - n: 5
       id: qu2026biomnibench
       chapter: 1
@@ -129,10 +144,12 @@ appendix_d:
       id: nawrath2026screening
       chapter: 4
       phrase: "Comparative evaluation of large language models for title and abstract screening against a low-prevalence gold standard set"
+      printed_as: description
     - n: 22
       id: mantyla2026disagreements
       chapter: 4
       phrase: "Evaluation of large language model agreement with human screeners across six systematic reviews in software engineering"
+      printed_as: description
     - n: 23
       id: ziemann2016genenames
       chapter: 5
@@ -149,10 +166,12 @@ appendix_d:
       id: pandera_docs
       chapter: 5
       phrase: "Pandera documentation"
+      omits: [year]
     - n: 27
       id: liu2026silentfailure
       chapter: 5
       phrase: "Silent failure and data consistency decay in multi-agent pipelines"
+      printed_as: description
     - n: 28
       id: loewe1926combination
       chapter: 6
@@ -177,14 +196,17 @@ appendix_d:
       id: fuentealba2023synergysoftware
       chapter: 6
       phrase: "Comparison of synergy quantification software on identical dose-response data"
+      printed_as: description
     - n: 34
       id: givrest2025
       chapter: 6
       phrase: "Good In Vitro Reporting Standards, developed alongside Good Cell Culture Practice 2.0 and OECD reporting guidance"
+      printed_as: description
     - n: 35
       id: ralston2026cellauth
       chapter: 6
       phrase: "Cell line authentication summary data, 2024 and 2025"
+      printed_as: description
     - n: 36
       id: trott2010vina
       chapter: 7
@@ -197,14 +219,17 @@ appendix_d:
       id: plewczynski2011docking
       chapter: 7
       phrase: "Comparative assessment of seven docking programs across approximately 1,300 protein-ligand complexes"
+      printed_as: description
     - n: 39
       id: scardino2023alphafolddocking
       chapter: 7
       phrase: "Assessment of AlphaFold models for structure-based virtual screening across 22 diverse targets"
+      printed_as: description
     - n: 40
       id: yu2026af3bias
       chapter: 7
       phrase: "Evaluation of AlphaFold 3 for protein-ligand complex prediction and its conformational biases"
+      printed_as: description
     - n: 41
       id: berman2000pdb
       chapter: 7
@@ -213,6 +238,7 @@ appendix_d:
       id: cfr21part11
       chapter: 8
       phrase: "Electronic records; electronic signatures"
+      omits: [year]
     - n: 43
       id: fda2018dataintegrity
       chapter: 8
@@ -241,10 +267,12 @@ appendix_d:
       id: chang2015replicable
       chapter: 9
       phrase: "Is economics research replicable? Sixty published papers from thirteen journals say usually not"
+      omits: [pages]
     - n: 50
       id: brodeur2026reproducibility
       chapter: 9
       phrase: "Computational reproducibility of 110 articles in journals with mandatory data and code sharing policies"
+      printed_as: description
     - n: 51
       id: errington2021cancerbiology
       chapter: 9
@@ -257,10 +285,12 @@ appendix_d:
       id: iarygina2026hcirepro
       chapter: 9
       phrase: "Reproducibility of shared materials at a major human-computer interaction conference"
+      printed_as: description
     - n: 54
       id: hornung2026barriers
       chapter: 9
       phrase: "Guidance on reproducible computational research and simulation studies"
+      printed_as: description
     - n: 55
       id: walters2023fabrication
       chapter: 10
@@ -277,18 +307,22 @@ appendix_d:
       id: ghostcite2026
       chapter: 10
       phrase: "Benchmark of citation hallucination rates across thirteen models and forty research domains"
+      printed_as: description
     - n: 59
       id: topaz2026lancetaudit
       chapter: 10
       phrase: "Prevalence of fabricated citations across more than two million published papers"
+      printed_as: description
     - n: 60
       id: phantom_references_2026
       chapter: 10
       phrase: "Audit of hallucinated citations in accepted conference papers"
+      printed_as: description
     - n: 61
       id: becker2026problemdrift
       chapter: 10
       phrase: "Problem drift in extended generative interactions"
+      printed_as: description
     - n: 62
       id: fda2025ai_guidance
       chapter: 11
@@ -314,14 +348,17 @@ appendix_d:
       id: mas_vs_sas_2025
       chapter: 12
       phrase: "Token consumption in multi-agent versus single-agent systems"
+      printed_as: description
     - n: 68
       id: practitioner2026_coordination
       chapter: 12
       phrase: "Orchestration overhead and coordination cost in production agent pipelines"
+      printed_as: description
     - n: 69
       id: clinical_scale_orchestration_2025
       chapter: 12
       phrase: "Comparative evaluation of single-agent and orchestrated multi-agent configurations under increasing task load in a clinical setting"
+      printed_as: description
     - n: 70
       id: anthropic_multiagent_research
       chapter: 12
@@ -342,3 +379,4 @@ appendix_d:
       id: further_reading_living_sources
       chapter: 0
       phrase: "Anthropic engineering blog and the Model Context Protocol documentation"
+      omits: [year]

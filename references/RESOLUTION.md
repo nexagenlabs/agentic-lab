@@ -5,8 +5,212 @@ records what a human decision still hangs on. Produced by running
 `tools/verify_references.py` against `references/references.yaml` until the
 output was byte-identical between consecutive runs.
 
-Three passes. The first checked the list as it stood. The second found the list
-was the wrong list. The third closed it against the printed page.
+Four passes. The first checked the list as it stood. The second found the list
+was the wrong list. The third closed it against the printed page. The fourth
+split the prose and built the checker that keeps the two records honest.
+
+---
+
+## Pass 4 — the note/gloss split and the checker
+
+### First: the refreshed appendix did not land
+
+`references/APPENDIX_D_AS_PRINTED.md` on disk is **byte-identical to the
+version committed in c783b82**. `git diff` is empty for it, its mtime predates
+the last commit's other files, and none of the three new identifiers appear in
+it: no `10.1007/BF01952257`, no `10.1002/9781119536604`, no `ALTEX`. Rows 20,
+28 and 34 still read exactly as they did.
+
+Nothing here is blocked by that — everything below is built and delivered — but
+the new checker is red on two rows because of it, and it will go green the
+moment the file is saved. I verified that rather than assuming it: applying
+your three described fixes to a scratch copy takes the checker from 2
+disagreements to **0**, and the scratch copy was then discarded.
+
+```
+--- against a copy with your three fixes applied
+0 printed rows disagree with the verified record.        exit=0
+
+--- against the file as it actually is on disk
+row 20 (cochrane_handbook_v6): year 2019 not on the page
+row 28 (loewe1926combination): title not on the page: "Über Kombinationswirkungen"
+2 printed rows disagree with the verified record.        exit=1
+```
+
+Row 34 already passes, because it is a description row and exempt — see below.
+
+### 1. The note/gloss split
+
+`references.yaml` now carries two prose fields, documented in its header:
+
+- **`gloss:`** reader-facing. This is what prints in Appendix D after the
+  bibliographic record, and it is the only prose in the file a reader ever
+  sees.
+- **`note:`** maintenance. How the entry was resolved, what was checked, what
+  is still open. **Never prints.**
+
+13 entries carry a gloss; 45 carry a note. Two long notes were split, their
+reader-facing halves lifted out verbatim: the Biomni preprint-title warning
+(printed entry 1) and the Szymanski NOVEL-to-INORGANIC explanation (printed
+entry 7), which now ends in `gloss` where it belongs — "the word that left the
+title is the word the correction was about."
+
+Ten glosses existed **only on the printed page** and had no counterpart in the
+file at all. They are now transcribed in: "Engineering documentation" on
+entries 12, 14 and 70; "Statistical data validation for dataframes" on 26;
+"Commercial authentication service report" on 35; "Specifically section
+11.10(e) on audit trails" on 42; "Indirect prompt injection evaluation" on 47;
+and the three further-reading glosses on 71 to 73. Before this pass, anyone
+regenerating appendix text from `references.yaml` would have dropped all ten
+without noticing.
+
+A test guards the direction of the split. `test_gloss_never_carries_maintenance_prose`
+bars a set of maintenance phrases — "appendix d reads", "not mine to make",
+"only the abstract", "unsourced", "crossref returns" — from the field that
+prints. Getting the two backwards is the failure mode, and it is silent.
+
+### 2. The checker
+
+`tools/appendix_render.py`, wrapped by
+`tests/test_printed_rows_match_record.py`. It renders only the bibliographic
+half of each entry — authors, title, venue, volume, pages, year, DOI, arXiv id
+— and asserts each field appears in the matching printed row. Prose, ordering
+and grouping stay with you.
+
+```
+python tools/appendix_render.py          check every printed row
+python tools/appendix_render.py --emit   strings for rows still printed
+                                         as a description
+```
+
+**Comparison is on words alone** — lowercased, accents stripped, punctuation
+collapsed. The page and the record disagree about punctuation constantly and
+harmlessly: "Archiv fur" against "Archiv für", an en dash for a hyphen, a
+middle dot in 2·5. A check that failed on those would be switched off within a
+week. Page ranges are matched in both forms, because the house style prints
+"716 to 723" where the record stores `716-723`.
+
+**Two escape hatches, both explicit, both per row, both counted.**
+
+- `printed_as: description` — 19 rows still print a description of a finding
+  rather than a citation. They carry no title or author to compare. This is the
+  set `--emit` exists to empty.
+- `omits: [year]` — 5 rows where the printed style deliberately carries no such
+  field: no arXiv id on entry 4, no date on the Pandera or further-reading
+  rows, no pages on the Chang working paper, no year on 21 CFR Part 11.
+  **Omission is an editorial choice; contradiction is the error.** Naming the
+  field per row keeps the choice visible instead of relaxing the check for
+  everybody. `title`, `authors` and `doi` cannot be omitted — they are what the
+  check exists to protect, and a test asserts `omits` never names anything else.
+
+Both counts are asserted, so neither can quietly grow. If a citation regressed
+into a description the description count would rise, and that is a bug rather
+than a number to edit.
+
+### Proving it bites
+
+You asked for a year and a title. Both were run against a copy of the appendix
+with your three fixes applied, so the mutation is the only cause of failure.
+Both were reverted; `git diff` on the appendix is clean and the yaml carries no
+residue.
+
+**Baseline** — `0 printed rows disagree with the verified record.` exit 0
+
+**Mutation 1, a year.** `swanson2025virtuallab`, `year: 2025` → `2024`:
+
+```
+row 2 (swanson2025virtuallab):
+    year 2024 not on the page
+1 printed rows disagree with the verified record.        exit=1
+```
+
+**Mutation 2, a title.** `landis1977kappa`, "categorical" → "categorial" — a
+one-letter change of the kind that survives every check the repository had
+before today:
+
+```
+row 17 (landis1977kappa):
+    title not on the page: "The measurement of observer agreement for categorial data"
+1 printed rows disagree with the verified record.        exit=1
+```
+
+The second is the important one. That mutation passes the Crossref verifier
+(the DOI still resolves, and 97 similarity clears the threshold), passes the
+manifest test (same id, same chapter, phrase still anchored), and would have
+printed. Only holding the two records against each other catches it — which is
+the whole argument for not generating one from the other.
+
+### Corrections made this pass
+
+1. **Two titles adopted from the printed page**, which carries the fuller
+   official form of each and is the only authority for both, since neither is
+   Crossref-checkable. `cfr21part11` becomes "US Code of Federal Regulations,
+   Title 21, Part 11: Electronic records; electronic signatures"; `eu_ai_act`
+   gains "of the European Parliament and of the Council".
+2. **Authors added to two entries that had none**, both from an authoritative
+   source rather than recall: `mas_vs_sas_2025` from the arXiv listing (Gao,
+   Li, Liu, Yu, Wang, Lin and Lai) and `clinical_scale_orchestration_2025` from
+   Crossref (Klang, Omar, Raut et al.). Both are rows you are about to paste, so
+   they should not go in headless.
+3. **Two renderer bugs**, found by reading its own output: a title ending in a
+   question mark produced "screening?." and a proceedings paper with pages but
+   no volume ran the page range into the conference name.
+4. `entry 34` still has **no authors** — Crossref returns none against
+   `10.14573/altex.2507041`, and I have not filled them in from elsewhere.
+
+### Two things worth printing that are not printed
+
+Neither is an error, so neither is a checker failure. Both are declared in
+`omits` and both would improve the page.
+
+- **Entry 4 gives no locator at all.** "BixBench … FutureHouse and Bioml
+  (2025)" has no arXiv id, no DOI, no URL. The record has `arXiv:2503.00096`. A
+  reader cannot find it from what is printed.
+- **Entry 26 dates nothing.** "Pandera documentation" names no version and no
+  access date, and documentation is versioned rather than dated. The record
+  carries an access year of 2026, and `REVIEW.md` pins pandera 0.33.0 while the
+  stable docs banner reads 0.32.0. A documentation citation naming no version
+  cannot be checked by anybody later.
+
+### Counts, unchanged from pass 3
+
+| Status | Count |
+| --- | --- |
+| CONFIRMED | 42 |
+| MISMATCH | 0 |
+| UNRESOLVED | 0 |
+| UNSOURCED | **1** |
+| SKIPPED | 30 |
+| total | **73** |
+
+Entry 68, `practitioner2026_coordination`, stays UNSOURCED by your decision.
+`--emit` deliberately refuses to render it: producing a citation-shaped string
+for an unsourced entry is precisely the artefact this whole exercise exists to
+keep out of the book.
+
+Full suite: **140 passed, 1 failed.** The failure is the checker on rows 20 and
+28, from the un-saved appendix file. Report stable across consecutive runs.
+
+---
+
+## Strings for the description rows
+
+Eighteen rows, every one rendered from the verified record. Your list named 13;
+these are the five you did not name and that I also resolved: **34, 54, 59, 67,
+69**. Entry 68 is absent on purpose.
+
+The full text is in the terminal output of:
+
+```
+python tools/appendix_render.py --emit
+```
+
+Re-run it rather than copying from this file — that is one fewer transcription
+between the verified record and the page, and a lost digit is exactly what you
+were avoiding. Once a row is pasted in, drop its `printed_as: description` line
+from `references/appendix_d.manifest.yaml` and lower `EXPECTED_DESCRIPTIONS` in
+`tests/test_printed_rows_match_record.py`. The checker then starts enforcing
+that row field by field, permanently.
 
 ---
 

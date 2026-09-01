@@ -7,6 +7,20 @@
 # Entries verified by hand and carrying a DOI are marked verified: true. The
 # rest need the script run against them before print.
 #
+# TWO PROSE FIELDS, AND THEY GO TO DIFFERENT PLACES.
+#
+# gloss:  reader-facing. This is what prints in Appendix D after the
+#         bibliographic record, and it is the only prose here that a reader
+#         ever sees. Write it for them.
+# note:   maintenance. How the entry was resolved, what was checked against
+#         what, what is still open, what the next person must not do. NEVER
+#         PRINTS. These notes say things like "THE ENTRY IS STALE AND THE FIX
+#         IS NOT MINE TO MAKE", which would be a catastrophe in a book.
+#
+# The two lived in one field until this pass, which was a live hazard: the
+# moment anyone drafts appendix text by copying from here, the scaffolding
+# ships with it.
+#
 # kind: article | preprint | book | report | standard | regulation |
 #       documentation | dataset | benchmark | unsourced
 # Entries whose kind is standard, regulation, documentation, dataset or report
@@ -28,12 +42,15 @@ references:
     year: 2026
     doi: "10.1126/science.adz4351"
     verified: true
+    gloss: >
+      Note the title: the widely circulated preprint, bioRxiv
+      2025.05.30.656746, is titled Biomni: a general-purpose biomedical AI
+      agent, and the system is still called Biomni.
     note: >
-      The preprint, bioRxiv 2025.05.30.656746, is titled "Biomni: a
-      general-purpose biomedical AI agent". The published title differs and
-      the system is still called Biomni. Citing the preprint title beside the
-      journal name is the partial attribute corruption Chapter 10 describes,
-      and this list contained exactly that before the verification pass.
+      Citing the preprint title beside the journal name is the partial
+      attribute corruption Chapter 10 describes, and this list contained
+      exactly that before the verification pass. The reader-facing half of
+      this is now in gloss, which is what prints.
 
   - id: swanson2025virtuallab
     chapter: 1
@@ -126,6 +143,13 @@ references:
     year: 2026
     doi: "10.1038/s41586-025-09992-y"
     verified: true
+    gloss: >
+      Note the title: the article was published in 2023 as the accelerated
+      synthesis of NOVEL materials, and this correction changed it to
+      INORGANIC, because the concerns raised were about the novelty claims.
+      Crossref now holds the corrected title; some indexes still carry the
+      original. The word that left the title is the word the correction was
+      about.
     note: >
       The correction states that concerns were raised about the unambiguous
       identification of compound structures by diffraction and about the
@@ -336,6 +360,7 @@ references:
     year: 2017
     doi: "10.1371/journal.pcbi.1005510"
     verified: false
+    gloss: "The best short statement of the habits this book assumes."
 
   - id: wickham2014tidydata
     chapter: 0
@@ -349,6 +374,7 @@ references:
     year: 2014
     doi: "10.18637/jss.v059.i10"
     verified: false
+    gloss: "The origin of the table shape Chapter 5 targets."
     note: >
       The DOI encodes v059.i10, which matches the volume and issue claimed
       here. Adding it is safe even though it came from recall, because this
@@ -367,21 +393,23 @@ references:
     year: 2005
     doi: "10.1371/journal.pmed.0020124"
     verified: false
+    gloss: "Context for why validation matters more than throughput."
 
   # ---------------- Standards and regulations, verified by URL ----------------
 
   - id: cfr21part11
     chapter: 8
     kind: regulation
-    title: "21 CFR Part 11: Electronic records; electronic signatures"
+    title: "US Code of Federal Regulations, Title 21, Part 11: Electronic records; electronic signatures"
     year: 1997
     url: "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11"
     verified: false
+    gloss: "Specifically section 11.10(e) on audit trails."
 
   - id: eu_ai_act
     chapter: 11
     kind: regulation
-    title: "Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence"
+    title: "Regulation (EU) 2024/1689 of the European Parliament and of the Council laying down harmonised rules on artificial intelligence"
     year: 2024
     url: "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
     verified: false
@@ -467,6 +495,7 @@ references:
     year: 2025
     url: "https://www.anthropic.com/engineering/writing-tools-for-agents"
     verified: false
+    gloss: "Engineering documentation."
     note: >
       URL checked. The post is titled "Writing effective tools for agents -
       with agents" and is dated 11 September 2025; this entry drops the
@@ -483,6 +512,7 @@ references:
     year: 2024
     url: "https://www.anthropic.com/engineering/building-effective-agents"
     verified: false
+    gloss: "Engineering documentation."
 
   - id: gartner2025agentic
     chapter: 3
@@ -546,6 +576,7 @@ references:
     year: 2025
     url: "https://www.anthropic.com/claude-opus-4-5-system-card"
     verified: false
+    gloss: "Indirect prompt injection evaluation."
     note: >
       Source of the 4.7, 33.6 and 63.0 per cent injection figures at one, ten
       and one hundred attempts. Confirm the exact numbers and the evaluation
@@ -606,6 +637,7 @@ references:
     chapter: 12
     kind: preprint
     title: "Single-agent or Multi-agent Systems? Why Not Both?"
+    authors: "Gao, M., Li, Y., Liu, B., Yu, Y., Wang, P., Lin, C.-Y. and Lai, F."
     venue: "arXiv"
     arxiv: "2505.18286"
     year: 2025
@@ -649,6 +681,7 @@ references:
     chapter: 12
     kind: preprint
     title: "Orchestrated multi agents sustain accuracy under clinical-scale workloads compared to a single agent"
+    authors: "Klang, E., Omar, M., Raut, G. et al."
     venue: "medRxiv"
     doi: "10.1101/2025.08.22.25334049"
     year: 2025
@@ -675,6 +708,7 @@ references:
     year: 2025
     url: "https://www.anthropic.com/engineering/multi-agent-research-system"
     verified: false
+    gloss: "Engineering documentation."
 
 
 # ================= Appendix D reconciliation, added in this pass =================
@@ -726,6 +760,7 @@ references:
     year: 2026
     url: "https://pandera.readthedocs.io/en/stable/"
     verified: false
+    gloss: "Statistical data validation for dataframes."
     note: >
       Appendix D calls this "Pandera documentation". URL checked and live.
       The site describes itself as "The Open-source Framework for Dataset
@@ -857,6 +892,7 @@ references:
     year: 2026
     doi: "10.3389/fcell.2026.1843943"
     verified: false
+    gloss: "Commercial authentication service report."
     note: >
       Appendix D calls this "Cell line authentication summary data, 2024 and
       2025". Resolved by searching on the finding, and it matches the Chapter 6
@@ -1291,6 +1327,7 @@ references:
     year: 2026
     url: "https://www.anthropic.com/engineering"
     verified: false
+    gloss: "Both of which are updated more often than any book can be."
     note: >
       Appendix D entry 74 reads "Anthropic engineering blog and the Model
       Context Protocol documentation, both of which are updated more often

@@ -265,7 +265,7 @@
   },
   {
     "ref_id": "cfr21part11",
-    "claimed_title": "21 CFR Part 11: Electronic records; electronic signatures",
+    "claimed_title": "US Code of Federal Regulations, Title 21, Part 11: Electronic records; electronic signatures",
     "status": "SKIPPED",
     "doi": null,
     "found_title": null,
@@ -276,7 +276,7 @@
   },
   {
     "ref_id": "eu_ai_act",
-    "claimed_title": "Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence",
+    "claimed_title": "Regulation (EU) 2024/1689 of the European Parliament and of the Council laying down harmonised rules on artificial intelligence",
     "status": "SKIPPED",
     "doi": null,
     "found_title": null,

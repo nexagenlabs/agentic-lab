@@ -85,7 +85,7 @@
     "found_year": null,
     "claimed_year": 2026,
     "title_score": null,
-    "note": "kind=regulation, verify by URL: https://www.fda.gov/"
+    "note": "kind=regulation, verify by URL: https://www.ema.europa.eu/en/documents/other/guiding-principles-good-ai-practice-drug-development_en.pdf"
   },
   {
     "ref_id": "walters2023fabrication",
@@ -294,7 +294,7 @@
     "found_year": null,
     "claimed_year": 2025,
     "title_score": null,
-    "note": "kind=regulation, verify by URL: https://www.fda.gov/regulatory-information/search-fda-guidance-documents"
+    "note": "kind=regulation, verify by URL: https://www.fda.gov/regulatory-information/search-fda-guidance-documents/considerations-use-artificial-intelligence-support-regulatory-decision-making-drug-and-biological"
   },
   {
     "ref_id": "owasp_llm_top10",
@@ -305,7 +305,7 @@
     "found_year": null,
     "claimed_year": 2025,
     "title_score": null,
-    "note": "kind=documentation, verify by URL: https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+    "note": "kind=documentation, verify by URL: https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/"
   },
   {
     "ref_id": "mcp_spec",
@@ -316,7 +316,7 @@
     "found_year": null,
     "claimed_year": 2026,
     "title_score": null,
-    "note": "kind=documentation, verify by URL: https://modelcontextprotocol.io/"
+    "note": "kind=documentation, verify by URL: https://modelcontextprotocol.io/specification/2026-07-28"
   },
   {
     "ref_id": "patil_bfcl",
@@ -360,7 +360,7 @@
     "found_year": null,
     "claimed_year": 2025,
     "title_score": null,
-    "note": "kind=documentation, verify by URL: https://www.anthropic.com/engineering"
+    "note": "kind=documentation, verify by URL: https://www.anthropic.com/engineering/writing-tools-for-agents"
   },
   {
     "ref_id": "anthropic_effective_agents",
@@ -382,7 +382,7 @@
     "found_year": null,
     "claimed_year": 2025,
     "title_score": null,
-    "note": "kind=documentation, verify by URL: https://www.gartner.com/en/newsroom"
+    "note": "kind=documentation, verify by URL: https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027"
   },
   {
     "ref_id": "langgraph_docs",
@@ -404,7 +404,7 @@
     "found_year": null,
     "claimed_year": 2018,
     "title_score": null,
-    "note": "kind=regulation, verify by URL: https://www.fda.gov/regulatory-information/search-fda-guidance-documents"
+    "note": "kind=regulation, verify by URL: https://www.fda.gov/regulatory-information/search-fda-guidance-documents/data-integrity-and-compliance-drug-cgmp-questions-and-answers"
   },
   {
     "ref_id": "owasp_agentic_top10",
@@ -415,7 +415,7 @@
     "found_year": null,
     "claimed_year": 2026,
     "title_score": null,
-    "note": "kind=documentation, verify by URL: https://owasp.org/"
+    "note": "kind=documentation, verify by URL: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/"
   },
   {
     "ref_id": "zhan2024injecagent",
@@ -437,7 +437,7 @@
     "found_year": null,
     "claimed_year": 2025,
     "title_score": null,
-    "note": "kind=documentation, verify by URL: https://www.anthropic.com/"
+    "note": "kind=documentation, verify by URL: https://www.anthropic.com/claude-opus-4-5-system-card"
   },
   {
     "ref_id": "cve_2026_22708",
@@ -459,7 +459,7 @@
     "found_year": null,
     "claimed_year": 2026,
     "title_score": null,
-    "note": "kind=regulation, verify by URL: https://eur-lex.europa.eu/"
+    "note": "kind=regulation, verify by URL: https://eur-lex.europa.eu/eli/reg/2026/1744/oj"
   },
   {
     "ref_id": "ich_e6r3",
@@ -470,7 +470,7 @@
     "found_year": null,
     "claimed_year": 2025,
     "title_score": null,
-    "note": "kind=standard, verify by URL: https://www.ich.org/page/efficacy-guidelines"
+    "note": "kind=standard, verify by URL: https://database.ich.org/sites/default/files/ICH_E6(R3)_Step4_FinalGuideline_2025_0106.pdf"
   },
   {
     "ref_id": "mas_vs_sas_2025",

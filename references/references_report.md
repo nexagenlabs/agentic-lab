@@ -28,7 +28,7 @@ Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is che
 
 **fda_ema_2026_principles**
   claimed: Guiding principles of good artificial intelligence practice in drug development
-  note:    kind=regulation, verify by URL: https://www.fda.gov/
+  note:    kind=regulation, verify by URL: https://www.ema.europa.eu/en/documents/other/guiding-principles-good-ai-practice-drug-development_en.pdf
 
 **cfr21part11**
   claimed: 21 CFR Part 11: Electronic records; electronic signatures
@@ -40,15 +40,15 @@ Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is che
 
 **fda2025ai_guidance**
   claimed: Considerations for the use of artificial intelligence to support regulatory decision-making for drug and biological products
-  note:    kind=regulation, verify by URL: https://www.fda.gov/regulatory-information/search-fda-guidance-documents
+  note:    kind=regulation, verify by URL: https://www.fda.gov/regulatory-information/search-fda-guidance-documents/considerations-use-artificial-intelligence-support-regulatory-decision-making-drug-and-biological
 
 **owasp_llm_top10**
   claimed: OWASP Top 10 for large language model applications
-  note:    kind=documentation, verify by URL: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+  note:    kind=documentation, verify by URL: https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
 
 **mcp_spec**
   claimed: Model Context Protocol specification, revision 2026-07-28
-  note:    kind=documentation, verify by URL: https://modelcontextprotocol.io/
+  note:    kind=documentation, verify by URL: https://modelcontextprotocol.io/specification/2026-07-28
 
 **patil_bfcl**
   claimed: Berkeley Function Calling Leaderboard
@@ -60,7 +60,7 @@ Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is che
 
 **anthropic_tools**
   claimed: Writing effective tools for agents
-  note:    kind=documentation, verify by URL: https://www.anthropic.com/engineering
+  note:    kind=documentation, verify by URL: https://www.anthropic.com/engineering/writing-tools-for-agents
 
 **anthropic_effective_agents**
   claimed: Building effective agents
@@ -68,7 +68,7 @@ Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is che
 
 **gartner2025agentic**
   claimed: Press release on agentic AI project cancellation rates through 2027
-  note:    kind=documentation, verify by URL: https://www.gartner.com/en/newsroom
+  note:    kind=documentation, verify by URL: https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027
 
 **langgraph_docs**
   claimed: LangGraph documentation and release notes
@@ -76,15 +76,15 @@ Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is che
 
 **fda2018dataintegrity**
   claimed: Data integrity and compliance with drug CGMP: questions and answers. Guidance for industry
-  note:    kind=regulation, verify by URL: https://www.fda.gov/regulatory-information/search-fda-guidance-documents
+  note:    kind=regulation, verify by URL: https://www.fda.gov/regulatory-information/search-fda-guidance-documents/data-integrity-and-compliance-drug-cgmp-questions-and-answers
 
 **owasp_agentic_top10**
   claimed: OWASP Top 10 for agentic applications
-  note:    kind=documentation, verify by URL: https://owasp.org/
+  note:    kind=documentation, verify by URL: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
 
 **anthropic_opus45_card**
   claimed: Claude Opus 4.5 system card
-  note:    kind=documentation, verify by URL: https://www.anthropic.com/
+  note:    kind=documentation, verify by URL: https://www.anthropic.com/claude-opus-4-5-system-card
 
 **cve_2026_22708**
   claimed: CVE-2026-22708: allowlist bypass in an agentic coding assistant
@@ -92,11 +92,11 @@ Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is che
 
 **eu_digital_omnibus**
   claimed: Digital Omnibus amending Regulation (EU) 2024/1689
-  note:    kind=regulation, verify by URL: https://eur-lex.europa.eu/
+  note:    kind=regulation, verify by URL: https://eur-lex.europa.eu/eli/reg/2026/1744/oj
 
 **ich_e6r3**
   claimed: Good clinical practice guideline E6(R3)
-  note:    kind=standard, verify by URL: https://www.ich.org/page/efficacy-guidelines
+  note:    kind=standard, verify by URL: https://database.ich.org/sites/default/files/ICH_E6(R3)_Step4_FinalGuideline_2025_0106.pdf
 
 **mas_vs_sas_2025**
   claimed: Single-agent or Multi-agent Systems? Why Not Both?

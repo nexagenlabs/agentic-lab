@@ -70,12 +70,11 @@ appendix_d:
     - n: 3
       id: ghareeb2025robin
       chapter: 1
-      phrase: "Robin: a multi-agent system for automating scientific discovery"
+      phrase: "A multi-agent system for automating scientific discovery"
     - n: 4
       id: mitchener2025bixbench
       chapter: 1
       phrase: "BixBench: a comprehensive benchmark for LLM-based agents in computational biology"
-      omits: [arxiv]
     - n: 5
       id: qu2026biomnibench
       chapter: 1
@@ -139,7 +138,7 @@ appendix_d:
     - n: 20
       id: cochrane_handbook_v6
       chapter: 4
-      phrase: "Cochrane Handbook for Systematic Reviews of Interventions, version 6"
+      phrase: "Cochrane Handbook for Systematic Reviews of Interventions, second edition"
     - n: 21
       id: nawrath2026screening
       chapter: 4
@@ -253,7 +252,7 @@ appendix_d:
     - n: 48
       id: cve_2026_22708
       chapter: 8
-      phrase: "Allowlist bypass in an agentic coding assistant"
+      phrase: "Terminal tool allowlist bypass via environment variables"
     - n: 49
       id: chang2015replicable
       chapter: 9

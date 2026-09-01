@@ -2,13 +2,13 @@
 
 Checked 73 entries against Crossref.
 
-Of 42 confirmations, 42 were resolved by DOI and 0 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
+Of 43 confirmations, 43 were resolved by DOI and 0 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
 
-- CONFIRMED: 42
+- CONFIRMED: 43
 - MISMATCH: 0
 - UNRESOLVED: 0
 - UNSOURCED: 1
-- SKIPPED: 30
+- SKIPPED: 29
 
 ## Unsourced, which need a source or a softened claim
 
@@ -17,10 +17,6 @@ Of 42 confirmations, 42 were resolved by DOI and 0 by title search. A DOI is che
   note:    This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports.
 
 ## Skipped by kind, verify by URL
-
-**ghareeb2025robin**
-  claimed: Robin: a multi-agent system for automating scientific discovery
-  note:    arXiv preprint, verify at arxiv.org/abs/2505.13400
 
 **mitchener2025bixbench**
   claimed: BixBench: a comprehensive benchmark for LLM-based agents in computational biology
@@ -87,7 +83,7 @@ Of 42 confirmations, 42 were resolved by DOI and 0 by title search. A DOI is che
   note:    kind=documentation, verify by URL: https://www.anthropic.com/claude-opus-4-5-system-card
 
 **cve_2026_22708**
-  claimed: CVE-2026-22708: allowlist bypass in an agentic coding assistant
+  claimed: Terminal tool allowlist bypass via environment variables
   note:    kind=documentation, verify by URL: https://nvd.nist.gov/vuln/detail/CVE-2026-22708
 
 **eu_digital_omnibus**
@@ -150,6 +146,12 @@ Of 42 confirmations, 42 were resolved by DOI and 0 by title search. A DOI is che
   claimed: The Virtual Lab of AI agents designs new SARS-CoV-2 nanobodies
   found:   The Virtual Lab of AI agents designs new SARS-CoV-2 nanobodies
   doi:     10.1038/s41586-025-09442-9
+  note:    resolved by DOI
+
+**ghareeb2025robin**
+  claimed: A multi-agent system for automating scientific discovery
+  found:   A multi-agent system for automating scientific discovery
+  doi:     10.1038/s41586-026-10652-y
   note:    resolved by DOI
 
 **qu2026biomnibench**

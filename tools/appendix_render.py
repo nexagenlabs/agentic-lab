@@ -140,8 +140,17 @@ def printed_rows() -> dict[int, str]:
 
 
 def doi_in(text: str) -> str | None:
+    """The DOI printed on a row, if any.
+
+    Trailing punctuation is stripped, not just a full stop. The page writes
+    "doi:10.1038/s41586-026-10652-y, published online 19 May 2026", and an
+    earlier version of this captured the comma and then reported the row as a
+    DOI mismatch against a DOI it had itself mangled. A checker that
+    manufactures the error it reports is the failure this repository already
+    fixed once, in the Crossref verifier, for the same reason.
+    """
     m = re.search(r"doi:\s*(10\.\S+)", text, re.I)
-    return m.group(1).rstrip(".").lower() if m else None
+    return m.group(1).rstrip(".,;:)]}").lower() if m else None
 
 
 def check_row(entry: dict, printed: str, omits: tuple[str, ...] = ()) -> list[str]:

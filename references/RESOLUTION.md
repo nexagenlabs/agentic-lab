@@ -11,6 +11,98 @@ split the prose and built the checker that keeps the two records honest.
 
 ---
 
+## Pass 6 — the page landed, and the checker turned on the record
+
+`APPENDIX_D_AS_PRINTED.md`, MD5 `4AAE61C8…`, written 1 September 12:27, 74 rows
+and **21 DOIs**. All eighteen pasted rows pass field by field on the first run.
+
+**Two rows disagreed out of seventy-four, and both were the record trailing the
+page** — the opposite direction from every earlier pass, and precisely the case
+the checker was built for. One of the two was my own bug.
+
+### Row 3 was a checker bug, and the honest kind to find
+
+The page reads `doi:10.1038/s41586-026-10652-y, published online 19 May 2026`.
+`doi_in()` stripped a trailing full stop but not a comma, captured
+`…-10652-y,` and reported a DOI mismatch **against a DOI it had itself
+mangled**. The record and the page agreed perfectly.
+
+That is the same defect `tools/verify_references.py` already carries a
+docstring about, where an entry with a correct hand-verified DOI was searched
+by title and failed on an error the tool introduced. It is worth naming the
+reason it matters: when a checker invents an error, the fix people reach for is
+to edit the data until the tool goes quiet. Fixed, and
+`test_a_doi_followed_by_a_comma_is_read_as_the_doi` pins five punctuation forms.
+
+### Row 3 was also genuinely stale, and every field check passed by accident
+
+Underneath the false positive was a real one. The page has moved Robin to the
+published version — *Nature* 655, 497 to 505 (2026) — which is what pass 1
+recommended and left as the author's call. The record still said kind preprint,
+venue arXiv, year 2025.
+
+**Every field check passed anyway**, and the way it did is worth recording:
+
+- the old title matched because the page quotes it in its gloss, explaining
+  that the preprint was titled "Robin: a multi-agent system…"
+- the old year 2025 matched because the same gloss cites the preprint's year
+- venue is not checked at all
+- volume and pages were absent from the record, so nothing was compared
+
+Only reading the row against the record found it. The record now carries the
+published article, and the entry moves from SKIPPED to CONFIRMED against
+Crossref. Three passes after it was first flagged, that entry is closed.
+
+### Row 48 was the record trailing an accepted correction
+
+The page now reads "Terminal tool allowlist bypass via environment variables.
+Security advisory GHSA-82wg-qcm4-fp2w, affecting Cursor before version 2.3,
+tracked as CVE-2026-22708" — the advisory's own title, with the product named,
+which is what pass 1 asked for. The record still held the description
+"CVE-2026-22708: allowlist bypass in an agentic coding assistant". Updated to
+match.
+
+### The phrase invariant earned its place again
+
+Printed row 20 changed from "version 6. Cochrane (2024)" to "second edition.
+John Wiley and Sons (2019). doi:10.1002/9781119536604". The manifest phrase
+moved with the page, and `test_every_appendix_phrase_is_recorded_in_its_entry`
+immediately failed, because the record nowhere contained the words "second
+edition". That is the invariant working: a page cannot be re-worded without the
+record acknowledging the new wording. Note recorded, including that "version 6"
+and "second edition" are the same object under Cochrane's and Wiley's naming.
+
+### Omissions, checked against the page rather than assumed
+
+- **Row 4** now prints `arXiv:2503.00096`. `omits: [arxiv]` dropped;
+  `EXPECTED_OMISSIONS` is 4.
+- **Row 26** reads "Versioned rather than dated; cite the version you
+  installed" — still no year, exactly as predicted last pass, so
+  `omits: [year]` stays. The right long-term fix is a version field in the
+  record rather than a year, but that is a judgement about the printed row.
+- **Rows 49 and 74** still carry no pages and no year respectively. Both stay.
+
+### Final state
+
+| Status | Count |
+| --- | --- |
+| CONFIRMED | **43** |
+| MISMATCH | 0 |
+| UNRESOLVED | 0 |
+| UNSOURCED | **1** |
+| SKIPPED | 29 |
+| total | **73** |
+
+- Checker: **0 of 74 printed rows disagree with the record.**
+- Full suite: **143 passed, 0 failed.**
+- Crossref report: byte-identical across consecutive runs.
+- Entry 68 remains UNSOURCED by decision; the Chapter 12 sentence is being
+  softened instead.
+
+References are closed.
+
+---
+
 ## Pass 5 — the eighteen enforced, and the file still has not arrived
 
 `printed_as: description` is dropped from all eighteen rows. Only 68 remains,

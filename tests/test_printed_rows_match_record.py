@@ -61,7 +61,7 @@ _spec.loader.exec_module(appendix_render)
 # declared omission. Asserted so that neither can grow without somebody
 # changing this line and saying why in the commit.
 EXPECTED_DESCRIPTIONS = 1
-EXPECTED_OMISSIONS = 5
+EXPECTED_OMISSIONS = 4
 
 
 @pytest.fixture(scope="module")
@@ -193,3 +193,29 @@ def test_emit_survives_a_console_that_cannot_spell_the_authors() -> None:
     for name in ("Mäntylä", "Seifert-Dähnn", "López-Muñoz", "Łaźniewski", "Hornbæk"):
         assert name in out, f"{name} did not survive a cp1252 console"
     assert "�" not in out and "?" * 2 not in out.replace("Both?", "")
+
+
+def test_a_doi_followed_by_a_comma_is_read_as_the_doi() -> None:
+    """The checker must not manufacture the mismatch it reports.
+
+    Printed row 3 reads "doi:10.1038/s41586-026-10652-y, published online
+    19 May 2026". The first version of doi_in stripped a trailing full stop
+    but not a comma, captured "...-y," and reported a DOI mismatch against a
+    DOI it had itself mangled. The record and the page agreed perfectly.
+
+    This is the same defect tools/verify_references.py already carries a
+    docstring about, where an entry with a correct hand-verified DOI was
+    searched by title and failed on a mismatch the tool introduced. A checker
+    that invents errors is worse than no checker, because the fix people reach
+    for is to edit the data until the tool goes quiet.
+    """
+    doi = "10.1038/s41586-026-10652-y"
+    for row in (
+        f"Ghareeb, A. E. et al. Nature 655 (2026). doi:{doi}, published online 19 May 2026.",
+        f"Something. doi:{doi}.",
+        f"Something. doi:{doi};",
+        f"Something (doi:{doi})",
+        f"Something. doi: {doi}",
+    ):
+        assert appendix_render.doi_in(row) == doi, row
+    assert appendix_render.doi_in("no doi here at all") is None

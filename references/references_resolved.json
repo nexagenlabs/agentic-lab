@@ -23,14 +23,14 @@
   },
   {
     "ref_id": "ghareeb2025robin",
-    "claimed_title": "Robin: a multi-agent system for automating scientific discovery",
-    "status": "SKIPPED",
-    "doi": null,
-    "found_title": null,
-    "found_year": null,
-    "claimed_year": 2025,
-    "title_score": null,
-    "note": "arXiv preprint, verify at arxiv.org/abs/2505.13400"
+    "claimed_title": "A multi-agent system for automating scientific discovery",
+    "status": "CONFIRMED",
+    "doi": "10.1038/s41586-026-10652-y",
+    "found_title": "A multi-agent system for automating scientific discovery",
+    "found_year": 2026,
+    "claimed_year": 2026,
+    "title_score": 100.0,
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "mitchener2025bixbench",
@@ -441,7 +441,7 @@
   },
   {
     "ref_id": "cve_2026_22708",
-    "claimed_title": "CVE-2026-22708: allowlist bypass in an agentic coding assistant",
+    "claimed_title": "Terminal tool allowlist bypass via environment variables",
     "status": "SKIPPED",
     "doi": null,
     "found_title": null,

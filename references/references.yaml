@@ -66,27 +66,37 @@ references:
 
   - id: ghareeb2025robin
     chapter: 1
-    kind: preprint
-    title: "Robin: a multi-agent system for automating scientific discovery"
+    kind: article
+    title: "A multi-agent system for automating scientific discovery"
     authors: "Ghareeb, A. E., Chang, B., Mitchener, L. et al."
-    venue: "arXiv"
+    venue: "Nature"
+    volume: "655"
+    pages: "497-505"
     arxiv: "2505.13400"
-    year: 2025
+    year: 2026
     doi: "10.1038/s41586-026-10652-y"
     verified: true
+    gloss: >
+      Note the title, as with Biomni above: the preprint, arXiv:2505.13400
+      (2025), is titled Robin: a multi-agent system for automating scientific
+      discovery, and the system is still called Robin.
     note: >
-      THE ENTRY IS STALE AND THE FIX IS NOT MINE TO MAKE. This preprint was
-      published in Nature on 19 May 2026, volume 655, pages 497-505, DOI
-      10.1038/s41586-026-10652-y. The DOI was resolved directly against
-      Crossref, which returns type journal-article, container Nature, and the
-      title "A multi-agent system for automating scientific discovery" -
-      WITHOUT the "Robin:" prefix this entry carries. The DOI is recorded here
-      so it is not lost, but kind stays preprint on purpose: flipping it to
-      article would let the tool confirm a Nature DOI sitting beside
-      venue "arXiv" and year 2025, which is the partial attribute corruption
-      Chapter 10 describes and huang2026biomni already warns about. Switching
-      the citation to the published version means editing title, venue,
-      volume, pages and year together, and that is an author decision.
+      CLOSED. This was flagged stale for three passes: the entry cited the
+      arXiv preprint while the work had been published in Nature on 19 May
+      2026 under a title without the "Robin:" prefix. The printed page has now
+      moved to the published version, so the record follows it. Crossref
+      against this DOI returns type journal-article, container Nature, volume
+      655, pages 497-505, which is what is recorded above.
+      The arxiv field is kept deliberately even though kind is now article. It
+      no longer routes the entry to SKIPPED, because that branch requires kind
+      to be preprint, so the entry resolves by DOI; what it does is let
+      tools/appendix_render.py assert the preprint id printed in the gloss is
+      the right one.
+      Worth recording how nearly this was missed. Every field check passed by
+      accident while the record was stale: the old title matched because the
+      page quotes it in the gloss, and the old year 2025 matched because the
+      gloss cites the preprint. Venue is not checked at all. Only reading the
+      row against the record found it.
 
   - id: mitchener2025bixbench
     chapter: 1
@@ -586,20 +596,20 @@ references:
   - id: cve_2026_22708
     chapter: 8
     kind: documentation
-    title: "CVE-2026-22708: allowlist bypass in an agentic coding assistant"
+    title: "Terminal tool allowlist bypass via environment variables"
     year: 2026
     url: "https://nvd.nist.gov/vuln/detail/CVE-2026-22708"
     verified: false
     note: >
-      The CVE is real and the URL resolves. The vendor advisory is
-      GHSA-82wg-qcm4-fp2w, titled "Terminal Tool Allowlist Bypass via
-      Environment Variables": in Cursor before 2.3, shell built-ins such as
+      The page now carries the advisory's own title and names the product,
+      which is what an earlier pass asked for, so this record follows it. The
+      vendor advisory is GHSA-82wg-qcm4-fp2w: in Cursor before 2.3, shell built-ins such as
       export and unset ran in Auto-Run allowlist mode without appearing in the
       allowlist, so prompt injection could poison PATH or LD_PRELOAD and turn
-      an already-approved command into arbitrary execution. This entry's title
-      says "an agentic coding assistant" where the record names Cursor. That
-      is a description standing in for a title, which is the exact shape the
-      reviewer objected to. Naming the product is the author's call.
+      an already-approved command into arbitrary execution. The entry used to
+      read "CVE-2026-22708: allowlist bypass in an agentic coding assistant",
+      a description standing in for a title, which is the exact shape the
+      reviewer objected to. Both records now use the advisory title.
 
   # ---------------- Chapter 11 ----------------
 
@@ -737,19 +747,19 @@ references:
     verified: false
     note: >
       Appendix D reads "Cochrane Handbook for Systematic Reviews of
-      Interventions, version 6. Cochrane (2024)". Resolved to the Wiley edited
-      book of
-      20 September 2019, which is the version 6 edition; Crossref returns
-      type edited-book against this DOI. One thing for the author to settle:
-      the printed entry says Cochrane (2024), which is the online handbook at
-      training.cochrane.org/handbook, and that is a different artefact from
-      the 2019 Wiley book this DOI pins. The online handbook is continuously
-      revised and is past 6.0, so a bare "version 6" will not identify what
-      was read, and 2024 beside a DOI for a 2019 book is the kind of
-      half-right record this list exists to prevent. Cite either the printed 2019 edition, which
-      this DOI pins, or the online version with its point release and an
-      access date. Supports the Chapter 4 dual-screen argument for two
-      independent reviewers.
+      Interventions, second edition. John Wiley and Sons (2019).
+      doi:10.1002/9781119536604", plus a gloss telling the reader the online
+      handbook is revised more often than the printed edition and to cite the
+      version they used.
+      CLOSED. Earlier passes flagged this twice: the printed row said "version
+      6. Cochrane (2024)" against a DOI that pins the Wiley book of
+      20 September 2019, which is a 2024 date on a 2019 artefact. The page now
+      names the edition, the publisher and the year that the DOI actually
+      resolves to, and says out loud that the online handbook is a different
+      and moving thing. Crossref returns type edited-book against this DOI.
+      Note that "version 6" and "second edition" are the same object under two
+      naming schemes, Cochrane's and Wiley's, which is why the earlier wording
+      was not wrong so much as unresolvable.
 
   # ---------------- Chapter 5 ----------------
 

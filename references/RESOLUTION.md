@@ -172,6 +172,35 @@ Neither is an error, so neither is a checker failure. Both are declared in
   stable docs banner reads 0.32.0. A documentation citation naming no version
   cannot be checked by anybody later.
 
+### The emit command corrupted the names it was built to protect
+
+Found by running the documented command on a plain console rather than
+trusting that it worked. `python tools/appendix_render.py --emit` crashed with
+`UnicodeEncodeError`, and the crash was the good part. Windows consoles default
+to cp1252, which cannot encode "Mäntylä", "Seifert-Dähnn" or "López-Muñoz".
+Python emitted replacement bytes for the rows it could mangle, **printed
+them**, and only then raised partway down the list:
+
+```
+ 21. Nawrath, M., ... and Seifert-D?hnn, I. Validating Large Language Models ...
+ 22. M?ntyl?, M., Matsubara, P., ...
+ 33. ... Torres, C. G. and L?pez-Mu?oz, R. A. Mind the Curve: ...
+ 34. ... (GIVReSt) ? A draft for stakeholder discussion ...
+Traceback (most recent call last):
+```
+
+Six rows printed before it stopped, and they look usable. They are corrupted in
+exactly the author names nobody re-reads — which is the defect class this
+entire exercise exists to prevent, reintroduced by the tool at the last step
+before the page.
+
+Output is now forced to UTF-8 regardless of the console, and
+`--emit --out rows.txt` writes the file directly, which is the safer route when
+the strings are going to be pasted.
+`test_emit_survives_a_console_that_cannot_spell_the_authors` runs the command
+under `PYTHONIOENCODING=cp1252` and asserts five diacritic-carrying names come
+back intact, so this cannot return quietly.
+
 ### Counts, unchanged from pass 3
 
 | Status | Count |

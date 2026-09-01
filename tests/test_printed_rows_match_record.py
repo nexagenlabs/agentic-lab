@@ -39,6 +39,9 @@ Both are counted and asserted, so neither can quietly grow.
 from __future__ import annotations
 
 import importlib.util
+import os
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -155,3 +158,30 @@ def test_gloss_never_carries_maintenance_prose() -> None:
         "maintenance prose has leaked into a gloss, which is the field that "
         f"prints in the book: {leaks}"
     )
+
+
+def test_emit_survives_a_console_that_cannot_spell_the_authors() -> None:
+    """--emit must not be at the mercy of the console codepage.
+
+    Found by running the documented command on a plain Windows console. The
+    default there is cp1252, which cannot encode "Mäntylä" or "Seifert-Dähnn",
+    and the failure mode was worse than a crash: Python emitted replacement
+    bytes for the rows it could mangle, printed them, and only then raised
+    UnicodeEncodeError partway down the list. The output up to that point
+    looked usable and was corrupted in precisely the author names nobody would
+    re-check, which is the defect class this whole file exists to prevent.
+
+    Rendering these strings is the last step before they are pasted into a
+    book, so it is the last place an encoding should be left to chance.
+    """
+    env = dict(os.environ, PYTHONIOENCODING="cp1252")
+    proc = subprocess.run(
+        [sys.executable, str(REPO / "tools" / "appendix_render.py"), "--emit"],
+        capture_output=True, env=env, cwd=REPO,
+    )
+    assert proc.returncode == 0, proc.stderr.decode("utf-8", "replace")
+
+    out = proc.stdout.decode("utf-8")
+    for name in ("Mäntylä", "Seifert-Dähnn", "López-Muñoz", "Łaźniewski", "Hornbæk"):
+        assert name in out, f"{name} did not survive a cp1252 console"
+    assert "�" not in out and "?" * 2 not in out.replace("Both?", "")

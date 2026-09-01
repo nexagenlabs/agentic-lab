@@ -21,6 +21,15 @@ Two modes:
     python tools/appendix_render.py --emit     print the bibliographic string
                                                for rows still printed as a
                                                description, ready to paste
+    python tools/appendix_render.py --emit --out rows.txt      the same, to a file
+
+Output is forced to UTF-8. On a Windows console the default is cp1252, which
+cannot encode "Mäntylä" or "Seifert-Dähnn" and turns them into replacement
+bytes before raising UnicodeEncodeError partway down the list. That failure is
+worse than a crash: the rows printed before it are silently corrupted in
+exactly the author names nobody would re-check, which is the whole class of
+defect this file exists to prevent. --out writes the file directly and is the
+safer route when the strings are going to be pasted.
 
 Rows the manifest marks ``printed_as: description`` are not checked field by
 field, because they legitimately carry no title or author yet. They are counted
@@ -208,13 +217,29 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--emit", action="store_true",
                     help="print the bibliographic string for description rows")
+    ap.add_argument("--out", type=Path,
+                    help="write the emitted rows here instead of to stdout")
     args = ap.parse_args()
 
+    # Never let the console's codepage decide whether an author's name survives.
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="strict")
+        except (AttributeError, ValueError):
+            pass
+
     if args.emit:
+        lines = []
         for n, rid, entry in descriptions():
-            print(f"{n:>3}. {render(entry)}")
+            lines.append(f"{n:>3}. {render(entry)}")
             if entry.get("gloss"):
-                print(f"     gloss: {entry['gloss'].strip()}")
+                lines.append(f"     gloss: {entry['gloss'].strip()}")
+        text = "\n".join(lines) + "\n"
+        if args.out:
+            args.out.write_text(text, encoding="utf-8")
+            print(f"wrote {len(lines)} lines to {args.out}")
+        else:
+            print(text, end="")
         return 0
 
     bad = failures()

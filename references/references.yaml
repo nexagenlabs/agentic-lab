@@ -611,6 +611,15 @@ references:
     year: 2025
     verified: true
     note: >
+      THE PRINTED APPENDIX IS STALE HERE, and this is the manifest test's
+      failure running in the opposite direction: references.yaml was resolved
+      and the printed page was not. Appendix D entry 67 still reads "Token
+      consumption in multi-agent versus single-agent systems. University of
+      Illinois Urbana-Champaign (2026)", a description of a finding, where
+      this entry has carried the resolved paper for two passes: arXiv
+      2505.18286, "Single-agent or Multi-agent Systems? Why Not Both?", 2025.
+      The printed year is wrong as well as the title. Update the appendix from
+      this entry, not the other way round.
       Source of the four to two hundred and twenty times figure. Two
       corrections came out of resolving it. The range is for INPUT, prefill
       tokens across seven datasets, not tokens in general, and Chapter 12 said
@@ -645,6 +654,13 @@ references:
     year: 2025
     verified: true
     note: >
+      THE PRINTED APPENDIX IS STALE HERE TOO. Appendix D entry 69 still reads
+      "Comparative evaluation of single-agent and orchestrated multi-agent
+      configurations under increasing task load in a clinical setting (2026)",
+      where this entry has carried the resolved medRxiv preprint,
+      10.1101/2025.08.22.25334049, since before the printed list was
+      extracted. The printed year is wrong as well as the title. Update the
+      appendix from this entry.
       The chapter's counter-evidence, and the strongest argument against its
       own thesis, so it needed a resolvable source most of all. Batch sizes
       from 5 to 80 across retrieval, extraction and dosing tasks. Confirm the
@@ -686,13 +702,17 @@ references:
     doi: "10.1002/9781119536604"
     verified: false
     note: >
-      Appendix D calls this "Cochrane Handbook for Systematic Reviews of
-      Interventions, version 6". Resolved to the Wiley edited book of
+      Appendix D reads "Cochrane Handbook for Systematic Reviews of
+      Interventions, version 6. Cochrane (2024)". Resolved to the Wiley edited
+      book of
       20 September 2019, which is the version 6 edition; Crossref returns
       type edited-book against this DOI. One thing for the author to settle:
-      the handbook also lives online at training.cochrane.org/handbook, where
-      it is continuously revised and is past 6.0, so a bare "version 6" will
-      not identify what was read. Cite either the printed 2019 edition, which
+      the printed entry says Cochrane (2024), which is the online handbook at
+      training.cochrane.org/handbook, and that is a different artefact from
+      the 2019 Wiley book this DOI pins. The online handbook is continuously
+      revised and is past 6.0, so a bare "version 6" will not identify what
+      was read, and 2024 beside a DOI for a 2019 book is the kind of
+      half-right record this list exists to prevent. Cite either the printed 2019 edition, which
       this DOI pins, or the online version with its point release and an
       access date. Supports the Chapter 4 dual-screen argument for two
       independent reviewers.
@@ -731,10 +751,14 @@ references:
     doi: "10.1007/BF01952257"
     verified: false
     note: >
-      Appendix D calls this "Loewe and Muischnek 1926, effects of
-      combinations", which is a translation of the German title rather than a
-      title. The real title is "Über Kombinationswirkungen" and it is the
-      origin of Loewe additivity. Supports the Chapter 6 claim that Bliss and
+      Appendix D reads "Effects of combinations: mathematical basis of the
+      problem", which is an English rendering with a subtitle attached, not
+      the paper's title. Crossref holds the title as "Über
+      Kombinationswirkungen" against this DOI; the subtitle in the appendix
+      corresponds to the first communication's subhead, "I. Mitteilung:
+      Hilfsmittel der Fragestellung". A reader searching the printed title
+      finds nothing. Print the German title, or the German title with a
+      bracketed translation. This is the origin of Loewe additivity. Supports the Chapter 6 claim that Bliss and
       Loewe are different statements about biology, not interchangeable
       scores.
 
@@ -779,7 +803,7 @@ references:
     chapter: 6
     kind: article
     title: "Mind the Curve: dose-response fitting biases the synergy scores across software used for chemotherapy combination studies"
-    authors: "Fuentealba-Manosalva, O., Mansilla, M., Buelvas, N., Martin-Martin, A., Torres, C. G. and Lopez-Munoz, R. A."
+    authors: "Fuentealba-Manosalva, O., Mansilla, M., Buelvas, N., Martin-Martin, A., Torres, C. G. and López-Muñoz, R. A."
     venue: "International Journal of Molecular Sciences"
     volume: "24"
     pages: "9705"
@@ -787,8 +811,8 @@ references:
     doi: "10.3390/ijms24119705"
     verified: false
     note: >
-      Appendix D calls this "Comparison of synergy quantification software on
-      identical data (2023)". Resolved by searching on the finding. The paper
+      Appendix D reads "Comparison of synergy quantification software on
+      identical dose-response data (2023)". Resolved by searching on the finding. The paper
       compares Combenefit 2.021 against SynergyFinder 3.6 on the same
       viability data under HSA, Loewe and Bliss, and reports that some
       combinations move from synergistic to antagonistic purely because the
@@ -807,8 +831,10 @@ references:
     doi: "10.14573/altex.2507041"
     verified: false
     note: >
-      Appendix D calls this "Good In Vitro Reporting Standards, with GCCP 2.0
-      and OECD guidance", which is three documents in one entry. This entry
+      Appendix D reads "Good In Vitro Reporting Standards, developed alongside
+      Good Cell Culture Practice 2.0 and OECD reporting guidance (2026)",
+      which is three documents in one entry. The printed year is also wrong:
+      Crossref dates the GIVReSt guidance to ALTEX volume 42, 2025, not 2026. This entry
       resolves the first and primary one. The second is Good Cell and Tissue
       Culture Practice 2.0, ALTEX 2020, DOI 10.14573/altex.2007091, Pamies et
       al. The third is the OECD Guidance Document on Good In Vitro Method
@@ -848,7 +874,7 @@ references:
     chapter: 7
     kind: article
     title: "Can we trust docking results? Evaluation of seven commonly used programs on PDBbind database"
-    authors: "Plewczynski, D., Lazniewski, M., Augustyniak, R. and Ginalski, K."
+    authors: "Plewczynski, D., Łaźniewski, M., Augustyniak, R. and Ginalski, K."
     venue: "Journal of Computational Chemistry"
     volume: "32"
     pages: "742-755"
@@ -856,8 +882,8 @@ references:
     doi: "10.1002/jcc.21643"
     verified: false
     note: >
-      Appendix D calls this "Comparative assessment of seven docking programs,
-      approximately 1,300 complexes". Resolved by the finding: seven programs
+      Appendix D reads "Comparative assessment of seven docking programs across
+      approximately 1,300 protein-ligand complexes". Resolved by the finding: seven programs
       (Surflex, LigandFit, Glide, GOLD, FlexX, eHiTS, AutoDock) on 1,300
       complexes from PDBbind 2007. Two corrections for the prose. The paper's
       own summary of the correlation result is that the best correlation is
@@ -879,8 +905,8 @@ references:
     doi: "10.1016/j.isci.2022.105920"
     verified: false
     note: >
-      Appendix D calls this "Assessment of AlphaFold models for screening
-      across 22 targets". Resolved by the finding: high-throughput docking on
+      Appendix D reads "Assessment of AlphaFold models for structure-based
+      virtual screening across 22 diverse targets". Resolved by the finding: high-throughput docking on
       AlphaFold models against the matching experimental PDB structures over a
       benchmark of 22 targets, consistently worse on the AlphaFold models
       across four docking programs and two consensus methods. The AlphaFold
@@ -888,26 +914,32 @@ references:
       AlphaFold 3; if the chapter reads it as a statement about AlphaFold in
       general, that needs narrowing.
 
-  - id: alphafold3_ligand_eval
+  - id: yu2026af3bias
     chapter: 7
-    kind: unsourced
-    title: "Evaluation of AlphaFold 3 for protein-ligand prediction (2025 to 2026)"
+    kind: article
+    title: "Bias in the AlphaFold3 prediction of ligand-induced domain motion in enzymes"
+    authors: "Yu, H., Bekar-Cesaretli, A. A., Lazou, M., Kozakov, D., Joseph-McCarthy, D. and Vajda, S."
+    venue: "Proceedings of the National Academy of Sciences"
+    volume: "123"
     year: 2026
+    doi: "10.1073/pnas.2530709123"
     verified: false
     note: >
-      UNSOURCED. Appendix D gives only this description, and unlike the other
-      descriptive entries it does not narrow to one paper. Searching the
-      finding returns at least four distinct 2025 to 2026 evaluations, each
-      reporting something different: a stereochemistry critique of AlphaFold 3
-      and Boltz-1 ligand geometry, a virtual screening assessment of
-      AlphaFold3-like models including Protenix and Boltz-2, a broad
-      AlphaFold3-in-drug-discovery assessment, and a pose-generation benchmark
-      on the ASAP Antiviral Challenge 2025. Attaching any one of them would be
-      a guess, and a plausible wrong citation is the defect this appendix is
-      accused of. Whichever number Chapter 7 quotes about AlphaFold 3 rests on
-      this entry; identify the paper the number came from, or soften the
-      sentence to the AlphaFold 2 evidence in scardino2023alphafolddocking,
-      which is sourced.
+      RESOLVED, having been UNSOURCED until the printed appendix arrived.
+      Appendix D reads "Evaluation of AlphaFold 3 for protein-ligand complex
+      prediction and its conformational biases (2025 to 2026)". The words
+      "conformational biases" are the discriminator that was missing from the
+      hand-written list an earlier pass worked from; without them the
+      description matched four different 2025-2026 evaluations and could not
+      be resolved, and with them it matches one. Published 4 March 2026.
+      What it found: ensembles of AlphaFold3 models generated for 82 enzymes
+      with and without ligand. Where the PDB holds more apo than holo
+      structures, 64.8 per cent of ligand-free models sit closer to the open
+      apo state; where it holds more holo than apo, 75.5 per cent of models
+      generated with NO ligand adopt the holo conformation. That is
+      memorisation of training-set composition rather than physics, and adding
+      the ligand only moderately changes it except for proteins with few
+      structures. Confirm the figure Chapter 7 quotes is one of these two.
 
   - id: berman2000pdb
     chapter: 7
@@ -928,28 +960,32 @@ references:
 
   # ---------------- Chapter 9 ----------------
 
-  - id: chang2022replicable
+  - id: chang2015replicable
     chapter: 9
     kind: article
-    title: 'Is Economics Research Replicable? Sixty Published Papers From Thirteen Journals Say "Often Not"'
+    title: 'Is Economics Research Replicable? Sixty Published Papers from Thirteen Journals Say "Usually Not"'
     authors: "Chang, A. C. and Li, P."
-    venue: "Critical Finance Review"
-    volume: "11"
-    pages: "185-206"
-    year: 2022
-    doi: "10.1561/104.00000053"
+    venue: "Finance and Economics Discussion Series, Federal Reserve Board"
+    pages: "1-26"
+    year: 2015
+    doi: "10.17016/FEDS.2015.083"
     verified: false
     note: >
-      Appendix D reads "Chang and Li, Is economics research replicable?".
-      This one is a trap and the appendix walked into it by giving no year.
-      There are two versions with DIFFERENT subtitles. The 2015 Federal
-      Reserve working paper says "Usually Not", DOI 10.17016/FEDS.2015.083;
-      the published 2022 Critical Finance Review article says "Often Not",
-      which is this entry. Both DOIs resolve. Citing the published venue
-      beside the working paper's subtitle, or the reverse, is exactly the
-      partial attribute corruption Chapter 10 describes. Confirm which one
-      Chapter 9 read, because the replication counts are reported differently
-      between the two versions.
+      Appendix D reads "Chang, A. C. and Li, P. Is economics research
+      replicable? Sixty published papers from thirteen journals say usually
+      not. Finance and Economics Discussion Series, Federal Reserve Board
+      (2015)", which settles a question an earlier pass had to leave open.
+      There are two versions with DIFFERENT subtitles: this 2015 Federal
+      Reserve working paper says "Usually Not", and the published 2022
+      Critical Finance Review article says "Often Not", DOI
+      10.1561/104.00000053, volume 11, pages 185 to 206. Both DOIs resolve.
+      An earlier pass entered the 2022 article; the printed page cites the
+      2015 working paper, so this entry now follows the printed page. Citing
+      one venue beside the other's subtitle is the partial attribute
+      corruption Chapter 10 describes, and with two live versions it is an
+      easy mistake to make later. Consider upgrading the citation to the
+      published 2022 version, but do it in both places at once, and note that
+      the replication counts are reported differently between them.
 
   - id: brodeur2026reproducibility
     chapter: 9
@@ -963,8 +999,9 @@ references:
     doi: "10.1038/s41586-026-10251-x"
     verified: false
     note: >
-      Appendix D calls this "Computational reproducibility of 110 articles,
-      Nature (April 2026)". Resolved by the finding, and the count matches:
+      Appendix D reads "Computational reproducibility of 110 articles in
+      journals with mandatory data and code sharing policies. Nature (April
+      2026)". Resolved by the finding, and the count matches:
       110 articles from leading economics and political science journals with
       mandatory data and code sharing, more than 85 per cent computationally
       reproducible, about 25 per cent carrying non-trivial coding errors.
@@ -976,15 +1013,15 @@ references:
     chapter: 9
     kind: article
     title: "On the Computational Reproducibility of Human-Computer Interaction"
-    authors: "Iarygina, O., Hornbaek, K. and Mottelson, A."
+    authors: "Iarygina, O., Hornbæk, K. and Mottelson, A."
     venue: "Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems"
     pages: "1-16"
     year: 2026
     doi: "10.1145/3772318.3791129"
     verified: false
     note: >
-      Appendix D calls this "Reproducibility of shared materials at an HCI
-      conference (2026)". Resolved by the finding: all CHI papers that shared
+      Appendix D reads "Reproducibility of shared materials at a major
+      human-computer interaction conference (2026)". Resolved by the finding: all CHI papers that shared
       study data and analysis code, re-run, with 49 per cent fully reproduced.
       Worth pairing with brodeur2026reproducibility in the prose, because the
       two rates differ sharply and the difference is in what was sampled.
@@ -993,23 +1030,28 @@ references:
     chapter: 9
     kind: article
     title: "Overcoming barriers to computational reproducibility"
-    authors: "Hornung, R., Nemeth, L., Zadorozhnyi, O. et al."
+    authors: "Hornung, R., Németh, L., Zadorozhnyi, O. et al."
     venue: "Royal Society Open Science"
     volume: "13"
     year: 2026
     doi: "10.1098/rsos.252489"
     verified: false
     note: >
-      Appendix D calls this "Guidance on reproducible computational research,
-      RSOS (2026)". Resolved to the 3 June 2026 Royal Society Open Science
-      paper. It is guidance addressed to authors and editors rather than a
-      measurement, so it supports a recommendation in Chapter 9 and not a
-      number.
+      Appendix D reads "Guidance on reproducible computational research and
+      simulation studies. Royal Society Open Science (2026)". Resolved to the
+      3 June 2026 Royal Society Open Science paper. The "and simulation
+      studies" half is not visible in the abstract, which was briefly a reason
+      to doubt the match; it is in the body, which gives simulation-specific
+      advice on saving the raw per-dataset results of long runs and on not
+      letting results depend on core count or parallelisation backend. The
+      paper also carries the REPRO Checklist. It is guidance addressed to
+      authors and editors rather than a measurement, so it supports a
+      recommendation in Chapter 9 and not a number.
 
   # ---------------- Chapter 10 ----------------
 
   - id: nasa_mco_mib_1999
-    chapter: 10
+    chapter: 5
     kind: report
     title: "Mars Climate Orbiter Mishap Investigation Board Phase I Report"
     authors: "NASA Mars Climate Orbiter Mishap Investigation Board"
@@ -1034,6 +1076,8 @@ references:
     title: "High Rates of Fabricated and Inaccurate References in ChatGPT-Generated Medical Content"
     authors: "Bhattacharyya, M., Miller, V. M., Bhattacharyya, D. and Miller, L. E."
     venue: "Cureus"
+    volume: "15"
+    pages: "e39238"
     year: 2023
     doi: "10.7759/cureus.39238"
     verified: false
@@ -1057,8 +1101,8 @@ references:
     year: 2026
     verified: false
     note: >
-      Appendix D calls this "Benchmark of citation hallucination, thirteen
-      models, forty domains". Resolved to GhostCite, submitted 6 February
+      Appendix D reads "Benchmark of citation hallucination rates across
+      thirteen models and forty research domains (2026)". Resolved to GhostCite, submitted 6 February
       2026. Carries no DOI on purpose: arXiv registers with DataCite rather
       than Crossref, so the arxiv field routes it to SKIPPED and it is
       verified at the abstract page. AND THE APPENDIX DESCRIPTION IS PARTLY
@@ -1084,11 +1128,15 @@ references:
     doi: "10.1016/S0140-6736(26)00603-3"
     verified: false
     note: >
-      Appendix D calls this "Prevalence of fabricated citations across two
-      million papers, Lancet". The paper's own title says 2·5 million, and the
-      audit covered 2.47 million open-access biomedical papers and 125.6
-      million references. "Two million" understates it and does not match the
-      title a reader will find, so fix the number in the prose. Reported
+      Appendix D reads "Prevalence of fabricated citations across more than
+      two million published papers. The Lancet (2026)". As printed that is
+      true rather than wrong: the audit covered 2.47 million open-access
+      biomedical papers and 125.6 million references, and 2.47 million is more
+      than two million. The objection is weaker than an earlier pass recorded,
+      but it is not nothing. The paper titles itself "an audit across 2·5
+      million biomedical papers", so a reader following the citation meets a
+      different number from the one the book gave them, and the book has
+      chosen the least impressive true statement available. Say 2.5 million. Reported
       findings: 4,046 fabricated citations across 2,810 papers among 97.1
       million verifiable references, and a rise from about one paper in 2,828
       in 2023 to one in 277 by early 2026. Read off the abstract and secondary
@@ -1138,6 +1186,126 @@ references:
       If Chapter 10 quotes a drift figure, check which paper it came from.
       This repository quotes no drift percentage anywhere, so nothing here
       decides it.
+
+
+# ============ Appendix D reconciliation, second pass ============
+#
+# Added after references/APPENDIX_D_AS_PRINTED.md arrived and the 74 printed
+# rows could be diffed against the 69 entries here. Three are works this
+# repository had never seen. One is a further-reading pointer. The fifth row
+# of the shortfall is not a new work at all: the appendix prints the FDA/EMA
+# guiding principles twice, at 8 and at 63, so 74 printed rows describe 73
+# distinct works. See references/appendix_d.manifest.yaml.
+
+  # ---------------- Chapter 4 ----------------
+
+  - id: nawrath2026screening
+    chapter: 4
+    kind: article
+    title: "Validating Large Language Models for Title-Abstract Screening in Low-Prevalence Systematic Reviews: An Environmental Science Case Study"
+    authors: "Nawrath, M., Merlina, A., Knight, J., Welch, S. A., Rashidian, M. and Seifert-Dähnn, I."
+    venue: "Information"
+    volume: "17"
+    pages: "501"
+    year: 2026
+    doi: "10.3390/info17050501"
+    verified: false
+    note: >
+      Appendix D reads "Comparative evaluation of large language models for
+      title and abstract screening against a low-prevalence gold standard set
+      (2026)". Resolved on the finding and confirmed against the abstract:
+      five models (GPT-4.1, Claude 3.5 Sonnet, Gemini 2.0 Flash, DeepSeek V3,
+      Mistral Large) against a 500-record gold standard with 8 inclusions, a
+      1.6 per cent prevalence, under a conservative zero-shot prompt.
+      Scope the claim carefully before quoting it. Eight positive cases is a
+      very small numerator: sensitivity moves by 12.5 points for every single
+      record the model gets wrong, so any per-model ranking from this study is
+      fragile, and the paper is a single environmental-science case study
+      rather than a survey. What it supports is Chapter 4's argument that
+      accuracy is the wrong metric at low prevalence, not a league table.
+
+  - id: mantyla2026disagreements
+    chapter: 4
+    kind: preprint
+    title: "Understanding LLMs in Title-Abstract Screening: From Disagreements to Recommendations"
+    authors: "Mäntylä, M., Matsubara, P., Felizardo, K. R., Kuutila, M., Gerosa, M., Sampaio, S. de S., Conte, T. and Steinmacher, I."
+    venue: "arXiv"
+    arxiv: "2606.17588"
+    year: 2026
+    verified: false
+    note: >
+      Appendix D reads "Evaluation of large language model agreement with human
+      screeners across six systematic reviews in software engineering (2026)".
+      Resolved on the finding, submitted 16 June 2026: six software
+      engineering systematic reviews, over 1,000 primary studies, screened
+      independently by human experts and by LLMs zero-shot, Cohen's kappa from
+      0.52 to 0.77. No DOI, for the arXiv and DataCite reason recorded on
+      ghostcite2026.
+      One near neighbour was checked and ruled out rather than assumed:
+      "Beyond Accuracy: LLM Variability in Evidence Screening for Software
+      Engineering SLRs", arXiv 2604.27006, carries software engineering in its
+      title but covers two reviews, not six, and benchmarks against classical
+      classifiers rather than against human screeners.
+      Worth noting for Chapter 4: 0.52 to 0.77 straddles the boundary between
+      moderate and substantial in the Landis and Koch bands this book cites at
+      landis1977kappa, and the screening task is exactly the class-imbalanced
+      setting byrt1993pabak and gwet2008ac1 are in the list to warn about. The
+      kappa range and the prevalence warning belong in the same sentence.
+
+  # ---------------- Chapter 5 ----------------
+
+  - id: liu2026silentfailure
+    chapter: 5
+    kind: preprint
+    title: "Silent Failure in LLM Agent Systems: The Entropy Principle and the Inevitable Disorder of Autonomous Agents"
+    authors: "Liu, D."
+    venue: "arXiv"
+    arxiv: "2606.08162"
+    year: 2026
+    verified: false
+    note: >
+      Appendix D reads "Silent failure and data consistency decay in
+      multi-agent pipelines (2026)". Both halves of that description are
+      names inside this paper rather than a paraphrase of it: "Data
+      Consistency Decay (L3 - Execution)" is a row in its failure taxonomy,
+      described as gradual divergence between recorded and actual state in
+      agent-managed data pipelines where every step runs correctly and the
+      aggregate is systematically wrong, and it tabulates consistency falling
+      from 100 per cent at one hop to 23.5 per cent at ten. Submitted 6 June
+      2026. No DOI, arXiv only.
+      Read the abstract alone and you would not find either phrase, which is
+      why an earlier pass could not resolve this; they are in the body. Treat
+      the surrounding claims with more caution than the other entries here:
+      single author, an entropy model S(t) = S0 e^(alpha t) offered as a
+      principle, and a claimed 40,000 controlled trials that nothing
+      independent has reproduced. It is a preprint making a strong general
+      claim, and the honest way to cite it in Chapter 5 is for the failure
+      mode it names, not for the law it proposes.
+
+  # ---------------- Further reading ----------------
+
+  - id: further_reading_living_sources
+    chapter: 0
+    kind: documentation
+    title: "Anthropic engineering blog and the Model Context Protocol documentation"
+    year: 2026
+    url: "https://www.anthropic.com/engineering"
+    verified: false
+    note: >
+      Appendix D entry 74 reads "Anthropic engineering blog and the Model
+      Context Protocol documentation, both of which are updated more often
+      than any book can be." It is a pointer to two living sources rather than
+      a citation of a work, which is why it had no counterpart here until the
+      printed list was diffed. Both are live: the blog at the URL above and
+      the specification at https://modelcontextprotocol.io/. Only one url
+      field exists, so the second is recorded here.
+      It deliberately overlaps entries already in this file
+      (anthropic_tools, anthropic_effective_agents,
+      anthropic_multiagent_research, mcp_spec), and that is fine for a
+      further-reading pointer in a way it would not be for a citation. It
+      cannot be verified in the sense the rest of the list is, because it
+      names no fixed version of anything; that is the point the sentence is
+      making.
 
 # This file is NOT self-certifying. It was seeded by hand and drifted from
 # Appendix D for the whole of the first draft: the appendix carried 74 entries

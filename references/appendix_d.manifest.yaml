@@ -1,250 +1,344 @@
 # appendix_d.manifest.yaml
 #
-# What Appendix D of the manuscript actually contains, recorded here because
-# the manuscript is not in this repository and nothing else in the build can
-# see it.
+# What Appendix D of the manuscript actually contains. Transcribed from
+# references/APPENDIX_D_AS_PRINTED.md, which is the authoritative extract of
+# the printed page.
 #
 # This file exists because of a specific failure. references.yaml was seeded by
 # hand and never reconciled against the appendix. The appendix carried 74
-# entries; references.yaml carried 47. tools/verify_references.py reported
-# green across three passes and a reviewer read the result as a statement about
-# the printed book, which it was not: it was a statement about the 47 entries
-# the tool could see. A verification gate pointed at the wrong list is worse
-# than no gate, because it buys confidence it has not earned.
+# printed rows; references.yaml carried 47. tools/verify_references.py reported
+# green across three passes, and that green was read as a statement about the
+# printed book. It was not: it was a statement about the 47 entries the tool
+# could see. A verification gate aimed at the wrong list is worse than no gate,
+# because a missing gate leaves you uncertain and a misaimed one sells you
+# confidence it has not earned.
+#
+# 74 printed rows describe 73 distinct works, because entries 8 and 63 are the
+# same document, printed once in Chapter 1 and again in Chapter 11. That is
+# recorded rather than silently collapsed: the printed page really does have 74
+# numbered rows, and a manifest that quietly held 73 would disagree with
+# anybody counting the book.
 #
 # tests/test_appendix_d_manifest.py holds references.yaml and this file to the
-# same list. Edit this file when Appendix D changes, and edit it FROM THE
-# APPENDIX, not from references.yaml, or the two will agree with each other
-# about something neither has checked.
+# same list. Edit this file FROM THE PRINTED APPENDIX, never from
+# references.yaml, or the two will agree with each other about something
+# neither has checked.
 #
-# count       the number of entries in the printed Appendix D, counted by hand.
-#             It is stated separately from the list on purpose. If it were
-#             derived from the list, a whole row could be dropped from both at
-#             once and nothing would notice; stated separately, the count is an
-#             independent witness and the test fails until the list matches it.
-# entries[].id      must correspond one-for-one with an id in references.yaml.
-# entries[].phrase  a short identifying phrase from the appendix entry, enough
-#             to find it on the printed page by eye. The test requires the
-#             phrase to appear in that entry's id, title or note in
-#             references.yaml, so an entry cannot be resolved from a
-#             description to a real paper without recording what the appendix
-#             itself says. That is the trail a reviewer follows.
-#
-# KNOWN GAP: count is 74 and only 69 entries are transcribed below, so
-# tests/test_appendix_d_manifest.py FAILS on purpose. Five appendix entries are
-# unaccounted for: the twenty-two recovered in the reconciliation pass were
-# listed by hand, and 47 + 22 is 69, not 74. Either five more entries are in the
-# printed appendix and have never been seen by this repository, or the count of
-# 74 is wrong, or references.yaml holds entries the appendix does not. Only the
-# printed page settles it. Do not "fix" this by editing count down to 69.
+# count         printed rows in Appendix D, counted by hand. Stated separately
+#               from the list on purpose: derived from it, a row dropped from
+#               both at once would pass unnoticed, and that is exactly the bug
+#               this file was written for.
+# entries[].n   the printed entry number. Asserted contiguous from 1 to count,
+#               which is a second independent witness against a lost row.
+# entries[].id  must correspond to an id in references.yaml.
+# entries[].phrase
+#               a short identifying fragment of the printed row, enough to find
+#               it on the page by eye. The test requires it to appear in that
+#               entry's id, title or note, so an entry cannot be resolved from
+#               a description into a real paper without recording what the
+#               appendix itself says.
+# entries[].duplicate_of
+#               present only where the appendix prints the same work twice.
+#               Names the earlier printed number. Such a row shares its id, and
+#               is exempt from the id-uniqueness and chapter checks.
 
 appendix_d:
   count: 74
   entries:
-    - id: huang2026biomni
+    - n: 1
+      id: huang2026biomni
       chapter: 1
       phrase: "Autonomous biomedical research with an artificial intelligence agent"
-    - id: swanson2025virtuallab
+    - n: 2
+      id: swanson2025virtuallab
       chapter: 1
       phrase: "The Virtual Lab of AI agents designs new SARS-CoV-2 nanobodies"
-    - id: ghareeb2025robin
+    - n: 3
+      id: ghareeb2025robin
       chapter: 1
       phrase: "Robin: a multi-agent system for automating scientific discovery"
-    - id: mitchener2025bixbench
+    - n: 4
+      id: mitchener2025bixbench
       chapter: 1
       phrase: "BixBench: a comprehensive benchmark for LLM-based agents in computational biology"
-    - id: qu2026biomnibench
+    - n: 5
+      id: qu2026biomnibench
       chapter: 1
       phrase: "BiomniBench: process-level evaluation of LLM agents for real-world biomedical research"
-    - id: szymanski2023alab
+    - n: 6
+      id: szymanski2023alab
       chapter: 1
       phrase: "An autonomous laboratory for the accelerated synthesis of inorganic materials"
-    - id: szymanski2026correction
+    - n: 7
+      id: szymanski2026correction
       chapter: 1
       phrase: "Author Correction: An autonomous laboratory for the accelerated synthesis of inorganic materials"
-    - id: fda_ema_2026_principles
+    - n: 8
+      id: fda_ema_2026_principles
       chapter: 1
       phrase: "Guiding principles of good artificial intelligence practice in drug development"
-    - id: walters2023fabrication
-      chapter: 10
-      phrase: "Fabrication and errors in the bibliographic citations generated by ChatGPT"
-    - id: cemri2025mast
-      chapter: 10
-      phrase: "Why do multi-agent LLM systems fail?"
-    - id: ziemann2016genenames
-      chapter: 5
-      phrase: "Gene name errors are widespread in the scientific literature"
-    - id: abeysooriya2021genenames
-      chapter: 5
-      phrase: "Gene name errors: lessons not learned"
-    - id: yadav2015zip
-      chapter: 6
-      phrase: "Searching for drug synergy in complex dose-response landscapes using an interaction potency model"
-    - id: ianevski2022synergyfinder
-      chapter: 6
-      phrase: "SynergyFinder 3.0: an interactive analysis and consensus interpretation of multi-drug synergies across multiple samples"
-    - id: trott2010vina
-      chapter: 7
-      phrase: "AutoDock Vina: improving the speed and accuracy of docking with a new scoring function, efficient optimization, and multithreading"
-    - id: wojcikowski2017mlsf
-      chapter: 7
-      phrase: "Performance of machine-learning scoring functions in structure-based virtual screening"
-    - id: landis1977kappa
-      chapter: 4
-      phrase: "The measurement of observer agreement for categorical data"
-    - id: byrt1993pabak
-      chapter: 4
-      phrase: "Bias, prevalence and kappa"
-    - id: gwet2008ac1
-      chapter: 4
-      phrase: "Computing inter-rater reliability and its variance in the presence of high agreement"
-    - id: errington2021cancerbiology
-      chapter: 9
-      phrase: "Investigating the replicability of preclinical cancer biology"
-    - id: baker2016reproducibility
-      chapter: 9
-      phrase: "1,500 scientists lift the lid on reproducibility"
-    - id: wilson2017goodenough
-      chapter: 0
-      phrase: "Good enough practices in scientific computing"
-    - id: wickham2014tidydata
-      chapter: 0
-      phrase: "Tidy data"
-    - id: ioannidis2005false
-      chapter: 0
-      phrase: "Why most published research findings are false"
-    - id: cfr21part11
-      chapter: 8
-      phrase: "21 CFR Part 11: Electronic records; electronic signatures"
-    - id: eu_ai_act
-      chapter: 11
-      phrase: "Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence"
-    - id: fda2025ai_guidance
-      chapter: 11
-      phrase: "Considerations for the use of artificial intelligence to support regulatory decision-making for drug and biological products"
-    - id: owasp_llm_top10
-      chapter: 8
-      phrase: "OWASP Top 10 for large language model applications"
-    - id: mcp_spec
-      chapter: 2
-      phrase: "Model Context Protocol specification, revision 2026-07-28"
-    - id: patil_bfcl
+    - n: 9
+      id: patil_bfcl
       chapter: 2
       phrase: "Berkeley Function Calling Leaderboard"
-    - id: liu2024lostmiddle
+    - n: 10
+      id: liu2024lostmiddle
       chapter: 2
       phrase: "Lost in the middle: how language models use long contexts"
-    - id: chroma2025contextrot
+    - n: 11
+      id: chroma2025contextrot
       chapter: 2
       phrase: "Context rot: how increasing input tokens impacts LLM performance"
-    - id: anthropic_tools
+    - n: 12
+      id: anthropic_tools
       chapter: 2
       phrase: "Writing effective tools for agents"
-    - id: anthropic_effective_agents
+    - n: 13
+      id: mcp_spec
+      chapter: 2
+      phrase: "Model Context Protocol specification, revision 2026-07-28"
+    - n: 14
+      id: anthropic_effective_agents
       chapter: 3
       phrase: "Building effective agents"
-    - id: gartner2025agentic
+    - n: 15
+      id: gartner2025agentic
       chapter: 3
       phrase: "Press release on agentic AI project cancellation rates through 2027"
-    - id: langgraph_docs
+    - n: 16
+      id: langgraph_docs
       chapter: 3
       phrase: "LangGraph documentation and release notes"
-    - id: fda2018dataintegrity
-      chapter: 8
-      phrase: "Data integrity and compliance with drug CGMP: questions and answers. Guidance for industry"
-    - id: owasp_agentic_top10
-      chapter: 8
-      phrase: "OWASP Top 10 for agentic applications"
-    - id: zhan2024injecagent
-      chapter: 8
-      phrase: "InjecAgent: benchmarking indirect prompt injections in tool-integrated large language model agents"
-    - id: anthropic_opus45_card
-      chapter: 8
-      phrase: "Claude Opus 4.5 system card"
-    - id: cve_2026_22708
-      chapter: 8
-      phrase: "CVE-2026-22708: allowlist bypass in an agentic coding assistant"
-    - id: eu_digital_omnibus
-      chapter: 11
-      phrase: "Digital Omnibus amending Regulation (EU) 2024/1689"
-    - id: ich_e6r3
-      chapter: 11
-      phrase: "Good clinical practice guideline E6(R3)"
-    - id: mas_vs_sas_2025
-      chapter: 12
-      phrase: "Single-agent or Multi-agent Systems? Why Not Both?"
-    - id: practitioner2026_coordination
-      chapter: 12
-      phrase: "Orchestration overhead and coordination cost in production agent pipelines"
-    - id: clinical_scale_orchestration_2025
-      chapter: 12
-      phrase: "Orchestrated multi agents sustain accuracy under clinical-scale workloads compared to a single agent"
-    - id: anthropic_multiagent_research
-      chapter: 12
-      phrase: "How we built our multi-agent research system"
-    - id: cochrane_handbook_v6
+    - n: 17
+      id: landis1977kappa
+      chapter: 4
+      phrase: "The measurement of observer agreement for categorical data"
+    - n: 18
+      id: byrt1993pabak
+      chapter: 4
+      phrase: "Bias, prevalence and kappa"
+    - n: 19
+      id: gwet2008ac1
+      chapter: 4
+      phrase: "Computing inter-rater reliability and its variance in the presence of high agreement"
+    - n: 20
+      id: cochrane_handbook_v6
       chapter: 4
       phrase: "Cochrane Handbook for Systematic Reviews of Interventions, version 6"
-    - id: pandera_docs
+    - n: 21
+      id: nawrath2026screening
+      chapter: 4
+      phrase: "Comparative evaluation of large language models for title and abstract screening against a low-prevalence gold standard set"
+    - n: 22
+      id: mantyla2026disagreements
+      chapter: 4
+      phrase: "Evaluation of large language model agreement with human screeners across six systematic reviews in software engineering"
+    - n: 23
+      id: ziemann2016genenames
+      chapter: 5
+      phrase: "Gene name errors are widespread in the scientific literature"
+    - n: 24
+      id: abeysooriya2021genenames
+      chapter: 5
+      phrase: "Gene name errors: lessons not learned"
+    - n: 25
+      id: nasa_mco_mib_1999
+      chapter: 5
+      phrase: "Mars Climate Orbiter Mishap Investigation Board, Phase I report"
+    - n: 26
+      id: pandera_docs
       chapter: 5
       phrase: "Pandera documentation"
-    - id: loewe1926combination
+    - n: 27
+      id: liu2026silentfailure
+      chapter: 5
+      phrase: "Silent failure and data consistency decay in multi-agent pipelines"
+    - n: 28
+      id: loewe1926combination
       chapter: 6
-      phrase: "Loewe and Muischnek 1926, effects of combinations"
-    - id: bliss1939joint
+      phrase: "Effects of combinations: mathematical basis of the problem"
+    - n: 29
+      id: bliss1939joint
       chapter: 6
-      phrase: "Bliss 1939, toxicity of poisons applied jointly"
-    - id: gaddum1940pharmacology
+      phrase: "The toxicity of poisons applied jointly"
+    - n: 30
+      id: gaddum1940pharmacology
       chapter: 6
-      phrase: "Gaddum 1940, Pharmacology first edition"
-    - id: fuentealba2023synergysoftware
+      phrase: "Pharmacology, first edition"
+    - n: 31
+      id: yadav2015zip
       chapter: 6
-      phrase: "Comparison of synergy quantification software on identical data (2023)"
-    - id: givrest2025
+      phrase: "Searching for drug synergy in complex dose-response landscapes using an interaction potency model"
+    - n: 32
+      id: ianevski2022synergyfinder
       chapter: 6
-      phrase: "Good In Vitro Reporting Standards, with GCCP 2.0 and OECD guidance"
-    - id: ralston2026cellauth
+      phrase: "SynergyFinder 3.0: an interactive analysis and consensus interpretation of multi-drug synergies across multiple samples"
+    - n: 33
+      id: fuentealba2023synergysoftware
+      chapter: 6
+      phrase: "Comparison of synergy quantification software on identical dose-response data"
+    - n: 34
+      id: givrest2025
+      chapter: 6
+      phrase: "Good In Vitro Reporting Standards, developed alongside Good Cell Culture Practice 2.0 and OECD reporting guidance"
+    - n: 35
+      id: ralston2026cellauth
       chapter: 6
       phrase: "Cell line authentication summary data, 2024 and 2025"
-    - id: plewczynski2011docking
+    - n: 36
+      id: trott2010vina
       chapter: 7
-      phrase: "Comparative assessment of seven docking programs, approximately 1,300 complexes"
-    - id: scardino2023alphafolddocking
+      phrase: "AutoDock Vina: improving the speed and accuracy of docking with a new scoring function, efficient optimization, and multithreading"
+    - n: 37
+      id: wojcikowski2017mlsf
       chapter: 7
-      phrase: "Assessment of AlphaFold models for screening across 22 targets"
-    - id: alphafold3_ligand_eval
+      phrase: "Performance of machine-learning scoring functions in structure-based virtual screening"
+    - n: 38
+      id: plewczynski2011docking
       chapter: 7
-      phrase: "Evaluation of AlphaFold 3 for protein-ligand prediction (2025 to 2026)"
-    - id: berman2000pdb
+      phrase: "Comparative assessment of seven docking programs across approximately 1,300 protein-ligand complexes"
+    - n: 39
+      id: scardino2023alphafolddocking
       chapter: 7
-      phrase: "Berman et al., The Protein Data Bank, NAR 28, 235-242 (2000)"
-    - id: chang2022replicable
+      phrase: "Assessment of AlphaFold models for structure-based virtual screening across 22 diverse targets"
+    - n: 40
+      id: yu2026af3bias
+      chapter: 7
+      phrase: "Evaluation of AlphaFold 3 for protein-ligand complex prediction and its conformational biases"
+    - n: 41
+      id: berman2000pdb
+      chapter: 7
+      phrase: "The Protein Data Bank"
+    - n: 42
+      id: cfr21part11
+      chapter: 8
+      phrase: "Electronic records; electronic signatures"
+    - n: 43
+      id: fda2018dataintegrity
+      chapter: 8
+      phrase: "Data integrity and compliance with drug CGMP: questions and answers"
+    - n: 44
+      id: owasp_llm_top10
+      chapter: 8
+      phrase: "Top 10 for large language model applications"
+    - n: 45
+      id: owasp_agentic_top10
+      chapter: 8
+      phrase: "Top 10 for agentic applications"
+    - n: 46
+      id: zhan2024injecagent
+      chapter: 8
+      phrase: "InjecAgent: benchmarking indirect prompt injections in tool-integrated large language model agents"
+    - n: 47
+      id: anthropic_opus45_card
+      chapter: 8
+      phrase: "Claude Opus 4.5 system card"
+    - n: 48
+      id: cve_2026_22708
+      chapter: 8
+      phrase: "Allowlist bypass in an agentic coding assistant"
+    - n: 49
+      id: chang2015replicable
       chapter: 9
-      phrase: "Chang and Li, Is economics research replicable?"
-    - id: brodeur2026reproducibility
+      phrase: "Is economics research replicable? Sixty published papers from thirteen journals say usually not"
+    - n: 50
+      id: brodeur2026reproducibility
       chapter: 9
-      phrase: "Computational reproducibility of 110 articles, Nature (April 2026)"
-    - id: iarygina2026hcirepro
+      phrase: "Computational reproducibility of 110 articles in journals with mandatory data and code sharing policies"
+    - n: 51
+      id: errington2021cancerbiology
       chapter: 9
-      phrase: "Reproducibility of shared materials at an HCI conference (2026)"
-    - id: hornung2026barriers
+      phrase: "Investigating the replicability of preclinical cancer biology"
+    - n: 52
+      id: baker2016reproducibility
       chapter: 9
-      phrase: "Guidance on reproducible computational research, RSOS (2026)"
-    - id: nasa_mco_mib_1999
+      phrase: "1,500 scientists lift the lid on reproducibility"
+    - n: 53
+      id: iarygina2026hcirepro
+      chapter: 9
+      phrase: "Reproducibility of shared materials at a major human-computer interaction conference"
+    - n: 54
+      id: hornung2026barriers
+      chapter: 9
+      phrase: "Guidance on reproducible computational research and simulation studies"
+    - n: 55
+      id: walters2023fabrication
       chapter: 10
-      phrase: "NASA Mars Climate Orbiter Mishap Investigation Board, Phase I report"
-    - id: bhattacharyya2023fabricated
+      phrase: "Fabrication and errors in the bibliographic citations generated by ChatGPT"
+    - n: 56
+      id: bhattacharyya2023fabricated
       chapter: 10
-      phrase: "Bhattacharyya et al., fabricated references in ChatGPT medical content"
-    - id: ghostcite2026
+      phrase: "High rates of fabricated and inaccurate references in ChatGPT-generated medical content"
+    - n: 57
+      id: cemri2025mast
       chapter: 10
-      phrase: "Benchmark of citation hallucination, thirteen models, forty domains"
-    - id: topaz2026lancetaudit
+      phrase: "Why do multi-agent LLM systems fail?"
+    - n: 58
+      id: ghostcite2026
       chapter: 10
-      phrase: "Prevalence of fabricated citations across two million papers, Lancet"
-    - id: phantom_references_2026
+      phrase: "Benchmark of citation hallucination rates across thirteen models and forty research domains"
+    - n: 59
+      id: topaz2026lancetaudit
       chapter: 10
-      phrase: "Audit of hallucinated citations in accepted conference papers (2026)"
-    - id: becker2026problemdrift
+      phrase: "Prevalence of fabricated citations across more than two million published papers"
+    - n: 60
+      id: phantom_references_2026
       chapter: 10
-      phrase: "Problem drift in extended generative interactions (2026)"
+      phrase: "Audit of hallucinated citations in accepted conference papers"
+    - n: 61
+      id: becker2026problemdrift
+      chapter: 10
+      phrase: "Problem drift in extended generative interactions"
+    - n: 62
+      id: fda2025ai_guidance
+      chapter: 11
+      phrase: "Considerations for the use of artificial intelligence to support regulatory decision-making for drug and biological products"
+    - n: 63
+      id: fda_ema_2026_principles
+      chapter: 11
+      phrase: "Guiding principles of good artificial intelligence practice in drug development"
+      duplicate_of: 8
+    - n: 64
+      id: eu_ai_act
+      chapter: 11
+      phrase: "laying down harmonised rules on artificial intelligence"
+    - n: 65
+      id: eu_digital_omnibus
+      chapter: 11
+      phrase: "Digital Omnibus amending Regulation (EU) 2024/1689"
+    - n: 66
+      id: ich_e6r3
+      chapter: 11
+      phrase: "Good clinical practice guideline E6(R3)"
+    - n: 67
+      id: mas_vs_sas_2025
+      chapter: 12
+      phrase: "Token consumption in multi-agent versus single-agent systems"
+    - n: 68
+      id: practitioner2026_coordination
+      chapter: 12
+      phrase: "Orchestration overhead and coordination cost in production agent pipelines"
+    - n: 69
+      id: clinical_scale_orchestration_2025
+      chapter: 12
+      phrase: "Comparative evaluation of single-agent and orchestrated multi-agent configurations under increasing task load in a clinical setting"
+    - n: 70
+      id: anthropic_multiagent_research
+      chapter: 12
+      phrase: "How we built our multi-agent research system"
+    - n: 71
+      id: wilson2017goodenough
+      chapter: 0
+      phrase: "Good enough practices in scientific computing"
+    - n: 72
+      id: wickham2014tidydata
+      chapter: 0
+      phrase: "Tidy data"
+    - n: 73
+      id: ioannidis2005false
+      chapter: 0
+      phrase: "Why most published research findings are false"
+    - n: 74
+      id: further_reading_living_sources
+      chapter: 0
+      phrase: "Anthropic engineering blog and the Model Context Protocol documentation"

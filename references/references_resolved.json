@@ -627,15 +627,15 @@
     "note": "resolved by DOI"
   },
   {
-    "ref_id": "alphafold3_ligand_eval",
-    "claimed_title": "Evaluation of AlphaFold 3 for protein-ligand prediction (2025 to 2026)",
-    "status": "UNSOURCED",
-    "doi": null,
-    "found_title": null,
-    "found_year": null,
+    "ref_id": "yu2026af3bias",
+    "claimed_title": "Bias in the AlphaFold3 prediction of ligand-induced domain motion in enzymes",
+    "status": "CONFIRMED",
+    "doi": "10.1073/pnas.2530709123",
+    "found_title": "Bias in the AlphaFold3 prediction of ligand-induced domain motion in enzymes",
+    "found_year": 2026,
     "claimed_year": 2026,
-    "title_score": null,
-    "note": "This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports."
+    "title_score": 100.0,
+    "note": "resolved by DOI"
   },
   {
     "ref_id": "berman2000pdb",
@@ -649,14 +649,14 @@
     "note": "resolved by DOI"
   },
   {
-    "ref_id": "chang2022replicable",
-    "claimed_title": "Is Economics Research Replicable? Sixty Published Papers From Thirteen Journals Say \"Often Not\"",
+    "ref_id": "chang2015replicable",
+    "claimed_title": "Is Economics Research Replicable? Sixty Published Papers from Thirteen Journals Say \"Usually Not\"",
     "status": "CONFIRMED",
-    "doi": "10.1561/104.00000053",
-    "found_title": "Is Economics Research Replicable? Sixty Published Papers From Thirteen Journals Say \u201cOften Not\u201d",
-    "found_year": 2022,
-    "claimed_year": 2022,
-    "title_score": 91.57894736842105,
+    "doi": "10.17016/feds.2015.083",
+    "found_title": "Is Economics Research Replicable? Sixty Published Papers from Thirteen Journals Say \"Usually Not\"",
+    "found_year": 2015,
+    "claimed_year": 2015,
+    "title_score": 100.0,
     "note": "resolved by DOI"
   },
   {
@@ -757,5 +757,49 @@
     "claimed_year": 2026,
     "title_score": 100.0,
     "note": "resolved by DOI"
+  },
+  {
+    "ref_id": "nawrath2026screening",
+    "claimed_title": "Validating Large Language Models for Title-Abstract Screening in Low-Prevalence Systematic Reviews: An Environmental Science Case Study",
+    "status": "CONFIRMED",
+    "doi": "10.3390/info17050501",
+    "found_title": "Validating Large Language Models for Title-Abstract Screening in Low-Prevalence Systematic Reviews: An Environmental Science Case Study",
+    "found_year": 2026,
+    "claimed_year": 2026,
+    "title_score": 100.0,
+    "note": "resolved by DOI"
+  },
+  {
+    "ref_id": "mantyla2026disagreements",
+    "claimed_title": "Understanding LLMs in Title-Abstract Screening: From Disagreements to Recommendations",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2026,
+    "title_score": null,
+    "note": "arXiv preprint, verify at arxiv.org/abs/2606.17588"
+  },
+  {
+    "ref_id": "liu2026silentfailure",
+    "claimed_title": "Silent Failure in LLM Agent Systems: The Entropy Principle and the Inevitable Disorder of Autonomous Agents",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2026,
+    "title_score": null,
+    "note": "arXiv preprint, verify at arxiv.org/abs/2606.08162"
+  },
+  {
+    "ref_id": "further_reading_living_sources",
+    "claimed_title": "Anthropic engineering blog and the Model Context Protocol documentation",
+    "status": "SKIPPED",
+    "doi": null,
+    "found_title": null,
+    "found_year": null,
+    "claimed_year": 2026,
+    "title_score": null,
+    "note": "kind=documentation, verify by URL: https://www.anthropic.com/engineering"
   }
 ]

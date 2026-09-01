@@ -5,12 +5,296 @@ records what a human decision still hangs on. Produced by running
 `tools/verify_references.py` against `references/references.yaml` until the
 output was byte-identical between consecutive runs.
 
-Two passes so far. The first checked the list as it stood. The second found
-that the list was the wrong list.
+Three passes. The first checked the list as it stood. The second found the list
+was the wrong list. The third closed it against the printed page.
+
+---
+
+## Pass 3 — diffed against Appendix D as printed
+
+`references/APPENDIX_D_AS_PRINTED.md` arrived with all 74 printed rows, so the
+five-row shortfall could be resolved instead of estimated.
+
+### The five
+
+They are not five missing citations. Three are, and two are structural.
+
+| Printed | What it is | Outcome |
+| --- | --- | --- |
+| **21** | "Comparative evaluation of large language models for title and abstract screening against a low-prevalence gold standard set (2026)" | New work, **resolved** with a DOI |
+| **22** | "Evaluation of large language model agreement with human screeners across six systematic reviews in software engineering (2026)" | New work, **resolved** to an arXiv preprint |
+| **27** | "Silent failure and data consistency decay in multi-agent pipelines (2026)" | New work, **resolved** to an arXiv preprint |
+| **74** | "Anthropic engineering blog and the Model Context Protocol documentation, both of which are updated more often than any book can be." | Not a new work — a further-reading pointer to two living sources, both already cited elsewhere in the list. It had no counterpart here because it is a sentence, not a citation |
+| **63** | "US Food and Drug Administration and European Medicines Agency. Guiding principles of good artificial intelligence practice in drug development (January 2026)" | Not a new work — **the same document as printed entry 8**, repeated under Chapter 11 |
+
+So **74 printed rows describe 73 distinct works**, and `references.yaml` now
+holds 73 entries. The arithmetic closes exactly.
+
+**No sixth or seventh turned up.** Every one of the 69 entries mapped onto a
+printed row, and every printed row mapped onto an entry. Nothing in
+`references.yaml` was absent from the appendix, which was the other way this
+could have gone.
+
+On the repeat at 8 and 63: the manifest records it with `duplicate_of` rather
+than collapsing it. The printed page genuinely has 74 numbered rows, and a
+manifest holding 73 would disagree with anyone counting the book. Whether the
+appendix *should* print it twice is an editorial question — a reference list
+that carries one document under two numbers is doing something a reader will
+notice — but that is yours, and the machinery now describes what is there
+rather than what would be tidier.
+
+### Counts
+
+| Status | Pass 1 | Pass 2 | Pass 3 |
+| --- | --- | --- | --- |
+| CONFIRMED | 24 | 40 | **42** |
+| MISMATCH | 0 | 0 | 0 |
+| UNRESOLVED | 0 | 0 | 0 |
+| UNSOURCED | 1 | 2 | **1** |
+| SKIPPED | 22 | 27 | **30** |
+| **total** | 47 | 69 | **73** |
+
+Manifest test: **7 passed**, including the count assertion that failed last
+pass. Full suite: **136 passed, 0 failed.** Report stable across consecutive
+runs.
+
+### DOIs added
+
+| Entry | DOI | Work |
+| --- | --- | --- |
+| `nawrath2026screening` | `10.3390/info17050501` | Nawrath et al., *Validating Large Language Models for Title-Abstract Screening in Low-Prevalence Systematic Reviews*, Information 17:501 |
+| `yu2026af3bias` | `10.1073/pnas.2530709123` | Yu et al., *Bias in the AlphaFold3 prediction of ligand-induced domain motion in enzymes*, PNAS 123 |
+| `chang2015replicable` | `10.17016/FEDS.2015.083` | Chang & Li, FEDS 2015 — **replaces** the 2022 DOI entered last pass, see below |
+
+Two more resolved to real works with no Crossref DOI, verified by arXiv ID:
+
+- `mantyla2026disagreements` — arXiv 2606.17588, submitted 16 June 2026
+- `liu2026silentfailure` — arXiv 2606.08162, submitted 6 June 2026
+
+### The AlphaFold 3 entry is no longer unsourced
+
+This is the pass's best result and it came free with the printed page. The
+hand-written list I worked from last pass said "Evaluation of AlphaFold 3 for
+protein-ligand prediction (2025 to 2026)". The printed appendix says
+"…for protein-ligand complex prediction **and its conformational biases**
+(2025 to 2026)".
+
+Those three words are the discriminator. Without them the description matched
+four different 2025–2026 evaluations and I marked it UNSOURCED rather than
+guess. With them it matches one: Yu, Bekar-Cesaretli, Lazou, Kozakov,
+Joseph-McCarthy and Vajda, PNAS, 4 March 2026, `10.1073/pnas.2530709123`.
+
+What it found, for the sentence in Chapter 7: ensembles of AlphaFold3 models
+for 82 enzymes, generated with and without ligand. Where the PDB holds more apo
+than holo structures, 64.8 % of ligand-free models sit closer to the open apo
+state. Where it holds more holo than apo, **75.5 % of models generated with no
+ligand at all adopt the holo conformation.** That is memorisation of
+training-set composition rather than physics, and adding the ligand only
+moderately shifts it except for proteins with few structures. Confirm the
+figure the chapter quotes is one of these two.
+
+### How the ambiguous ones were pinned
+
+Two of the three needed a candidate ruled out rather than a match asserted.
+
+**#22** could have been either of two 2026 software-engineering screening
+papers. *Beyond Accuracy: LLM Variability in Evidence Screening for Software
+Engineering SLRs* (arXiv 2604.27006) has "software engineering" in its title,
+which is the tempting match — but it covers **two** reviews and benchmarks
+against classical classifiers, not humans. *Understanding LLMs in
+Title-Abstract Screening* (arXiv 2606.17588) covers **six** software
+engineering systematic reviews, over 1,000 primary studies, human experts
+against LLMs zero-shot, Cohen's kappa 0.52 to 0.77. The appendix says six, and
+says human screeners. Ruled in on the numbers, not the title.
+
+Worth noticing for Chapter 4: 0.52–0.77 straddles the moderate/substantial
+boundary in the Landis and Koch bands the book already cites at
+`landis1977kappa`, and screening is exactly the class-imbalanced setting
+`byrt1993pabak` and `gwet2008ac1` are in the list to warn about. Those belong
+in one sentence.
+
+**#27** looked unresolvable at first. arXiv 2606.08162's *abstract* neither
+names "data consistency decay" nor mentions data pipelines, and I nearly marked
+it unsourced on that basis. The full text settles it: "Data Consistency Decay
+(L3 — Execution)" is a named row in its failure taxonomy, described as gradual
+divergence between recorded and actual state in agent-managed data pipelines
+where every step runs correctly and the aggregate is systematically wrong, and
+it tabulates consistency falling from 100 % at one hop to **23.5 % at ten**.
+Both halves of the appendix's description are the paper's own terms.
+
+Cite it for the failure mode it names, not for the law it proposes: it is a
+single-author preprint offering an entropy model, S(t) = S₀e^(αt), as a
+principle, on 40,000 trials nothing independent has reproduced.
+
+### Corrections made to references.yaml from the printed page
+
+1. **Chang & Li: the appendix answers the question I raised.** Last pass I
+   flagged two versions with different subtitles and entered the published 2022
+   *Critical Finance Review* article. The printed appendix cites the **2015
+   Federal Reserve working paper** — "usually not", Finance and Economics
+   Discussion Series — fully and coherently specified. The entry now follows
+   the printed page: `chang2015replicable`, `10.17016/FEDS.2015.083`. Both DOIs
+   resolve, so upgrading to the 2022 version later is a real option; do it in
+   both files at once, and note the replication counts are reported differently
+   between them.
+2. **The Mars Climate Orbiter report belongs to Chapter 5, not Chapter 10.** I
+   filed it under Chapter 10 on the reasoning that unit errors are a Chapter 10
+   topic. The appendix files it under Data-Wrangling Agents. The chapter
+   assertion in the manifest test caught it.
+3. Volume and pages added to `bhattacharyya2023fabricated` (Cureus 15, e39238),
+   taken from the printed row.
+4. Author diacritics restored where an earlier pass had flattened them —
+   Łaźniewski, López-Muñoz, Hornbæk, Németh.
+
+### Errors in the printed appendix
+
+Beyond 67 and 69, which you already named.
+
+1. **Entry 28 prints a title that does not exist.** "Effects of combinations:
+   mathematical basis of the problem" is an English rendering with a subtitle
+   attached. Crossref holds the paper as "Über Kombinationswirkungen"; the
+   subtitle corresponds to the first communication's subhead, "I. Mitteilung:
+   Hilfsmittel der Fragestellung". **A reader searching the printed title finds
+   nothing.** Print the German title, or the German with a bracketed
+   translation.
+2. **Entry 34's year is wrong.** The appendix says 2026; Crossref dates the
+   GIVReSt guidance to ALTEX volume 42, **2025**. The entry also still bundles
+   three documents into one row.
+3. **Entry 20 pairs a 2024 date with a 2019 book.** The appendix says "version
+   6. Cochrane (2024)", which is the continuously-revised online handbook at
+   `training.cochrane.org/handbook`. The DOI that resolves,
+   `10.1002/9781119536604`, is the Wiley printed edition of September 2019.
+   Different artefacts. Pick one — and if it is the online handbook, it needs a
+   point release and an access date, because "version 6" alone will not
+   identify what was read.
+4. **Entry 59 is weaker than I said last pass, but still worth fixing.** As
+   printed, "more than two million published papers" is *true* — the audit
+   covered 2.47 million. My earlier note called it an understatement of the
+   source, and that was too strong. The remaining objection is real though: the
+   paper titles itself "an audit across 2·5 million biomedical papers", so a
+   reader following the citation meets a different number from the one the book
+   gave them, and the book chose the least impressive true statement available.
+   Say 2.5 million.
+5. **Entry 54's "and simulation studies" is fine.** I flagged it as possibly
+   unsupported, because the RSOS abstract does not mention simulation studies.
+   The body does: advice on saving raw per-dataset results of long runs, and on
+   not letting results depend on core count or parallelisation backend. The
+   entry stands as printed. Retracting my concern.
+
+### Still unsourced
+
+One, unchanged since pass 1.
+
+**`practitioner2026_coordination`** — printed entry 68, "Orchestration overhead
+and coordination cost in production agent pipelines. Practitioner measurements
+(2026)", supporting the Chapter 12 orchestration-overhead passage. Nothing
+sources it. You already removed the 950 ms-against-500 and
+29,000-tokens-against-10,000 figures and labelled the eighty per cent claim as
+one team's report. I have not gone looking for something close enough to
+attach, in three passes now, because a plausible near-match is the failure and
+not the fix.
+
+---
+
+## Generating Appendix D from references.yaml
+
+You asked for a proposal, not a build. Here is the proposal, and it is a
+qualified no — generate the mechanical half, not the whole thing.
+
+### What stands in the way right now
+
+**`note:` is two fields wearing one name.** Some notes are prose that belongs in
+the printed book: the Szymanski title explanation, ending "the word that left
+the title is the word the correction was about", is written for a reader and
+prints today as entry 7. Others are verification working notes that must never
+print: "THE ENTRY IS STALE AND THE FIX IS NOT MINE TO MAKE", "Appendix D reads
+…", "Crossref returns type edited-book", "only the abstract was read here". A
+generator that printed `note` would put my scaffolding into your book.
+
+**Some printed prose exists nowhere else.** Entry 42's "Specifically section
+11.10(e) on audit trails", entry 47's "Indirect prompt injection evaluation",
+and the further-reading glosses at 71 to 73 ("The origin of the table shape
+Chapter 5 targets") are on the printed page and not in `references.yaml`. A
+generator would silently drop them.
+
+**Claim order is not in `references.yaml` and is not derivable.** It is the
+order a chapter makes its arguments in. It exists today only as the printed
+numbering, which the manifest now carries as `n`.
+
+### What it would cost
+
+| Step | Effort | Notes |
+| --- | --- | --- |
+| Split `note` into `note` (internal) and `gloss` (printed) | Half a day | 73 entries, ~45 with notes. A judgement call each; getting one wrong prints working notes into the book |
+| Transcribe the ~10 printed glosses that exist only on the page | 30 min | Mechanical once located |
+| Ordering: drive from the manifest's `n` | Free | The data already exists |
+| Renderer: group by chapter, sort by `n`, format per house style | Half a day to a day | The fiddly part. Books, regulations, preprints and documentation each print differently, and the style spells ranges as "716 to 723" rather than an en dash |
+| Round-trip test: render, diff against `APPENDIX_D_AS_PRINTED.md`, fail on any difference | 2 hours | This is the piece that makes it worth doing, and it forces the four above to actually be complete |
+
+Call it **one focused day**, most of it in the `note`/`gloss` split rather than
+in code.
+
+### What it would lose
+
+**The two witnesses collapse into one.** This is the real cost and it is not
+small. The manifest test works today because `references.yaml` and the manifest
+are two independently-maintained records of the same list, neither derived from
+the other. Generate the appendix from the yaml and the appendix stops being
+evidence: the test becomes a function checked against its own input. Single
+source of truth is the right answer for *divergence*, which is what bit you.
+It is the wrong answer for *wrongness*. If `references.yaml` carries a bad
+title today, the printed page disagrees and someone can notice. Generated, the
+book agrees with the error, confidently, and nothing in the system dissents.
+
+Note that both failures found in this project were divergence in one direction
+and staleness in the other — 47 against 74, then entries 67 and 69 frozen while
+the yaml moved on. A generator kills both. But it also kills the mechanism that
+*found* them.
+
+**Editorial arrangement.** Entry 74 — "both of which are updated more often
+than any book can be" — is a sentence about the appendix as an object, working
+because it sits last. Renderers flatten that kind of thing first.
+
+**The deliberate repeat.** Entries 8 and 63 have to be told to a generator;
+they are not derivable from one `chapter:` field. Cheap to support, but a naive
+one-entry-one-row renderer drops the repeat and takes the count from 74 to 73,
+which looks like a fix and is not.
+
+### What I would do instead
+
+**Build a checker, not a generator**, and do the `note`/`gloss` split
+regardless.
+
+1. **Split `note` into `note` and `gloss` now.** Do this whether or not
+   anything is ever generated. The file currently mixes shipping prose with
+   working notes, and that is a live hazard the moment anyone copies from it —
+   which is how appendix text gets written. Highest-value item on this page and
+   independent of everything else.
+2. **Render only the bibliographic half** of each entry — authors, title,
+   venue, volume, pages, year, DOI — and assert it appears in the corresponding
+   printed row of `APPENDIX_D_AS_PRINTED.md`. Leave prose, ordering and
+   grouping to you and the page.
+
+That buys the actual protection. A printed row could no longer disagree with
+the verified record about a title, a volume, a year or a DOI, which is exactly
+how 67 and 69 went stale and how entry 28 came to print a title that does not
+exist. It costs about a third of the generator, and it keeps the property that
+made this whole exercise work: two records, separately maintained, that have to
+agree.
+
+If you later want full generation, the checker is the right first step anyway.
+It forces the formatting rules to be written down and proven against the real
+page before anything depends on them — and at that point the generator is
+mostly already written.
 
 ---
 
 ## Pass 2 — reconciling against Appendix D
+
+> Superseded in places by pass 3, which had the printed page. Where the two
+> disagree, pass 3 is right. In particular: the AlphaFold 3 entry is no longer
+> unsourced, the Chang & Li version question is settled in favour of the 2015
+> working paper, and the Lancet objection is weaker than stated here.
 
 Appendix D carries 74 entries. `references.yaml` held 47. Twenty-two of the
 missing entries were named and have been added; **five are still unaccounted
@@ -69,7 +353,10 @@ are SKIPPED and verified by URL or arXiv ID instead:
 
 ### Still unsourced
 
-**`alphafold3_ligand_eval` — new, and it cannot be closed from here.**
+**`alphafold3_ligand_eval` — RESOLVED IN PASS 3**, once the printed wording
+supplied the words "and its conformational biases". Left below as written,
+because the reason it could not be closed from the hand-written list is the
+point.
 
 Appendix D gives only "Evaluation of AlphaFold 3 for protein-ligand prediction
 (2025 to 2026)". Unlike every other description in the list, this one does not

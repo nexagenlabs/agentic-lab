@@ -1,23 +1,19 @@
 # Reference verification report
 
-Checked 69 entries against Crossref.
+Checked 73 entries against Crossref.
 
-Of 40 confirmations, 40 were resolved by DOI and 0 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
+Of 42 confirmations, 42 were resolved by DOI and 0 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
 
-- CONFIRMED: 40
+- CONFIRMED: 42
 - MISMATCH: 0
 - UNRESOLVED: 0
-- UNSOURCED: 2
-- SKIPPED: 27
+- UNSOURCED: 1
+- SKIPPED: 30
 
 ## Unsourced, which need a source or a softened claim
 
 **practitioner2026_coordination**
   claimed: Orchestration overhead and coordination cost in production agent pipelines
-  note:    This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports.
-
-**alphafold3_ligand_eval**
-  claimed: Evaluation of AlphaFold 3 for protein-ligand prediction (2025 to 2026)
   note:    This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports.
 
 ## Skipped by kind, verify by URL
@@ -129,6 +125,18 @@ Of 40 confirmations, 40 were resolved by DOI and 0 by title search. A DOI is che
 **phantom_references_2026**
   claimed: Phantom References: Hallucinated Citations That Survive Peer Review at Top-Tier Conferences
   note:    arXiv preprint, verify at arxiv.org/abs/2607.00738
+
+**mantyla2026disagreements**
+  claimed: Understanding LLMs in Title-Abstract Screening: From Disagreements to Recommendations
+  note:    arXiv preprint, verify at arxiv.org/abs/2606.17588
+
+**liu2026silentfailure**
+  claimed: Silent Failure in LLM Agent Systems: The Entropy Principle and the Inevitable Disorder of Autonomous Agents
+  note:    arXiv preprint, verify at arxiv.org/abs/2606.08162
+
+**further_reading_living_sources**
+  claimed: Anthropic engineering blog and the Model Context Protocol documentation
+  note:    kind=documentation, verify by URL: https://www.anthropic.com/engineering
 
 ## Confirmed
 
@@ -324,16 +332,22 @@ Of 40 confirmations, 40 were resolved by DOI and 0 by title search. A DOI is che
   doi:     10.1016/j.isci.2022.105920
   note:    resolved by DOI
 
+**yu2026af3bias**
+  claimed: Bias in the AlphaFold3 prediction of ligand-induced domain motion in enzymes
+  found:   Bias in the AlphaFold3 prediction of ligand-induced domain motion in enzymes
+  doi:     10.1073/pnas.2530709123
+  note:    resolved by DOI
+
 **berman2000pdb**
   claimed: The Protein Data Bank
   found:   The Protein Data Bank
   doi:     10.1093/nar/28.1.235
   note:    resolved by DOI
 
-**chang2022replicable**
-  claimed: Is Economics Research Replicable? Sixty Published Papers From Thirteen Journals Say "Often Not"
-  found:   Is Economics Research Replicable? Sixty Published Papers From Thirteen Journals Say “Often Not”
-  doi:     10.1561/104.00000053
+**chang2015replicable**
+  claimed: Is Economics Research Replicable? Sixty Published Papers from Thirteen Journals Say "Usually Not"
+  found:   Is Economics Research Replicable? Sixty Published Papers from Thirteen Journals Say "Usually Not"
+  doi:     10.17016/feds.2015.083
   note:    resolved by DOI
 
 **brodeur2026reproducibility**
@@ -370,4 +384,10 @@ Of 40 confirmations, 40 were resolved by DOI and 0 by title search. A DOI is che
   claimed: Stay Focused: Problem Drift in Multi-Agent Debate
   found:   Stay Focused: Problem Drift in Multi-Agent Debate
   doi:     10.18653/v1/2026.findings-eacl.268
+  note:    resolved by DOI
+
+**nawrath2026screening**
+  claimed: Validating Large Language Models for Title-Abstract Screening in Low-Prevalence Systematic Reviews: An Environmental Science Case Study
+  found:   Validating Large Language Models for Title-Abstract Screening in Low-Prevalence Systematic Reviews: An Environmental Science Case Study
+  doi:     10.3390/info17050501
   note:    resolved by DOI

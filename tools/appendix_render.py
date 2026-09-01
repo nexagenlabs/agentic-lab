@@ -22,6 +22,13 @@ Two modes:
                                                for rows still printed as a
                                                description, ready to paste
     python tools/appendix_render.py --emit --out rows.txt      the same, to a file
+    python tools/appendix_render.py --emit --all               every row, not just
+                                                               the description ones
+
+--all is for reading the record beside the page, not for pasting wholesale.
+The appendix's prose, grouping and arrangement are not in references.yaml and
+never will be; rendering all of it would produce a plausible-looking appendix
+that is missing exactly the half a person wrote.
 
 Output is forced to UTF-8. On a Windows console the default is cp1252, which
 cannot encode "Mäntylä" or "Seifert-Dähnn" and turns them into replacement
@@ -202,8 +209,11 @@ def failures() -> list[tuple[int, str, list[str]]]:
     return out
 
 
-def descriptions() -> list[tuple[int, str, dict]]:
+def rows_to_emit(everything: bool = False) -> list[tuple[int, str, dict]]:
     refs, man, _ = load()
+    if everything:
+        return [(r["n"], r["id"], refs[r["id"]]) for r in man["entries"]
+                if "duplicate_of" not in r]
     # An unsourced entry has nothing to paste. Emitting a citation-shaped
     # string for one would be handing over exactly the artefact this whole
     # exercise exists to keep out of the book.
@@ -219,6 +229,8 @@ def main() -> int:
                     help="print the bibliographic string for description rows")
     ap.add_argument("--out", type=Path,
                     help="write the emitted rows here instead of to stdout")
+    ap.add_argument("--all", action="store_true",
+                    help="emit every row, not only those printed as a description")
     args = ap.parse_args()
 
     # Never let the console's codepage decide whether an author's name survives.
@@ -230,7 +242,7 @@ def main() -> int:
 
     if args.emit:
         lines = []
-        for n, rid, entry in descriptions():
+        for n, rid, entry in rows_to_emit(args.all):
             lines.append(f"{n:>3}. {render(entry)}")
             if entry.get("gloss"):
                 lines.append(f"     gloss: {entry['gloss'].strip()}")

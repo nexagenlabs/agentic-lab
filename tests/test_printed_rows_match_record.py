@@ -60,7 +60,7 @@ _spec.loader.exec_module(appendix_render)
 # The number of rows still printed as a description, and the number carrying a
 # declared omission. Asserted so that neither can grow without somebody
 # changing this line and saying why in the commit.
-EXPECTED_DESCRIPTIONS = 19
+EXPECTED_DESCRIPTIONS = 1
 EXPECTED_OMISSIONS = 5
 
 
@@ -173,10 +173,18 @@ def test_emit_survives_a_console_that_cannot_spell_the_authors() -> None:
 
     Rendering these strings is the last step before they are pasted into a
     book, so it is the last place an encoding should be left to chance.
+
+    Driven through --all rather than the bare --emit. The first version of this
+    test used --emit, and it broke the moment the last diacritic-carrying
+    description row was pasted into the appendix and stopped being emitted: the
+    test was silently coupled to which rows happened to be outstanding. --all
+    always renders every entry, so the encoding is tested rather than the
+    backlog.
     """
     env = dict(os.environ, PYTHONIOENCODING="cp1252")
     proc = subprocess.run(
-        [sys.executable, str(REPO / "tools" / "appendix_render.py"), "--emit"],
+        [sys.executable, str(REPO / "tools" / "appendix_render.py"),
+         "--emit", "--all"],
         capture_output=True, env=env, cwd=REPO,
     )
     assert proc.returncode == 0, proc.stderr.decode("utf-8", "replace")

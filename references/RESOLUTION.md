@@ -11,6 +11,84 @@ split the prose and built the checker that keeps the two records honest.
 
 ---
 
+## Pass 5 — the eighteen enforced, and the file still has not arrived
+
+`printed_as: description` is dropped from all eighteen rows. Only 68 remains,
+UNSOURCED by decision. `EXPECTED_DESCRIPTIONS` is 1. From now on those rows are
+checked field by field: title, first author, year, volume, pages, arXiv id, and
+DOI agreement.
+
+**`references/APPENDIX_D_AS_PRINTED.md` is still the original.** Byte-identical
+to the copy committed in f3eb02b, MD5 `60f76a4f…`, and it contains 5 DOIs where
+21 are expected. Rows 4, 20, 26, 28 and 34 all read exactly as they did two
+passes ago.
+
+One detail worth having: the file's **mtime moved** (10:25 to 11:46) while its
+content did not. So this is not a forgotten save. Something wrote the file and
+wrote the old bytes — an export run against a manuscript copy without the
+edits, or an editor flushing a buffer that predated them. Looking upstream of
+the save will be more productive than saving again.
+
+The checker therefore reports **20 disagreements**: the eighteen newly enforced
+rows, each still carrying its old description, plus 20 and 28 from the earlier
+un-landed fixes. Every one is of the form "this row still reads as the
+description". There is no disagreement of any other kind.
+
+### What was verified rather than assumed
+
+Enforcing eighteen rows at once introduces a real risk that has nothing to do
+with the paste: that the checker itself mishandles the new rows. Those strings
+carry an en dash (34), a title ending in a question mark (39, 67), a middle dot
+in 2·5 (59), and diacritics in six author lists. Any of those could produce a
+false positive that would then be "fixed" by weakening the check.
+
+Rendering the eighteen into a scratch copy of the appendix and running the
+checker gives **0 disagreements**, with row 4's `omits: [arxiv]` also removed.
+The scratch copy was discarded and the repository's file is byte-identical to
+HEAD.
+
+That test is circular about content - it checks strings against themselves -
+and proves nothing about whether the paste is correct. It is not circular about
+mechanism, and that was the open question: the checker parses every awkward
+character in the new rows without a false positive, so when the file lands the
+only failures will be real ones.
+
+The scratch copy was never written to `references/APPENDIX_D_AS_PRINTED.md`.
+Doing that would make the page a function of the record, which is the generator
+this project decided against, and it would destroy the independence the checker
+depends on.
+
+### Two omissions probably ready to drop
+
+Not dropped, because they cannot be confirmed against a file that is not here.
+Each is one line in `references/appendix_d.manifest.yaml`, and
+`EXPECTED_OMISSIONS` in the test drops with it.
+
+- **Row 4, `omits: [arxiv]`.** The BixBench arXiv id is described as added. The
+  scratch run confirms the row passes with the omission removed.
+- **Row 26, `omits: [year]`.** A Pandera version note is described as added,
+  but the omission names `year`, and a version is not a year. If the printed
+  row now reads "version 0.33.0" with no date, the omission must stay. Whether
+  it should be `omits: [year]` or the record should carry a version field
+  instead is a judgement about the printed row, and needs the printed row.
+
+### A test that was coupled to the backlog
+
+`test_emit_survives_a_console_that_cannot_spell_the_authors` broke the moment
+the description set emptied: it drove `--emit`, and with only entry 68 left
+there were no diacritics in the output to assert on. The test was silently
+measuring the backlog rather than the encoding.
+
+Fixed by adding `--emit --all`, which renders every row regardless of what is
+outstanding, and pointing the test at that. `--all` is for reading the record
+beside the page; it is documented as not for pasting wholesale, since rendering
+the whole appendix from the record produces a plausible-looking appendix
+missing exactly the half a person wrote.
+
+Full suite: **141 passed, 1 failed**, the failure being the 20 rows above.
+
+---
+
 ## Pass 4 — the note/gloss split and the checker
 
 ### First: the refreshed appendix did not land

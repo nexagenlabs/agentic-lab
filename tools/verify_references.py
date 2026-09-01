@@ -156,10 +156,23 @@ def verify(entry: dict, client: httpx.Client) -> Result:
         return Result(ref_id, title, "SKIPPED", None, None, None, claimed_year, None,
                       f"arXiv preprint, verify at arxiv.org/abs/{entry['arxiv']}")
 
-    if entry.get("kind") in {"standard", "regulation", "documentation", "dataset"}:
+    if entry.get("kind") in {"standard", "regulation", "documentation",
+                            "dataset", "report"}:
         return Result(ref_id, title, "SKIPPED", entry.get("doi"), None, None,
                       claimed_year, None,
                       f"kind={entry['kind']}, verify by URL: {entry.get('url', 'none given')}")
+
+    # A book that carries a DOI is resolved by it like anything else. A book
+    # that does not is almost always older than DOIs, and Crossref has no
+    # record to find. Sending one to a title search is the arXiv mistake in a
+    # different costume: "Pharmacology", Gaddum 1940, matches some unrelated
+    # modern work and the tool reports a mismatch it invented. Skip it and say
+    # so, the same way standards are skipped.
+    if entry.get("kind") == "book" and not entry.get("doi"):
+        return Result(ref_id, title, "SKIPPED", None, None, None,
+                      claimed_year, None,
+                      f"book with no DOI, predates Crossref; verify by URL: "
+                      f"{entry.get('url', 'none given')}")
 
     if not title:
         return Result(ref_id, title, "UNRESOLVED", None, None, None, claimed_year, None,

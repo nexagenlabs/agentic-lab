@@ -1,19 +1,23 @@
 # Reference verification report
 
-Checked 47 entries against Crossref.
+Checked 69 entries against Crossref.
 
-Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
+Of 40 confirmations, 40 were resolved by DOI and 0 by title search. A DOI is checked; a title match is inferred. Adding a DOI to an entry is the single highest value change available here, and it is safe to add one from any source, because this script resolves it and will report a mismatch if it is wrong.
 
-- CONFIRMED: 24
+- CONFIRMED: 40
 - MISMATCH: 0
 - UNRESOLVED: 0
-- UNSOURCED: 1
-- SKIPPED: 22
+- UNSOURCED: 2
+- SKIPPED: 27
 
 ## Unsourced, which need a source or a softened claim
 
 **practitioner2026_coordination**
   claimed: Orchestration overhead and coordination cost in production agent pipelines
+  note:    This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports.
+
+**alphafold3_ligand_eval**
+  claimed: Evaluation of AlphaFold 3 for protein-ligand prediction (2025 to 2026)
   note:    This entry names a finding, not a work. It has no title, author or venue that any tool can resolve. Source it or remove the claim it supports.
 
 ## Skipped by kind, verify by URL
@@ -105,6 +109,26 @@ Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is che
 **anthropic_multiagent_research**
   claimed: How we built our multi-agent research system
   note:    kind=documentation, verify by URL: https://www.anthropic.com/engineering/multi-agent-research-system
+
+**pandera_docs**
+  claimed: Pandera documentation
+  note:    kind=documentation, verify by URL: https://pandera.readthedocs.io/en/stable/
+
+**gaddum1940pharmacology**
+  claimed: Pharmacology
+  note:    book with no DOI, predates Crossref; verify by URL: https://www.jameslindlibrary.org/gaddum-jh-1940/
+
+**nasa_mco_mib_1999**
+  claimed: Mars Climate Orbiter Mishap Investigation Board Phase I Report
+  note:    kind=report, verify by URL: https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf
+
+**ghostcite2026**
+  claimed: GhostCite: A Large-Scale Analysis of Citation Validity in the Age of Large Language Models
+  note:    arXiv preprint, verify at arxiv.org/abs/2602.06718
+
+**phantom_references_2026**
+  claimed: Phantom References: Hallucinated Citations That Survive Peer Review at Top-Tier Conferences
+  note:    arXiv preprint, verify at arxiv.org/abs/2607.00738
 
 ## Confirmed
 
@@ -250,4 +274,100 @@ Of 24 confirmations, 24 were resolved by DOI and 0 by title search. A DOI is che
   claimed: Orchestrated multi agents sustain accuracy under clinical-scale workloads compared to a single agent
   found:   Orchestrated multi agents sustain accuracy under clinical-scale workloads compared to a single agent
   doi:     10.1101/2025.08.22.25334049
+  note:    resolved by DOI
+
+**cochrane_handbook_v6**
+  claimed: Cochrane Handbook for Systematic Reviews of Interventions
+  found:   Cochrane Handbook for Systematic Reviews of Interventions
+  doi:     10.1002/9781119536604
+  note:    resolved by DOI
+
+**loewe1926combination**
+  claimed: Über Kombinationswirkungen
+  found:   Über Kombinationswirkungen
+  doi:     10.1007/bf01952257
+  note:    resolved by DOI
+
+**bliss1939joint**
+  claimed: The toxicity of poisons applied jointly
+  found:   THE TOXICITY OF POISONS APPLIED JOINTLY1
+  doi:     10.1111/j.1744-7348.1939.tb06990.x
+  note:    resolved by DOI
+
+**fuentealba2023synergysoftware**
+  claimed: Mind the Curve: dose-response fitting biases the synergy scores across software used for chemotherapy combination studies
+  found:   Mind the Curve: Dose–Response Fitting Biases the Synergy Scores across Software Used for Chemotherapy Combination Studies
+  doi:     10.3390/ijms24119705
+  note:    resolved by DOI
+
+**givrest2025**
+  claimed: Guidance for Good In Vitro Reporting Standards (GIVReSt) – A draft for stakeholder discussion and background documentation
+  found:   Guidance for Good In Vitro Reporting Standards (GIVReSt) – A draft for stakeholder discussion and background documentation
+  doi:     10.14573/altex.2507041
+  note:    resolved by DOI
+
+**ralston2026cellauth**
+  claimed: Cell line authentication: a commercial service provider perspective
+  found:   Cell line authentication: a commercial service provider perspective
+  doi:     10.3389/fcell.2026.1843943
+  note:    resolved by DOI
+
+**plewczynski2011docking**
+  claimed: Can we trust docking results? Evaluation of seven commonly used programs on PDBbind database
+  found:   Can we trust docking results? Evaluation of seven commonly used programs on PDBbind database
+  doi:     10.1002/jcc.21643
+  note:    resolved by DOI
+
+**scardino2023alphafolddocking**
+  claimed: How good are AlphaFold models for docking-based virtual screening?
+  found:   How good are AlphaFold models for docking-based virtual screening?
+  doi:     10.1016/j.isci.2022.105920
+  note:    resolved by DOI
+
+**berman2000pdb**
+  claimed: The Protein Data Bank
+  found:   The Protein Data Bank
+  doi:     10.1093/nar/28.1.235
+  note:    resolved by DOI
+
+**chang2022replicable**
+  claimed: Is Economics Research Replicable? Sixty Published Papers From Thirteen Journals Say "Often Not"
+  found:   Is Economics Research Replicable? Sixty Published Papers From Thirteen Journals Say “Often Not”
+  doi:     10.1561/104.00000053
+  note:    resolved by DOI
+
+**brodeur2026reproducibility**
+  claimed: Reproducibility and robustness of economics and political science research
+  found:   Reproducibility and robustness of economics and political science research
+  doi:     10.1038/s41586-026-10251-x
+  note:    resolved by DOI
+
+**iarygina2026hcirepro**
+  claimed: On the Computational Reproducibility of Human-Computer Interaction
+  found:   On the Computational Reproducibility of Human-Computer Interaction
+  doi:     10.1145/3772318.3791129
+  note:    resolved by DOI
+
+**hornung2026barriers**
+  claimed: Overcoming barriers to computational reproducibility
+  found:   Overcoming barriers to computational reproducibility
+  doi:     10.1098/rsos.252489
+  note:    resolved by DOI
+
+**bhattacharyya2023fabricated**
+  claimed: High Rates of Fabricated and Inaccurate References in ChatGPT-Generated Medical Content
+  found:   High Rates of Fabricated and Inaccurate References in ChatGPT-Generated Medical Content
+  doi:     10.7759/cureus.39238
+  note:    resolved by DOI
+
+**topaz2026lancetaudit**
+  claimed: Fabricated citations: an audit across 2·5 million biomedical papers
+  found:   Fabricated citations: an audit across 2·5 million biomedical papers
+  doi:     10.1016/s0140-6736(26)00603-3
+  note:    resolved by DOI
+
+**becker2026problemdrift**
+  claimed: Stay Focused: Problem Drift in Multi-Agent Debate
+  found:   Stay Focused: Problem Drift in Multi-Agent Debate
+  doi:     10.18653/v1/2026.findings-eacl.268
   note:    resolved by DOI

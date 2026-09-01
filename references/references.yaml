@@ -7,11 +7,13 @@
 # Entries verified by hand and carrying a DOI are marked verified: true. The
 # rest need the script run against them before print.
 #
-# kind: article | preprint | book | standard | regulation | documentation |
-#       dataset | benchmark
-# Entries whose kind is standard, regulation, documentation or dataset are
-# skipped by the Crossref check and verified by URL instead. That is a
-# decision, recorded rather than left implicit.
+# kind: article | preprint | book | report | standard | regulation |
+#       documentation | dataset | benchmark | unsourced
+# Entries whose kind is standard, regulation, documentation, dataset or report
+# are skipped by the Crossref check and verified by URL instead, as are books
+# that carry no DOI, because a pre-DOI book has no Crossref record and a title
+# search on one manufactures a mismatch. That is a decision, recorded rather
+# than left implicit.
 
 references:
 
@@ -658,6 +660,490 @@ references:
     url: "https://www.anthropic.com/engineering/multi-agent-research-system"
     verified: false
 
-# All Appendix D entries are now present. Add nothing here from recall: an
-# entry that is plausible and wrong is the failure this book is about, and a
-# title check cannot catch a real paper that is not the one the book cites.
+
+# ================= Appendix D reconciliation, added in this pass =================
+#
+# references.yaml was seeded by hand and never reconciled against Appendix D.
+# The appendix carries 74 entries; this file held 47. The twenty-two below were
+# in the printed book and had never been checked by anything.
+#
+# Every DOI here was resolved against Crossref before it was written, and the
+# title, authors, venue, volume, pages and year of each resolved entry were
+# taken from that Crossref record rather than from recall. Where the appendix
+# gives a description instead of a title, the description is preserved verbatim
+# in the entry note, both so the resolution can be audited against the printed
+# page and so tests/test_appendix_d_manifest.py can anchor the entry to it.
+
+  # ---------------- Chapter 4 ----------------
+
+  - id: cochrane_handbook_v6
+    chapter: 4
+    kind: book
+    title: "Cochrane Handbook for Systematic Reviews of Interventions"
+    authors: "Higgins, J. P. T., Thomas, J., Chandler, J., Cumpston, M., Li, T., Page, M. J. and Welch, V. A. (eds)"
+    venue: "Wiley"
+    year: 2019
+    doi: "10.1002/9781119536604"
+    verified: false
+    note: >
+      Appendix D calls this "Cochrane Handbook for Systematic Reviews of
+      Interventions, version 6". Resolved to the Wiley edited book of
+      20 September 2019, which is the version 6 edition; Crossref returns
+      type edited-book against this DOI. One thing for the author to settle:
+      the handbook also lives online at training.cochrane.org/handbook, where
+      it is continuously revised and is past 6.0, so a bare "version 6" will
+      not identify what was read. Cite either the printed 2019 edition, which
+      this DOI pins, or the online version with its point release and an
+      access date. Supports the Chapter 4 dual-screen argument for two
+      independent reviewers.
+
+  # ---------------- Chapter 5 ----------------
+
+  - id: pandera_docs
+    chapter: 5
+    kind: documentation
+    title: "Pandera documentation"
+    year: 2026
+    url: "https://pandera.readthedocs.io/en/stable/"
+    verified: false
+    note: >
+      Appendix D calls this "Pandera documentation". URL checked and live.
+      The site describes itself as "The Open-source Framework for Dataset
+      Validation". Two cautions. The year above is an access year, not a
+      publication year, because documentation is versioned rather than dated;
+      the stable docs banner currently reads 0.32.0 while REVIEW.md records
+      this repository pinning pandera 0.33.0. A documentation citation that
+      names no version cannot be checked by anybody later, so record the
+      version the book was written against. Supports the Chapter 5 schema
+      validation material.
+
+  # ---------------- Chapter 6 ----------------
+
+  - id: loewe1926combination
+    chapter: 6
+    kind: article
+    title: "Über Kombinationswirkungen"
+    authors: "Loewe, S. and Muischnek, H."
+    venue: "Archiv für Experimentelle Pathologie und Pharmakologie"
+    volume: "114"
+    pages: "313-326"
+    year: 1926
+    doi: "10.1007/BF01952257"
+    verified: false
+    note: >
+      Appendix D calls this "Loewe and Muischnek 1926, effects of
+      combinations", which is a translation of the German title rather than a
+      title. The real title is "Über Kombinationswirkungen" and it is the
+      origin of Loewe additivity. Supports the Chapter 6 claim that Bliss and
+      Loewe are different statements about biology, not interchangeable
+      scores.
+
+  - id: bliss1939joint
+    chapter: 6
+    kind: article
+    title: "The toxicity of poisons applied jointly"
+    authors: "Bliss, C. I."
+    venue: "Annals of Applied Biology"
+    volume: "26"
+    pages: "585-615"
+    year: 1939
+    doi: "10.1111/j.1744-7348.1939.tb06990.x"
+    verified: false
+    note: >
+      Appendix D calls this "Bliss 1939, toxicity of poisons applied jointly".
+      Crossref holds the title in capitals with a trailing footnote marker,
+      "THE TOXICITY OF POISONS APPLIED JOINTLY1"; the sentence-case form here
+      still scores above the threshold. Origin of Bliss independence.
+      Supports the same Chapter 6 claim as loewe1926combination, and the
+      check_consensus rule rejecting Bliss and ZIP together.
+
+  - id: gaddum1940pharmacology
+    chapter: 6
+    kind: book
+    title: "Pharmacology"
+    authors: "Gaddum, J. H."
+    venue: "Oxford University Press"
+    year: 1940
+    url: "https://www.jameslindlibrary.org/gaddum-jh-1940/"
+    verified: false
+    note: >
+      Appendix D calls this "Gaddum 1940, Pharmacology first edition". A 1940
+      Oxford University Press textbook predates DOIs and Crossref does not
+      hold it, so there is nothing to resolve; a title search on the single
+      word "Pharmacology" returns an unrelated work, which is why the tool now
+      skips books that carry no DOI rather than manufacturing a mismatch. The
+      URL is the James Lind Library record for the 1940 edition, checked and
+      live. This is a real book in libraries, not an unsourced finding.
+
+  - id: fuentealba2023synergysoftware
+    chapter: 6
+    kind: article
+    title: "Mind the Curve: dose-response fitting biases the synergy scores across software used for chemotherapy combination studies"
+    authors: "Fuentealba-Manosalva, O., Mansilla, M., Buelvas, N., Martin-Martin, A., Torres, C. G. and Lopez-Munoz, R. A."
+    venue: "International Journal of Molecular Sciences"
+    volume: "24"
+    pages: "9705"
+    year: 2023
+    doi: "10.3390/ijms24119705"
+    verified: false
+    note: >
+      Appendix D calls this "Comparison of synergy quantification software on
+      identical data (2023)". Resolved by searching on the finding. The paper
+      compares Combenefit 2.021 against SynergyFinder 3.6 on the same
+      viability data under HSA, Loewe and Bliss, and reports that some
+      combinations move from synergistic to antagonistic purely because the
+      two packages fit the concentration-response curve differently. Note the
+      scope before quoting it: two packages on canine mammary tumour lines,
+      not a broad survey. Supports the Chapter 6 claim that a synergy score is
+      a statement about a model and a fit, not a measurement.
+
+  - id: givrest2025
+    chapter: 6
+    kind: article
+    title: "Guidance for Good In Vitro Reporting Standards (GIVReSt) – A draft for stakeholder discussion and background documentation"
+    venue: "ALTEX"
+    volume: "42"
+    year: 2025
+    doi: "10.14573/altex.2507041"
+    verified: false
+    note: >
+      Appendix D calls this "Good In Vitro Reporting Standards, with GCCP 2.0
+      and OECD guidance", which is three documents in one entry. This entry
+      resolves the first and primary one. The second is Good Cell and Tissue
+      Culture Practice 2.0, ALTEX 2020, DOI 10.14573/altex.2007091, Pamies et
+      al. The third is the OECD Guidance Document on Good In Vitro Method
+      Practices (GIVIMP), an OECD publication with no Crossref DOI. If the
+      chapter cites all three they should be three entries; splitting them
+      changes the appendix count, so it is the author's call. Crossref returns
+      no author list against this DOI, so the authors field is omitted rather
+      than filled in from elsewhere. Supports the Chapter 6 claim that
+      adaptation_report.md is organised by the GIVReSt categories, which the
+      Build 07 report reproduces as cell source and identity, quality control,
+      materials, culture conditions, design, analysis and data availability.
+
+  - id: ralston2026cellauth
+    chapter: 6
+    kind: article
+    title: "Cell line authentication: a commercial service provider perspective"
+    authors: "Ralston, E. and Haskayne, C."
+    venue: "Frontiers in Cell and Developmental Biology"
+    volume: "14"
+    year: 2026
+    doi: "10.3389/fcell.2026.1843943"
+    verified: false
+    note: >
+      Appendix D calls this "Cell line authentication summary data, 2024 and
+      2025". Resolved by searching on the finding, and it matches the Chapter 6
+      claim exactly: 4.7 per cent of lines misidentified in 2024 and 2.4 per
+      cent in 2025, from 1,893 samples submitted to one commercial STR
+      profiling service. Two things to get right in the prose. The data years
+      are 2024 and 2025 but the paper is 2026, so the citation year and the
+      data years differ and the sentence should say which it means. And the
+      figures are one provider's submitted samples, not a population estimate,
+      which the Build 06 README already says correctly.
+
+  # ---------------- Chapter 7 ----------------
+
+  - id: plewczynski2011docking
+    chapter: 7
+    kind: article
+    title: "Can we trust docking results? Evaluation of seven commonly used programs on PDBbind database"
+    authors: "Plewczynski, D., Lazniewski, M., Augustyniak, R. and Ginalski, K."
+    venue: "Journal of Computational Chemistry"
+    volume: "32"
+    pages: "742-755"
+    year: 2011
+    doi: "10.1002/jcc.21643"
+    verified: false
+    note: >
+      Appendix D calls this "Comparative assessment of seven docking programs,
+      approximately 1,300 complexes". Resolved by the finding: seven programs
+      (Surflex, LigandFit, Glide, GOLD, FlexX, eHiTS, AutoDock) on 1,300
+      complexes from PDBbind 2007. Two corrections for the prose. The paper's
+      own summary of the correlation result is that the best correlation is
+      around 0.4, where builds/08-dock-loop/README.md gives the range as 0.10
+      to 0.38; read the correlation table before printing that range. And the
+      seventh program is AutoDock, not AutoDock Vina, so the "minus 0.18 for
+      Vina" figure in the same paragraph comes from a different benchmark and
+      is still unsourced.
+
+  - id: scardino2023alphafolddocking
+    chapter: 7
+    kind: article
+    title: "How good are AlphaFold models for docking-based virtual screening?"
+    authors: "Scardino, V., Di Filippo, J. I. and Cavasotto, C. N."
+    venue: "iScience"
+    volume: "26"
+    pages: "105920"
+    year: 2023
+    doi: "10.1016/j.isci.2022.105920"
+    verified: false
+    note: >
+      Appendix D calls this "Assessment of AlphaFold models for screening
+      across 22 targets". Resolved by the finding: high-throughput docking on
+      AlphaFold models against the matching experimental PDB structures over a
+      benchmark of 22 targets, consistently worse on the AlphaFold models
+      across four docking programs and two consensus methods. The AlphaFold
+      Database snapshot is November 2022, so this is AlphaFold 2 and not
+      AlphaFold 3; if the chapter reads it as a statement about AlphaFold in
+      general, that needs narrowing.
+
+  - id: alphafold3_ligand_eval
+    chapter: 7
+    kind: unsourced
+    title: "Evaluation of AlphaFold 3 for protein-ligand prediction (2025 to 2026)"
+    year: 2026
+    verified: false
+    note: >
+      UNSOURCED. Appendix D gives only this description, and unlike the other
+      descriptive entries it does not narrow to one paper. Searching the
+      finding returns at least four distinct 2025 to 2026 evaluations, each
+      reporting something different: a stereochemistry critique of AlphaFold 3
+      and Boltz-1 ligand geometry, a virtual screening assessment of
+      AlphaFold3-like models including Protenix and Boltz-2, a broad
+      AlphaFold3-in-drug-discovery assessment, and a pose-generation benchmark
+      on the ASAP Antiviral Challenge 2025. Attaching any one of them would be
+      a guess, and a plausible wrong citation is the defect this appendix is
+      accused of. Whichever number Chapter 7 quotes about AlphaFold 3 rests on
+      this entry; identify the paper the number came from, or soften the
+      sentence to the AlphaFold 2 evidence in scardino2023alphafolddocking,
+      which is sourced.
+
+  - id: berman2000pdb
+    chapter: 7
+    kind: article
+    title: "The Protein Data Bank"
+    authors: "Berman, H. M., Westbrook, J., Feng, Z., Gilliland, G., Bhat, T. N., Weissig, H. et al."
+    venue: "Nucleic Acids Research"
+    volume: "28"
+    pages: "235-242"
+    year: 2000
+    doi: "10.1093/nar/28.1.235"
+    verified: false
+    note: >
+      Appendix D reads "Berman et al., The Protein Data Bank, NAR 28,
+      235-242 (2000)", which is a full record rather than a description, so
+      this was an ordinary lookup. Authors, venue, volume, pages and year all
+      match the Crossref record.
+
+  # ---------------- Chapter 9 ----------------
+
+  - id: chang2022replicable
+    chapter: 9
+    kind: article
+    title: 'Is Economics Research Replicable? Sixty Published Papers From Thirteen Journals Say "Often Not"'
+    authors: "Chang, A. C. and Li, P."
+    venue: "Critical Finance Review"
+    volume: "11"
+    pages: "185-206"
+    year: 2022
+    doi: "10.1561/104.00000053"
+    verified: false
+    note: >
+      Appendix D reads "Chang and Li, Is economics research replicable?".
+      This one is a trap and the appendix walked into it by giving no year.
+      There are two versions with DIFFERENT subtitles. The 2015 Federal
+      Reserve working paper says "Usually Not", DOI 10.17016/FEDS.2015.083;
+      the published 2022 Critical Finance Review article says "Often Not",
+      which is this entry. Both DOIs resolve. Citing the published venue
+      beside the working paper's subtitle, or the reverse, is exactly the
+      partial attribute corruption Chapter 10 describes. Confirm which one
+      Chapter 9 read, because the replication counts are reported differently
+      between the two versions.
+
+  - id: brodeur2026reproducibility
+    chapter: 9
+    kind: article
+    title: "Reproducibility and robustness of economics and political science research"
+    authors: "Brodeur, A., Mikola, D., Cook, N. et al."
+    venue: "Nature"
+    volume: "652"
+    pages: "151-156"
+    year: 2026
+    doi: "10.1038/s41586-026-10251-x"
+    verified: false
+    note: >
+      Appendix D calls this "Computational reproducibility of 110 articles,
+      Nature (April 2026)". Resolved by the finding, and the count matches:
+      110 articles from leading economics and political science journals with
+      mandatory data and code sharing, more than 85 per cent computationally
+      reproducible, about 25 per cent carrying non-trivial coding errors.
+      Note the scope when quoting it: economics and political science, and
+      journals that already mandate code sharing, so it is an optimistic
+      sample rather than a general one.
+
+  - id: iarygina2026hcirepro
+    chapter: 9
+    kind: article
+    title: "On the Computational Reproducibility of Human-Computer Interaction"
+    authors: "Iarygina, O., Hornbaek, K. and Mottelson, A."
+    venue: "Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems"
+    pages: "1-16"
+    year: 2026
+    doi: "10.1145/3772318.3791129"
+    verified: false
+    note: >
+      Appendix D calls this "Reproducibility of shared materials at an HCI
+      conference (2026)". Resolved by the finding: all CHI papers that shared
+      study data and analysis code, re-run, with 49 per cent fully reproduced.
+      Worth pairing with brodeur2026reproducibility in the prose, because the
+      two rates differ sharply and the difference is in what was sampled.
+
+  - id: hornung2026barriers
+    chapter: 9
+    kind: article
+    title: "Overcoming barriers to computational reproducibility"
+    authors: "Hornung, R., Nemeth, L., Zadorozhnyi, O. et al."
+    venue: "Royal Society Open Science"
+    volume: "13"
+    year: 2026
+    doi: "10.1098/rsos.252489"
+    verified: false
+    note: >
+      Appendix D calls this "Guidance on reproducible computational research,
+      RSOS (2026)". Resolved to the 3 June 2026 Royal Society Open Science
+      paper. It is guidance addressed to authors and editors rather than a
+      measurement, so it supports a recommendation in Chapter 9 and not a
+      number.
+
+  # ---------------- Chapter 10 ----------------
+
+  - id: nasa_mco_mib_1999
+    chapter: 10
+    kind: report
+    title: "Mars Climate Orbiter Mishap Investigation Board Phase I Report"
+    authors: "NASA Mars Climate Orbiter Mishap Investigation Board"
+    year: 1999
+    url: "https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf"
+    verified: false
+    note: >
+      Appendix D calls this "NASA Mars Climate Orbiter Mishap Investigation
+      Board, Phase I report". The URL was checked and returns a 1.4 MB PDF
+      from NASA's own lessons-learned library, so the document is where this
+      entry says it is. Honest limit: the cover title could not be extracted
+      mechanically, the PDF carrying only "MCO Report83.doc" in its metadata,
+      so the title above is the appendix's wording rather than a verified
+      transcription. Someone should read the cover page once. The report was
+      released 10 November 1999 and found the root cause to be a failed
+      conversion between imperial and metric units in ground navigation
+      software, which is the Chapter 10 silent-unit-error argument.
+
+  - id: bhattacharyya2023fabricated
+    chapter: 10
+    kind: article
+    title: "High Rates of Fabricated and Inaccurate References in ChatGPT-Generated Medical Content"
+    authors: "Bhattacharyya, M., Miller, V. M., Bhattacharyya, D. and Miller, L. E."
+    venue: "Cureus"
+    year: 2023
+    doi: "10.7759/cureus.39238"
+    verified: false
+    note: >
+      Appendix D reads "Bhattacharyya et al., fabricated references in
+      ChatGPT medical content", giving author and topic, so this was an
+      ordinary lookup. Published 19 May 2023. The reported split across 115 references from 30
+      generated papers is 47 per cent fabricated, 46 per cent authentic but
+      inaccurate and 7 per cent authentic and accurate; confirm against the
+      paper before quoting, since only secondary summaries were read here.
+      Note that the model is ChatGPT-3.5, which matters if Chapter 10 reads it
+      as a claim about current models.
+
+  - id: ghostcite2026
+    chapter: 10
+    kind: preprint
+    title: "GhostCite: A Large-Scale Analysis of Citation Validity in the Age of Large Language Models"
+    authors: "Xu, Z., Qiu, Y., Sun, L. et al."
+    venue: "arXiv"
+    arxiv: "2602.06718"
+    year: 2026
+    verified: false
+    note: >
+      Appendix D calls this "Benchmark of citation hallucination, thirteen
+      models, forty domains". Resolved to GhostCite, submitted 6 February
+      2026. Carries no DOI on purpose: arXiv registers with DataCite rather
+      than Crossref, so the arxiv field routes it to SKIPPED and it is
+      verified at the abstract page. AND THE APPENDIX DESCRIPTION IS PARTLY
+      WRONG. The abstract confirms thirteen models and a hallucination range
+      of 14.23 to 94.93 per cent, but it describes 2.2 million citations drawn
+      from 56,381 papers in AI/ML and Security venues over 2020 to 2025. It
+      does not say forty research domains. "Forty domains" appeared only in a
+      secondary summary, as did a figure of 375,000 citations, and neither is
+      in the abstract. If Chapter 10 says forty domains, that number needs
+      checking against the paper itself or removing. Only the abstract was
+      read here, so treat every figure in this note as unverified against the
+      full text.
+
+  - id: topaz2026lancetaudit
+    chapter: 10
+    kind: article
+    title: "Fabricated citations: an audit across 2·5 million biomedical papers"
+    authors: "Topaz, M., Roguin, N., Gupta, P., Zhang, Z. and Peltonen, L.-M."
+    venue: "The Lancet"
+    volume: "407"
+    pages: "1779-1781"
+    year: 2026
+    doi: "10.1016/S0140-6736(26)00603-3"
+    verified: false
+    note: >
+      Appendix D calls this "Prevalence of fabricated citations across two
+      million papers, Lancet". The paper's own title says 2·5 million, and the
+      audit covered 2.47 million open-access biomedical papers and 125.6
+      million references. "Two million" understates it and does not match the
+      title a reader will find, so fix the number in the prose. Reported
+      findings: 4,046 fabricated citations across 2,810 papers among 97.1
+      million verifiable references, and a rise from about one paper in 2,828
+      in 2023 to one in 277 by early 2026. Read off the abstract and secondary
+      coverage rather than the full text.
+
+  - id: phantom_references_2026
+    chapter: 10
+    kind: preprint
+    title: "Phantom References: Hallucinated Citations That Survive Peer Review at Top-Tier Conferences"
+    authors: "Russinovich, M., Siva Kumar, R. S. and Salem, A."
+    venue: "arXiv"
+    arxiv: "2607.00738"
+    year: 2026
+    verified: false
+    note: >
+      Appendix D calls this "Audit of hallucinated citations in accepted
+      conference papers (2026)". Resolved by the finding, submitted 1 July
+      2026. No DOI, for the same arXiv and DataCite reason as ghostcite2026.
+      The abstract reports roughly one in twenty NeurIPS and USENIX Security
+      2025 papers carrying at least two likely hallucinated references, with
+      reference-level rates typically below one per cent, and verification
+      costing about four cents a paper. The gap between the reference-level
+      rate and the paper-level rate is the point worth making in Chapter 10,
+      and it is easy to quote only one of them and mislead.
+
+  - id: becker2026problemdrift
+    chapter: 10
+    kind: article
+    title: "Stay Focused: Problem Drift in Multi-Agent Debate"
+    authors: "Becker, J., Kaesberg, L. B., Stephan, A., Wahle, J. P., Ruas, T. and Gipp, B."
+    venue: "Findings of the Association for Computational Linguistics: EACL 2026"
+    pages: "5068-5102"
+    year: 2026
+    doi: "10.18653/v1/2026.findings-eacl.268"
+    verified: false
+    note: >
+      Appendix D calls this "Problem drift in extended generative interactions
+      (2026)". Identified on the term rather than the title: "problem drift"
+      is this paper's coinage, the year matches, and it is the paper reporting
+      that generative tasks drift in 76 to 89 per cent of cases against 7 to
+      21 per cent for high-complexity tasks, which is what the appendix
+      description points at. CONFIRM THIS IS THE RIGHT PAPER. A near
+      neighbour exists, "Agent Drift: Quantifying Behavioral Degradation in
+      Multi-Agent LLM Systems Over Extended Interactions", arXiv 2601.04170,
+      whose title matches the appendix words "extended interactions" more
+      closely but which uses the term agent drift rather than problem drift.
+      If Chapter 10 quotes a drift figure, check which paper it came from.
+      This repository quotes no drift percentage anywhere, so nothing here
+      decides it.
+
+# This file is NOT self-certifying. It was seeded by hand and drifted from
+# Appendix D for the whole of the first draft: the appendix carried 74 entries
+# while this file carried 47, and the verification gate reported green on the
+# 47 it could see. references/appendix_d.manifest.yaml now records the
+# appendix independently and tests/test_appendix_d_manifest.py fails when the
+# two lists disagree. Add nothing here from recall: an entry that is plausible
+# and wrong is the failure this book is about, and a title check cannot catch
+# a real paper that is not the one the book cites.
